@@ -54,9 +54,14 @@ public class UserStoryModel {
         return priority;
     }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
+    public void setPriority(int priority)
+    {
+        while (priority < 0 || priority >= 6)
+        {
+            priority = this.priority;
+        }
     }
+
 
     public int getStoryPoints() {
         return storyPoints;
@@ -86,9 +91,21 @@ public class UserStoryModel {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setOpen()
+    {
+        status = "Open";
     }
+
+    public void setInProgress()
+    {
+        status = "In progress";
+    }
+
+    public void setDone()
+    {
+        status = "Done";
+    }
+
 
 
     // ToString;
