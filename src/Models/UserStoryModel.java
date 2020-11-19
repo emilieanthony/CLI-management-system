@@ -58,7 +58,7 @@ public class UserStoryModel {
     {
         while (priority <= 0 || priority >= 6)
         {
-            System.out.println("priority must be between 1 to 5."); "test";
+            System.out.println("priority must be between 1 to 5.");
             priority = this.priority;
         }
     }
