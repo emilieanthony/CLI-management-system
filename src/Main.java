@@ -1,7 +1,15 @@
+import Models.BacklogModel;
+import Models.UserStoryModel;
+
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main (String [] args) {
-        System.out.println("New branch test");
 
+        ProductOwnerView menuProductOwner = new ProductOwnerView();
+        BacklogModel backlogModel = menuProductOwner.createBacklog();
+
+        }
     }
-}
+
