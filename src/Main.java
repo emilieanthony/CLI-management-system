@@ -10,6 +10,9 @@ public class Main {
         ProductOwnerView menuProductOwner = new ProductOwnerView();
         BacklogModel backlogModel = menuProductOwner.createBacklog();
 
+
+        menuProductOwner.viewBacklog(backlogModel);
+
         }
     }
 

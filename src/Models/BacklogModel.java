@@ -57,11 +57,10 @@ public class BacklogModel {
 
     @Override
     public String toString() {
-        return "Models.BacklogModel{" +
-                "name='" + name + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", allUserStories=" + allUserStories +
-                '}';
+        return "Backlog: \n" +
+                "name = " + name + '\n' +
+                "Start Date = " + startDate + '\n' +
+                "End Date = " + endDate + '\n' +
+                "All User Stories = " + allUserStories + ".";
     }
 }

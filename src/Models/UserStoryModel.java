@@ -113,16 +113,14 @@ public class UserStoryModel {
 
     @Override
     public String toString() {
-        return "Models.UserStoryModel{" +
-                "name='" + name + '\'' +
-                ", number='" + number + '\'' +
-                ", sprint='" + sprint + '\'' +
-                ", priority=" + priority +
-                ", storyPoints=" + storyPoints +
-                ", content='" + content + '\'' +
-                ", acceptanceCriteria='" + acceptanceCriteria + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+        return "User story number : " + number + '\n' +
+                "Name = " + name + '\n' +
+                "Sprint = " + sprint + '\n' +
+                "Priority = " + priority + '\n' +
+                "Story Points = " + storyPoints + '\n' +
+                "Content = " + content + '\n' +
+                "Acceptance Criteria = " + acceptanceCriteria + '\n' +
+                "Status = " + status + '\n' + ".";
     }
 }
 
