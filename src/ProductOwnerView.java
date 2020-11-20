@@ -6,13 +6,14 @@ import java.util.Scanner;
 public class ProductOwnerView {
     Scanner input = new Scanner(System.in);
 
-    public int menuProductOwner() {
+    public void menuProductOwner() {
 
         System.out.println("Welcome product owner!\n" +
                 "Please enter an option below\n" +
                 "1. Create a new product backlog\n" +
                 "2. View product backlog\n" +
-                "3. Go back to main menu\n");
+                "3. Edit product backlog\n"+
+                "4. Go back to main menu\n");
 
         int option = input.nextInt();
         switch (option) { //put switch in controller and call methods? Controller: "Accepts input and converts it to commands for the model or view"
@@ -23,9 +24,11 @@ public class ProductOwnerView {
                 //viewBacklog(Backlog);
 
             case 3:
-                // go back to main menu
+                //menuEditBacklog();
+
+            case 4:
+                //go back to main menu
         }
-        return input.nextInt(); // För switchen i controllern
 
     }
 
