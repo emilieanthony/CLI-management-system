@@ -56,11 +56,11 @@ public class UserStoryModel {
 
     public void setPriority(int priority)
     {
-        while (priority <= 0 || priority >= 6)
-        {
+        do{
             System.out.println("priority must be between 1 to 5.");
             priority = this.priority;
         }
+        while (priority <= 0 || priority >= 6);
     }
 
 
