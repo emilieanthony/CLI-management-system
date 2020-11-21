@@ -11,25 +11,9 @@ public class TeamMember
 		this.name = name;
 	}
 
-	public void printMytask(ArrayList<Task> taskList)
+	public int getId()
 	{
-		String output = "";
-
-		if (taskList == null)
-		{
-			output = "You have no tasks assigned.";
-		}
-		else
-		{
-			for (Task task : taskList)
-			{
-				if (task.isAssigned(this))
-				{
-					output = output + task.toString() + "\n";
-				}
-			}
-		}
-		System.out.println(output);
+		return id;
 	}
 
 	public String toString()

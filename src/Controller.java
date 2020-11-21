@@ -10,10 +10,16 @@ public class Controller
 	{
 		scanner = new Scanner(System.in);
 		project = new Project();
-		scrumMaster = new ScrumMaster();
+		scrumMaster = new ScrumMaster(1,"Per persson");
 	}
 
-	public static void menuScrumMaster()
+	public void runApplication()
+	{
+		menuScrumMaster();
+		menuTeamMember();
+	}
+
+	public void menuScrumMaster()
 	{
 		Scanner input = new Scanner(System.in);
 
@@ -24,7 +30,7 @@ public class Controller
 				"3. Create a new task\n" +
 				"4. Create a new Development team member\n" +
 				"5. Create a new Product owner\n" +
-				"6. Assign a task to development team member\n" + //Our task to solve
+				"6. Assign a task to development team member\n" +  //Our task to solve
 				"7. View product backlog\n" +
 				"8. Go back to main menu");
 
@@ -43,26 +49,33 @@ public class Controller
 			case 5:
 				break;
 			case 6:
-				ScrumMaster
+				System.out.println("Write the ID of the task: ");
+				int idTask = input.nextInt();
+				System.out.println("Write the ID of Development team member: ");
+				int idMember = input.nextInt();
+
+				project.assignTask(project.getTeamMember(idMember), project.getTask(idTask));
+
+				System.out.println("Task is now assigned to development team member!");
+
 				break;
 			case 7:
 				break;
 			case 8:
 				break;
 
-
 		}
 
 	}
 
-	public static void menuTeamMember()
+	public void menuTeamMember()
 	{
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Welcome development team member!\n" +
 				"Please enter an option below\n" +
-				"1. View my own tasks\n" +
-				"2. View assigned tasks\n" +		//Our task to solve
+				"1. View my own tasks\n" +			//Our task to solve
+				"2. View assigned tasks\n" +		//Not our task but
 				"3. Add a new task to myself\n" +
 				"4. Go back to main menu");
 
@@ -71,9 +84,16 @@ public class Controller
 		switch (option)
 		{
 			case 1:
+				System.out.println("Write your ID: ");
+				int id = input.nextInt();
+				System.out.println("----YOUR ASSIGNED TASK(S)----");
+				System.out.print(project.printTasks(project.getTeamMember(id)));
+				System.out.println("-----------------------------");
 				break;
 			case 2:
-
+				System.out.println("------ALL ASSIGNED TASKS-----");
+				System.out.print(project.printTasks());
+				System.out.println("-----------------------------");
 				break;
 			case 3:
 				break;

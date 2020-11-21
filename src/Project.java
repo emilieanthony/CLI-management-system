@@ -5,6 +5,8 @@ public class Project
 	private ArrayList<Task> tasks;
 	private ArrayList<TeamMember> teamMembers;
 	private ScrumMaster scrumMaster;
+	//User stories
+	//Project backlog
 
 	public Project()
 	{
@@ -13,22 +15,70 @@ public class Project
 		testSetup();
 	}
 
+	public Task getTask(int id)
+	{
+		for(Task task : tasks)
+		{
+			if(task.getId() == id)
+			{
+				return task;
+			}
+		}
+		return null;
+	}
+
 	public void addTask(Task task)
 	{
 		tasks.add(task);
 	}
 
-	public void printTasks()
+	public String printTasks()
 	{
+		String output = "";
+
 		for (Task task : tasks)
 		{
-			System.out.print(task.toString());
+			output = output +  task.toString();
 		}
+		return output;
 	}
 
-	public TeamMember getTeamMembers(TeamMember member)
+	public String printTasks(TeamMember member)
 	{
-		return teamMembers.get(member);
+		String output = "";
+
+		if (tasks == null)
+		{
+			output = "You have no tasks assigned.";
+		}
+		else
+		{
+			for (Task task : tasks)
+			{
+				if (task.isAssigned(member))
+				{
+					output = output + task.toString() + "\n";
+				}
+			}
+		}
+		return output;
+	}
+
+	public TeamMember getTeamMember(int id)
+	{
+		for(TeamMember member : teamMembers)
+		{
+			if(member.getId() == id)
+			{
+				return member;
+			}
+		}
+		return null;
+	}
+
+	public void assignTask(TeamMember member, Task task)
+	{
+		task.getAssignedTeamMembers().add(member);
 	}
 
 	private void testSetup()
@@ -37,13 +87,7 @@ public class Project
 		teamMembers.add(new TeamMember(2,"Gurra Eriksson"));
 		teamMembers.add(new TeamMember(3,"Olle Qvist"));
 		teamMembers.add(new TeamMember(4,"Dick James"));
-		tasks.add(new Task(4,"Menu","Create a main menu"));
-		tasks.add(new Task(3,"Scrum master","Create a scrum master"));
-	}
-
-	public void test()
-	{
-		scrumMaster.assignTask(teamMembers.get(0), tasks.get(0));
-		printTasks();
+		tasks.add(new Task(1,4,"Menu","Create a main menu"));
+		tasks.add(new Task(2,3,"Scrum master","Create a scrum master"));
 	}
 }

@@ -9,8 +9,4 @@ public class ScrumMaster
 		this.name = name;
 	}
 
-	public void assignTask(TeamMember member, Task task)
-	{
-		task.getAssignedTeamMembers().add(member);
-	}
 }
