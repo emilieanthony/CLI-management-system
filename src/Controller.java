@@ -4,13 +4,11 @@ public class Controller
 {
 	private Scanner scanner;
 	private Project project;
-	private ScrumMaster scrumMaster;
 
 	public Controller()
 	{
 		scanner = new Scanner(System.in);
 		project = new Project();
-		scrumMaster = new ScrumMaster(1,"Per persson");
 	}
 
 	public void runApplication()
@@ -21,8 +19,6 @@ public class Controller
 
 	public void menuScrumMaster()
 	{
-		Scanner input = new Scanner(System.in);
-
 		System.out.println("Welcome scrum master!\n" +
 				"Please enter an option below\n" +
 				"1. Create a new project\n" +
@@ -34,7 +30,7 @@ public class Controller
 				"7. View product backlog\n" +
 				"8. Go back to main menu");
 
-		int option = input.nextInt();
+		int option = scanner.nextInt();
 
 		switch (option)
 		{
@@ -50,9 +46,9 @@ public class Controller
 				break;
 			case 6:
 				System.out.println("Write the ID of the task: ");
-				int idTask = input.nextInt();
+				int idTask = scanner.nextInt();
 				System.out.println("Write the ID of Development team member: ");
-				int idMember = input.nextInt();
+				int idMember = scanner.nextInt();
 
 				project.assignTask(project.getTeamMember(idMember), project.getTask(idTask));
 
@@ -70,8 +66,6 @@ public class Controller
 
 	public void menuTeamMember()
 	{
-		Scanner input = new Scanner(System.in);
-
 		System.out.println("Welcome development team member!\n" +
 				"Please enter an option below\n" +
 				"1. View my own tasks\n" +			//Our task to solve
@@ -79,13 +73,13 @@ public class Controller
 				"3. Add a new task to myself\n" +
 				"4. Go back to main menu");
 
-		int option = input.nextInt();
+		int option = scanner.nextInt();
 
 		switch (option)
 		{
 			case 1:
 				System.out.println("Write your ID: ");
-				int id = input.nextInt();
+				int id = scanner.nextInt();
 				System.out.println("----YOUR ASSIGNED TASK(S)----");
 				System.out.print(project.printTasks(project.getTeamMember(id)));
 				System.out.println("-----------------------------");

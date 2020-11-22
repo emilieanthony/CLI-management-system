@@ -5,6 +5,7 @@ public class Project
 	private ArrayList<Task> tasks;
 	private ArrayList<TeamMember> teamMembers;
 	private ScrumMaster scrumMaster;
+	//Product owner
 	//User stories
 	//Project backlog
 

@@ -47,14 +47,14 @@ public class Task
 		return assignedTeamMembers;
 	}
 
-	public boolean isAssigned(TeamMember member)
-	{
-		return assignedTeamMembers.contains(member);
-	}
-
 	public int getId()
 	{
 		return id;
+	}
+
+	public boolean isAssigned(TeamMember member)
+	{
+		return assignedTeamMembers.contains(member);
 	}
 
 	public String toString()
@@ -66,7 +66,7 @@ public class Task
 
 		if(assignedTeamMembers == null)
 		{
-			output = output + "\nNone";
+			output = output + "\n";
 		}
 		else
 		{
