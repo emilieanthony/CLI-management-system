@@ -50,7 +50,7 @@ public class Controller
 				System.out.println("Write the ID of Development team member: ");
 				int idMember = scanner.nextInt();
 
-				project.assignTask(project.getTeamMember(idMember), project.getTask(idTask));
+				project.assignTask(idMember, idTask);
 
 				System.out.println("Task is now assigned to development team member!");
 

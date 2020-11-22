@@ -77,6 +77,11 @@ public class Project
 		return null;
 	}
 
+	public void assignTask(int memberID, int taskID)		//This one is using method below
+	{
+		assignTask(getTeamMember(memberID), getTask(taskID));
+	}
+
 	public void assignTask(TeamMember member, Task task)
 	{
 		task.getAssignedTeamMembers().add(member);
