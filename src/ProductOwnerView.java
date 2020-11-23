@@ -219,4 +219,24 @@ public class ProductOwnerView {
         editUserStoryMenu(backlogModel);
     }
 
+    public Task findTaskById(int id, ArrayList<Task> allTasks){
+
+        Task task = null;
+        Iterator<Task> iterator = allTasks.iterator();
+        while (task == null && iterator.hasNext()){
+            Task foundTask = iterator.next();
+            if(foundTask.getId() == id){
+                task = foundTask;
+                Scan.print(task.toString());
+            }
+        }
+        return task;
+    }
+
+    public void viewAssignedTasks(int id, ArrayList<Task> allTasks){
+        Task task = findTaskById(id, allTasks);
+        if(!(task.getAssignedTeamMembers().isEmpty())){
+            Scan.print(task.toString());
+        }
+    }
 }
