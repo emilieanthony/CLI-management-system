@@ -14,7 +14,7 @@ public class ProductOwnerView {
 
     public int menuProductOwner() {
         //this method returns the user input as an int and is used in the method backlogMenu in ControllerBacklog
-        System.out.println("Welcome product owner!\n" +
+        Scan.print("Welcome product owner!\n" +
                 "Please enter an option below\n" +
                 "1. Create a new product backlog\n" +
                 "2. View product backlog\n" +
@@ -29,25 +29,21 @@ public class ProductOwnerView {
         Scan.print("Invalid input, please enter another option\n");
     }
 
-
-
     public BacklogModel createBacklog() {
         input.nextLine();
-        System.out.println("Please enter product backlog name:");
+        Scan.print("Please enter product backlog name:");
         String backlogName = input.nextLine();
-        System.out.println("Please enter start date:");
+        Scan.print("Please enter start date:");
         String startDate = input.nextLine();
-        System.out.println("Please enter end date:");
+        Scan.print("Please enter end date:");
         String endDate = input.nextLine();
-
         return new BacklogModel(backlogName, startDate, endDate);
     }
 
     public void viewBacklog(BacklogModel backlogModel) {
-        System.out.println(backlogModel.toString());
+        Scan.print(backlogModel.toString());
     }
 
-    //controller
     public UserStoryModel findUStoryByNumber(int number, ArrayList<UserStoryModel> allUserStories) {
         UserStoryModel userStory = null;
         Iterator<UserStoryModel> iterator = allUserStories.iterator();
@@ -61,9 +57,8 @@ public class ProductOwnerView {
         return userStory;
     }
 
-    public int menuEditBacklog(BacklogModel backlogModel) {
+    public int menuEditBacklog() {
         int option;
-        do {
             option = Scan.readInt("Please enter the number of which part of the " +
                     "backlog you want to " +
                     "edit.\n" +
@@ -72,132 +67,95 @@ public class ProductOwnerView {
                     "3- Edit Backlog end date.\n" +
                     "4- Edit Backlog user stories.\n" +
                     "5- Back to your menu.");
-            Scan.readLine("");
             return option;
-        } while (option <= 0 || option >= 6);
     }
 
     public void editBacklogName(BacklogModel backlogModel){
         String name = Scan.readLine("Write a new name for the backlog.");
         backlogModel.setName(name);
-        menuEditBacklog(backlogModel);
+        menuEditBacklog();
     }
     public void editBacklogSDate(BacklogModel backlogModel){
         String startDate = Scan.readLine("Write a new start date for the backlog, ex" +
                 "(day/Nov/2020)" +
                 ".");
         backlogModel.setStartDate(startDate);
-        menuEditBacklog(backlogModel);
+        menuEditBacklog();
     }
     public void editBacklogEDate(BacklogModel backlogModel){
         String endDate = Scan.readLine("Write a new end date for the backlog, ex(day/Nov/2020)");
         backlogModel.setEndDate(endDate);
-        menuEditBacklog(backlogModel);
+        menuEditBacklog();
     }
 
-    public void editUserStoryMenu(BacklogModel backlogModel){
+    public int menuEditUserStory() {
+        int option = Scan.readInt
+                    ("Which part of the user story you want to edit, enter a " +
+                            "number\n" +
+                            "1- Edit user story number.\n" +
+                            "2- Edit user story name.\n" +
+                            "3- Edit user story sprint.\n" +
+                            "4- Edit user story priority.\n" +
+                            "5- Edit user story story points.\n" +
+                            "6- Edit user story content.\n" +
+                            "7- Edit user story acceptance criteria\n" +
+                            "8- Edit user story status.\n" +
+                            "9- Back to your menu.");
+            return option;
+    }
 
-        viewBacklog(backlogModel);
-
-        int option;
+    public int getStoryNumber(){
         int number = Scan.readInt("Please enter the user story number you want to edit.");
-        Scan.readLine("");
-
-        do {
-
-        findUStoryByNumber(number,backlogModel.getAllUserStories());
-
-        option = Scan.readInt("Which part of the user story you want to edit, enter a " +
-                "number\n" +
-                "1- Edit user story number.\n" +
-                "2- Edit user story name.\n" +
-                "3- Edit user story sprint.\n" +
-                "4- Edit user story priority.\n" +
-                "5- Edit user story story points.\n" +
-                "6- Edit user story content.\n" +
-                "7- Edit user story acceptance criteria\n" +
-                "8- Edit user story status.\n" +
-                "9- Back to your menu.");
-        Scan.readLine("");
-
-            switch (option) {
-                case 1: editUSNumber(number, backlogModel.getAllUserStories(),backlogModel);
-                    break;
-                case 2: editUSName(number,backlogModel.getAllUserStories(),backlogModel);
-                    break;
-                case 3: editUSSprint(number,backlogModel.getAllUserStories(),backlogModel);
-                    break;
-                case 4: editUSPriority(number,backlogModel.getAllUserStories(),backlogModel);
-                    break;
-                case 5: editUSStoryPoints(number,backlogModel.getAllUserStories(),backlogModel);
-                    break;
-                case 6: editUSContent(number,backlogModel.getAllUserStories(),backlogModel);
-                    break;
-                case 7: editUSAcceptanceC(number,backlogModel.getAllUserStories(),backlogModel);
-                    break;
-                case 8: editUSStatus(number,backlogModel.getAllUserStories(),backlogModel);
-                    break;
-                case 9: menuProductOwner();
-                    break;
-                default: Scan.print("Invalid choice, please enter a number between 1 to 9.\n");
-            }
-        }while (option <=0 || option >=10);
-
+        return number;
     }
-    public void editUSNumber(int number, ArrayList<UserStoryModel> allUserStories,
-                             BacklogModel backlogModel){
 
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+    public void editUSNumber(int number, BacklogModel backlogModel){
+        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
         int newUSNumber = Scan.readInt("Enter a new number for the user story.");
         userStory.setNumber(newUSNumber);
-        editUserStoryMenu(backlogModel);
     }
-    public void editUSName(int number,ArrayList<UserStoryModel> allUserStories,
-                           BacklogModel backlogModel){
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+    public void editUSName(int number, BacklogModel backlogModel){
+        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
         String newUSName = Scan.readLine("Enter a new name for the user story.");
         userStory.setName(newUSName);
-        editUserStoryMenu(backlogModel);
+
     }
-    public void editUSSprint(int number,ArrayList<UserStoryModel> allUserStories,BacklogModel backlogModel){
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+    public void editUSSprint(int number,BacklogModel backlogModel){
+        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
         String newUSSprint = Scan.readLine("Enter a new sprint for the user story.");
         userStory.setSprint(newUSSprint);
-        editUserStoryMenu(backlogModel);
+
     }
-    public void editUSPriority(int number,ArrayList<UserStoryModel> allUserStories,BacklogModel backlogModel){
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+    public void editUSPriority(int number,BacklogModel backlogModel){
+        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
         int newUSPriority = Scan.readInt("Enter a new priority for the user story.");
         Scan.readLine("");
         userStory.setPriority(newUSPriority);
-        editUserStoryMenu(backlogModel);
     }
-    public void editUSStoryPoints(int number,ArrayList<UserStoryModel> allUserStories,BacklogModel backlogModel){
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+    public void editUSStoryPoints(int number, BacklogModel backlogModel){
+        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
         int newUSStoryPoints = Scan.readInt("Enter new story points for the user story.");
         Scan.readLine("");
         userStory.setStoryPoints(newUSStoryPoints);
-        editUserStoryMenu(backlogModel);
     }
-    public void editUSContent(int number,ArrayList<UserStoryModel> allUserStories,BacklogModel backlogModel){
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+    public void editUSContent(int number, BacklogModel backlogModel){
+        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
         String newUSContent = Scan.readLine("Enter a new content for the user story.");
         userStory.setContent(newUSContent);
-        editUserStoryMenu(backlogModel);
+
     }
-    public void editUSAcceptanceC(int number,ArrayList<UserStoryModel> allUserStories,BacklogModel backlogModel){
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+    public void editUSAcceptanceC(int number, BacklogModel backlogModel){
+        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
         String newUSAcceptanceC = Scan.readLine("Enter new acceptance criteria for the user " +
                 "story.");
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
-        editUserStoryMenu(backlogModel);
+
     }
-    public void editUSStatus(int number,ArrayList<UserStoryModel> allUserStories,BacklogModel backlogModel){
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+    public void editUSStatus(int number, BacklogModel backlogModel){
+        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
         String newUSStatus = Scan.readLine("Enter new Status for the user " +
                 "story.");
         userStory.setStatus(newUSStatus);
-        editUserStoryMenu(backlogModel);
     }
 
     public Task findTaskById(int id, ArrayList<Task> allTasks){
@@ -221,4 +179,5 @@ public class ProductOwnerView {
             Scan.print(task.toString());
         }
     }
+
 }
