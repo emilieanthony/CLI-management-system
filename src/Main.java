@@ -9,10 +9,10 @@ public class Main {
 
         //Controller for backlog operations
         ControllerBacklog controllerBacklog = new ControllerBacklog();
-
+        controllerBacklog.backlogMenu();
         //Controller for ScrumMaster operations
         Controller controller = new Controller();
-        controller.runApplication();
+        //controller.runApplication();
 
 
         // Test:

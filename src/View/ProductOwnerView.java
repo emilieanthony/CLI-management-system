@@ -18,14 +18,21 @@ public class ProductOwnerView {
                 "Please enter an option below\n" +
                 "1. Create a new product backlog\n" +
                 "2. View product backlog\n" +
-                "3. Edit product backlog\n"+
+                "3. Edit product backlog\n" +
                 "4. Go back to main menu\n");
 
         int option = input.nextInt();
         return option;
     }
 
+    public void defaultMessage(){
+        Scan.print("Invalid input, please enter another option\n");
+    }
+
+
+
     public BacklogModel createBacklog() {
+        input.nextLine();
         System.out.println("Please enter product backlog name:");
         String backlogName = input.nextLine();
         System.out.println("Please enter start date:");
@@ -36,17 +43,17 @@ public class ProductOwnerView {
         return new BacklogModel(backlogName, startDate, endDate);
     }
 
-    public void viewBacklog(BacklogModel backlogModel){
+    public void viewBacklog(BacklogModel backlogModel) {
         System.out.println(backlogModel.toString());
     }
 
     //controller
-    public UserStoryModel findUStoryByNumber(int number, ArrayList<UserStoryModel> allUserStories){
-        UserStoryModel userStory= null;
+    public UserStoryModel findUStoryByNumber(int number, ArrayList<UserStoryModel> allUserStories) {
+        UserStoryModel userStory = null;
         Iterator<UserStoryModel> iterator = allUserStories.iterator();
-        while (userStory==null&& iterator.hasNext()){
+        while (userStory == null && iterator.hasNext()) {
             UserStoryModel foundUserStory = iterator.next();
-            if(foundUserStory.getNumber()==number){
+            if (foundUserStory.getNumber() == number) {
                 userStory = foundUserStory;
                 Scan.print(userStory.toString());
             }
@@ -54,53 +61,38 @@ public class ProductOwnerView {
         return userStory;
     }
 
-    public void editBacklog (BacklogModel backlogModel){
+    public int menuEditBacklog(BacklogModel backlogModel) {
         int option;
         do {
-        option = Scan.readInt("Please enter the number of which part of the " +
-                "backlog you want to " +
-                "edit.\n" +
-                "1- Edit Backlog name.\n" +
-                "2- Edit Backlog start date.\n" +
-                "3- Edit Backlog end date.\n" +
-                "4- Edit Backlog user stories.\n" +
-                "5- Back to your menu.");
-        Scan.readLine("");
-
-            switch (option) {
-                case 1: editBacklogName(backlogModel);
-                    break;
-                case 2: editBacklogSDate(backlogModel);
-                    break;
-                case 3: editBacklogEDate(backlogModel);
-                    break;
-                case 4: editUserStoryMenu(backlogModel);  //Method to another menu to edit user
-                    // stories.
-                    break;
-                case 5: menuProductOwner();
-                    break;
-                default: Scan.print("Invalid choice, please enter a number between 1 to 5.\n");
-            }
-        }while (option <=0 || option >=6);
-
+            option = Scan.readInt("Please enter the number of which part of the " +
+                    "backlog you want to " +
+                    "edit.\n" +
+                    "1- Edit Backlog name.\n" +
+                    "2- Edit Backlog start date.\n" +
+                    "3- Edit Backlog end date.\n" +
+                    "4- Edit Backlog user stories.\n" +
+                    "5- Back to your menu.");
+            Scan.readLine("");
+            return option;
+        } while (option <= 0 || option >= 6);
     }
 
     public void editBacklogName(BacklogModel backlogModel){
         String name = Scan.readLine("Write a new name for the backlog.");
         backlogModel.setName(name);
-        editBacklog(backlogModel);
+        menuEditBacklog(backlogModel);
     }
     public void editBacklogSDate(BacklogModel backlogModel){
         String startDate = Scan.readLine("Write a new start date for the backlog, ex" +
                 "(day/Nov/2020)" +
                 ".");
         backlogModel.setStartDate(startDate);
-        editBacklog(backlogModel);
+        menuEditBacklog(backlogModel);
     }
     public void editBacklogEDate(BacklogModel backlogModel){
         String endDate = Scan.readLine("Write a new end date for the backlog, ex(day/Nov/2020)");
         backlogModel.setEndDate(endDate);
-        editBacklog(backlogModel);
+        menuEditBacklog(backlogModel);
     }
 
     public void editUserStoryMenu(BacklogModel backlogModel){
