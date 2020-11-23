@@ -19,6 +19,10 @@ public class BacklogModel {
         this.allUserStories = new ArrayList<>();
     }
 
+    // Empty constructor - avoid null pointer exception
+    public BacklogModel(){
+    }
+
     //Setters and Getters:-Make sure at the end of the project that not used methods are deleted.
 
     public String getName() {
