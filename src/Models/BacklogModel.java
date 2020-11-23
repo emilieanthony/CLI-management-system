@@ -49,10 +49,6 @@ public class BacklogModel {
         return allUserStories;
     }
 
-    public void setAllUserStories(ArrayList<UserStoryModel> allUserStories) {
-        this.allUserStories = allUserStories;
-    }
-
     //ToString:-
 
     @Override
@@ -61,6 +57,6 @@ public class BacklogModel {
                 "name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +
                 "End Date = " + endDate + '\n' +
-                "All User Stories = " + allUserStories + ".";
+                "All User Stories:-\n " + allUserStories + ".";
     }
 }

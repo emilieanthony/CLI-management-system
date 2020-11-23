@@ -1,11 +1,12 @@
 package Models;
 
+import Utility.Scan;
 
 public class UserStoryModel {
 
     // Attributes:-
     private String name;
-    private String number;
+    private int number;
     private String sprint;
     private int priority;
     private int storyPoints;
@@ -13,8 +14,10 @@ public class UserStoryModel {
     private String acceptanceCriteria;
     private String status;
 
+
     // Constructors:-
-    public UserStoryModel(String name, String number, String sprint, int priority, int storyPoints, String content, String acceptanceCriteria) {
+    public UserStoryModel(String name, int number, String sprint, int priority, int storyPoints,
+                          String content, String acceptanceCriteria) {
         this.name = name;
         this.number = number;
         this.sprint = sprint;
@@ -34,11 +37,11 @@ public class UserStoryModel {
         this.name = name;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
@@ -57,7 +60,7 @@ public class UserStoryModel {
     public void setPriority(int priority)
     {
         do{
-            System.out.println("priority must be between 1 to 5.");
+            Scan.print("priority must be between 1 to 5.");
             priority = this.priority;
         }
         while (priority <= 0 || priority >= 6);
@@ -92,19 +95,8 @@ public class UserStoryModel {
         return status;
     }
 
-    public void setOpen()
-    {
-        status = "Open";
-    }
-
-    public void setInProgress()
-    {
-        status = "In progress";
-    }
-
-    public void setDone()
-    {
-        status = "Done";
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 
@@ -113,14 +105,14 @@ public class UserStoryModel {
 
     @Override
     public String toString() {
-        return "User story number : " + number + '\n' +
+        return "\n\nUser story number : " + number + '\n' +
                 "Name = " + name + '\n' +
                 "Sprint = " + sprint + '\n' +
                 "Priority = " + priority + '\n' +
                 "Story Points = " + storyPoints + '\n' +
                 "Content = " + content + '\n' +
-                "Acceptance Criteria = " + acceptanceCriteria + '\n' +
-                "Status = " + status + '\n' + ".";
+                "Acceptance Criteria =\n" + acceptanceCriteria + '\n' +
+                "Status = " + status;
     }
 }
 

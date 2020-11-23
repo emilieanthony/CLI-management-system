@@ -8,11 +8,8 @@ public class Main {
     public static void main (String [] args) {
 
         ProductOwnerView menuProductOwner = new ProductOwnerView();
-        BacklogModel backlogModel = menuProductOwner.createBacklog();
+        //BacklogModel backlogModel = menuProductOwner.createBacklog();
 
-
-        menuProductOwner.viewBacklog(backlogModel);
-
-        }
     }
+}
 
