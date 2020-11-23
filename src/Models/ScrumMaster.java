@@ -1,3 +1,5 @@
+package Models;
+
 public class ScrumMaster
 {
 	private int id;

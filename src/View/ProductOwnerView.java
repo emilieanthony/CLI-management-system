@@ -1,3 +1,5 @@
+package View;
+
 import Models.BacklogModel;
 import Models.Task;
 import Models.UserStoryModel;
@@ -10,8 +12,8 @@ import java.util.Scanner;
 public class ProductOwnerView {
     Scanner input = new Scanner(System.in);
 
-    public void menuProductOwner(BacklogModel backlogModel) {
-
+    public int menuProductOwner() {
+        //this method returns the user input as an int and is used in the method backlogMenu in ControllerBacklog
         System.out.println("Welcome product owner!\n" +
                 "Please enter an option below\n" +
                 "1. Create a new product backlog\n" +
@@ -20,19 +22,7 @@ public class ProductOwnerView {
                 "4. Go back to main menu\n");
 
         int option = input.nextInt();
-        input.nextLine();
-
-        switch (option) { //put switch in controller and call methods? Controller: "Accepts input and converts it to commands for the model or view"
-            case 1: createBacklog();
-                break;
-            case 2: viewBacklog(backlogModel);
-                break;
-            case 3: editBacklog(backlogModel);
-                break;
-            case 4:
-                //go back to main menu
-        }
-
+        return option;
     }
 
     public BacklogModel createBacklog() {
@@ -48,11 +38,10 @@ public class ProductOwnerView {
 
     public void viewBacklog(BacklogModel backlogModel){
         System.out.println(backlogModel.toString());
-
     }
 
+    //controller
     public UserStoryModel findUStoryByNumber(int number, ArrayList<UserStoryModel> allUserStories){
-
         UserStoryModel userStory= null;
         Iterator<UserStoryModel> iterator = allUserStories.iterator();
         while (userStory==null&& iterator.hasNext()){
@@ -88,7 +77,7 @@ public class ProductOwnerView {
                 case 4: editUserStoryMenu(backlogModel);  //Method to another menu to edit user
                     // stories.
                     break;
-                case 5: menuProductOwner(backlogModel);
+                case 5: menuProductOwner();
                     break;
                 default: Scan.print("Invalid choice, please enter a number between 1 to 5.\n");
             }
@@ -156,7 +145,7 @@ public class ProductOwnerView {
                     break;
                 case 8: editUSStatus(number,backlogModel.getAllUserStories(),backlogModel);
                     break;
-                case 9: menuProductOwner(backlogModel);
+                case 9: menuProductOwner();
                     break;
                 default: Scan.print("Invalid choice, please enter a number between 1 to 9.\n");
             }
@@ -232,6 +221,7 @@ public class ProductOwnerView {
         }
         return task;
     }
+
 
     public void viewAssignedTasks(int id, ArrayList<Task> allTasks){
         Task task = findTaskById(id, allTasks);

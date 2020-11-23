@@ -1,3 +1,7 @@
+package Controller;
+
+import Models.Project;
+
 import java.util.Scanner;
 
 public class Controller
@@ -52,7 +56,7 @@ public class Controller
 
 				project.assignTask(idMember, idTask);
 
-				System.out.println("Task is now assigned to development team member!");
+				System.out.println("Models.Task is now assigned to development team member!");
 
 				break;
 			case 7:

@@ -1,17 +1,19 @@
+import Controller.Controller;
+import Controller.ControllerBacklog;
 import Models.BacklogModel;
-import Models.UserStoryModel;
-
-import java.util.ArrayList;
+import View.ProductOwnerView;
 
 public class Main {
 
     public static void main (String [] args) {
 
+        //Controller for backlog operations
+        ControllerBacklog controllerBacklog = new ControllerBacklog();
+
+        //Controller for ScrumMaster operations
         Controller controller = new Controller();
         controller.runApplication();
 
-        ProductOwnerView menuProductOwner = new ProductOwnerView();
-        BacklogModel backlogModel = menuProductOwner.createBacklog();
 
         // Test:
         /*BacklogModel backlog = new BacklogModel("backlog1", "11/12", "13/12");

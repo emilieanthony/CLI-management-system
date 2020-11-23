@@ -1,3 +1,5 @@
+package Models;
+
 import java.util.ArrayList;
 
 public class Project
@@ -7,7 +9,7 @@ public class Project
 	private ScrumMaster scrumMaster;
 	//Product owner
 	//User stories
-	//Project backlog
+	//Models.Project backlog
 
 	public Project()
 	{
