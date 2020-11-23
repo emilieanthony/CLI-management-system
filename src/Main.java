@@ -7,6 +7,8 @@ public class Main {
 
     public static void main (String [] args) {
 
+        Controller controller = new Controller();
+        controller.runApplication();
 
         ProductOwnerView menuProductOwner = new ProductOwnerView();
         BacklogModel backlogModel = menuProductOwner.createBacklog();
@@ -29,7 +31,6 @@ public class Main {
         menuProductOwner.viewBacklog(backlog);
     }*/
     }
-
 }
 
 
