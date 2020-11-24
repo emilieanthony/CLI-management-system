@@ -1,13 +1,7 @@
 package View;
 
-import Controller.ControllerBacklog;
 import Models.BacklogModel;
-import Models.Task;
-import Models.UserStoryModel;
 import Utility.Scan;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class ProductOwnerView {

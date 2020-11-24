@@ -1,7 +1,6 @@
 package Controller;
 
 import Models.Project;
-
 import java.util.Scanner;
 
 public class Controller
