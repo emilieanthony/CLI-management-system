@@ -15,6 +15,7 @@ public class ControllerBacklog {
     private ProductOwnerView viewProductOwner = new ProductOwnerView();
 
 
+
     //methods
     /*-----------------------------------Code to reuse--------------------------------------------*/
     public UserStoryModel findUStoryByNumber(int number, ArrayList<UserStoryModel> allUserStories) {
@@ -55,6 +56,7 @@ public class ControllerBacklog {
     /*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*/
     public void backlogMenu() {
         boolean running = true;
+
         do {
             int option = viewProductOwner.menuProductOwner();
             switch (option) {
@@ -96,7 +98,7 @@ public class ControllerBacklog {
                     viewProductOwner.editBacklogEDate(backlog);
                     break;
                 case 4:
-                    viewProductOwner.menuEditUserStory();
+                    editUserStory();
                     break;
                 case 5:
                     running = false;
@@ -110,7 +112,7 @@ public class ControllerBacklog {
     public void editUserStory() {
         boolean running = true;
         viewProductOwner.viewBacklog(backlog);
-        int number = getStoryNumber();
+        int number = viewProductOwner.getStoryNumber();
         do {
             int option = viewProductOwner.menuEditUserStory();
 
@@ -148,59 +150,50 @@ public class ControllerBacklog {
         } while (running);
     }
 
-    // Code below will be refactored if we choose to separate controller and view
-    public int getStoryNumber(){
-        int number = Scan.readInt("Please enter the user story number you want to edit.");
-        return number;
-    }
 
     public void editUSNumber(int number, BacklogModel backlogModel){
+        viewProductOwner.getNewUSNumber();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        int newUSNumber = Scan.readInt("Enter a new number for the user story.");
-        userStory.setNumber(newUSNumber);
+        userStory.setNumber(viewProductOwner.getNewUSNumber());
     }
     public void editUSName(int number, BacklogModel backlogModel){
+        viewProductOwner.getNewUSName();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        String newUSName = Scan.readLine("Enter a new name for the user story.");
-        userStory.setName(newUSName);
+        userStory.setName(viewProductOwner.getNewUSName());
 
     }
     public void editUSSprint(int number,BacklogModel backlogModel){
+        viewProductOwner.getNewUSSprint();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        String newUSSprint = Scan.readLine("Enter a new sprint for the user story.");
-        userStory.setSprint(newUSSprint);
+        userStory.setSprint(viewProductOwner.getNewUSSprint());
 
     }
     public void editUSPriority(int number,BacklogModel backlogModel){
+        viewProductOwner.getNewUSPriority();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        int newUSPriority = Scan.readInt("Enter a new priority for the user story.");
-        Scan.readLine("");
-        userStory.setPriority(newUSPriority);
+        userStory.setPriority(viewProductOwner.getNewUSPriority());
     }
     public void editUSStoryPoints(int number, BacklogModel backlogModel){
+        viewProductOwner.getNewUSStoryPoints();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        int newUSStoryPoints = Scan.readInt("Enter new story points for the user story.");
-        Scan.readLine("");
-        userStory.setStoryPoints(newUSStoryPoints);
+        userStory.setStoryPoints(viewProductOwner.getNewUSStoryPoints());
     }
     public void editUSContent(int number, BacklogModel backlogModel){
+        viewProductOwner.getNewUSContent();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        String newUSContent = Scan.readLine("Enter a new content for the user story.");
-        userStory.setContent(newUSContent);
+        userStory.setContent(viewProductOwner.getNewUSContent());
 
     }
     public void editUSAcceptanceC(int number, BacklogModel backlogModel){
+        viewProductOwner.getNewUSAcceptanceC();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        String newUSAcceptanceC = Scan.readLine("Enter new acceptance criteria for the user " +
-                "story.");
-        userStory.setAcceptanceCriteria(newUSAcceptanceC);
+        userStory.setAcceptanceCriteria(viewProductOwner.getNewUSAcceptanceC());
 
     }
     public void editUSStatus(int number, BacklogModel backlogModel){
+        viewProductOwner.getNewUSStatus();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        String newUSStatus = Scan.readLine("Enter new Status for the user " +
-                "story.");
-        userStory.setStatus(newUSStatus);
+        userStory.setStatus(viewProductOwner.getNewUSStatus());
     }
 }
 

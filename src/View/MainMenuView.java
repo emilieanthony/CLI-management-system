@@ -34,7 +34,7 @@ public class MainMenuView {
                     controller.menuScrumMaster();
                     break;
                 case 2:
-                    viewProductOwner.menuProductOwner();
+                    controllerBacklog.backlogMenu();
                     break;
                 case 3:
                     // MenuTeamMember.menuTeamMember();
