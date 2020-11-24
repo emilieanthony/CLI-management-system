@@ -1,6 +1,5 @@
 package View;
 
-import Controller.Projects;
 import Utility.Scan;
 import java.util.Scanner;
 

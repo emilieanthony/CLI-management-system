@@ -26,7 +26,7 @@ public class ControllerDevelopmentMember {
         } while (running);
     }
 
-    //Method for a dev to finding task by ID - this method already created?
+    //Method for a dev to finding task by ID - is this method already created?
     /*public Task findTaskById (int id, ArrayList<Task> allTasks){
 
         Task task = null;
