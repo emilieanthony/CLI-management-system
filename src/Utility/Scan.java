@@ -20,7 +20,7 @@ public class Scan {
 
     public static int readInt(String output) {
         System.out.println(output);
-        int anInt = scan.nextInt();
+        int anInt = Integer.parseInt(scan.nextLine()); // to avoid error with new line
         return anInt;
     }
 
@@ -40,4 +40,6 @@ public class Scan {
     }
 
 }
+
+
 
