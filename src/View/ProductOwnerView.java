@@ -8,12 +8,6 @@ public class ProductOwnerView {
 
     Scanner input = new Scanner(System.in);
 
-    /*--------------------------------------------Code to reuse -----------------------------------------------------*/
-
-    public void defaultMessage() {
-        Scan.print("Invalid input, please enter another option\n");
-    }
-
     /*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*/
 
     public int menuProductOwner() {
