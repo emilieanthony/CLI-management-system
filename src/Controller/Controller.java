@@ -64,7 +64,6 @@ public class Controller
 				break;
 
 		}
-
 	}
 
 	public void menuTeamMember()
@@ -79,6 +78,7 @@ public class Controller
 		int option = scanner.nextInt();
 
 		switch (option)
+
 		{
 			case 1:
 				System.out.println("Write your ID: ");
@@ -98,6 +98,4 @@ public class Controller
 				break;
 		}
 	}
-
-
 }
