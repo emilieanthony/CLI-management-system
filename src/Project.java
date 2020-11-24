@@ -4,7 +4,6 @@ public class Project
 {
 	private ArrayList<Task> tasks;
 	private ArrayList<TeamMember> teamMembers;
-	private ScrumMaster scrumMaster;
 	//Product owner
 	//User stories
 	//Project backlog
@@ -89,7 +88,6 @@ public class Project
 
 	private void testSetup()
 	{
-		scrumMaster = new ScrumMaster(1,"Lena Andersson");
 		teamMembers.add(new TeamMember(2,"Gurra Eriksson"));
 		teamMembers.add(new TeamMember(3,"Olle Qvist"));
 		teamMembers.add(new TeamMember(4,"Dick James"));

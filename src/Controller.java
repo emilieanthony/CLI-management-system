@@ -11,9 +11,10 @@ public class Controller
 		project = new Project();
 	}
 
-	public void runApplication()
+	public void runApplication()		//Temporary for testing of code
 	{
 		menuScrumMaster();
+		menuTeamMember();
 		menuTeamMember();
 	}
 
@@ -39,6 +40,7 @@ public class Controller
 			case 2:
 				break;
 			case 3:
+
 				break;
 			case 4:
 				break;
@@ -61,7 +63,6 @@ public class Controller
 				break;
 
 		}
-
 	}
 
 	public void menuTeamMember()
