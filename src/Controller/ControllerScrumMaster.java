@@ -1,7 +1,8 @@
 package Controller;
 
-import Models.ProjectModel;
-import Models.Sprint;
+import Models.*;
+import Utility.PrintUtility;
+import View.ProductOwnerView;
 import View.ScrumMasterView;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class ControllerScrumMaster {
 	private ScrumMasterView viewScrumMaster = new ScrumMasterView();
 	private ArrayList<ProjectModel> allProjects;
 	private ArrayList<Sprint> allSprints;
+	//Must be in method for create DevMember
+	//arrayLists = new ArrayLists();
 
 	public ControllerScrumMaster() {
 		this.allProjects = new ArrayList<>();
@@ -38,7 +41,7 @@ public class ControllerScrumMaster {
 				case 5:
 					//createProductOwner();
 					break;
-				case 6: //Assign task to DevTeam Member - I need to understand "projects" better to know how to handle this one
+				case 6: //Assign task to DevTeam Member:
 					/*System.out.println("Write the ID of the task: ");
 					int idTask = scanner.nextInt();
 					System.out.println("Write the ID of Development team member: ");
@@ -46,7 +49,7 @@ public class ControllerScrumMaster {
 					projects.assignTask(idMember, idTask);
 					System.out.println("Models.Task is now assigned to development team member!");*/
 					break;
-				case 7: // view product backlog
+				case 7:// view backlog
 					break;
 				case 8:
 					//project.viewAllDevelopmentMembers();
@@ -56,81 +59,79 @@ public class ControllerScrumMaster {
 				case 10:
 					running = false; // Go back to main menu
 					break;
+				default:
+					PrintUtility.defaultMessage();
+					break;
 			}
 		} while (running);
 	}
 
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
-	//TO DO
-	/*private Projects projects;
-	private Scanner scanner;
-
-	public ControllerProductOwner() {
-		projects = new Projects();
-		scanner = new Scanner(System.in);
-	}
-	//TO DO
-	public void createProductOwner() {
+	//TO DO - Methods refers to project and arrayLists. Make sure these are connected.
+	/*public void createProductOwner() {
 		System.out.println("Please type the name of the new Product Owner below: ");
 		String name = scanner.nextLine();
 
-		// System.out.println("Please type the id of the new Product Owner below: ");
-		// int id = scanner.nextInt();
-
 		int id = createIdProductOwner();
+		String typeId = "P";
 
-		projects.getAllProductOwners().add(new ProductOwner(name, id));
+		arrayLists.getAllProductOwners().add(new ProductOwner(name, typeId, id));
 
-		System.out.println(" You have successfully created " + name + " as a new Product Owner with the id " + id);
+		System.out.println(" You have successfully created " + name + " as a new Product Owner with the id "
+				+ typeId + id);
 
-		projects.viewAllProductOwners();
-
+		arrayLists.viewAllProductOwners();
 	}
-	//TO DO
-	public int createIdProductOwner() {
 
-		int id = 200;
+	public int createIdProductOwner() { // from Dart project
 
-		if (projects.getAllProductOwners().isEmpty()) {
-			id = 200;
+		int id = 1;
+
+		if (arrayLists.getAllProductOwners().isEmpty()) {
+			id = 1;
 		} else {
-			id = projects.getAllProductOwners().get(projects.getAllProductOwners().size() - 1).getId() + 1;
+			id = arrayLists.getAllProductOwners().get(arrayLists.getAllProductOwners().size() - 1).getId() + 1;
 		}
 		return id;
-	} */
+	}
 
-	/*------------------------------------Methods create development member-------------------------------------------*/
+	*//*------------------------------------Methods create development member-------------------------------------------*//*
 
-		// Missing method for getAllDevelopmentMembers
-		//TO DO
-            /*public int createIdDevelopmentMember () {
-                int id = 1;
+		//TO DO - arrayList
+		public void createDevelopmentMember() {
 
-                if (project.getAllDevelopmentMembers().isEmpty()) {
-                    id = 1;
-                } else {
-                    id = project.getAllDevelopmentMembers().get(project.getAllDevelopmentMembers().size() - 1).getId() + 1;
-                }
-                return id;
-            }*/
+			System.out.println("Please type the name of the new Development member below: ");
+			String name = scanner.nextLine();
 
-	// Add this method in ControllerScrumMaster - Case 4 menu Switch.
+			int id = createIdDevelopmentMember();
 
-    /*public void createDevelopmentMember(){
-        System.out.println("Please type the name of the new Development member below: ");
-        String name = scanner.nextLine();
+			String typeId = "D";
 
-        int id = createIdDevelopmentMember();
-        //System.out.println("Please type the id of the new Development member below: ");
-        //int id = scanner.nextInt();
+			arrayLists.getAllDevelopmentMembers().add(new DevelopmentMember(name, typeId, id));
 
-        project.getAllDevelopmentMembers().add(new DevelopmentMember(name, id));
+			System.out.println(" You have successfully created " + name + " as a new Development Member with the id "
+					+ typeId + id + ".");
 
-        System.out.println(" You have successfully created " + name + " as a new Development Member with the id " + id);
+			arrayLists.viewAllDevelopmentMembers();
 
-        project.viewAllDevelopmentMembers();
-    }*/
+		}
+
+
+	public int createIdDevelopmentMember() { // from Dart project
+
+		int idNr = 1;
+
+		if (arrayLists.getAllDevelopmentMembers().isEmpty()) {
+			idNr = 1;
+		} else {
+			idNr = arrayLists.getAllDevelopmentMembers().get(arrayLists.getAllDevelopmentMembers().size() - 1).getId() + 1;
+		}
+
+		return idNr;
+
+	}
+}*/
 
 	/*------------------------------------Methods etc for projects-------------------------------------------*/
 
@@ -173,8 +174,6 @@ public class ControllerScrumMaster {
 		System.out.println("You have successfully created the following project:");
 		System.out.println(project.toString());
 	}
-
-
 
 		/*------------------------------------Methods etc for sprints-------------------------------------------*/
 

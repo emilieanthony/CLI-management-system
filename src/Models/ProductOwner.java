@@ -13,21 +13,30 @@ public class ProductOwner {
 
     //attributes
     private String name;
+    private String typeId;
     private int id;
 
-    public ProductOwner (String name, int id){
+    public ProductOwner (String name, String typeId, int id){
         this.name = name;
+        this.typeId = typeId;
         this.id = id;
     }
 
     // getters & setters
-
     public void setName(String name) {
         this.name = name;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getTypeId() {
+        return typeId;
     }
 
     public void setId(int id) {
@@ -39,10 +48,8 @@ public class ProductOwner {
     }
 
     public String toString() {
-        return name + "  "+ id;
+        return name + "  " + typeId + id;
     }
-
-
 }
 
 

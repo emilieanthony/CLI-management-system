@@ -9,7 +9,6 @@ public class ArrayList {
     public ArrayList() {
         this.allProductOwners = new java.util.ArrayList<>();
         this.allDevelopmentMembers = new java.util.ArrayList<>();
-
     }
 
     public java.util.ArrayList<ProductOwner> getAllProductOwners(){
@@ -21,7 +20,6 @@ public class ArrayList {
     }
 
     public void viewAllProductOwners() {
-
         for (ProductOwner productOwner : allProductOwners){
             System.out.println(productOwner.toString());
         }

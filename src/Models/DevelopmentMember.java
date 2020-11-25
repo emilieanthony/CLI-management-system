@@ -10,13 +10,13 @@ public class DevelopmentMember {
     5.3 When a development team member is created the system prints a confirmation text to the user.
      */
 
-
-
-    String name;
+    private String name;
+    private String typeId;
     int id;
 
-    public DevelopmentMember(String name, int id) {
+    public DevelopmentMember(String name, String typeId, int id) {
         this.name = name;
+        this.typeId = typeId;
         this.id = id;
     }
 
@@ -28,6 +28,14 @@ public class DevelopmentMember {
         return name;
     }
 
+    public void setTypeId(String typeId) {
+        this.typeId = "D";
+    }
+
+    public String getTypeId() {
+        return typeId;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -37,6 +45,8 @@ public class DevelopmentMember {
     }
 
     public String toString() {
-        return name + "  " + id;
+        return name + "  " + typeId + id;
     }
 }
+
+

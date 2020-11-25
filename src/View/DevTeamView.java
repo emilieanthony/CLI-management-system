@@ -22,7 +22,7 @@ public class DevTeamView {
         return option;
         }
 
-        //TO DO
+       //TO DO  - "project" doesn't connect
     /*public void viewTasks(){
         System.out.println("Write your ID: ");
         int id = input.nextInt();
@@ -31,7 +31,6 @@ public class DevTeamView {
         System.out.println("-----------------------------");
     }
 
-    //TO DO
     public void viewAssignedTasks(){
         System.out.println("------ALL ASSIGNED TASKS-----");
         System.out.print(projects.printTasks());
