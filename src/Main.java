@@ -1,17 +1,12 @@
-import Controller.Controller;
-import Controller.ControllerBacklog;
+import Controller.ControllerAll;
 import Models.BacklogModel;
-import View.MainMenuView;
 import View.ProductOwnerView;
 
 public class Main {
 
-    public static void main (String [] args) {
+    public static void main(String[] args) {
 
-        MainMenuView mainMenuView = new MainMenuView();
-        mainMenuView.mainMenu();
+        ControllerAll controllerAll = new ControllerAll();
+        controllerAll.menuMain();
     }
 }
-
-
-

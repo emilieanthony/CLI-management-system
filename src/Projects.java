@@ -1,21 +1,20 @@
-package Models;
+import Models.Task;
+import Models.TeamMember;
 
 import java.util.ArrayList;
 
-public class Project
+public class Projects
 {
 	private ArrayList<Task> tasks;
 	private ArrayList<TeamMember> teamMembers;
-	private ScrumMaster scrumMaster;
 	//Product owner
 	//User stories
-	//Models.Project backlog
+	//Controller.Project backlog
 
-	public Project()
+	public Projects()
 	{
 		tasks = new ArrayList<>();
 		teamMembers = new ArrayList<>();
-		testSetup();
 	}
 
 	public Task getTask(int id)
@@ -89,13 +88,5 @@ public class Project
 		task.getAssignedTeamMembers().add(member);
 	}
 
-	private void testSetup()
-	{
-		scrumMaster = new ScrumMaster(1,"Lena Andersson");
-		teamMembers.add(new TeamMember(2,"Gurra Eriksson"));
-		teamMembers.add(new TeamMember(3,"Olle Qvist"));
-		teamMembers.add(new TeamMember(4,"Dick James"));
-		tasks.add(new Task(1,4,"Menu","Create a main menu"));
-		tasks.add(new Task(2,3,"Scrum master","Create a scrum master"));
-	}
+
 }
