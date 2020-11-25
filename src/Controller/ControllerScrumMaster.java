@@ -49,7 +49,7 @@ public class ControllerScrumMaster {
 					projects.assignTask(idMember, idTask);
 					System.out.println("Models.Task is now assigned to development team member!");*/
 					break;
-				case 7:// view backlog
+				case 7: //View backlog method.
 					break;
 				case 8:
 					//project.viewAllDevelopmentMembers();

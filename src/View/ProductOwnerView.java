@@ -7,25 +7,21 @@ import java.util.Scanner;
 
 public class ProductOwnerView {
 
-    Scanner input = new Scanner(System.in);
 
     /*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*/
 
     public int menuProductOwner() {
         //this method returns the user input as an int and is used in the method backlogMenu in ControllerBacklog
-        Scan.print("Welcome product owner!\n" +
+        int option = Scan.readInt("Welcome product owner!\n" +
                 "Please enter an option below\n" +
                 "1. Create a new product backlog\n" +
                 "2. View product backlog\n" +
                 "3. Edit product backlog\n" +
                 "4. Go back to main menu\n");
-
-        int option = input.nextInt();
         return option;
     }
 
     public BacklogModel createBacklog() {
-        Scan.readLine("");
         String backlogName = Scan.readLine("Please enter product backlog name:");
         String startDate = Scan.readLine("Please enter start date:");
         String endDate = Scan.readLine("Please enter end date:");
@@ -112,6 +108,7 @@ public class ProductOwnerView {
     public int getStoryNumber(){
         int number = Scan.readInt("Please enter the user story number you want to edit.");
         return number;
+
     }
     public int getNewUSNumber(){
         int newUSNumber = Scan.readInt("Enter a new number for the user story.");
@@ -147,6 +144,8 @@ public class ProductOwnerView {
                 "story.");
         return newUSStatus;
     }
+
+    //Scan.closeScanner();
 
 }
 

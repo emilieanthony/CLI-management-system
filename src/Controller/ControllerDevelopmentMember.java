@@ -21,7 +21,7 @@ public class ControllerDevelopmentMember {
                     //viewDevTeam.viewTasks(); //US 7 - should only show what's assigned to you
                     break;
                 case 2:
-                    //viewDevTeam.viewAssignedTasks(); // US11 - should show ALL assigned tasks and persons
+                    //viewAllAssignedTasks(); // US11 - should show ALL assigned tasks and persons
                     break;
                 case 3: // Add new task to myself
                     break;
@@ -31,7 +31,7 @@ public class ControllerDevelopmentMember {
         } while (running);
     }
 
-    /*//TO DO
+
     public Task findTaskById (int id, ArrayList<Task> allTasks){
         Task task = null;
         Iterator<Task> iterator = allTasks.iterator();
@@ -44,14 +44,17 @@ public class ControllerDevelopmentMember {
         return task;
     }
 
-    //TO DO
-    public void viewAssignedTasks(int id, ArrayList<Task> allTasks){
-        Task task = findTaskById(id, allTasks);
-        if(!(task.getAssignedTeamMembers().isEmpty())){
-            Scan.print(task.toString());
+    public void viewAllAssignedTasks(ArrayList<Task> allTasks) {
+        Task task = null;
+        Iterator<Task> iterator = allTasks.iterator();
+        while (task == null && iterator.hasNext()) {
+            Task foundTask = iterator.next();
+            if (!(foundTask.getAssignedTeamMembers().isEmpty())){
+                task = foundTask;
+                Scan.print(task.toString());
+            }
         }
-    }*/
-
     }
+}
 
 

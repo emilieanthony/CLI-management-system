@@ -1,11 +1,7 @@
 package Controller;
 
-import Models.BacklogModel;
 import Utility.PrintUtility;
 import Utility.Scan;
-import View.ProductOwnerView;
-
-import java.util.Scanner;
 
 public class ControllerAll {
 
@@ -23,13 +19,13 @@ public class ControllerAll {
     /*--------------------------------------------Main menu -----------------------------------------------------*/
 
         public int mainMenu() {
-            Scanner input = new Scanner(System.in);
-            Scan.print("Welcome to Codelicode, your project management tool.\nPlease enter a option below:\n" +
+
+            int option = Scan.readInt("Welcome to Codelicode, your project management tool.\nPlease " +
+                    "enter a option below:\n" +
                     "1. Scrum master\n" +
                     "2. Product owner\n" +
                     "3. Development team member\n"+
                     "4. Exit system\n");
-            int option = input.nextInt();
             return option;
         }
 
