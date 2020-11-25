@@ -4,6 +4,7 @@ import Utility.Scan;
 import java.util.Scanner;
 
 public class DevTeamView {
+    //TO DO
     //Projects projects = new Projects();
     Scanner input = new Scanner(System.in);
 
@@ -21,7 +22,7 @@ public class DevTeamView {
         return option;
         }
 
-        // problems with projects
+        //TO DO
     /*public void viewTasks(){
         System.out.println("Write your ID: ");
         int id = input.nextInt();
@@ -30,6 +31,7 @@ public class DevTeamView {
         System.out.println("-----------------------------");
     }
 
+    //TO DO
     public void viewAssignedTasks(){
         System.out.println("------ALL ASSIGNED TASKS-----");
         System.out.print(projects.printTasks());

@@ -61,6 +61,8 @@ public class ControllerScrumMaster {
 	}
 
 	/*------------------------------------------Methods product owner------------------------------------------------*/
+
+	//TO DO
 	/*private Projects projects;
 	private Scanner scanner;
 
@@ -68,7 +70,7 @@ public class ControllerScrumMaster {
 		projects = new Projects();
 		scanner = new Scanner(System.in);
 	}
-
+	//TO DO
 	public void createProductOwner() {
 		System.out.println("Please type the name of the new Product Owner below: ");
 		String name = scanner.nextLine();
@@ -85,7 +87,7 @@ public class ControllerScrumMaster {
 		projects.viewAllProductOwners();
 
 	}
-
+	//TO DO
 	public int createIdProductOwner() {
 
 		int id = 200;
@@ -100,8 +102,8 @@ public class ControllerScrumMaster {
 
 	/*------------------------------------Methods create development member-------------------------------------------*/
 
-// Missing method for getAllDevelopmentMembers
-
+		// Missing method for getAllDevelopmentMembers
+		//TO DO
             /*public int createIdDevelopmentMember () {
                 int id = 1;
 

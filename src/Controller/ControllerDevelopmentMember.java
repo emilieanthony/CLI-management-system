@@ -27,6 +27,7 @@ public class ControllerDevelopmentMember {
     }
 
     //Method for a dev to finding task by ID - is this method already created?
+    //TO DO
     /*public Task findTaskById (int id, ArrayList<Task> allTasks){
 
         Task task = null;
@@ -41,6 +42,7 @@ public class ControllerDevelopmentMember {
         return task;
     }
     //Method for a dev to view assigned task
+    //TO DO
     public void viewAssignedTasks(int id, ArrayList<Task> allTasks){
         Task task = findTaskById(id, allTasks);
         if(!(task.getAssignedTeamMembers().isEmpty())){
