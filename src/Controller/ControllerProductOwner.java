@@ -1,20 +1,18 @@
 package Controller;
-import Models.BacklogModel;
-import Models.Task;
-import Models.UserStoryModel;
+
+import Models.*;
+import Utility.PrintUtility;
 import Utility.Scan;
 import View.ProductOwnerView;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ControllerBacklog {
+
+public class ControllerProductOwner {
 
     //attributes
     private BacklogModel backlog = new BacklogModel();
     private ProductOwnerView viewProductOwner = new ProductOwnerView();
-
-
 
     //methods
     /*-----------------------------------Code to reuse--------------------------------------------*/
@@ -31,37 +29,14 @@ public class ControllerBacklog {
         return userStory;
     }
 
-    // Why are these task methods here?
-    public Task findTaskById(int id, ArrayList<Task> allTasks){
-
-        Task task = null;
-        Iterator<Task> iterator = allTasks.iterator();
-        while (task == null && iterator.hasNext()){
-            Task foundTask = iterator.next();
-            if(foundTask.getId() == id){
-                task = foundTask;
-                Scan.print(task.toString());
-            }
-        }
-        return task;
-    }
-
-    public void viewAssignedTasks(int id, ArrayList<Task> allTasks){
-        Task task = findTaskById(id, allTasks);
-        if(!(task.getAssignedTeamMembers().isEmpty())){
-            Scan.print(task.toString());
-        }
-    }
-
     /*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*/
     public void backlogMenu() {
         boolean running = true;
-
         do {
             int option = viewProductOwner.menuProductOwner();
             switch (option) {
                 case 1:
-                    backlog = viewProductOwner.createBacklog();
+                    createBacklog();
                     break;
                 case 2:
                     viewProductOwner.viewBacklog(backlog);
@@ -73,13 +48,14 @@ public class ControllerBacklog {
                     running = false; //go back to main menu
                     break;
                 default:
-                    viewProductOwner.defaultMessage();
+                    PrintUtility.defaultMessage();
             }
         } while (running);
     }
 
     public void createBacklog() {
-        viewProductOwner.createBacklog();
+
+        backlog = viewProductOwner.createBacklog();
     }
 
     /*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*/
@@ -101,18 +77,38 @@ public class ControllerBacklog {
                     editUserStory();
                     break;
                 case 5:
+                    addUserStory();
+                    break;
+                case 6:
+                    removeUserStory(backlog.getAllUserStories());
+                    break;
+                case 7:
                     running = false;
                     break;
                 default:
-                    viewProductOwner.defaultMessage();
+                    PrintUtility.defaultMessage();
             }
         } while (running);
     }
+
+    public void addUserStory(){
+        UserStoryModel newUserStory = viewProductOwner.getUSInfo();
+        backlog.getAllUserStories().add(newUserStory);
+    }
+
+    public void removeUserStory(ArrayList<UserStoryModel> allUserStories){
+        int number = viewProductOwner.getUSNumber();
+        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
+        allUserStories.remove(userStory);
+    }
+
     /*--------------------------------3rd Menu - menu for editing user stories---------------------------------------*/
     public void editUserStory() {
         boolean running = true;
         viewProductOwner.viewBacklog(backlog);
+
         int number = viewProductOwner.getStoryNumber();
+
         do {
             int option = viewProductOwner.menuEditUserStory();
 
@@ -145,57 +141,62 @@ public class ControllerBacklog {
                     running = false;
                     break;
                 default:
-                    viewProductOwner.defaultMessage();
+                    PrintUtility.defaultMessage();
             }
         } while (running);
     }
 
-
     public void editUSNumber(int number, BacklogModel backlogModel){
-        viewProductOwner.getNewUSNumber();
+        int newUSNumber = viewProductOwner.getNewUSNumber();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setNumber(viewProductOwner.getNewUSNumber());
+        userStory.setNumber(newUSNumber);
     }
     public void editUSName(int number, BacklogModel backlogModel){
-        viewProductOwner.getNewUSName();
+        String newUSName = viewProductOwner.getNewUSName();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setName(viewProductOwner.getNewUSName());
+        userStory.setName(newUSName);
 
     }
     public void editUSSprint(int number,BacklogModel backlogModel){
-        viewProductOwner.getNewUSSprint();
+        String newUSSprint = viewProductOwner.getNewUSSprint();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setSprint(viewProductOwner.getNewUSSprint());
+        userStory.setSprint(newUSSprint);
 
     }
     public void editUSPriority(int number,BacklogModel backlogModel){
-        viewProductOwner.getNewUSPriority();
+        int newUSPriority = viewProductOwner.getNewUSPriority();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setPriority(viewProductOwner.getNewUSPriority());
+        userStory.setPriority(newUSPriority);
     }
     public void editUSStoryPoints(int number, BacklogModel backlogModel){
-        viewProductOwner.getNewUSStoryPoints();
+        int newUSSPoints = viewProductOwner.getNewUSStoryPoints();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setStoryPoints(viewProductOwner.getNewUSStoryPoints());
+        userStory.setStoryPoints(newUSSPoints);
     }
     public void editUSContent(int number, BacklogModel backlogModel){
-        viewProductOwner.getNewUSContent();
+        String newUSContent = viewProductOwner.getNewUSContent();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setContent(viewProductOwner.getNewUSContent());
+        userStory.setContent(newUSContent);
 
     }
     public void editUSAcceptanceC(int number, BacklogModel backlogModel){
-        viewProductOwner.getNewUSAcceptanceC();
+        String newUSAcceptanceC = viewProductOwner.getNewUSAcceptanceC();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setAcceptanceCriteria(viewProductOwner.getNewUSAcceptanceC());
+        userStory.setAcceptanceCriteria(newUSAcceptanceC);
 
     }
     public void editUSStatus(int number, BacklogModel backlogModel){
-        viewProductOwner.getNewUSStatus();
+        String newUSStatus = viewProductOwner.getNewUSStatus();
         UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setStatus(viewProductOwner.getNewUSStatus());
+        userStory.setStatus(newUSStatus);
     }
 }
+
+
+
+
+
+
 
 
 
