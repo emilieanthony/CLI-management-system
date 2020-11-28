@@ -1,52 +1,106 @@
 package Controller;
 
+import Models.*;
 import Utility.PrintUtility;
 import Utility.Scan;
+import View.DevTeamView;
+import View.ProductOwnerView;
+import View.ScrumMasterView;
 
-public class ControllerAll {
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ControllerAll
+{
 
     //attributes
-    //Controller for ScrumMaster operations as an object
-    private ControllerScrumMaster controllerScrumMaster = new ControllerScrumMaster();
 
-    //Controller for controller Team members as an object
-    private ControllerDevelopmentMember controllerDevTeam = new ControllerDevelopmentMember();
+    private ArrayList<Project> allProjects;
+    private ArrayList<Sprint> allSprints;
+    private ArrayList<Backlog> allBacklogs;
 
-    //Controller for controller product owner as an object
-    private ControllerProductOwner controllerProductOwner = new ControllerProductOwner();
+    public ControllerAll()
+    {
+        allProjects = new ArrayList<>();
+        allSprints = new ArrayList<>();
+        allBacklogs = new ArrayList<>();
+    }
+
+    public ArrayList<Project> getAllProjects() {
+        return allProjects;
+    }
+    public ArrayList<Sprint> getAllSprints() {
+        return allSprints;
+    }
+    public ArrayList<Backlog> getAllBacklogs() {
+        return allBacklogs;
+    }
+
 
     //methods
     /*--------------------------------------------Main menu -----------------------------------------------------*/
 
-        public int mainMenu() {
+    public int mainMenu()
+    {
 
-            int option = Scan.readInt("Welcome to Codelicode, your project management tool.\nPlease " +
-                    "enter a option below:\n" +
-                    "1. Scrum master\n" +
-                    "2. Product owner\n" +
-                    "3. Development team member\n"+
-                    "4. Exit system\n");
-            return option;
-        }
+        int option = Scan.readInt("\n\nWelcome to Codelicode, your project management tool" +
+                ".\nPlease " +
+                "enter a option below:\n" +
+                "1. Scrum master\n" +
+                "2. Product owner\n" +
+                "3. Development team member\n" +
+                "4. Exit system\n");
+        return option;
+    }
 
-        public void menuMain(){
+
+    public void menuMain(ControllerAll controllerAll, ControllerScrumMaster contScrum ,
+                         ControllerProductOwner contProOwner,
+                         ControllerDeveloper contDeveloper, ScrumMasterView scrumView ,
+                         ProductOwnerView proOwnerView, DevTeamView developerView
+            ,Project project)
+    {
         boolean running = true;
-            do {
+        do
+        {
             int option = mainMenu();
-            switch (option) {
+            switch (option)
+            {
                 case 1:
-                    controllerScrumMaster.scrumMasterMenu();
+                    contScrum.scrumMasterMenu(scrumView, proOwnerView,contProOwner,controllerAll);
                     break;
                 case 2:
-                    controllerProductOwner.backlogMenu();
+                    contProOwner.backlogMenu(proOwnerView,controllerAll,contProOwner);
                     break;
                 case 3:
-                    controllerDevTeam.teamMemberMenu();
+                    contDeveloper.teamMemberMenu(developerView,controllerAll,project);
                     break;
-                case 4: running = false;
+                case 4: running = false; // Exit system.
                     break;
-                default: PrintUtility.defaultMessage();
-                }
-        } while (running) ;
+                default:
+                    PrintUtility.defaultMessage();
+            }
+        } while (running);
     }
+    public Project whichProject(ControllerAll controllerAll){
+        int projectId = Scan.readInt("Enter project id: ");
+        Project project = controllerAll.findProjectById(projectId);
+        return project;
+    }
+    public Project findProjectById(int id){
+        Project project = null;
+
+        Iterator<Project> iterator = allProjects.iterator();
+
+        while (iterator.hasNext() && project==null){
+            Project currentProject = iterator.next();
+            if(currentProject.getId() == id){
+                project = currentProject;
+            }
+        }
+        return project;
+
+    }
+
+
 }

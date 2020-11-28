@@ -45,10 +45,8 @@ public class Sprint {
 
     @Override
     public String toString() {
-        return "Sprint{" +
-                "name='" + name + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
+        return "Sprint Name: " + name +
+                "\nStart Date: " + startDate +
+                "\nEnd Date: " + endDate;
     }
 }

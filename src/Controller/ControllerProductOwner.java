@@ -4,24 +4,25 @@ import Models.*;
 import Utility.PrintUtility;
 import Utility.Scan;
 import View.ProductOwnerView;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class ControllerProductOwner {
-
-    //attributes
-    private BacklogModel backlog = new BacklogModel();
-    private ProductOwnerView viewProductOwner = new ProductOwnerView();
+public class ControllerProductOwner
+{
 
     //methods
     /*-----------------------------------Code to reuse--------------------------------------------*/
-    public UserStoryModel findUStoryByNumber(int number, ArrayList<UserStoryModel> allUserStories) {
-        UserStoryModel userStory = null;
-        Iterator<UserStoryModel> iterator = allUserStories.iterator();
-        while (userStory == null && iterator.hasNext()) {
-            UserStoryModel foundUserStory = iterator.next();
-            if (foundUserStory.getNumber() == number) {
+    public UserStory findUStoryByNumber(int number, ArrayList<UserStory> allUserStories)
+    {
+        UserStory userStory = null;
+        Iterator<UserStory> iterator = allUserStories.iterator();
+        while (userStory == null && iterator.hasNext())
+        {
+            UserStory foundUserStory = iterator.next();
+            if (foundUserStory.getNumber() == number)
+            {
                 userStory = foundUserStory;
                 Scan.print(userStory.toString());
             }
@@ -30,19 +31,22 @@ public class ControllerProductOwner {
     }
 
     /*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*/
-    public void backlogMenu() {
+    public void backlogMenu(ProductOwnerView proOwnerView,ControllerAll controllerAll,ControllerProductOwner contProOwner)
+    {
         boolean running = true;
-        do {
-            int option = viewProductOwner.menuProductOwner();
-            switch (option) {
+        do
+        {
+            int option = proOwnerView.menuProductOwner();
+            switch (option)
+            {
                 case 1:
-                    createBacklog();
+                    createBacklog(proOwnerView,controllerAll);
                     break;
                 case 2:
-                    viewProductOwner.viewBacklog(backlog);
+                    viewBacklog(controllerAll,proOwnerView);
                     break;
                 case 3:
-                    editBacklog();
+                    editBacklog(proOwnerView,controllerAll,contProOwner);
                     break;
                 case 4:
                     running = false; //go back to main menu
@@ -53,34 +57,39 @@ public class ControllerProductOwner {
         } while (running);
     }
 
-    public void createBacklog() {
-
-        backlog = viewProductOwner.createBacklog();
+    public void createBacklog(ProductOwnerView proOwnerView, ControllerAll controllerAll)
+    {
+        Backlog backlog = proOwnerView.createBacklog();
+        controllerAll.getAllBacklogs().add(backlog);
     }
 
     /*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*/
-    public void editBacklog() {
+    public void editBacklog(ProductOwnerView proOwnerView,ControllerAll controllerAll,
+                            ControllerProductOwner contProOwner)
+    {
         boolean running = true;
-        do {
-            int option = viewProductOwner.menuEditBacklog();
-            switch (option) {
+        do
+        {
+            int option = proOwnerView.menuEditBacklog();
+            switch (option)
+            {
                 case 1:
-                    viewProductOwner.editBacklogName(backlog);
+                    proOwnerView.editBacklogName(controllerAll, proOwnerView, contProOwner);
                     break;
                 case 2:
-                    viewProductOwner.editBacklogSDate(backlog);
+                    proOwnerView.editBacklogSDate(controllerAll, proOwnerView, contProOwner);
                     break;
                 case 3:
-                    viewProductOwner.editBacklogEDate(backlog);
+                    proOwnerView.editBacklogEDate(controllerAll, proOwnerView, contProOwner);
                     break;
                 case 4:
-                    editUserStory();
+                    editUserStory(proOwnerView,controllerAll);
                     break;
                 case 5:
-                    addUserStory();
+                    addUserStory(proOwnerView,controllerAll);
                     break;
                 case 6:
-                    removeUserStory(backlog.getAllUserStories());
+                    removeUserStory(proOwnerView,controllerAll);
                     break;
                 case 7:
                     running = false;
@@ -91,51 +100,83 @@ public class ControllerProductOwner {
         } while (running);
     }
 
-    public void addUserStory(){
-        UserStoryModel newUserStory = viewProductOwner.getUSInfo();
+    public void addUserStory(ProductOwnerView proOwnerView, ControllerAll controllerAll)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        UserStory newUserStory = proOwnerView.getUSInfo();
         backlog.getAllUserStories().add(newUserStory);
     }
 
-    public void removeUserStory(ArrayList<UserStoryModel> allUserStories){
-        int number = viewProductOwner.getUSNumber();
-        UserStoryModel userStory = findUStoryByNumber(number, allUserStories);
-        allUserStories.remove(userStory);
+    public void removeUserStory(ProductOwnerView proOwnerView,ControllerAll controllerAll)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        int number = proOwnerView.getUSNumber();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
+        backlog.getAllUserStories().remove(userStory);
+        Scan.print("\nThis User Story has been removed");
+    }
+    public void viewBacklog(ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Scan.print(backlog.toString());
     }
 
+
+    public Backlog findBacklogByName(String name,ArrayList<Backlog> allBacklogs){
+        Backlog backlog = null;
+        Iterator<Backlog> iterator = allBacklogs.iterator();
+        while (backlog == null && iterator.hasNext())
+        {
+            Backlog foundBacklog = iterator.next();
+            if (foundBacklog.getName().equalsIgnoreCase(name))
+            {
+                backlog = foundBacklog;
+            }
+        }
+        return backlog;
+    }
+
+
     /*--------------------------------3rd Menu - menu for editing user stories---------------------------------------*/
-    public void editUserStory() {
+    public void editUserStory(ProductOwnerView proOwnerView,ControllerAll controllerAll)
+    {
+
         boolean running = true;
-        viewProductOwner.viewBacklog(backlog);
+        viewBacklog(controllerAll,proOwnerView);
+        int number = proOwnerView.getStoryNumber();
 
-        int number = viewProductOwner.getStoryNumber();
+        do
+        {
+            int option = proOwnerView.menuEditUserStory();
 
-        do {
-            int option = viewProductOwner.menuEditUserStory();
-
-            switch (option) {
+            switch (option)
+            {
                 case 1:
-                    editUSNumber(number,backlog);
+                    editUSNumber(number,controllerAll, proOwnerView);
                     break;
                 case 2:
-                    editUSName(number,backlog);
+                    editUSName(number,controllerAll, proOwnerView);
                     break;
                 case 3:
-                    editUSSprint(number,backlog);
+                    editUSSprint(number,controllerAll, proOwnerView);
                     break;
                 case 4:
-                    editUSPriority(number,backlog);
+                    editUSPriority(number,controllerAll, proOwnerView);
                     break;
                 case 5:
-                    editUSStoryPoints(number, backlog);
+                    editUSStoryPoints(number,controllerAll, proOwnerView);
                     break;
                 case 6:
-                    editUSContent(number, backlog);
+                    editUSContent(number,controllerAll, proOwnerView);
                     break;
                 case 7:
-                    editUSAcceptanceC(number, backlog);
+                    editUSAcceptanceC(number,controllerAll, proOwnerView);
                     break;
                 case 8:
-                    editUSStatus(number, backlog);
+                    editUSStatus(number,controllerAll, proOwnerView);
                     break;
                 case 9:
                     running = false;
@@ -146,56 +187,82 @@ public class ControllerProductOwner {
         } while (running);
     }
 
-    public void editUSNumber(int number, BacklogModel backlogModel){
-        int newUSNumber = viewProductOwner.getNewUSNumber();
-        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
+    public void editUSNumber(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        int newUSNumber = proOwnerView.getNewUSNumber();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setNumber(newUSNumber);
     }
-    public void editUSName(int number, BacklogModel backlogModel){
-        String newUSName = viewProductOwner.getNewUSName();
-        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
+
+    public void editUSName(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        String newUSName = proOwnerView.getNewUSName();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setName(newUSName);
 
     }
-    public void editUSSprint(int number,BacklogModel backlogModel){
-        String newUSSprint = viewProductOwner.getNewUSSprint();
-        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
+
+    public void editUSSprint(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        String newUSSprint = proOwnerView.getNewUSSprint();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setSprint(newUSSprint);
 
     }
-    public void editUSPriority(int number,BacklogModel backlogModel){
-        int newUSPriority = viewProductOwner.getNewUSPriority();
-        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
+
+    public void editUSPriority(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        int newUSPriority = proOwnerView.getNewUSPriority();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setPriority(newUSPriority);
     }
-    public void editUSStoryPoints(int number, BacklogModel backlogModel){
-        int newUSSPoints = viewProductOwner.getNewUSStoryPoints();
-        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
+
+    public void editUSStoryPoints(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        int newUSSPoints = proOwnerView.getNewUSStoryPoints();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setStoryPoints(newUSSPoints);
     }
-    public void editUSContent(int number, BacklogModel backlogModel){
-        String newUSContent = viewProductOwner.getNewUSContent();
-        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
-        userStory.setContent(newUSContent);
 
+    public void editUSContent(int number, ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        String newUSContent = proOwnerView.getNewUSContent();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
+        userStory.setContent(newUSContent);
     }
-    public void editUSAcceptanceC(int number, BacklogModel backlogModel){
-        String newUSAcceptanceC = viewProductOwner.getNewUSAcceptanceC();
-        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
+
+    public void editUSAcceptanceC(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        String newUSAcceptanceC = proOwnerView.getNewUSAcceptanceC();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
 
     }
-    public void editUSStatus(int number, BacklogModel backlogModel){
-        String newUSStatus = viewProductOwner.getNewUSStatus();
-        UserStoryModel userStory = findUStoryByNumber(number, backlogModel.getAllUserStories());
+
+    public void editUSStatus(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    {
+        String name = proOwnerView.chooseBacklog();
+        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        String newUSStatus = proOwnerView.getNewUSStatus();
+        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setStatus(newUSStatus);
     }
+
 }
-
-
-
-
-
 
 
 

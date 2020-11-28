@@ -2,65 +2,72 @@ package Models;
 
 import java.util.ArrayList;
 
-public class BacklogModel {
+public class Backlog
+{
 
     //Attributes:-
     private String name;
     private String startDate;
     private String endDate;
-    private ArrayList <UserStoryModel> allUserStories;
+    private ArrayList<UserStory> allUserStories;
 
 
     // Constructor:-
-    public BacklogModel(String name, String startDate, String endDate) {
+    public Backlog(String name, String startDate, String endDate)
+    {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.allUserStories = new ArrayList<>();
     }
 
-    // Empty constructor - avoid null pointer exception
-    public BacklogModel(){
-    }
 
     //Setters and Getters:-Make sure at the end of the project that not used methods are deleted.
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getStartDate() {
+    public String getStartDate()
+    {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(String startDate)
+    {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public String getEndDate()
+    {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(String endDate)
+    {
         this.endDate = endDate;
     }
 
-    public ArrayList<UserStoryModel> getAllUserStories() {
+    public ArrayList<UserStory> getAllUserStories()
+    {
         return allUserStories;
     }
 
     //ToString:-
 
     @Override
-    public String toString() {
-        return "Backlog: \n" +
+    public String toString()
+    {
+        return "\n\nBacklog: \n" +
                 "name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +
                 "End Date = " + endDate + '\n' +
-                "All User Stories:-\n " + allUserStories + ".";
+                "All User Stories:\n " + allUserStories + ".";
     }
 }

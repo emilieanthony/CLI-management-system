@@ -4,216 +4,231 @@ import Models.*;
 import Utility.PrintUtility;
 import View.ProductOwnerView;
 import View.ScrumMasterView;
+import Utility.Scan;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ControllerScrumMaster {
 
-	private Scanner scanner = new Scanner(System.in);
-	//private Projects projects;
-	//projects = new Projects();
-	private ScrumMasterView viewScrumMaster = new ScrumMasterView();
-	private ArrayList<ProjectModel> allProjects;
-	private ArrayList<Sprint> allSprints;
-	//Must be in method for create DevMember
-	//arrayLists = new ArrayLists();
 
-	public ControllerScrumMaster() {
-		this.allProjects = new ArrayList<>();
-		this.allSprints = new ArrayList<>();
-	}
+	public void scrumMasterMenu(ScrumMasterView scrumView, ProductOwnerView proOwnerView,
+								ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	{
 
-	public void scrumMasterMenu() {
 		boolean running = true;
-		do {
-			int option = viewScrumMaster.menuScrumMaster();
-			switch (option) {
-				case 1: //Create a new project
+		do
+		{
+			int option = scrumView.menuScrumMaster();
+			switch (option)
+			{
+				case 1:
+					createProject(controllerAll);
 					break;
-				case 2: //Create a new sprint
+				case 2:
+					createSprint(controllerAll);
 					break;
-				case 3: //Create a new task
+				case 3:
+					createDevelopmentMember(controllerAll);
 					break;
 				case 4:
-					//createDevelopmentMember();
+					createProductOwner(controllerAll);
 					break;
 				case 5:
-					//createProductOwner();
+					assignTask(controllerAll);
 					break;
-				case 6: //Assign task to DevTeam Member:
-					/*System.out.println("Write the ID of the task: ");
-					int idTask = scanner.nextInt();
-					System.out.println("Write the ID of Development team member: ");
-					int idMember = scanner.nextInt();
-					projects.assignTask(idMember, idTask);
-					System.out.println("Models.Task is now assigned to development team member!");*/
+				case 6:
+					contProOwner.viewBacklog(controllerAll,proOwnerView);
 					break;
-				case 7: //View backlog method.
+				case 7:
+					viewTeamMembers(controllerAll);
 					break;
 				case 8:
-					//project.viewAllDevelopmentMembers();
-					break;
-				case 9: // View all Product owners
-					break;
-				case 10:
 					running = false; // Go back to main menu
 					break;
 				default:
 					PrintUtility.defaultMessage();
-					break;
 			}
 		} while (running);
 	}
 
-	/*------------------------------------------Methods product owner------------------------------------------------*/
+	private void viewTeamMembers(ControllerAll controllerAll)
+	{
+		int idProject = Scan.readInt("Write the ID of the project: ");
 
-	//TO DO - Methods refers to project and arrayLists. Make sure these are connected.
-	/*public void createProductOwner() {
-		System.out.println("Please type the name of the new Product Owner below: ");
-		String name = scanner.nextLine();
-
-		int id = createIdProductOwner();
-		String typeId = "P";
-
-		arrayLists.getAllProductOwners().add(new ProductOwner(name, typeId, id));
-
-		System.out.println(" You have successfully created " + name + " as a new Product Owner with the id "
-				+ typeId + id);
-
-		arrayLists.viewAllProductOwners();
+		for (Project project : controllerAll.getAllProjects())
+		{
+			if (project.getId() == idProject)
+			{
+				project.viewAllDevelopmentMembers();
+				return;
+			}
+		}
+		Scan.print("Project not found.\n\n");
 	}
 
-	public int createIdProductOwner() { // from Dart project
+	private void assignTask(ControllerAll controllerAll)
+	{
+		int idTask = Scan.readInt("Write the ID of the task: ");
+		int idMember = Scan.readInt("Write the ID of Development team member: ");
+		int idProject = Scan.readInt("Write the ID of the project: ");
 
-		int id = 1;
+		for (Project project : controllerAll.getAllProjects())
+		{
+			if (project.getId() == idProject)
+			{
+				project.assignTask(idMember, idTask);
+				Scan.print("Task is now assigned to development team member!\n\n");
+				return;
+			}
+		}
+		Scan.print("Project not found.\n\n");
+	}
 
-		if (arrayLists.getAllProductOwners().isEmpty()) {
-			id = 1;
-		} else {
-			id = arrayLists.getAllProductOwners().get(arrayLists.getAllProductOwners().size() - 1).getId() + 1;
+	/*------------------------------------------Methods product owner------------------------------------------------*/
+
+	public void createProductOwner(ControllerAll controllerAll)
+	{
+		String name = Scan.readLine("Please type the name of the new Product Owner below: ");
+
+		//System.out.println("Please type the id of the new Product Owner below: ");
+		//int id = scanner.nextInt();
+
+		int idProject = Scan.readInt("Write the ID of the project that the product owner will belong to:" +
+				" ");
+		int id = createIdProductOwner(idProject,controllerAll);
+
+		for (Project project : controllerAll.getAllProjects())
+		{
+			if (project.getId() == idProject)
+			{
+				project.getAllProductOwners().add(new ProductOwner(name, id));
+
+
+			}
+		}
+		Scan.print(" You have successfully created " + name +
+				" as a new Product Owner with the id " + id );
+	}
+
+	public int createIdProductOwner(int idProject, ControllerAll controllerAll)
+	{
+		int id = 200;
+
+		for (Project project : controllerAll.getAllProjects())        //To get the project needed to create unique
+		{                                               //id for product owner
+			if (project.getId() == idProject)
+			{
+				if (project.getAllProductOwners().isEmpty())
+				{
+					id = 200;
+				}
+				else
+				{
+					id = project.getAllProductOwners().get(project.getAllProductOwners().size() - 1).getId() + 1;
+				}
+			}
 		}
 		return id;
 	}
 
-	*//*------------------------------------Methods create development member-------------------------------------------*//*
+	/*------------------------------------Methods create development member-------------------------------------------*/
 
-		//TO DO - arrayList
-		public void createDevelopmentMember() {
+	public void createDevelopmentMember(ControllerAll controllerAll)
+	{
+		String name = Scan.readLine("Please type the name of the new Development member below: \n");
+		int idProject = Scan.readInt("Write the ID of the project that the Development member will belong to:" +
+				" ");
+		int id = createIdDevelopmentMember(idProject,controllerAll);
 
-			System.out.println("Please type the name of the new Development member below: ");
-			String name = scanner.nextLine();
 
-			int id = createIdDevelopmentMember();
-
-			String typeId = "D";
-
-			arrayLists.getAllDevelopmentMembers().add(new DevelopmentMember(name, typeId, id));
-
-			System.out.println(" You have successfully created " + name + " as a new Development Member with the id "
-					+ typeId + id + ".");
-
-			arrayLists.viewAllDevelopmentMembers();
-
+		for (Project project : controllerAll.getAllProjects())
+		{
+			if (project.getId() == idProject)
+			{
+				project.getAllDevelopmentMembers().add(new Developer(name, id));
+			}
 		}
-
-
-	public int createIdDevelopmentMember() { // from Dart project
-
-		int idNr = 1;
-
-		if (arrayLists.getAllDevelopmentMembers().isEmpty()) {
-			idNr = 1;
-		} else {
-			idNr = arrayLists.getAllDevelopmentMembers().get(arrayLists.getAllDevelopmentMembers().size() - 1).getId() + 1;
-		}
-
-		return idNr;
-
+		Scan.print(" You have successfully created " + name +
+				" as a new Development Member with the id " + id);
 	}
-}*/
+
+	public int createIdDevelopmentMember(int idProject, ControllerAll controllerAll)
+	{
+		int id = 1;
+
+		for (Project project : controllerAll.getAllProjects())        //To get the project needed to create unique
+		{                                               //id for product owner
+			if (project.getId() == idProject)
+			{
+				if (project.getAllDevelopmentMembers().isEmpty())
+				{
+					id = 1;
+				}
+				else
+				{
+					id = project.getAllDevelopmentMembers().get(project.getAllDevelopmentMembers().size() - 1).getId() + 1;
+				}
+			}
+		}
+		return id;
+	}
 
 	/*------------------------------------Methods etc for projects-------------------------------------------*/
 
 
-	public ArrayList<ProjectModel> getAllProjects() {
-		return allProjects;
-	}
+	public void createProject(ControllerAll controllerAll)
+	{
+		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
+				"project:");
+		String name = Scan.readLine("Name: ");
+		int id =  Scan.readInt("ID: ");
+		int startYear =  Scan.readInt("Start date (YYYY): ");
+		int startMonth = Scan.readInt("Start date (MM): ");
+		int startDay = Scan.readInt("Start date (DD): ");
+		int endYear = Scan.readInt("End date (YYYY): ");
+		int endMonth = Scan.readInt("End date (MM): ");
+		int endDay = Scan.readInt("End date (DD): ");
 
-	public void setAllProjects(ArrayList<ProjectModel> allProjects) {
-		this.allProjects = allProjects;
-	}
-
-	public void createProject() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new project:");
-		System.out.println("Name:");
-		String name = scanner.nextLine();
-		System.out.println("Start date (YYYY):");
-		int startYear = scanner.nextInt();
-		System.out.println("Start date (MM):");
-		int startMonth = scanner.nextInt();
-		System.out.println("Start date (DD):");
-		int startDay = scanner.nextInt();
-		System.out.println("End date (YYYY):");
-		int endYear = scanner.nextInt();
-		System.out.println("End date (MM):");
-		int endMonth = scanner.nextInt();
-		System.out.println("End date (DD):");
-		int endDay = scanner.nextInt();
-
-		//create exception here for nonvalid input
+		//create exception here for non valid input
 
 		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
 		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
-		ProjectModel project = new ProjectModel(name, startDate, endDate);
-		allProjects.add(project);
+		Project project = new Project(id, name, startDate, endDate);
+		controllerAll.getAllProjects().add(project);
 
 		//export ArrayList to a file
 
-		System.out.println("You have successfully created the following project:");
-		System.out.println(project.toString());
+		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
 
-		/*------------------------------------Methods etc for sprints-------------------------------------------*/
 
-		public ArrayList<Sprint> getAllSprints() {
-			return allSprints;
-		}
 
-		public void setAllSprints(ArrayList<Sprint> allSprints) {
-			this.allSprints = allSprints;
-		}
+	/*------------------------------------Methods etc for sprints-------------------------------------------*/
 
-	public void createSprint() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new sprint:");
-		System.out.println("Name:");
-		String name = scanner.nextLine();
-		System.out.println("Start date (YYYY):");
-		int startYear = scanner.nextInt();
-		System.out.println("Start date (MM):");
-		int startMonth = scanner.nextInt();
-		System.out.println("Start date (DD):");
-		int startDay = scanner.nextInt();
-		System.out.println("End date (YYYY):");
-		int endYear = scanner.nextInt();
-		System.out.println("End date (MM):");
-		int endMonth = scanner.nextInt();
-		System.out.println("End date (DD):");
-		int endDay = scanner.nextInt();
+	public void createSprint(ControllerAll controllerAll)
+	{
+		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
+				"sprint:");
+		String name = Scan.readLine("Name:");
+		int startYear = Scan.readInt("Start date (YYYY):");
+		int startMonth = Scan.readInt("Start date (MM):");
+		int startDay = Scan.readInt("Start date (DD):");
+		int endYear = Scan.readInt("End date (YYYY):");
+		int endMonth = Scan.readInt("End date (MM):");
+		int endDay = Scan.readInt("End date (DD):");
 
-		//create exception here for nonvalid input
+		//create exception here for non valid input
 
 		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
 		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
 		Sprint sprint = new Sprint(name, startDate, endDate);
-		allSprints.add(sprint);
+		controllerAll.getAllSprints().add(sprint);
 
 		//export ArrayList to a file
 
-		System.out.println("You have successfully created the following sprint:");
-		System.out.println(sprint.toString());
+		Scan.print("You have successfully created the following sprint:\n\n" + sprint.toString());
 
 	}
 }
