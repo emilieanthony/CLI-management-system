@@ -2,7 +2,8 @@ package Models;
 
 import Utility.Scan;
 
-public class UserStoryModel {
+public class UserStory
+{
 
     // Attributes:-
     private String name;
@@ -16,8 +17,9 @@ public class UserStoryModel {
 
 
     // Constructors:-
-    public UserStoryModel(String name, int number, String sprint, int priority, int storyPoints,
-                          String content, String acceptanceCriteria) {
+    public UserStory(String name, int number, String sprint, int priority, int storyPoints,
+                     String content, String acceptanceCriteria)
+    {
         this.name = name;
         this.number = number;
         this.sprint = sprint;
@@ -29,82 +31,97 @@ public class UserStoryModel {
     }
 
     // Setters and Getters. Make sure at the end of the project that not used methods are deleted.
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public int getNumber() {
+    public int getNumber()
+    {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(int number)
+    {
         this.number = number;
     }
 
-    public String getSprint() {
+    public String getSprint()
+    {
         return sprint;
     }
 
-    public void setSprint(String sprint) {
+    public void setSprint(String sprint)
+    {
         this.sprint = sprint;
     }
 
-    public int getPriority() {
+    public int getPriority()
+    {
         return priority;
     }
 
     public void setPriority(int priority)
     {
-        do{
+        do
+        {
             Scan.print("priority must be between 1 to 5.");
             priority = this.priority;
         }
         while (priority <= 0 || priority >= 6);
     }
 
-
-    public int getStoryPoints() {
+    public int getStoryPoints()
+    {
         return storyPoints;
     }
 
-    public void setStoryPoints(int storyPoints) {
+    public void setStoryPoints(int storyPoints)
+    {
         this.storyPoints = storyPoints;
     }
 
-    public String getContent() {
+    public String getContent()
+    {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(String content)
+    {
         this.content = content;
     }
 
-    public String getAcceptanceCriteria() {
+    public String getAcceptanceCriteria()
+    {
         return acceptanceCriteria;
     }
 
-    public void setAcceptanceCriteria(String acceptanceCriteria) {
+    public void setAcceptanceCriteria(String acceptanceCriteria)
+    {
         this.acceptanceCriteria = acceptanceCriteria;
     }
 
-    public String getStatus() {
+    public String getStatus()
+    {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(String status)
+    {
         this.status = status;
     }
-
 
 
     // ToString;
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "\n\nUser story number : " + number + '\n' +
                 "Name = " + name + '\n' +
                 "Sprint = " + sprint + '\n' +

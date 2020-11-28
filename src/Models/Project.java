@@ -1,101 +1,172 @@
 package Models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Project
 {
-	private ArrayList<Task> tasks;
-	private ArrayList<TeamMember> teamMembers;
-	private ScrumMaster scrumMaster;
-	//Product owner
-	//User stories
-	//Models.Project backlog
+    //attributes
+    private int id;
+    private String name;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private ArrayList<Task> allTasks;
+    private ArrayList<Developer> allTeamMembers;
+    private java.util.ArrayList<ProductOwner> allProductOwners;
 
-	public Project()
-	{
-		tasks = new ArrayList<>();
-		teamMembers = new ArrayList<>();
-		testSetup();
-	}
+    //constructor
+    public Project(int id, String name, LocalDate startDate, LocalDate endDate)
+    {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.allTasks = new ArrayList<>();
+        this.allTeamMembers = new ArrayList<>();
+        this.allProductOwners = new java.util.ArrayList<>();
+    }
 
-	public Task getTask(int id)
-	{
-		for(Task task : tasks)
-		{
-			if(task.getId() == id)
-			{
-				return task;
-			}
-		}
-		return null;
-	}
+    //all getters & setters
+    public int getId()
+    {
+        return id;
+    }
 
-	public void addTask(Task task)
-	{
-		tasks.add(task);
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public String printTasks()
-	{
-		String output = "";
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-		for (Task task : tasks)
-		{
-			output = output +  task.toString();
-		}
-		return output;
-	}
+    public LocalDate getStartDate()
+    {
+        return startDate;
+    }
 
-	public String printTasks(TeamMember member)
-	{
-		String output = "";
+    public void setStartDate(LocalDate startDate)
+    {
+        this.startDate = startDate;
+    }
 
-		if (tasks == null)
-		{
-			output = "You have no tasks assigned.";
-		}
-		else
-		{
-			for (Task task : tasks)
-			{
-				if (task.isAssigned(member))
-				{
-					output = output + task.toString() + "\n";
-				}
-			}
-		}
-		return output;
-	}
+    public LocalDate getEndDate()
+    {
+        return endDate;
+    }
 
-	public TeamMember getTeamMember(int id)
-	{
-		for(TeamMember member : teamMembers)
-		{
-			if(member.getId() == id)
-			{
-				return member;
-			}
-		}
-		return null;
-	}
+    public void setEndDate(LocalDate endDate)
+    {
+        this.endDate = endDate;
+    }
 
-	public void assignTask(int memberID, int taskID)		//This one is using method below
-	{
-		assignTask(getTeamMember(memberID), getTask(taskID));
-	}
+    public Task getTask(int id)
+    {
+        for (Task task : allTasks)
+        {
+            if (task.getId() == id)
+            {
+                return task;
+            }
+        }
+        return null;
+    }
 
-	public void assignTask(TeamMember member, Task task)
-	{
-		task.getAssignedTeamMembers().add(member);
-	}
+    public String printTasks()
+    {
+        String output = "";
 
-	private void testSetup()
-	{
-		scrumMaster = new ScrumMaster(1,"Lena Andersson");
-		teamMembers.add(new TeamMember(2,"Gurra Eriksson"));
-		teamMembers.add(new TeamMember(3,"Olle Qvist"));
-		teamMembers.add(new TeamMember(4,"Dick James"));
-		tasks.add(new Task(1,4,"Menu","Create a main menu"));
-		tasks.add(new Task(2,3,"Scrum master","Create a scrum master"));
-	}
+        for (Task task : allTasks)
+        {
+            output = output + task.toString();
+        }
+        return output;
+    }
+
+    public String printTasks(Developer member)
+    {
+        String output = "";
+
+        if (allTasks == null)
+        {
+            output = "You have no tasks assigned.";
+        }
+        else
+        {
+            for (Task task : allTasks)
+            {
+                if (task.isAssigned(member))
+                {
+                    output = output + task.toString() + "\n";
+                }
+            }
+        }
+        return output;
+    }
+
+
+    public Developer getTeamMember(int id)
+    {
+        for (Developer member : allTeamMembers)
+        {
+            if (member.getId() == id)
+            {
+                return member;
+            }
+        }
+        return null;
+    }
+
+    public void assignTask(int memberID, int taskID)        //This one is using method below
+    {
+        assignTask(getTeamMember(memberID), getTask(taskID));
+    }
+
+    public void assignTask(Developer member, Task task)
+    {
+        task.getAssignedTeamMembers().add(member);
+    }
+
+    public ArrayList<ProductOwner> getAllProductOwners()
+    {
+        return allProductOwners;
+    }
+
+    public ArrayList<Developer> getAllDevelopmentMembers()
+    {
+        return allTeamMembers;
+    }
+
+    public ArrayList<Task> getAllTasks()
+    {
+        return allTasks;
+    }
+
+    public void viewAllProductOwners()
+    {
+        for (ProductOwner productOwner : allProductOwners)
+        {
+            System.out.println(productOwner.toString());
+        }
+    }
+
+    public void viewAllDevelopmentMembers()
+    {
+        for (Developer developer : allTeamMembers)
+        {
+            System.out.println(developer.toString());
+        }
+    }
+    //toString
+
+    @Override
+    public String toString()
+    {
+        return "Project ID: " + id +
+                "\nName: " + name +
+                "\nStart Date: " + startDate +
+                "\nEnd Date: " + endDate;
+    }
 }
