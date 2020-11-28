@@ -22,17 +22,18 @@ public class Main
         ScrumMasterView scrumView = new ScrumMasterView();
         ProductOwnerView proOwnerView = new ProductOwnerView();
         DevTeamView developerView = new DevTeamView();
-
-
-//________________________TEST__________________________//
-
         Project project = new Project(
                 1,
                 "Test Project",
                 LocalDate.now(),
                 LocalDate.now().plusDays(10));
 
-        Project project2 = new Project(
+
+//________________________TEST__________________________//
+
+
+
+        /*Project project2 = new Project(
                 1,
                 "Test Project",
                 LocalDate.now(),
@@ -86,7 +87,7 @@ public class Main
         allUserStories.add(US3);
         allUserStories.add(US4);
         allUserStories.add(US5);
-        allUserStories.add(US6);
+        allUserStories.add(US6);*/
 
 //_________________________________________________ end test _____________________________//
 
