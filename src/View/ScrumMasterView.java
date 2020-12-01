@@ -13,12 +13,13 @@ public class ScrumMasterView {
                 "Please enter an option below\n" +
                 "1. Create a new project\n" +
                 "2. Create a new sprint\n" +
-                "3. Create a new Development Team Member\n" +
-                "4. Create a new Product owner\n" +
-                "5. Assign a task to Development Team Member\n" +
-                "6. View product backlog\n" +
-                "7. View all Development Team Members\n" +
-                "8. Go back to main menu\n");
+                "3. Create a new Sprint Backlog\n" +
+                "4. Create a new Development Team Member\n" +
+                "5. Create a new Product owner\n" +
+                "6. Assign a task to Development Team Member\n" +
+                "7. View product backlog\n" +
+                "8. View all Development Team Members\n" +
+                "9. Go back to main menu\n");
 
         return option;
     }
