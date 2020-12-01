@@ -30,21 +30,23 @@ public class ControllerScrumMaster {
 					createSprint(controllerAll);
 					break;
 				case 3:
+					//Method for creating a new sprint backlog
+				case 4:
 					createDevelopmentMember(controllerAll);
 					break;
-				case 4:
+				case 5:
 					createProductOwner(controllerAll);
 					break;
-				case 5:
+				case 6:
 					assignTask(controllerAll);
 					break;
-				case 6:
+				case 7:
 					contProOwner.viewBacklog(controllerAll,proOwnerView);
 					break;
-				case 7:
+				case 8:
 					viewTeamMembers(controllerAll);
 					break;
-				case 8:
+				case 9:
 					running = false; // Go back to main menu
 					break;
 				default:
