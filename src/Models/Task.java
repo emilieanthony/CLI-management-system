@@ -1,3 +1,5 @@
+package Models;
+
 import java.util.ArrayList;
 
 public class Task
@@ -7,7 +9,7 @@ public class Task
 	private String status;
 	private String name;
 	private String description;
-	private ArrayList<TeamMember> assignedTeamMembers;
+	private ArrayList<Developer> assignedTeamMembers;
 
 	public Task(int id, int priorityNumber, String name, String description)
 	{
@@ -42,7 +44,7 @@ public class Task
 		status = "Done";
 	}
 
-	public ArrayList<TeamMember> getAssignedTeamMembers()
+	public ArrayList<Developer> getAssignedTeamMembers()
 	{
 		return assignedTeamMembers;
 	}
@@ -52,7 +54,7 @@ public class Task
 		return id;
 	}
 
-	public boolean isAssigned(TeamMember member)
+	public boolean isAssigned(Developer member)
 	{
 		return assignedTeamMembers.contains(member);
 	}
@@ -61,8 +63,9 @@ public class Task
 	{
 		String output;
 
-		output = "ID: " + id + " Priority number: " + priorityNumber + "  Status: " + status + "  Name: " + name +
-				"  Description: " + description + "\nAssigned Team Members:";
+		output =
+				"Tasks: "+ "\nID:" + id + "\nName: " + name + "\nPriority number: " + priorityNumber +
+						"\nStatus: " + status+ "\nDescription: " + description + "\nAssigned Team Members:";
 
 		if(assignedTeamMembers == null)
 		{
@@ -70,7 +73,7 @@ public class Task
 		}
 		else
 		{
-			for (TeamMember member : assignedTeamMembers)
+			for (Developer member : assignedTeamMembers)
 			{
 				output = output + "\n" + member.toString();
 			}
