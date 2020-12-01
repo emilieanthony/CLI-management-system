@@ -74,13 +74,13 @@ public class ControllerProductOwner
             switch (option)
             {
                 case 1:
-                    proOwnerView.editBacklogName(controllerAll, proOwnerView, contProOwner);
+                    editBacklogName(controllerAll, proOwnerView, contProOwner);
                     break;
                 case 2:
-                    proOwnerView.editBacklogSDate(controllerAll, proOwnerView, contProOwner);
+                    editBacklogSDate(controllerAll, proOwnerView, contProOwner);
                     break;
                 case 3:
-                    proOwnerView.editBacklogEDate(controllerAll, proOwnerView, contProOwner);
+                    editBacklogEDate(controllerAll, proOwnerView, contProOwner);
                     break;
                 case 4:
                     editUserStory(proOwnerView,controllerAll);
@@ -115,7 +115,7 @@ public class ControllerProductOwner
         int number = proOwnerView.getUSNumber();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         backlog.getAllUserStories().remove(userStory);
-        Scan.print("\nThis User Story has been removed");
+        proOwnerView.printRemoved();
     }
     public void viewBacklog(ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
@@ -137,6 +137,29 @@ public class ControllerProductOwner
             }
         }
         return backlog;
+    }
+    public void editBacklogName(ControllerAll controllerAll, ProductOwnerView viewProOwner,
+                                ControllerProductOwner contProOwner){
+        String nameBacklog = viewProOwner.getBacklogName();
+        String name = viewProOwner.chooseBacklog();
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        backlog.setName(nameBacklog);
+    }
+    public void editBacklogSDate(ControllerAll controllerAll, ProductOwnerView viewProOwner,
+                                 ControllerProductOwner contProOwner)
+    {
+        String name = viewProOwner.chooseBacklog();
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        String startDate = viewProOwner.getBacklogSDate();
+        backlog.setStartDate(startDate);
+    }
+    public void editBacklogEDate(ControllerAll controllerAll, ProductOwnerView viewProOwner,
+                                 ControllerProductOwner contProOwner)
+    {
+        String name = viewProOwner.chooseBacklog();
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        String endDate = viewProOwner.getBacklogEDate();
+        backlog.setEndDate(endDate);
     }
 
 

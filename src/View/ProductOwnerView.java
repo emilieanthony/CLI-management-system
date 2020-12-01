@@ -53,37 +53,25 @@ public class ProductOwnerView
         String name = Scan.readLine("Please enter the name of the Backlog:");
         return name;
     }
-    public void editBacklogName(ControllerAll controllerAll, ProductOwnerView viewProOwner,
-                                ControllerProductOwner contProOwner)
+    public String getBacklogName()
     {
-        String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
         String nameBacklog = Scan.readLine("Please enter a new name for the backlog:");
-        backlog.setName(nameBacklog);
+        return nameBacklog;
     }
 
-    public void editBacklogSDate(ControllerAll controllerAll, ProductOwnerView viewProOwner,
-                                 ControllerProductOwner contProOwner)
-    {
-        String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+    public String getBacklogSDate() {
         String startDate = Scan.readLine("Please enter a new start date for the backlog ex" +
                 "(day/Nov/2020):");
-        backlog.setStartDate(startDate);
+        return startDate;
     }
 
-    public void editBacklogEDate(ControllerAll controllerAll, ProductOwnerView viewProOwner,
-                                 ControllerProductOwner contProOwner)
-    {
-        String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+    public String getBacklogEDate() {
         String endDate = Scan.readLine("Please enter a new End date for the backlog ex" +
                 "(day/Nov/2020):");
-        backlog.setEndDate(endDate);
+        return endDate;
     }
 
-    public UserStory getUSInfo()
-    {
+    public UserStory getUSInfo() {
         Scan.print("Add new user story");
         String name = Scan.readLine("Name: ");
         int number = Scan.readInt("User story number: ");
@@ -123,61 +111,55 @@ public class ProductOwnerView
         return option;
     }
 
-    public int getStoryNumber()
-    {
+    public int getStoryNumber() {
         int number = Scan.readInt("Please enter the user story number you want to edit.");
         return number;
 
     }
 
-    public int getNewUSNumber()
-    {
+    public int getNewUSNumber() {
         int newUSNumber = Scan.readInt("Enter a new number for the user story.");
         return newUSNumber;
     }
 
-    public String getNewUSName()
-    {
+    public String getNewUSName() {
         String newUSName = Scan.readLine("Enter a new name for the user story.");
         return newUSName;
     }
 
-    public String getNewUSSprint()
-    {
+    public String getNewUSSprint() {
         String newUSSprint = Scan.readLine("Enter a new sprint for the user story.");
         return newUSSprint;
     }
 
-    public int getNewUSPriority()
-    {
+    public int getNewUSPriority() {
         int newUSPriority = Scan.readInt("Enter a new priority for the user story.");
         return newUSPriority;
     }
 
-    public int getNewUSStoryPoints()
-    {
+    public int getNewUSStoryPoints() {
         int newUSStoryPoints = Scan.readInt("Enter new story points for the user story.");
         return newUSStoryPoints;
     }
 
-    public String getNewUSContent()
-    {
+    public String getNewUSContent() {
         String newUSContent = Scan.readLine("Enter a new content for the user story.");
         return newUSContent;
     }
 
-    public String getNewUSAcceptanceC()
-    {
+    public String getNewUSAcceptanceC() {
         String newUSAcceptanceC = Scan.readLine("Enter new acceptance criteria for the user " +
                 "story.");
         return newUSAcceptanceC;
     }
 
-    public String getNewUSStatus()
-    {
+    public String getNewUSStatus() {
         String newUSStatus = Scan.readLine("Enter new Status for the user " +
                 "story.");
         return newUSStatus;
+    }
+    public void printRemoved(){
+        Scan.print("\nThis User Story has been removed");
     }
 
 }
