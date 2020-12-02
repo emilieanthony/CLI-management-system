@@ -10,6 +10,8 @@ public class Backlog
     private String startDate;
     private String endDate;
     private ArrayList<UserStory> allUserStories;
+    private ArrayList<Task> tasks;
+
 
 
     // Constructor:-
@@ -19,6 +21,7 @@ public class Backlog
         this.startDate = startDate;
         this.endDate = endDate;
         this.allUserStories = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
 
@@ -59,6 +62,13 @@ public class Backlog
         return allUserStories;
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     //ToString:-
 
     @Override
@@ -68,6 +78,7 @@ public class Backlog
                 "name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +
                 "End Date = " + endDate + '\n' +
+                "All tasks:\n " + tasks + "\n" +
                 "All User Stories:\n " + allUserStories + ".";
     }
 }

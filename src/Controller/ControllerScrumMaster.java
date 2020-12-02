@@ -7,6 +7,8 @@ import View.ScrumMasterView;
 import Utility.Scan;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ControllerScrumMaster {
 
@@ -28,7 +30,8 @@ public class ControllerScrumMaster {
 					createSprint(controllerAll);
 					break;
 				case 3:
-					//Method for creating a new sprint backlog
+					createTask(scrumView, controllerAll);
+					break;
 				case 4:
 					createDevelopmentMember(controllerAll);
 					break;
@@ -67,6 +70,15 @@ public class ControllerScrumMaster {
 		}
 		Scan.print("Project not found.\n\n");
 	}
+
+	/*------------------------------------------Methods for tasks------------------------------------------------*/
+
+	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){
+			Task newTask = scrumMasterView.createTask();
+			String name = scrumMasterView.getBacklogName();
+			findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
+		}
+
 
 	private void assignTask(ControllerAll controllerAll)
 	{
@@ -204,7 +216,6 @@ public class ControllerScrumMaster {
 	}
 
 
-
 	/*------------------------------------Methods etc for sprints-------------------------------------------*/
 
 	public void createSprint(ControllerAll controllerAll)
@@ -230,6 +241,20 @@ public class ControllerScrumMaster {
 
 		Scan.print("You have successfully created the following sprint:\n\n" + sprint.toString());
 
+	}
+
+	public Backlog findBacklogByName(String name, ArrayList<Backlog> allBacklogs){
+		Backlog backlog = null;
+		Iterator<Backlog> iterator = allBacklogs.iterator();
+		while (backlog == null && iterator.hasNext())
+		{
+			Backlog foundBacklog = iterator.next();
+			if (foundBacklog.getName().equalsIgnoreCase(name))
+			{
+				backlog = foundBacklog;
+			}
+		}
+		return backlog;
 	}
 }
 

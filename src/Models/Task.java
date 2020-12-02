@@ -25,6 +25,17 @@ public class Task
 		this.assignedTeamMembers = new ArrayList<>();
 	}
 
+	// constructor for creating a new task without knowing actual hours
+	public Task(int id, int priorityNumber, int estimatedHours, String name, String description) {
+		this.id = id;
+		this.priorityNumber = priorityNumber;
+		this.estimatedHours = estimatedHours;
+		this.status = "Open";
+		this.name = name;
+		this.description = description;
+		this.assignedTeamMembers = new ArrayList<>();
+	}
+
 	public void setPriorityNumber(int priorityNumber)
 	{
 		if(priorityNumber > 0  && priorityNumber < 6)
