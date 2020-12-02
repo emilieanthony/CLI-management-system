@@ -10,11 +10,11 @@ public class Project
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
-   // private ArrayList<Task> allTasks;
+   //private ArrayList<Task> allTasks;
     private ArrayList<Developer> allTeamMembers;
     private ArrayList<ProductOwner> allProductOwners;
-    private ArrayList<Backlog> productBacklog;
-    private ArrayList<Sprint> sprintsBacklog;
+    private ArrayList<Backlog> projectBacklog;
+    private ArrayList<Sprint> sprintBacklog;
 
 
     //constructor
@@ -26,9 +26,9 @@ public class Project
         this.endDate = endDate;
       //  this.allTasks = new ArrayList<>();
         this.allTeamMembers = new ArrayList<>();
-        this.allProductOwners = new java.util.ArrayList<>();
-        this.productBacklog = new ArrayList<>();
-        this.sprintsBacklog = new ArrayList<>();
+        this.allProductOwners = new ArrayList<>();
+        this.projectBacklog = new ArrayList<>();
+        this.sprintBacklog = new ArrayList<>();
     }
 
     //all getters & setters
@@ -69,7 +69,7 @@ public class Project
 
     public Task getTaskFromSprintBacklog(int id)
     {
-        for(Sprint sprint : sprintsBacklog)
+        for(Sprint sprint : sprintBacklog)
         {
             return sprint.getTask(id);
         }
@@ -78,7 +78,7 @@ public class Project
 
     public String printTasksFromSprintBacklog()
     {
-        for(Sprint sprint : sprintsBacklog)
+        for(Sprint sprint : sprintBacklog)
         {
             return sprint.printTasks();
         }
@@ -87,7 +87,7 @@ public class Project
 
     public String printPersonalTasks(Developer member)
     {
-        for(Sprint sprint : sprintsBacklog)
+        for(Sprint sprint : sprintBacklog)
         {
             return sprint.printPersonalTasks(member);
         }
@@ -108,7 +108,10 @@ public class Project
 
     public void assignTask(int memberID, int taskID)        //This one is using method below
     {
-        assignTask(getTeamMember(memberID), sprintBacklog.getTask(taskID));
+        for(Sprint sprint : sprintBacklog)
+        {
+            assignTask(getTeamMember(memberID), sprint.getTask(taskID));
+        }
     }
 
     public void assignTask(Developer member, Task task)
@@ -128,7 +131,7 @@ public class Project
 
     public ArrayList<Task> getAllTasks()
     {
-        for(Sprint sprint : sprintsBacklog)
+        for(Sprint sprint : sprintBacklog)
         {
             return sprint.getAllTasks();
         }

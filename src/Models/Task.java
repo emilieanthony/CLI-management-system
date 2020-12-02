@@ -6,15 +6,19 @@ public class Task
 {
 	private int id;
 	private int priorityNumber;
+	private int estimatedHours;
+	private int actualHours;
 	private String status;
 	private String name;
 	private String description;
 	private ArrayList<Developer> assignedTeamMembers;
 
-	public Task(int id, int priorityNumber, String name, String description)
+	public Task(int id, int priorityNumber, int estimatedTime,int actualHours, String name, String description)
 	{
 		this.id = id;
 		this.priorityNumber = priorityNumber;
+		this.estimatedHours = estimatedTime;
+		this.actualHours = actualHours;
 		this.status = "Open";
 		this.name = name;
 		this.description = description;
