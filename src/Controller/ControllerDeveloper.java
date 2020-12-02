@@ -8,8 +8,6 @@ import Models.Project;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ControllerDeveloper
 {
@@ -84,7 +82,7 @@ public class ControllerDeveloper
         {
             if (project.getId() == idProject)
             {
-                Scan.print("----YOUR ASSIGNED TASK(S)----\n" + project.printTasks(project.getTeamMember(id)) + "\n" + "-----------------------------");
+                Scan.print("----YOUR ASSIGNED TASK(S)----\n" + project.printPersonalTasks(project.getTeamMember(id)) + "\n" + "-----------------------------");
             }
         }
     }

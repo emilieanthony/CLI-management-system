@@ -16,24 +16,24 @@ public class ControllerAll
     //attributes
 
     private ArrayList<Project> allProjects;
-    private ArrayList<Sprint> allSprints;
-    private ArrayList<Backlog> allBacklogs;
+    private ArrayList<Sprint> SprintBacklog;
+    private ArrayList<Backlog> projectBacklog;
 
     public ControllerAll()
     {
         allProjects = new ArrayList<>();
-        allSprints = new ArrayList<>();
-        allBacklogs = new ArrayList<>();
+        SprintBacklog = new ArrayList<>();
+        projectBacklog = new ArrayList<>();
     }
 
     public ArrayList<Project> getAllProjects() {
         return allProjects;
     }
-    public ArrayList<Sprint> getAllSprints() {
-        return allSprints;
+    public ArrayList<Sprint> getSprintBacklog() {
+        return SprintBacklog;
     }
-    public ArrayList<Backlog> getAllBacklogs() {
-        return allBacklogs;
+    public ArrayList<Backlog> getProjectBacklog() {
+        return projectBacklog;
     }
 
 

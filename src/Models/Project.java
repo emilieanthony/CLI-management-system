@@ -10,9 +10,12 @@ public class Project
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
-    private ArrayList<Task> allTasks;
+   // private ArrayList<Task> allTasks;
     private ArrayList<Developer> allTeamMembers;
-    private java.util.ArrayList<ProductOwner> allProductOwners;
+    private ArrayList<ProductOwner> allProductOwners;
+    private ArrayList<Backlog> productBacklog;
+    private ArrayList<Sprint> sprintsBacklog;
+
 
     //constructor
     public Project(int id, String name, LocalDate startDate, LocalDate endDate)
@@ -21,9 +24,11 @@ public class Project
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.allTasks = new ArrayList<>();
+      //  this.allTasks = new ArrayList<>();
         this.allTeamMembers = new ArrayList<>();
         this.allProductOwners = new java.util.ArrayList<>();
+        this.productBacklog = new ArrayList<>();
+        this.sprintsBacklog = new ArrayList<>();
     }
 
     //all getters & setters
@@ -62,50 +67,32 @@ public class Project
         this.endDate = endDate;
     }
 
-    public Task getTask(int id)
+    public Task getTaskFromSprintBacklog(int id)
     {
-        for (Task task : allTasks)
+        for(Sprint sprint : sprintsBacklog)
         {
-            if (task.getId() == id)
-            {
-                return task;
-            }
+            return sprint.getTask(id);
         }
         return null;
     }
 
-    public String printTasks()
+    public String printTasksFromSprintBacklog()
     {
-        String output = "";
-
-        for (Task task : allTasks)
+        for(Sprint sprint : sprintsBacklog)
         {
-            output = output + task.toString();
+            return sprint.printTasks();
         }
-        return output;
+        return null;
     }
 
-    public String printTasks(Developer member)
+    public String printPersonalTasks(Developer member)
     {
-        String output = "";
-
-        if (allTasks == null)
+        for(Sprint sprint : sprintsBacklog)
         {
-            output = "You have no tasks assigned.";
+            return sprint.printPersonalTasks(member);
         }
-        else
-        {
-            for (Task task : allTasks)
-            {
-                if (task.isAssigned(member))
-                {
-                    output = output + task.toString() + "\n";
-                }
-            }
-        }
-        return output;
+        return null;
     }
-
 
     public Developer getTeamMember(int id)
     {
@@ -121,7 +108,7 @@ public class Project
 
     public void assignTask(int memberID, int taskID)        //This one is using method below
     {
-        assignTask(getTeamMember(memberID), getTask(taskID));
+        assignTask(getTeamMember(memberID), sprintBacklog.getTask(taskID));
     }
 
     public void assignTask(Developer member, Task task)
@@ -141,7 +128,11 @@ public class Project
 
     public ArrayList<Task> getAllTasks()
     {
-        return allTasks;
+        for(Sprint sprint : sprintsBacklog)
+        {
+            return sprint.getAllTasks();
+        }
+        return null;
     }
 
     public void viewAllProductOwners()
