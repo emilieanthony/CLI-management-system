@@ -39,7 +39,7 @@ public class Import {
                     String startDate = projectInfo[2];
                     String endDate = projectInfo[3];
                     backlog = new Backlog(name,startDate,endDate);
-                    controllerAll.getAllBacklogs().add(backlog);
+                    controllerAll.getProjectBacklog().add(backlog);
                 }
                 if (projectInfo[0].equalsIgnoreCase("Sprint")){
                     String name = projectInfo[1];
@@ -54,7 +54,7 @@ public class Import {
                     LocalDate startDate = LocalDate.of(sYear,sMonth,sDay);
                     LocalDate endDate = LocalDate.of(eYear, eMonth, eDay);
                     Sprint sprint = new Sprint(name,startDate,endDate);
-                    controllerAll.getAllSprints().add(sprint);
+                    controllerAll.getSprintBacklog().add(sprint);
                 }
                 if (projectInfo[0].equalsIgnoreCase("Task")){
                     int id = Integer.parseInt(projectInfo[1]);

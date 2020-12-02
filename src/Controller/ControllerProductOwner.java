@@ -60,7 +60,7 @@ public class ControllerProductOwner
     public void createBacklog(ProductOwnerView proOwnerView, ControllerAll controllerAll)
     {
         Backlog backlog = proOwnerView.createBacklog();
-        controllerAll.getAllBacklogs().add(backlog);
+        controllerAll.getProjectBacklog().add(backlog);
     }
 
     /*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*/
@@ -103,7 +103,7 @@ public class ControllerProductOwner
     public void addUserStory(ProductOwnerView proOwnerView, ControllerAll controllerAll)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         UserStory newUserStory = proOwnerView.getUSInfo();
         backlog.getAllUserStories().add(newUserStory);
     }
@@ -111,7 +111,7 @@ public class ControllerProductOwner
     public void removeUserStory(ProductOwnerView proOwnerView,ControllerAll controllerAll)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         int number = proOwnerView.getUSNumber();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         backlog.getAllUserStories().remove(userStory);
@@ -120,7 +120,7 @@ public class ControllerProductOwner
     public void viewBacklog(ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         Scan.print(backlog.toString());
     }
 
@@ -142,14 +142,14 @@ public class ControllerProductOwner
                                 ControllerProductOwner contProOwner){
         String nameBacklog = viewProOwner.getBacklogName();
         String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
         backlog.setName(nameBacklog);
     }
     public void editBacklogSDate(ControllerAll controllerAll, ProductOwnerView viewProOwner,
                                  ControllerProductOwner contProOwner)
     {
         String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
         String startDate = viewProOwner.getBacklogSDate();
         backlog.setStartDate(startDate);
     }
@@ -157,7 +157,7 @@ public class ControllerProductOwner
                                  ControllerProductOwner contProOwner)
     {
         String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
         String endDate = viewProOwner.getBacklogEDate();
         backlog.setEndDate(endDate);
     }
@@ -213,7 +213,7 @@ public class ControllerProductOwner
     public void editUSNumber(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         int newUSNumber = proOwnerView.getNewUSNumber();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setNumber(newUSNumber);
@@ -222,7 +222,7 @@ public class ControllerProductOwner
     public void editUSName(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         String newUSName = proOwnerView.getNewUSName();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setName(newUSName);
@@ -232,7 +232,7 @@ public class ControllerProductOwner
     public void editUSSprint(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         String newUSSprint = proOwnerView.getNewUSSprint();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setSprint(newUSSprint);
@@ -242,7 +242,7 @@ public class ControllerProductOwner
     public void editUSPriority(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         int newUSPriority = proOwnerView.getNewUSPriority();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setPriority(newUSPriority);
@@ -251,7 +251,7 @@ public class ControllerProductOwner
     public void editUSStoryPoints(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         int newUSSPoints = proOwnerView.getNewUSStoryPoints();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setStoryPoints(newUSSPoints);
@@ -260,7 +260,7 @@ public class ControllerProductOwner
     public void editUSContent(int number, ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         String newUSContent = proOwnerView.getNewUSContent();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setContent(newUSContent);
@@ -269,7 +269,7 @@ public class ControllerProductOwner
     public void editUSAcceptanceC(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         String newUSAcceptanceC = proOwnerView.getNewUSAcceptanceC();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
@@ -279,7 +279,7 @@ public class ControllerProductOwner
     public void editUSStatus(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         String newUSStatus = proOwnerView.getNewUSStatus();
         UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
         userStory.setStatus(newUSStatus);
