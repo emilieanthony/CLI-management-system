@@ -3,6 +3,7 @@ import Controller.ControllerDeveloper;
 import Controller.ControllerProductOwner;
 import Controller.ControllerScrumMaster;
 import Models.*;
+import Utility.Import;
 import View.DevTeamView;
 import View.ProductOwnerView;
 import View.ScrumMasterView;
@@ -27,6 +28,9 @@ public class Main
                 "Test Project",
                 LocalDate.now(),
                 LocalDate.now().plusDays(10));
+        Backlog backlog = new Backlog("","","");
+        Import importFile = new Import();
+        importFile.importProjects(controllerAll,project,backlog);
 
 
 //________________________TEST__________________________//

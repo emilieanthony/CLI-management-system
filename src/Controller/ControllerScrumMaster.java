@@ -200,8 +200,6 @@ public class ControllerScrumMaster {
 		Project project = new Project(id, name, startDate, endDate);
 		controllerAll.getAllProjects().add(project);
 
-		//export ArrayList to a file
-
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
 

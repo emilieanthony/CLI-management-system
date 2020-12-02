@@ -26,8 +26,8 @@ public class ProductOwnerView
     public Backlog createBacklog()
     {
         String backlogName = Scan.readLine("Please enter product backlog name:");
-        String startDate = Scan.readLine("Please enter start date:");
-        String endDate = Scan.readLine("Please enter end date:");
+        String startDate = Scan.readLine("Please enter start date: ex (yyyy/mm/dd)");
+        String endDate = Scan.readLine("Please enter end date: ex (yyyy/mm/dd)");
         return new Backlog(backlogName, startDate, endDate);
     }
 
