@@ -7,8 +7,6 @@ import View.ScrumMasterView;
 import Utility.Scan;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ControllerScrumMaster {
 
@@ -226,7 +224,7 @@ public class ControllerScrumMaster {
 		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
 		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
 		Sprint sprint = new Sprint(name, startDate, endDate);
-		controllerAll.getAllSprints().add(sprint);
+		controllerAll.getSprintBacklog().add(sprint);
 
 		//export ArrayList to a file
 

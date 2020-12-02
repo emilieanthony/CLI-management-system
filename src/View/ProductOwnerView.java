@@ -57,7 +57,7 @@ public class ProductOwnerView
                                 ControllerProductOwner contProOwner)
     {
         String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
         String nameBacklog = Scan.readLine("Please enter a new name for the backlog:");
         backlog.setName(nameBacklog);
     }
@@ -66,7 +66,7 @@ public class ProductOwnerView
                                  ControllerProductOwner contProOwner)
     {
         String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
         String startDate = Scan.readLine("Please enter a new start date for the backlog ex" +
                 "(day/Nov/2020):");
         backlog.setStartDate(startDate);
@@ -76,7 +76,7 @@ public class ProductOwnerView
                                  ControllerProductOwner contProOwner)
     {
         String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getAllBacklogs());
+        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
         String endDate = Scan.readLine("Please enter a new End date for the backlog ex" +
                 "(day/Nov/2020):");
         backlog.setEndDate(endDate);

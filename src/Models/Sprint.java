@@ -1,52 +1,135 @@
 package Models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class Sprint {
+public class Sprint
+{
 
-    //attributes
-    String name;
-    LocalDate startDate;
-    LocalDate endDate;
+	//attributes
+	private String name;
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private ArrayList<Task> allTasks;
+	private ArrayList<UserStory> userStories;
 
-    //constructor
-    public Sprint(String name, LocalDate startDate, LocalDate endDate) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+	//constructor
+	public Sprint(String name, LocalDate startDate, LocalDate endDate)
+	{
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.allTasks = new ArrayList<>();
+		this.userStories = new ArrayList<>();
+	}
 
-    //all getters & setters
-    public String getName() {
-        return name;
-    }
+	//all getters & setters
+	public String getName()
+	{
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+	public LocalDate getStartDate()
+	{
+		return startDate;
+	}
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+	public void setStartDate(LocalDate startDate)
+	{
+		this.startDate = startDate;
+	}
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
+	public LocalDate getEndDate()
+	{
+		return endDate;
+	}
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+	public void setEndDate(LocalDate endDate)
+	{
+		this.endDate = endDate;
+	}
 
-    //toString
+	//--------------------------------
+	public Task getTask(int id)
+	{
+		for (Task task : allTasks)
+		{
+			if (task.getId() == id)
+			{
+				return task;
+			}
+		}
+		return null;
+	}
 
-    @Override
-    public String toString() {
-        return "Sprint Name: " + name +
-                "\nStart Date: " + startDate +
-                "\nEnd Date: " + endDate;
-    }
+	public UserStory getUserStory(int number)
+	{
+		for(UserStory userStory : userStories)
+		{
+			if(userStory.getName().equals(number))
+			{
+				return userStory;
+			}
+		}
+		return null;
+	}
+
+	public String printTasks()
+	{
+		String output = "";
+
+		for (Task task : allTasks)
+		{
+			output = output + task.toString();
+		}
+		return output;
+	}
+
+	public String printPersonalTasks(Developer member)
+	{
+		String output = "";
+
+		if (allTasks == null)
+		{
+			output = "You have no tasks assigned.";
+		}
+		else
+		{
+			for (Task task : allTasks)
+			{
+				if (task.isAssigned(member))
+				{
+					output = output + task.toString() + "\n";
+				}
+			}
+		}
+		return output;
+	}
+
+	public ArrayList<Task> getAllTasks()
+	{
+		return allTasks;
+	}
+
+	public ArrayList<UserStory> getAllUserStories()
+	{
+		return userStories;
+	}
+
+	//--------------------------------------------------
+
+	//toString
+
+	@Override
+	public String toString()
+	{
+		return "Sprint Name: " + name +
+				"\nStart Date: " + startDate +
+				"\nEnd Date: " + endDate;
+	}
 }
