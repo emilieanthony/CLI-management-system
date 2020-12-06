@@ -8,17 +8,19 @@ public class Project
     //attributes
     private int id;
     private String name;
-    private LocalDate startDate;
-    private LocalDate endDate;
-   //private ArrayList<Task> allTasks;
+   /* private LocalDate startDate;
+    private LocalDate endDate;*/
+    private String startDate;
+    private String endDate;
     private ArrayList<Developer> allTeamMembers;
     private ArrayList<ProductOwner> allProductOwners;
-    private ArrayList<Backlog> projectBacklog;
-    private ArrayList<Sprint> sprintBacklog;
+    private ProductBacklog productBacklog;
+
+    private ArrayList<Sprint> sprints;
 
 
     //constructor
-    public Project(int id, String name, LocalDate startDate, LocalDate endDate)
+    public Project(int id, String name, /*LocalDate*/String startDate, /*LocalDate*/String endDate)
     {
         this.id = id;
         this.name = name;
@@ -27,8 +29,8 @@ public class Project
       //  this.allTasks = new ArrayList<>();
         this.allTeamMembers = new ArrayList<>();
         this.allProductOwners = new ArrayList<>();
-        this.projectBacklog = new ArrayList<>();
-        this.sprintBacklog = new ArrayList<>();
+        this.productBacklog = new ProductBacklog(name,startDate,endDate);
+        this.sprints = new ArrayList<>();
     }
 
     //all getters & setters
@@ -47,29 +49,29 @@ public class Project
         this.name = name;
     }
 
-    public LocalDate getStartDate()
+    public /*LocalDate*/ String getStartDate()
     {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate)
+    public void setStartDate(/*LocalDate*/ String startDate)
     {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate()
+    public /*LocalDate*/ String getEndDate()
     {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate)
+    public void setEndDate(/*LocalDate*/ String endDate)
     {
         this.endDate = endDate;
     }
 
     public Task getTaskFromSprintBacklog(int id)
     {
-        for(Sprint sprint : sprintBacklog)
+        for(Sprint sprint : sprints)
         {
             return sprint.getTask(id);
         }
@@ -78,7 +80,7 @@ public class Project
 
     public String printTasksFromSprintBacklog()
     {
-        for(Sprint sprint : sprintBacklog)
+        for(Sprint sprint : sprints)
         {
             return sprint.printTasks();
         }
@@ -87,7 +89,7 @@ public class Project
 
     public String printPersonalTasks(Developer member)
     {
-        for(Sprint sprint : sprintBacklog)
+        for(Sprint sprint : sprints)
         {
             return sprint.printPersonalTasks(member);
         }
@@ -108,7 +110,7 @@ public class Project
 
     public void assignTask(int memberID, int taskID)        //This one is using method below
     {
-        for(Sprint sprint : sprintBacklog)
+        for(Sprint sprint : sprints)
         {
             assignTask(getTeamMember(memberID), sprint.getTask(taskID));
         }
@@ -131,11 +133,21 @@ public class Project
 
     public ArrayList<Task> getAllTasks()
     {
-        for(Sprint sprint : sprintBacklog)
+        for(Sprint sprint : sprints)
         {
             return sprint.getAllTasks();
         }
         return null;
+    }
+
+    public ArrayList<Sprint> getAllSprints()
+    {
+        return sprints;
+    }
+
+    public ProductBacklog getProductBacklog()
+    {
+        return productBacklog;
     }
 
     public void viewAllProductOwners()

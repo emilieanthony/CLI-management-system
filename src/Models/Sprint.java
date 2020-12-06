@@ -8,13 +8,13 @@ public class Sprint
 
 	//attributes
 	private String name;
-	private LocalDate startDate;
-	private LocalDate endDate;
-	private ArrayList<Task> allTasks;
+	private /*LocalDate*/ String startDate;
+	private /*LocalDate*/ String endDate;
+	private ArrayList<Task> allTasks;      //sprintBacklog is allTasks and userStories
 	private ArrayList<UserStory> userStories;
 
 	//constructor
-	public Sprint(String name, LocalDate startDate, LocalDate endDate)
+	public Sprint(String name, /*LocalDate*/ String startDate, /*LocalDate*/ String endDate)
 	{
 		this.name = name;
 		this.startDate = startDate;
@@ -34,22 +34,22 @@ public class Sprint
 		this.name = name;
 	}
 
-	public LocalDate getStartDate()
+	public /*LocalDate*/ String getStartDate()
 	{
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate)
+	public void setStartDate(/*LocalDate*/ String startDate)
 	{
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate()
+	public /*LocalDate*/ String getEndDate()
 	{
 		return endDate;
 	}
 
-	public void setEndDate(LocalDate endDate)
+	public void setEndDate(/*LocalDate*/ String endDate)
 	{
 		this.endDate = endDate;
 	}

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class Import {
 
-    public void importProjects(ControllerAll controllerAll,Project project, Backlog backlog){
+    public void importProjects(ControllerAll controllerAll,Project project, ProductBacklog backlog){
         File file = new File("C:\\Users\\bassa\\OneDrive\\Skrivbord\\Info.txt");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -38,7 +38,7 @@ public class Import {
                     String name = projectInfo[1];
                     String startDate = projectInfo[2];
                     String endDate = projectInfo[3];
-                    backlog = new Backlog(name,startDate,endDate);
+                    backlog = new ProductBacklog(name,startDate,endDate);
                     controllerAll.getProjectBacklog().add(backlog);
                 }
                 if (projectInfo[0].equalsIgnoreCase("Sprint")){

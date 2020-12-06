@@ -4,6 +4,7 @@ import Models.*;
 import Utility.PrintUtility;
 import Utility.Scan;
 import View.ProductOwnerView;
+import View.ScrumMasterView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,7 +41,7 @@ public class ControllerProductOwner
             switch (option)
             {
                 case 1:
-                    createBacklog(proOwnerView,controllerAll);
+                    //createBacklog(proOwnerView,controllerAll); //Do we need this?
                     break;
                 case 2:
                     viewBacklog(controllerAll,proOwnerView);
@@ -57,11 +58,12 @@ public class ControllerProductOwner
         } while (running);
     }
 
-    public void createBacklog(ProductOwnerView proOwnerView, ControllerAll controllerAll)
+/*    public void createBacklog(ProductOwnerView proOwnerView, ControllerAll controllerAll)
     {
-        Backlog backlog = proOwnerView.createBacklog();
+        ProductBacklog backlog = proOwnerView.createBacklog();
+
         controllerAll.getProjectBacklog().add(backlog);
-    }
+    }*/
 
     /*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*/
     public void editBacklog(ProductOwnerView proOwnerView,ControllerAll controllerAll,
@@ -102,35 +104,50 @@ public class ControllerProductOwner
 
     public void addUserStory(ProductOwnerView proOwnerView, ControllerAll controllerAll)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        UserStory newUserStory = proOwnerView.getUSInfo();
-        backlog.getAllUserStories().add(newUserStory);
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                UserStory newUserStory = proOwnerView.getUSInfo();
+                project.getProductBacklog().getAllUserStories().add(newUserStory);
+            }
+        }
     }
 
     public void removeUserStory(ProductOwnerView proOwnerView,ControllerAll controllerAll)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        int number = proOwnerView.getUSNumber();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        backlog.getAllUserStories().remove(userStory);
-        proOwnerView.printRemoved();
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                int number = proOwnerView.getUSNumber();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                project.getProductBacklog().getAllUserStories().remove(userStory);
+                proOwnerView.printRemoved();
+            }
+        }
     }
     public void viewBacklog(ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        Scan.print(backlog.toString());
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                project.getProductBacklog().toString();
+            }
+        }
     }
 
 
-    public Backlog findBacklogByName(String name,ArrayList<Backlog> allBacklogs){
-        Backlog backlog = null;
-        Iterator<Backlog> iterator = allBacklogs.iterator();
+    public ProductBacklog findBacklogByName(String name, ArrayList<ProductBacklog> allBacklogs){
+        ProductBacklog backlog = null;
+        Iterator<ProductBacklog> iterator = allBacklogs.iterator();
         while (backlog == null && iterator.hasNext())
         {
-            Backlog foundBacklog = iterator.next();
+            ProductBacklog foundBacklog = iterator.next();
             if (foundBacklog.getName().equalsIgnoreCase(name))
             {
                 backlog = foundBacklog;
@@ -141,27 +158,44 @@ public class ControllerProductOwner
     public void editBacklogName(ControllerAll controllerAll, ProductOwnerView viewProOwner,
                                 ControllerProductOwner contProOwner){
         String nameBacklog = viewProOwner.getBacklogName();
-        String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
-        backlog.setName(nameBacklog);
+
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                project.getProductBacklog().setName(nameBacklog);
+            }
+        }
     }
     public void editBacklogSDate(ControllerAll controllerAll, ProductOwnerView viewProOwner,
                                  ControllerProductOwner contProOwner)
     {
-        String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
         String startDate = viewProOwner.getBacklogSDate();
-        backlog.setStartDate(startDate);
+
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                project.getProductBacklog().setStartDate(startDate);
+            }
+        }
     }
     public void editBacklogEDate(ControllerAll controllerAll, ProductOwnerView viewProOwner,
                                  ControllerProductOwner contProOwner)
     {
-        String name = viewProOwner.chooseBacklog();
-        Backlog backlog = contProOwner.findBacklogByName(name, controllerAll.getProjectBacklog());
         String endDate = viewProOwner.getBacklogEDate();
-        backlog.setEndDate(endDate);
-    }
 
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                project.getProductBacklog().setStartDate(endDate);
+            }
+        }
+    }
 
     /*--------------------------------3rd Menu - menu for editing user stories---------------------------------------*/
     public void editUserStory(ProductOwnerView proOwnerView,ControllerAll controllerAll)
@@ -212,79 +246,121 @@ public class ControllerProductOwner
 
     public void editUSNumber(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        int newUSNumber = proOwnerView.getNewUSNumber();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        userStory.setNumber(newUSNumber);
+        int idProject = Scan.readInt("Write the ID of the project: ");
+
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                int newUSNumber = proOwnerView.getNewUSNumber();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                userStory.setNumber(newUSNumber);
+            }
+        }
     }
 
     public void editUSName(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        String newUSName = proOwnerView.getNewUSName();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        userStory.setName(newUSName);
-
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                String newUSName = proOwnerView.getNewUSName();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                userStory.setName(newUSName);
+            }
+        }
     }
 
     public void editUSSprint(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        String newUSSprint = proOwnerView.getNewUSSprint();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        userStory.setSprint(newUSSprint);
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                String newUSSprint = proOwnerView.getNewUSSprint();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                userStory.setSprint(newUSSprint);
+            }
+        }
 
     }
 
     public void editUSPriority(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        int newUSPriority = proOwnerView.getNewUSPriority();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        userStory.setPriority(newUSPriority);
+        int idProject = Scan.readInt("Write the ID of the project: ");
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                int newUSPriority = proOwnerView.getNewUSPriority();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                userStory.setPriority(newUSPriority);
+            }
+        }
     }
 
-    public void editUSStoryPoints(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
+    public void editUSStoryPoints(int number, ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        int newUSSPoints = proOwnerView.getNewUSStoryPoints();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        userStory.setStoryPoints(newUSSPoints);
+        int idProject = Scan.readInt("Write the ID of the project: ");
+
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                int newUSSPoints = proOwnerView.getNewUSStoryPoints();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                userStory.setStoryPoints(newUSSPoints);
+            }
+        }
     }
 
     public void editUSContent(int number, ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        String newUSContent = proOwnerView.getNewUSContent();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        userStory.setContent(newUSContent);
+        int idProject = Scan.readInt("Write the ID of the project: ");
+
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                String newUSContent = proOwnerView.getNewUSContent();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                userStory.setContent(newUSContent);
+            }
+        }
     }
 
     public void editUSAcceptanceC(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        String newUSAcceptanceC = proOwnerView.getNewUSAcceptanceC();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        userStory.setAcceptanceCriteria(newUSAcceptanceC);
+        int idProject = Scan.readInt("Write the ID of the project: ");
 
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                String newUSAcceptanceC = proOwnerView.getNewUSAcceptanceC();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                userStory.setAcceptanceCriteria(newUSAcceptanceC);
+            }
+        }
     }
 
     public void editUSStatus(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        String newUSStatus = proOwnerView.getNewUSStatus();
-        UserStory userStory = findUStoryByNumber(number, backlog.getAllUserStories());
-        userStory.setStatus(newUSStatus);
-    }
+        int idProject = Scan.readInt("Write the ID of the project: ");
 
+        for (Project project : controllerAll.getAllProjects())
+        {
+            if (project.getId() == idProject)
+            {
+                String newUSStatus = proOwnerView.getNewUSStatus();
+                UserStory userStory = findUStoryByNumber(number, project.getProductBacklog().getAllUserStories());
+                userStory.setStatus(newUSStatus);
+            }
+        }
+    }
 }
 
 

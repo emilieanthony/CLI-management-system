@@ -2,7 +2,7 @@ package Models;
 
 import java.util.ArrayList;
 
-public class Backlog
+public class ProductBacklog
 {
 
     //Attributes:-
@@ -15,7 +15,7 @@ public class Backlog
 
 
     // Constructor:-
-    public Backlog(String name, String startDate, String endDate)
+    public ProductBacklog(String name, String startDate, String endDate)
     {
         this.name = name;
         this.startDate = startDate;

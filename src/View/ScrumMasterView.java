@@ -1,12 +1,7 @@
 package View;
 
-import Models.Backlog;
-import Models.Developer;
 import Models.Task;
-import Models.UserStory;
 import Utility.Scan;
-
-import java.util.ArrayList;
 
 
 public class ScrumMasterView {
@@ -17,13 +12,17 @@ public class ScrumMasterView {
                 "Please enter an option below\n" +
                 "1. Create a new project\n" +
                 "2. Create a new sprint\n" +
-                "3. Create a new task\n" +
-                "4. Create a new Development Team Member\n" +
-                "5. Create a new Product owner\n" +
-                "6. Assign a task to Development Team Member\n" +
-                "7. View product backlog\n" +
-                "8. View all Development Team Members\n" +
-                "9. Go back to main menu\n");
+                "3. Create a new task for product backlog\n" +
+                "4. Create a new task for sprint backlog\n" +
+                "5. Create a user story for product backlog\n" +
+                "6. Create a user story for sprint backlog\n" +
+                "7. Create a new Development Team Member\n" +
+                "8. Create a new Product owner\n" +
+                "9. Assign a task to Development Team Member\n" +
+                "10. View product backlog\n" +
+                "11. View all development Team Members\n" +
+                "12. Move task or user story to sprint backlog\n" +
+                "13. Go back to main menu\n");
 
         return option;
     }

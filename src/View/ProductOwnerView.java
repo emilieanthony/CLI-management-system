@@ -1,8 +1,6 @@
 package View;
 
-import Controller.ControllerAll;
-import Controller.ControllerProductOwner;
-import Models.Backlog;
+import Models.ProductBacklog;
 import Models.UserStory;
 import Utility.Scan;
 
@@ -23,12 +21,12 @@ public class ProductOwnerView
 
     }
 
-    public Backlog createBacklog()
+    public ProductBacklog createBacklog()
     {
         String backlogName = Scan.readLine("Please enter product backlog name:");
         String startDate = Scan.readLine("Please enter start date: ex (yyyy/mm/dd)");
         String endDate = Scan.readLine("Please enter end date: ex (yyyy/mm/dd)");
-        return new Backlog(backlogName, startDate, endDate);
+        return new ProductBacklog(backlogName, startDate, endDate);
     }
 
 

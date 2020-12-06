@@ -9,7 +9,6 @@ import View.ProductOwnerView;
 import View.ScrumMasterView;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Main
 {
@@ -20,15 +19,15 @@ public class Main
         ControllerScrumMaster contScrum = new ControllerScrumMaster();
         ControllerProductOwner contProOwner = new ControllerProductOwner();
         ControllerDeveloper contDeveloper = new ControllerDeveloper();
+        UserStory userStory = new UserStory("menu", 1, "1",2,2, "create menu","menu must work");
+        Sprint sprint = new Sprint("1","2020-01-01", "2020-01-14");
         ScrumMasterView scrumView = new ScrumMasterView();
         ProductOwnerView proOwnerView = new ProductOwnerView();
         DevTeamView developerView = new DevTeamView();
-        Project project = new Project(
-                1,
-                "Test Project",
-                LocalDate.now(),
-                LocalDate.now().plusDays(10));
-        Backlog backlog = new Backlog("","","");
+        Project project = new Project(1,"Codelicode", "2020-01-01","2021-01-01");
+        ProductBacklog backlog = new ProductBacklog("","","");
+        project.getAllSprints().add(sprint);
+        project.getProductBacklog().getAllUserStories().add(userStory);
         Import importFile = new Import();
         importFile.importProjects(controllerAll,project,backlog);
 

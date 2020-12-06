@@ -17,13 +17,13 @@ public class ControllerAll
 
     private ArrayList<Project> allProjects;
     private ArrayList<Sprint> SprintBacklog;
-    private ArrayList<Backlog> projectBacklog;
+   // private ArrayList<ProductBacklog> projectBacklog;
 
     public ControllerAll()
     {
         allProjects = new ArrayList<>();
         SprintBacklog = new ArrayList<>();
-        projectBacklog = new ArrayList<>();
+       // projectBacklog = new ArrayList<>();
     }
 
     public ArrayList<Project> getAllProjects() {
@@ -32,9 +32,10 @@ public class ControllerAll
     public ArrayList<Sprint> getSprintBacklog() {
         return SprintBacklog;
     }
-    public ArrayList<Backlog> getProjectBacklog() {
+   /* public ArrayList<ProductBacklog> getProjectBacklog()
+    {
         return projectBacklog;
-    }
+    }*/
 
 
     //methods
