@@ -28,7 +28,7 @@ public class ControllerScrumMaster
 					createProject(controllerAll);
 					break;
 				case 2:
-					createSprintAndSprintBacklog(contProOwner ,controllerAll);
+					createSprintAndSprintBacklog(proOwnerView, scrumView,contProOwner ,controllerAll);
 					break;
 				case 3:
 					createTaskToProductBacklog(scrumView, controllerAll);
@@ -254,7 +254,7 @@ public class ControllerScrumMaster
 
 	/*------------------------------------Methods etc for sprints-------------------------------------------*/
 
-	public void createSprintAndSprintBacklog(ControllerProductOwner contProOwner ,ControllerAll controllerAll)
+	public void createSprintAndSprintBacklog(ProductOwnerView proOwnerView, ScrumMasterView scrumMasterView,ControllerProductOwner contProOwner ,ControllerAll controllerAll)
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"sprint:");
@@ -285,12 +285,12 @@ public class ControllerScrumMaster
 
 		if(input.equals(1))
 		{
-			contProOwner.addUserStory(ProductOwnerView proOwnerView ,ControllerAll controllerAll);
+			contProOwner.addUserStory(proOwnerView ,controllerAll);
 		}
 
 		if(input.equals(2))
 		{
-			createTaskToSprint(ScrumMasterView scrumMasterView, ControllerAll controllerAll);
+			createTaskToSprint(scrumMasterView, controllerAll);
 		}
 
 	}
