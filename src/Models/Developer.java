@@ -9,6 +9,7 @@ public class Developer
     public Developer(String name, int id) {
         this.name = name;
         this.id = id;
+
     }
 
     public void setName(String name) {
@@ -27,10 +28,9 @@ public class Developer
         return id;
     }
 
-
     public String toString()
     {
-        return "ID: " + id + "\nName: " + name;
+        return "\nDeveloper: " + "\nName: " + name + "\nID: " + id;
     }
 
 }

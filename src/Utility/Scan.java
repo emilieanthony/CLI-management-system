@@ -13,7 +13,7 @@ public class Scan {
 
     // Methods for output and scanning input
     public static String readLine(String output) {
-        System.out.print(output);
+        System.out.println(output);
         String line = scan.nextLine();
         return line;
     }

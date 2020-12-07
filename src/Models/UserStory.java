@@ -31,6 +31,7 @@ public class UserStory
     }
 
     // Setters and Getters. Make sure at the end of the project that not used methods are deleted.
+
     public String getName()
     {
         return name;
@@ -124,7 +125,7 @@ public class UserStory
     {
         return "\n\nUser story number : " + number + '\n' +
                 "Name = " + name + '\n' +
-                "Sprint = " + sprint + '\n' +
+                "SprintBacklog = " + sprint + '\n' +
                 "Priority = " + priority + '\n' +
                 "Story Points = " + storyPoints + '\n' +
                 "Content = " + content + '\n' +

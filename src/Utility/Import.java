@@ -2,14 +2,18 @@ package Utility;
 
 import Controller.ControllerAll;
 import Models.*;
+import Models.SprintBacklog;
 
 import java.io.*;
 import java.time.LocalDate;
 
+import static View.ScrumMasterView.getFileName;
+
 public class Import {
 
-    public void importProjects(ControllerAll controllerAll,Project project, Backlog backlog){
-        File file = new File("C:\\Users\\bassa\\OneDrive\\Skrivbord\\Info.txt");
+    public void importProjects(ControllerAll controllerAll){
+        String fileName = getFileName();
+        File file = new File(fileName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -31,15 +35,19 @@ public class Import {
                     LocalDate startDate = LocalDate.of(sYear,sMonth,sDay);
                     LocalDate endDate = LocalDate.of(eYear, eMonth, eDay);
 
-                    project = new Project(number,name,startDate,endDate);
+                    Project project = new Project(number,name,startDate,endDate);
                     controllerAll.getAllProjects().add(project);
+                    Scan.print(project.toString() + "\n");
                 }
                 if (projectInfo[0].equalsIgnoreCase("Backlog")){
                     String name = projectInfo[1];
                     String startDate = projectInfo[2];
                     String endDate = projectInfo[3];
-                    backlog = new Backlog(name,startDate,endDate);
-                    controllerAll.getProjectBacklog().add(backlog);
+                    ProductBacklog productBacklog = new ProductBacklog(name,startDate,endDate);
+                    String projectName = projectInfo[4];
+                    Project foundProject = controllerAll.findProjectImport(projectName);
+                    foundProject.getAllProductBacklogs().add(productBacklog);
+                    Scan.print(productBacklog.toString() + "\n");
                 }
                 if (projectInfo[0].equalsIgnoreCase("Sprint")){
                     String name = projectInfo[1];
@@ -53,27 +61,27 @@ public class Import {
 
                     LocalDate startDate = LocalDate.of(sYear,sMonth,sDay);
                     LocalDate endDate = LocalDate.of(eYear, eMonth, eDay);
-                    Sprint sprint = new Sprint(name,startDate,endDate);
-                    controllerAll.getSprintBacklog().add(sprint);
+                    SprintBacklog sprintBacklog = new SprintBacklog(name,startDate,endDate);
+                    String projectName = projectInfo[8];
+                    Project foundProject = controllerAll.findProjectImport(projectName);
+                    foundProject.getAllSprintBacklogs().add(sprintBacklog);
+                    Scan.print(sprintBacklog.toString() + "\n");
                 }
                 if (projectInfo[0].equalsIgnoreCase("Task")){
                     int id = Integer.parseInt(projectInfo[1]);
                     int priorityN = Integer.parseInt(projectInfo[2]);
                     String name = projectInfo[4];
                     String description = projectInfo[5];
-                    Task task = new Task(id,priorityN,name,description);
-                    project.getAllTasks().add(task);
-                    //Set status. a setter method should be implemented instead.
-                    if (projectInfo[3].equalsIgnoreCase("Open")){
-                        task.setOpen();
-                    }else if(projectInfo[3].equalsIgnoreCase("In progress")){
-                        task.setInProgress();
-                    }
-                    else if(projectInfo[3].equalsIgnoreCase("Done")){
-                        task.setDone();
-                    }
+                    int estimatedH = Integer.parseInt(projectInfo[6]);
+                    Task task = new Task(id,priorityN,estimatedH,name,description);
+                    String projectName = projectInfo[7];
+                    Project foundProject = controllerAll.findProjectImport(projectName);
+                    foundProject.getAllTasks().add(task);
+                    String status = projectInfo[3];
+                    task.setStatus(status);
+                    Scan.print(task.toString() + "\n");
                 }
-                if (projectInfo[0].equalsIgnoreCase("User Story")){
+                if (projectInfo[0].equalsIgnoreCase("US")){
                     String name = projectInfo[1];
                     int number =  Integer.parseInt(projectInfo[2]);
                     String sprint = projectInfo[3];
@@ -81,27 +89,37 @@ public class Import {
                     int storyPoints = Integer.parseInt(projectInfo[5]);
                     String content = projectInfo[6];
                     String acceptanceCriteria = projectInfo[7];
-
                     UserStory userStory = new UserStory(name,number,sprint,priorityN,storyPoints
                     ,content,acceptanceCriteria);
+                    String backlogName = projectInfo[9];
+                    String projectName = projectInfo[10];
+                    Project foundProject = controllerAll.findProjectImport(projectName);
+                    ProductBacklog backlog = controllerAll.findBacklogImport(backlogName,
+                            foundProject);
                     backlog.getAllUserStories().add(userStory);
                     //Set status
                     String status = projectInfo[8];
                     userStory.setStatus(status);
+                    Scan.print(userStory.toString() + "\n");
                 }
                 if (projectInfo[0].equalsIgnoreCase("Developer")){
                     String name = projectInfo[1];
                     int id = Integer.parseInt(projectInfo[2]);
                     Developer developer = new Developer(name,id);
-                    project.getAllDevelopmentMembers().add(developer);
+                    String projectName = projectInfo[3];
+                    Project foundProject = controllerAll.findProjectImport(projectName);
+                    foundProject.getAllTeamMembers().add(developer);
+                    Scan.print(developer.toString() + "\n");
                 }
-                if (projectInfo[0].equalsIgnoreCase("Product Owner")){
+                if (projectInfo[0].equalsIgnoreCase("Productowner")){
                     String name = projectInfo[1];
                     int id = Integer.parseInt(projectInfo[2]);
                     ProductOwner productOwner = new ProductOwner(name,id);
-                    project.getAllProductOwners().add(productOwner);
+                    String projectName = projectInfo[3];
+                    Project foundProject = controllerAll.findProjectImport(projectName);
+                    foundProject.getAllProductOwners().add(productOwner);
+                    Scan.print(productOwner.toString() + "\n");
                 }
-
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -109,7 +127,5 @@ public class Import {
             e.printStackTrace();
         }
     }
-
-
 
 }

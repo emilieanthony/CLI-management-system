@@ -1,40 +1,33 @@
 package Controller;
 
 import Models.*;
-import Utility.PrintUtility;
 import Utility.Scan;
-import View.DevTeamView;
-import View.ProductOwnerView;
-import View.ScrumMasterView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import static Utility.PrintUtility.defaultMessage;
+import static View.DevTeamView.getDeveloperId;
+import static View.DevTeamView.getTaskId;
+import static View.ScrumMasterView.*;
 
 public class ControllerAll
 {
 
     //attributes
-
     private ArrayList<Project> allProjects;
-    private ArrayList<Sprint> SprintBacklog;
-    private ArrayList<Backlog> projectBacklog;
 
+    //Constructor:
     public ControllerAll()
     {
         allProjects = new ArrayList<>();
-        SprintBacklog = new ArrayList<>();
-        projectBacklog = new ArrayList<>();
     }
 
+    //Getters:
     public ArrayList<Project> getAllProjects() {
         return allProjects;
     }
-    public ArrayList<Sprint> getSprintBacklog() {
-        return SprintBacklog;
-    }
-    public ArrayList<Backlog> getProjectBacklog() {
-        return projectBacklog;
-    }
+
 
 
     //methods
@@ -43,9 +36,9 @@ public class ControllerAll
     public int mainMenu()
     {
 
-        int option = Scan.readInt("\n\nWelcome to Codelicode, your project management tool" +
-                ".\nPlease " +
-                "enter a option below:\n" +
+        int option = Scan.readInt("\n\nWelcome to Codelicode, your project management tool\n\n" +
+                "Shift between your projects to be able to make any changes or view options,\nYou will find an option in your " +
+                        "menu to choose between projects! \n" + "\nPlease enter a option below:\n" +
                 "1. Scrum master\n" +
                 "2. Product owner\n" +
                 "3. Development team member\n" +
@@ -56,45 +49,57 @@ public class ControllerAll
 
     public void menuMain(ControllerAll controllerAll, ControllerScrumMaster contScrum ,
                          ControllerProductOwner contProOwner,
-                         ControllerDeveloper contDeveloper, ScrumMasterView scrumView ,
-                         ProductOwnerView proOwnerView, DevTeamView developerView
-            ,Project project)
+                         ControllerDeveloper contDeveloper)
     {
         boolean running = true;
+        Start();
         do
         {
             int option = mainMenu();
             switch (option)
             {
                 case 1:
-                    contScrum.scrumMasterMenu(scrumView, proOwnerView,contProOwner,controllerAll);
+                    contScrum.scrumMasterMenu(contProOwner,controllerAll);
                     break;
                 case 2:
-                    contProOwner.backlogMenu(proOwnerView,controllerAll,contProOwner);
+                    contProOwner.productOwnerMenu(controllerAll);
                     break;
                 case 3:
-                    contDeveloper.teamMemberMenu(developerView,controllerAll,project);
+                    contDeveloper.teamMemberMenu(controllerAll);
                     break;
                 case 4: running = false; // Exit system.
                     break;
                 default:
-                    PrintUtility.defaultMessage();
+                    defaultMessage();
             }
         } while (running);
     }
-    public Project whichProject(ControllerAll controllerAll){
-        int projectId = Scan.readInt("Enter project id: ");
-        Project project = controllerAll.findProjectById(projectId);
+    public Project whichProject(){
+        Project project = findProjectByName();
         return project;
     }
-    public Project findProjectById(int id){
+    public Project findProjectByName(){
         Project project = null;
 
         Iterator<Project> iterator = allProjects.iterator();
 
         while (iterator.hasNext() && project==null){
             Project currentProject = iterator.next();
-            if(currentProject.getId() == id){
+            if(currentProject.getName().equalsIgnoreCase(proName)){
+                project = currentProject;
+            }
+        }
+        return project;
+
+    }
+    public Project findProjectImport(String name){
+
+        Project project = null;
+        Iterator<Project> iterator = allProjects.iterator();
+
+        while (iterator.hasNext() && project==null){
+            Project currentProject = iterator.next();
+            if(currentProject.getName().equalsIgnoreCase(name)){
                 project = currentProject;
             }
         }
@@ -102,5 +107,63 @@ public class ControllerAll
 
     }
 
+    public Task findTaskById(ControllerAll controllerAll)
+    {
+        int id = getTaskId();
+        Task task = null;
+        Project project = controllerAll.whichProject();
+        Iterator<Task> iterator = project.getAllTasks().iterator();
+        while (task == null && iterator.hasNext())
+        {
+            Task foundTask = iterator.next();
+            if (foundTask.getId() == id)
+            {
+                task = foundTask;
+            }
+        }
+        return task;
+    }
 
+    public Developer findDeveloperByID(){
+        int id = getDeveloperId();
+        Project project = whichProject();
+        Developer developer = null;
+        Iterator<Developer> iterator = project.getAllTeamMembers().iterator();
+        while (developer == null && iterator.hasNext())
+        {
+            Developer foundDeveloper = iterator.next();
+            if (foundDeveloper.getId()==id)
+            {
+                developer = foundDeveloper;
+            }
+        }
+
+        return developer;
+    }
+    public ProductBacklog findBacklogByName(Project project){
+        ProductBacklog productBacklog = null;
+        Iterator<ProductBacklog> iterator = project.getAllProductBacklogs().iterator();
+        while (productBacklog == null && iterator.hasNext())
+        {
+            ProductBacklog foundProductBacklog = iterator.next();
+            if (foundProductBacklog.getName().equalsIgnoreCase(backlogName))
+            {
+                productBacklog = foundProductBacklog;
+            }
+        }
+        return productBacklog;
+    }
+    public ProductBacklog findBacklogImport(String name,Project project){
+        ProductBacklog productBacklog = null;
+        Iterator<ProductBacklog> iterator = project.getAllProductBacklogs().iterator();
+        while (productBacklog == null && iterator.hasNext())
+        {
+            ProductBacklog foundProductBacklog = iterator.next();
+            if (foundProductBacklog.getName().equalsIgnoreCase(name))
+            {
+                productBacklog = foundProductBacklog;
+            }
+        }
+        return productBacklog;
+    }
 }

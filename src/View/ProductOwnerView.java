@@ -1,81 +1,83 @@
 package View;
 
-import Controller.ControllerAll;
-import Controller.ControllerProductOwner;
-import Models.Backlog;
+import Models.ProductBacklog;
 import Models.UserStory;
 import Utility.Scan;
+
+import static View.ScrumMasterView.backlogName;
+import static View.ScrumMasterView.proName;
 
 public class ProductOwnerView
 {
 
     /*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*/
 
-    public int menuProductOwner()
+    public static int menuProductOwner()
     {
-        int option = Scan.readInt("\n\nWelcome product owner!\n" +
+        int option = Scan.readInt("\n\nWelcome product owner!\n\n" +
+                "You're working on Project " + proName +"." + "\n\n" +
                 "Please enter an option below\n" +
                 "1. Create a new product backlog\n" +
                 "2. View product backlog\n" +
                 "3. Edit product backlog\n" +
-                "4. Go back to main menu\n");
+                "4. Choose project\n" +
+                "5. Go back to main menu\n");
         return option;
 
     }
 
-    public Backlog createBacklog()
+    public static ProductBacklog getBacklogInfo()
     {
         String backlogName = Scan.readLine("Please enter product backlog name:");
         String startDate = Scan.readLine("Please enter start date: ex (yyyy/mm/dd)");
         String endDate = Scan.readLine("Please enter end date: ex (yyyy/mm/dd)");
-        return new Backlog(backlogName, startDate, endDate);
+        return new ProductBacklog(backlogName, startDate, endDate);
     }
 
 
     /*----------------------------------------------2nd Menu---------------------------------------------------------*/
 
-    public int menuEditBacklog()
+    public static int menuEditBacklog()
     {
         int option;
-        option = Scan.readInt("Please enter the number of which part of the " +
-                "backlog you want to " +
-                "edit:\n" +
-                "1- Edit Backlog name\n" +
-                "2- Edit Backlog start date\n" +
-                "3- Edit Backlog end date\n" +
-                "4- Edit Backlog user stories\n" +
+        option =
+                Scan.readInt("\n\nNow you're accessing " + backlogName + " Backlog in "+  proName + " project!" +
+                        "\n\nPlease enter the number of which part of the backlog you want to edit:\n\n" +
+                "1- Edit Product Backlog name\n" +
+                "2- Edit Product Backlog start date\n" +
+                "3- Edit Product Backlog end date\n" +
+                "4- Edit Product Backlog user stories\n" +
                 "5- Add User Story\n" +
                 "6- Remove User Story \n" +
                 "7- Back to your menu");
         return option;
     }
-    public String chooseBacklog(){
-        String name = Scan.readLine("Please enter the name of the Backlog:");
-        return name;
+    public static void chooseBacklog(){
+        backlogName = Scan.readLine("\nPlease enter the name of the Product Backlog:");
     }
-    public String getBacklogName()
+    public static String getBacklogName()
     {
-        String nameBacklog = Scan.readLine("Please enter a new name for the backlog:");
+        String nameBacklog = Scan.readLine("\nPlease enter a new name for the backlog:");
         return nameBacklog;
     }
 
-    public String getBacklogSDate() {
-        String startDate = Scan.readLine("Please enter a new start date for the backlog ex" +
+    public static String getBacklogSDate() {
+        String startDate = Scan.readLine("\nPlease enter a new start date for the backlog ex" +
                 "(day/Nov/2020):");
         return startDate;
     }
 
-    public String getBacklogEDate() {
-        String endDate = Scan.readLine("Please enter a new End date for the backlog ex" +
+    public static String getBacklogEDate() {
+        String endDate = Scan.readLine("\nPlease enter a new End date for the backlog ex" +
                 "(day/Nov/2020):");
         return endDate;
     }
 
-    public UserStory getUSInfo() {
+    public static UserStory getUSInfo() {
         Scan.print("Add new user story");
         String name = Scan.readLine("Name: ");
         int number = Scan.readInt("User story number: ");
-        String sprint = Scan.readLine("Sprint: ");
+        String sprint = Scan.readLine("SprintBacklog: ");
         int priority = Scan.readInt("Priority: ");
         int storyPoints = Scan.readInt("Story points: ");
         String content = Scan.readLine("Content: ");
@@ -85,20 +87,20 @@ public class ProductOwnerView
 
     }
 
-    public int getUSNumber()
+    public static int getUSNumber()
     {
-        Scan.print("Remove a user story");
-        int number = Scan.readInt("Enter the number of the user story you want to remove:");
+        Scan.print("\nRemove a user story");
+        int number = Scan.readInt("\nEnter the number of the user story you want to remove:");
         return number;
     }
 
 
     /*----------------------------------------------3rd Menu---------------------------------------------------------*/
-    public int menuEditUserStory()
+    public static int menuEditUserStory()
     {
         int option = Scan.readInt
-                ("Which part of the user story you want to edit, enter a " +
-                        "number:\n" +
+                ("\n\nNow you're accessing a "+ backlogName + "'s backlog User story." + "\nWhich" +
+                        " part of the user story you want to edit, enter a number:\n\n" +
                         "1- Edit user story number.\n" +
                         "2- Edit user story name.\n" +
                         "3- Edit user story sprint.\n" +
@@ -107,58 +109,58 @@ public class ProductOwnerView
                         "6- Edit user story content.\n" +
                         "7- Edit user story acceptance criteria\n" +
                         "8- Edit user story status.\n" +
-                        "9- Back to your menu.");
+                        "9- Back to your menu.\n");
         return option;
     }
 
-    public int getStoryNumber() {
-        int number = Scan.readInt("Please enter the user story number you want to edit.");
+    public static int getStoryNumber() {
+        int number = Scan.readInt("\nPlease enter the user story number you want to edit.");
         return number;
 
     }
 
-    public int getNewUSNumber() {
-        int newUSNumber = Scan.readInt("Enter a new number for the user story.");
+    public static int getNewUSNumber() {
+        int newUSNumber = Scan.readInt("\nEnter a new number for the user story.");
         return newUSNumber;
     }
 
-    public String getNewUSName() {
-        String newUSName = Scan.readLine("Enter a new name for the user story.");
+    public static String getNewUSName() {
+        String newUSName = Scan.readLine("\nEnter a new name for the user story.");
         return newUSName;
     }
 
-    public String getNewUSSprint() {
-        String newUSSprint = Scan.readLine("Enter a new sprint for the user story.");
+    public static String getNewUSSprint() {
+        String newUSSprint = Scan.readLine("\nEnter a new sprint for the user story.");
         return newUSSprint;
     }
 
-    public int getNewUSPriority() {
-        int newUSPriority = Scan.readInt("Enter a new priority for the user story.");
+    public static int getNewUSPriority() {
+        int newUSPriority = Scan.readInt("\nEnter a new priority for the user story.");
         return newUSPriority;
     }
 
-    public int getNewUSStoryPoints() {
-        int newUSStoryPoints = Scan.readInt("Enter new story points for the user story.");
+    public static int getNewUSStoryPoints() {
+        int newUSStoryPoints = Scan.readInt("\nEnter new story points for the user story.");
         return newUSStoryPoints;
     }
 
-    public String getNewUSContent() {
-        String newUSContent = Scan.readLine("Enter a new content for the user story.");
+    public static String getNewUSContent() {
+        String newUSContent = Scan.readLine("\nEnter a new content for the user story.");
         return newUSContent;
     }
 
-    public String getNewUSAcceptanceC() {
-        String newUSAcceptanceC = Scan.readLine("Enter new acceptance criteria for the user " +
+    public static String getNewUSAcceptanceC() {
+        String newUSAcceptanceC = Scan.readLine("\nEnter new acceptance criteria for the user " +
                 "story.");
         return newUSAcceptanceC;
     }
 
-    public String getNewUSStatus() {
-        String newUSStatus = Scan.readLine("Enter new Status for the user " +
+    public static String getNewUSStatus() {
+        String newUSStatus = Scan.readLine("\nEnter new Status for the user " +
                 "story.");
         return newUSStatus;
     }
-    public void printRemoved(){
+    public static void printRemoved(){
         Scan.print("\nThis User Story has been removed");
     }
 

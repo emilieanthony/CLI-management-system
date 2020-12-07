@@ -1,26 +1,26 @@
 package Controller;
 
 import Models.*;
-import Utility.PrintUtility;
-import View.ProductOwnerView;
-import View.ScrumMasterView;
+import Models.SprintBacklog;
+import Utility.Import;
 import Utility.Scan;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
+
+import static Utility.PrintUtility.defaultMessage;
+import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster {
 
+	private Import importFile = new Import();
 
-	public void scrumMasterMenu(ScrumMasterView scrumView, ProductOwnerView proOwnerView,
-								ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	public void scrumMasterMenu(ControllerProductOwner contProOwner,ControllerAll controllerAll)
 	{
 
 		boolean running = true;
 		do
 		{
-			int option = scrumView.menuScrumMaster();
+			int option = menuScrumMaster();
 			switch (option)
 			{
 				case 1:
@@ -30,7 +30,7 @@ public class ControllerScrumMaster {
 					createSprint(controllerAll);
 					break;
 				case 3:
-					createTask(scrumView, controllerAll);
+					createTask(controllerAll);
 					break;
 				case 4:
 					createDevelopmentMember(controllerAll);
@@ -42,96 +42,67 @@ public class ControllerScrumMaster {
 					assignTask(controllerAll);
 					break;
 				case 7:
-					contProOwner.viewBacklog(controllerAll,proOwnerView);
+					contProOwner.viewBacklogs(controllerAll);
 					break;
 				case 8:
 					viewTeamMembers(controllerAll);
 					break;
 				case 9:
+					importFile.importProjects(controllerAll);
+					break;
+				case 10:
+					getProjectName();
+					break;
+				case 11:
 					running = false; // Go back to main menu
 					break;
 				default:
-					PrintUtility.defaultMessage();
+					defaultMessage();
 			}
 		} while (running);
 	}
 
 	private void viewTeamMembers(ControllerAll controllerAll)
 	{
-		int idProject = Scan.readInt("Write the ID of the project: ");
-
-		for (Project project : controllerAll.getAllProjects())
-		{
-			if (project.getId() == idProject)
-			{
-				project.viewAllDevelopmentMembers();
-				return;
-			}
+		Project project = controllerAll.whichProject();
+		membersView();
+		for (Developer developer: project.getAllTeamMembers()) {
+			Scan.print(developer.toString());
 		}
-		Scan.print("Project not found.\n\n");
+
 	}
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 
-	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){
-			Task newTask = scrumMasterView.createTask();
-			String name = scrumMasterView.getBacklogName();
-			findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
-		}
+	private void createTask(ControllerAll controllerAll){
+			Task newTask = getTaskInfo();
+			Project project = controllerAll.whichProject();
+			project.getAllTasks().add(newTask);
+	}
 
-
-	private void assignTask(ControllerAll controllerAll)
-	{
-		int idTask = Scan.readInt("Write the ID of the task: ");
-		int idMember = Scan.readInt("Write the ID of Development team member: ");
-		int idProject = Scan.readInt("Write the ID of the project: ");
-
-		for (Project project : controllerAll.getAllProjects())
-		{
-			if (project.getId() == idProject)
-			{
-				project.assignTask(idMember, idTask);
-				Scan.print("Task is now assigned to development team member!\n\n");
-				return;
-			}
-		}
-		Scan.print("Project not found.\n\n");
+	public void assignTask(ControllerAll controllerAll){
+		Task task = controllerAll.findTaskById(controllerAll);
+		Developer developer = controllerAll.findDeveloperByID();
+		task.getAssignedTeamMembers().add(developer);
+		task.setStatus("In progress");
 	}
 
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
 	public void createProductOwner(ControllerAll controllerAll)
 	{
-		String name = Scan.readLine("Please type the name of the new Product Owner below: ");
-
-		//System.out.println("Please type the id of the new Product Owner below: ");
-		//int id = scanner.nextInt();
-
-		int idProject = Scan.readInt("Write the ID of the project that the product owner will belong to:" +
-				" ");
-		int id = createIdProductOwner(idProject,controllerAll);
-
-		for (Project project : controllerAll.getAllProjects())
-		{
-			if (project.getId() == idProject)
-			{
-				project.getAllProductOwners().add(new ProductOwner(name, id));
-
-
-			}
-		}
-		Scan.print(" You have successfully created " + name +
-				" as a new Product Owner with the id " + id );
+		String name = getProOwnerInfo();
+		int id = createIdProductOwner(controllerAll);
+		ProductOwner newProOwner = new ProductOwner(name,id);
+		Project project = controllerAll.whichProject();
+		project.getAllProductOwners().add(newProOwner);
+		createdProOwner();
 	}
 
-	public int createIdProductOwner(int idProject, ControllerAll controllerAll)
+	public int createIdProductOwner(ControllerAll controllerAll)
 	{
 		int id = 200;
-
-		for (Project project : controllerAll.getAllProjects())        //To get the project needed to create unique
-		{                                               //id for product owner
-			if (project.getId() == idProject)
-			{
+		Project project = controllerAll.whichProject();
 				if (project.getAllProductOwners().isEmpty())
 				{
 					id = 200;
@@ -140,8 +111,6 @@ public class ControllerScrumMaster {
 				{
 					id = project.getAllProductOwners().get(project.getAllProductOwners().size() - 1).getId() + 1;
 				}
-			}
-		}
 		return id;
 	}
 
@@ -149,41 +118,27 @@ public class ControllerScrumMaster {
 
 	public void createDevelopmentMember(ControllerAll controllerAll)
 	{
-		String name = Scan.readLine("Please type the name of the new Development member below: \n");
-		int idProject = Scan.readInt("Write the ID of the project that the Development member will belong to:" +
-				" ");
-		int id = createIdDevelopmentMember(idProject,controllerAll);
 
-
-		for (Project project : controllerAll.getAllProjects())
-		{
-			if (project.getId() == idProject)
-			{
-				project.getAllDevelopmentMembers().add(new Developer(name, id));
-			}
-		}
-		Scan.print(" You have successfully created " + name +
-				" as a new Development Member with the id " + id);
+		String name = getDeveloperInfo();
+		int id = createIdDevelopmentMember(controllerAll);
+		Project project = controllerAll.whichProject();
+		Developer developer = new Developer(name,id);
+		project.getAllTeamMembers().add(developer);
+		createdDeveloper();
 	}
 
-	public int createIdDevelopmentMember(int idProject, ControllerAll controllerAll)
+	public int createIdDevelopmentMember(ControllerAll controllerAll)
 	{
 		int id = 1;
-
-		for (Project project : controllerAll.getAllProjects())        //To get the project needed to create unique
-		{                                               //id for product owner
-			if (project.getId() == idProject)
-			{
-				if (project.getAllDevelopmentMembers().isEmpty())
+		Project project = controllerAll.whichProject();
+				if (project.getAllTeamMembers().isEmpty())
 				{
 					id = 1;
 				}
 				else
 				{
-					id = project.getAllDevelopmentMembers().get(project.getAllDevelopmentMembers().size() - 1).getId() + 1;
+					id = project.getAllTeamMembers().get(project.getAllTeamMembers().size() - 1).getId() + 1;
 				}
-			}
-		}
 		return id;
 	}
 
@@ -203,7 +158,6 @@ public class ControllerScrumMaster {
 		int endMonth = Scan.readInt("End date (MM): ");
 		int endDay = Scan.readInt("End date (DD): ");
 
-		//create exception here for non valid input
 
 		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
 		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
@@ -219,7 +173,7 @@ public class ControllerScrumMaster {
 	public void createSprint(ControllerAll controllerAll)
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
-				"sprint:");
+				"sprintProductBacklog:");
 		String name = Scan.readLine("Name:");
 		int startYear = Scan.readInt("Start date (YYYY):");
 		int startMonth = Scan.readInt("Start date (MM):");
@@ -232,28 +186,17 @@ public class ControllerScrumMaster {
 
 		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
 		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
-		Sprint sprint = new Sprint(name, startDate, endDate);
-		controllerAll.getSprintBacklog().add(sprint);
+		Project project = controllerAll.whichProject();
+		SprintBacklog sprintProductBacklog = new SprintBacklog(name, startDate, endDate);
+		project.getAllSprintBacklogs().add(sprintProductBacklog);
 
 		//export ArrayList to a file
 
-		Scan.print("You have successfully created the following sprint:\n\n" + sprint.toString());
+		Scan.print("You have successfully created the following sprintProductBacklog:\n\n" +
+				sprintProductBacklog.toString());
 
 	}
 
-	public Backlog findBacklogByName(String name, ArrayList<Backlog> allBacklogs){
-		Backlog backlog = null;
-		Iterator<Backlog> iterator = allBacklogs.iterator();
-		while (backlog == null && iterator.hasNext())
-		{
-			Backlog foundBacklog = iterator.next();
-			if (foundBacklog.getName().equalsIgnoreCase(name))
-			{
-				backlog = foundBacklog;
-			}
-		}
-		return backlog;
-	}
 }
 
 

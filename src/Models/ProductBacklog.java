@@ -1,27 +1,24 @@
 package Models;
 
+import Models.UserStory;
+
 import java.util.ArrayList;
 
-public class Backlog
-{
+public class ProductBacklog {
 
     //Attributes:-
     private String name;
     private String startDate;
     private String endDate;
     private ArrayList<UserStory> allUserStories;
-    private ArrayList<Task> tasks;
-
-
 
     // Constructor:-
-    public Backlog(String name, String startDate, String endDate)
+    public ProductBacklog(String name, String startDate, String endDate)
     {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.allUserStories = new ArrayList<>();
-        this.tasks = new ArrayList<>();
     }
 
 
@@ -62,23 +59,16 @@ public class Backlog
         return allUserStories;
     }
 
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
 
     //ToString:-
 
     @Override
     public String toString()
     {
-        return "\n\nBacklog: \n" +
+        return "\n\nProductBacklog: \n" +
                 "name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +
                 "End Date = " + endDate + '\n' +
-                "All tasks:\n " + tasks + "\n" +
                 "All User Stories:\n " + allUserStories + ".";
     }
 }

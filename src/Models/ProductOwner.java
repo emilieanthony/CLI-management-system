@@ -38,7 +38,7 @@ public class ProductOwner
 
     public String toString()
     {
-        return name + "  " + id;
+        return "\nProduct owner: " + "\nName: " + name + "\nID: " + id;
     }
 }
 
