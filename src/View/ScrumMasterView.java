@@ -15,13 +15,13 @@ public class ScrumMasterView {
                 "3. Create a new task for product backlog\n" +
                 "4. Create a new task for sprint backlog\n" +
                 "5. Create a user story for product backlog\n" +
-                "6. Create a user story for sprint backlog\n" +
-                "7. Create a new Development Team Member\n" +
-                "8. Create a new Product owner\n" +
-                "9. Assign a task to Development Team Member\n" +
-                "10. View product backlog\n" +
-                "11. View all development Team Members\n" +
-                "12. Move task or user story to sprint backlog\n" +
+                "6. Create a new Development Team Member\n" +
+                "7. Create a new Product owner\n" +
+                "8. Assign a task to Development Team Member\n" +
+                "9. View product backlog\n" +
+                "10. View all development Team Members\n" +
+                "11. Move task or user story to sprint backlog\n" +
+                "12. View sprint backlog\n" +
                 "13. Go back to main menu\n");
 
         return option;

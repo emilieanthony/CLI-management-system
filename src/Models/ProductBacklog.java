@@ -57,6 +57,30 @@ public class ProductBacklog
         this.endDate = endDate;
     }
 
+    public Task getTask(int id)
+    {
+        for(Task task : tasks)
+        {
+            if(task.getId()==id)
+            {
+                return task;
+            }
+        }
+        return null;
+    }
+
+    public UserStory getUserStory(int number)
+    {
+        for(UserStory userStory : allUserStories)
+        {
+            if(userStory.getNumber()==number)
+            {
+                return userStory;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<UserStory> getAllUserStories()
     {
         return allUserStories;
@@ -77,8 +101,8 @@ public class ProductBacklog
         return "\n\nBacklog: \n" +
                 "name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +
-                "End Date = " + endDate + '\n' +
+                "End Date = " + endDate + "\n\n" +
                 "All tasks:\n " + tasks + "\n" +
-                "All User Stories:\n " + allUserStories + ".";
+                "All User Stories:\n " + allUserStories + ".\n\n";
     }
 }

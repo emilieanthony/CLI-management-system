@@ -105,6 +105,7 @@ public class ControllerProductOwner
     public void addUserStory(ProductOwnerView proOwnerView, ControllerAll controllerAll)
     {
         int idProject = Scan.readInt("Write the ID of the project: ");
+
         for (Project project : controllerAll.getAllProjects())
         {
             if (project.getId() == idProject)
@@ -118,6 +119,7 @@ public class ControllerProductOwner
     public void removeUserStory(ProductOwnerView proOwnerView,ControllerAll controllerAll)
     {
         int idProject = Scan.readInt("Write the ID of the project: ");
+
         for (Project project : controllerAll.getAllProjects())
         {
             if (project.getId() == idProject)
@@ -132,11 +134,12 @@ public class ControllerProductOwner
     public void viewBacklog(ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         int idProject = Scan.readInt("Write the ID of the project: ");
+
         for (Project project : controllerAll.getAllProjects())
         {
             if (project.getId() == idProject)
             {
-                project.getProductBacklog().toString();
+                System.out.println(project.getProductBacklog().toString());
             }
         }
     }
@@ -160,6 +163,7 @@ public class ControllerProductOwner
         String nameBacklog = viewProOwner.getBacklogName();
 
         int idProject = Scan.readInt("Write the ID of the project: ");
+
         for (Project project : controllerAll.getAllProjects())
         {
             if (project.getId() == idProject)
@@ -188,6 +192,7 @@ public class ControllerProductOwner
         String endDate = viewProOwner.getBacklogEDate();
 
         int idProject = Scan.readInt("Write the ID of the project: ");
+
         for (Project project : controllerAll.getAllProjects())
         {
             if (project.getId() == idProject)
@@ -262,6 +267,7 @@ public class ControllerProductOwner
     public void editUSName(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         int idProject = Scan.readInt("Write the ID of the project: ");
+
         for (Project project : controllerAll.getAllProjects())
         {
             if (project.getId() == idProject)
@@ -276,6 +282,7 @@ public class ControllerProductOwner
     public void editUSSprint(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         int idProject = Scan.readInt("Write the ID of the project: ");
+
         for (Project project : controllerAll.getAllProjects())
         {
             if (project.getId() == idProject)
@@ -291,6 +298,7 @@ public class ControllerProductOwner
     public void editUSPriority(int number,ControllerAll controllerAll, ProductOwnerView proOwnerView)
     {
         int idProject = Scan.readInt("Write the ID of the project: ");
+
         for (Project project : controllerAll.getAllProjects())
         {
             if (project.getId() == idProject)

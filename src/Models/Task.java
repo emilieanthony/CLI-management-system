@@ -12,6 +12,7 @@ public class Task
 	private String name;
 	private String description;
 	private ArrayList<Developer> assignedTeamMembers;
+	//Sprint number
 
 	public Task(int id, int priorityNumber, int estimatedTime,int actualHours, String name, String description)
 	{

@@ -3,7 +3,7 @@ import Controller.ControllerDeveloper;
 import Controller.ControllerProductOwner;
 import Controller.ControllerScrumMaster;
 import Models.*;
-import Utility.Import;
+//import Utility.Import;
 import View.DevTeamView;
 import View.ProductOwnerView;
 import View.ScrumMasterView;
@@ -25,11 +25,12 @@ public class Main
         ProductOwnerView proOwnerView = new ProductOwnerView();
         DevTeamView developerView = new DevTeamView();
         Project project = new Project(1,"Codelicode", "2020-01-01","2021-01-01");
-        ProductBacklog backlog = new ProductBacklog("","","");
+        controllerAll.getAllProjects().add(project);
+        //ProductBacklog backlog = new ProductBacklog("","","");
         project.getAllSprints().add(sprint);
         project.getProductBacklog().getAllUserStories().add(userStory);
-        Import importFile = new Import();
-        importFile.importProjects(controllerAll,project,backlog);
+        /*Import importFile = new Import();
+        importFile.importProjects(controllerAll,project,backlog);*/
 
 
 //________________________TEST__________________________//

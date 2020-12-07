@@ -6,6 +6,7 @@ import Models.*;
 import java.io.*;
 import java.time.LocalDate;
 
+/*
 public class Import {
 
     public void importProjects(ControllerAll controllerAll,Project project, ProductBacklog backlog){
@@ -27,6 +28,7 @@ public class Import {
                     int eYear = Integer.parseInt(projectInfo[6]);
                     int eMonth = Integer.parseInt(projectInfo[7]);
                     int eDay = Integer.parseInt(projectInfo[8]);
+
 
                     LocalDate startDate = LocalDate.of(sYear,sMonth,sDay);
                     LocalDate endDate = LocalDate.of(eYear, eMonth, eDay);
@@ -113,3 +115,4 @@ public class Import {
 
 
 }
+*/
