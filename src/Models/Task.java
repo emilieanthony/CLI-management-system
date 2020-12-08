@@ -35,9 +35,6 @@ public class Task implements Comparable<Task>
 		this.description = description;
 		this.assignedTeamMembers = new ArrayList<>();
 	}
-	public int getId() {
-		return id;
-	}
 
 	public int getPriorityNumber() {
 		return priorityNumber;
@@ -63,9 +60,6 @@ public class Task implements Comparable<Task>
 		return description;
 	}
 
-	public ArrayList<Developer> getAssignedTeamMembers() {
-		return assignedTeamMembers;
-	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -81,9 +75,7 @@ public class Task implements Comparable<Task>
 		this.description = description;
 		this.assignedTeamMembers = new ArrayList<>();
 	}
-	public void setPriorityNumber(int priorityNumber) {
-		this.priorityNumber = priorityNumber;
-	}
+
 	public void setActualHours(int actualHours) {
 		this.actualHours = actualHours;
 	}

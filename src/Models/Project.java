@@ -1,6 +1,5 @@
 package Models;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Project
@@ -85,16 +84,14 @@ public class Project
 
     public Task getTaskFromSprintBacklog(int id)
     {
-        for(Sprint sprint : sprints)
+        for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
-            return sprint.getTask(id);
+            return sprintBacklog.getTask(id);
         }
         return null;
 
     }
-    public ProductBacklog getProductBacklog() {
-        return productBacklog;
-    }
+
     public SprintBacklog getSprintBacklog() {
         return sprintBacklog;
     }
@@ -104,18 +101,18 @@ public class Project
 
     public String printTasksFromSprintBacklog()
     {
-        for(Sprint sprint : sprints)
+        for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
-            return sprint.printTasks();
+            return sprintBacklog.printTasks();
         }
         return null;
     }
 
     public String printPersonalTasks(Developer member)
     {
-        for(Sprint sprint : sprints)
+        for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
-            return sprint.printPersonalTasks(member);
+            return sprintBacklog.printPersonalTasks(member);
         }
         return null;
     }
@@ -138,15 +135,12 @@ public class Project
         }
         return null;
     }
-    public ArrayList<Task> getAllTasks() {
-        return allTasks;
-    }
 
     public void assignTask(int memberID, int taskID)        //This one is using method below
     {
-        for(Sprint sprint : sprints)
+        for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
-            assignTask(getTeamMember(memberID), sprint.getTask(taskID));
+            assignTask(getTeamMember(memberID), sprintBacklog.getTask(taskID));
         }
     }
     public ArrayList<Developer> getAllTeamMembers() {
@@ -176,16 +170,16 @@ public class Project
 
     public ArrayList<Task> getAllTasks()
     {
-        for(Sprint sprint : sprints)
+        for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
-            return sprint.getAllTasks();
+            return sprintBacklog.getAllTasks();
         }
         return null;
     }
 
-    public ArrayList<Sprint> getAllSprints()
+    public ArrayList<SprintBacklog> getAllSprints()
     {
-        return sprints;
+        return allSprintBacklogs;
     }
 
     public ProductBacklog getProductBacklog()
@@ -224,6 +218,6 @@ public class Project
                 "\nTeam Members: " + allTeamMembers +
                 "\nProduct Owners: " + allProductOwners +
                 //"\nProduct Backlogs=" + allProductBacklogs +
-                "\nSprint Backlogs: " + allSprintBacklogs;
+                "\nSprintBacklog Backlogs: " + allSprintBacklogs;
     }
 }

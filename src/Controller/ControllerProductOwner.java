@@ -2,6 +2,10 @@ package Controller;
 
 import Models.*;
 import Utility.Scan;
+import View.ProductOwnerView;
+import View.ScrumMasterView;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
@@ -72,7 +76,6 @@ public class ControllerProductOwner
     public void editBacklog(ControllerAll controllerAll)
     {
         boolean running = true;
-        chooseBacklog();
         do
         {
             int option = menuEditBacklog();

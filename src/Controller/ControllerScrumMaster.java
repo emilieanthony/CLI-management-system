@@ -1,11 +1,8 @@
 package Controller;
 
 import Models.*;
-import Models.SprintBacklog;
 import Utility.Import;
 import Utility.Scan;
-
-import java.time.LocalDate;
 
 import static Utility.PrintUtility.defaultMessage;
 import static View.ScrumMasterView.*;
@@ -282,7 +279,7 @@ public class ControllerScrumMaster {
 											 ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
-				"sprint:");
+				"sprintBacklog:");
 		String name = Scan.readLine("Name:");
 		int startYear = Scan.readInt("Start date (YYYY):");
 		int startMonth = Scan.readInt("Start date (MM):");
@@ -298,13 +295,13 @@ public class ControllerScrumMaster {
 		String startDate = startYear + "-" + startMonth + "-" + startDay;
 		String endDate = endYear + "-" + endMonth + "-" + endDay;
 
-		Sprint sprint = new Sprint(name, startDate, endDate);
-		controllerAll.getSprintBacklog().add(sprint);
+		SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
+		controllerAll.getSprintBacklog().add(sprintBacklog);
 
 		//export ArrayList to a file
 
-		String input = Scan.readLine("You have successfully created the following sprint:\n\n"
-				+ sprint.toString() + "\nDo you want to create a user story type: 1\n" +
+		String input = Scan.readLine("You have successfully created the following sprintBacklog:\n\n"
+				+ sprintBacklog.toString() + "\nDo you want to create a user story type: 1\n" +
 				"Do you want to create a task type: 2\n" +
 				"To exit type: 3\n");
 
@@ -324,19 +321,19 @@ public class ControllerScrumMaster {
 
 	}
 
-	public Sprint findSprintBacklogByName(String name, ArrayList<Sprint> allBacklogs)
+	public SprintBacklog findSprintBacklogByName(String name, ArrayList<SprintBacklog> allBacklogs)
 	{
-		Sprint sprint = null;
-		Iterator<Sprint> iterator = allBacklogs.iterator();
-		while (sprint == null && iterator.hasNext())
+		SprintBacklog sprintBacklog = null;
+		Iterator<SprintBacklog> iterator = allBacklogs.iterator();
+		while (sprintBacklog == null && iterator.hasNext())
 		{
-			Sprint foundBacklog = iterator.next();
+			SprintBacklog foundBacklog = iterator.next();
 			if (foundBacklog.getName().equalsIgnoreCase(name))
 			{
-				sprint = foundBacklog;
+				sprintBacklog = foundBacklog;
 			}
 		}
-		return sprint;
+		return sprintBacklog;
 	}
 }
 

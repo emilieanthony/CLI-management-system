@@ -50,7 +50,7 @@ public class Import {
                     foundProject.setProductBacklog(productBacklog);
                     Scan.print(productBacklog.toString() + "\n");
                 }
-                if (projectInfo[0].equalsIgnoreCase("Sprint")){
+                if (projectInfo[0].equalsIgnoreCase("SprintBacklog")){
                     String name = projectInfo[1];
                     int sYear = Integer.parseInt(projectInfo[2]);
                     int sMonth = Integer.parseInt(projectInfo[3]);

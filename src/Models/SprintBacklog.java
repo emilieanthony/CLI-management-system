@@ -1,6 +1,5 @@
 package Models;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -9,13 +8,13 @@ public class SprintBacklog
 
 	//attributes
 	private String name;
-	private LocalDate startDate;
-	private LocalDate endDate;
-	private ArrayList<Task> allTasks;
+	private String startDate;
+	private String endDate;
+	private ArrayList<Task> allTasks;      //sprintBacklog is allTasks and userStories
 	private ArrayList<UserStory> userStories;
 
 	//constructor
-	public SprintBacklog(String name, LocalDate startDate, LocalDate endDate)
+	public SprintBacklog(String name,String startDate, String endDate)
 	{
 		this.name = name;
 		this.startDate = startDate;
@@ -35,26 +34,92 @@ public class SprintBacklog
 		this.name = name;
 	}
 
-	public LocalDate getStartDate()
+	public /*LocalDate*/ String getStartDate()
 	{
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate)
+	public void setStartDate(/*LocalDate*/ String startDate)
 	{
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate()
+	public /*LocalDate*/ String getEndDate()
 	{
 		return endDate;
 	}
 
-	public void setEndDate(LocalDate endDate)
+	public void setEndDate(/*LocalDate*/ String endDate)
 	{
 		this.endDate = endDate;
 	}
 
+	//--------------------------------
+	public Task getTask(int id)
+	{
+		for (Task task : allTasks)
+		{
+			if (task.getId() == id)
+			{
+				return task;
+			}
+		}
+		return null;
+	}
+
+	public UserStory getUserStory(int number)
+	{
+		for(UserStory userStory : userStories)
+		{
+			if(userStory.getName().equals(number))
+			{
+				return userStory;
+			}
+		}
+		return null;
+	}
+
+	public String printTasks()
+	{
+		String output = "";
+
+		for (Task task : allTasks)
+		{
+			output = output + task.toString();
+		}
+		return output;
+	}
+
+	public String printPersonalTasks(Developer member)
+	{
+		String output = "";
+
+		if (allTasks == null)
+		{
+			output = "You have no tasks assigned.";
+		}
+		else
+		{
+			for (Task task : allTasks)
+			{
+				if (task.isAssigned(member))
+				{
+					output = output + task.toString() + "\n";
+				}
+			}
+		}
+		return output;
+	}
+
+	public ArrayList<Task> getAllTasks()
+	{
+		return allTasks;
+	}
+
+	public ArrayList<UserStory> getAllUserStories()
+	{
+		return userStories;
+	}
 
 	//--------------------------------------------------
 

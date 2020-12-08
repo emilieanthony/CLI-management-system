@@ -21,14 +21,13 @@ public class ControllerAll
     public ControllerAll()
     {
         allProjects = new ArrayList<>();
+
     }
 
     //Getters:
     public ArrayList<Project> getAllProjects() {
         return allProjects;
     }
-
-
 
     //methods
     /*--------------------------------------------Main menu -----------------------------------------------------*/
@@ -52,7 +51,6 @@ public class ControllerAll
                          ControllerDeveloper contDeveloper)
     {
         boolean running = true;
-        Start();
         do
         {
             int option = mainMenu();
@@ -92,12 +90,12 @@ public class ControllerAll
             }
         }
         return project;
-
     }
 
     public Project findProjectImport(String name){
 
         Project project = null;
+
         Iterator<Project> iterator = allProjects.iterator();
 
         while (iterator.hasNext() && project==null){
