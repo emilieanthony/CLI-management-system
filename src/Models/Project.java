@@ -20,28 +20,27 @@ public class Project
     private ArrayList<Task> allTasks;
     private ArrayList<Developer> allTeamMembers;
     private ArrayList<ProductOwner> allProductOwners;
-    private ArrayList<ProductBacklog> allProductBacklogs;
     private ArrayList<SprintBacklog> allSprintBacklogs;
 
 
 
     //constructor
 
-
     public Project(int id, String name, LocalDate startDate, LocalDate endDate) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+
         productBacklog = new ProductBacklog(null,null,null);
         sprintBacklog = new SprintBacklog(null,null,null);
         productOwner = new ProductOwner(null,0);
         developer = new Developer(null,0);
         task = new Task(0,0,0,null,null);
+
         allTasks = new ArrayList<>();
         allTeamMembers = new ArrayList<>();
         allProductOwners = new ArrayList<>();
-        allProductBacklogs = new ArrayList<>();
         allSprintBacklogs = new ArrayList<>();
 
     }
@@ -112,8 +111,8 @@ public class Project
         return allProductOwners;
     }
 
-    public ArrayList<ProductBacklog> getAllProductBacklogs() {
-        return allProductBacklogs;
+    public void setProductBacklog(ProductBacklog productBacklog) {
+        this.productBacklog = productBacklog;
     }
 
     public ArrayList<SprintBacklog> getAllSprintBacklogs() {
@@ -128,14 +127,14 @@ public class Project
                 "\nName: " + name +
                 "\nStart Date: " + startDate +
                 "\nEnd Date: " + endDate +
-                //"\nProduct Backlog: " + productBacklog +
+                "\nProduct Backlog: " + productBacklog +
                 //"\nSprint Backlog: " + sprintBacklog +
                 //"\nProduct Owner: " + productOwner +
                 //"\nDeveloper: " + developer +
                 "\nTasks: " + allTasks +
                 "\nTeam Members: " + allTeamMembers +
                 "\nProduct Owners: " + allProductOwners +
-                "\nProduct Backlogs=" + allProductBacklogs +
+                //"\nProduct Backlogs=" + allProductBacklogs +
                 "\nSprint Backlogs: " + allSprintBacklogs;
     }
 }

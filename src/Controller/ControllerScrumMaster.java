@@ -42,7 +42,7 @@ public class ControllerScrumMaster {
 					assignTask(controllerAll);
 					break;
 				case 7:
-					contProOwner.viewBacklogs(controllerAll);
+					contProOwner.viewBacklog(controllerAll);
 					break;
 				case 8:
 					viewTeamMembers(controllerAll);

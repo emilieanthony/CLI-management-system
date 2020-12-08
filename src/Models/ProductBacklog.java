@@ -65,7 +65,7 @@ public class ProductBacklog {
     @Override
     public String toString()
     {
-        return "\n\nProductBacklog: \n" +
+        return "\n\nProduct Backlog: \n" +
                 "name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +
                 "End Date = " + endDate + '\n' +

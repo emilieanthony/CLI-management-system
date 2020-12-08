@@ -12,8 +12,10 @@ import static View.ScrumMasterView.getFileName;
 public class Import {
 
     public void importProjects(ControllerAll controllerAll){
+
         String fileName = getFileName();
         File file = new File(fileName);
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -46,7 +48,7 @@ public class Import {
                     ProductBacklog productBacklog = new ProductBacklog(name,startDate,endDate);
                     String projectName = projectInfo[4];
                     Project foundProject = controllerAll.findProjectImport(projectName);
-                    foundProject.getAllProductBacklogs().add(productBacklog);
+                    foundProject.setProductBacklog(productBacklog);
                     Scan.print(productBacklog.toString() + "\n");
                 }
                 if (projectInfo[0].equalsIgnoreCase("Sprint")){
@@ -90,13 +92,10 @@ public class Import {
                     String content = projectInfo[6];
                     String acceptanceCriteria = projectInfo[7];
                     UserStory userStory = new UserStory(name,number,sprint,priorityN,storyPoints
-                    ,content,acceptanceCriteria);
-                    String backlogName = projectInfo[9];
-                    String projectName = projectInfo[10];
+                            ,content,acceptanceCriteria);
+                    String projectName = projectInfo[9];
                     Project foundProject = controllerAll.findProjectImport(projectName);
-                    ProductBacklog backlog = controllerAll.findBacklogImport(backlogName,
-                            foundProject);
-                    backlog.getAllUserStories().add(userStory);
+                    foundProject.getProductBacklog().getAllUserStories().add(userStory);
                     //Set status
                     String status = projectInfo[8];
                     userStory.setStatus(status);

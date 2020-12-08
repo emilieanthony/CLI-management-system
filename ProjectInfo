@@ -18,18 +18,18 @@ Task;4;1;In progress;Plan user story 5; You should plan how to implement This us
 Task;5;7;Open;Plan user story 2; You should plan how to implement This user story;3;Codelicode4
 Task;1;8;In progress;Plan user story 2; You should plan how to implement This user story;3;Codelicode2
 Task;2;4;Open;Plan user story 2; You should plan how to implement This user story;3;Codelicode;Codelicode
-US;User Stroy 1;1;1;5;8;A user story content;A user story acceptance criteria;Open;Codelicode2;Codelicode2
-US;User Stroy 2;2;2;5;8;A user story content;A user story acceptance criteria;In progress;Codelicode;Codelicode
-US;User Stroy 3;3;3;5;8;A user story content;A user story acceptance criteria;Open;Codelicode2;Codelicode2
-US;User Stroy 4;4;2;5;8;A user story content;A user story acceptance criteria;Done;Codelicode3;Codelicode3
-US;User Stroy 6;6;2;5;8;A user story content;A user story acceptance criteria;Open;Codelicode;Codelicode
-US;User Stroy 7;7;1;5;8;A user story content;A user story acceptance criteria;Done;Codelicode;Codelicode
-US;User Stroy 8;1;2;5;8;A user story content;A user story acceptance criteria;Open;Codelicode;Codelicode
-US;User Stroy 9;2;1;5;8;A user story content;A user story acceptance criteria;Open;Codelicode2;Codelicode2
-US;User Stroy 10;3;1;5;8;A user story content;A user story acceptance criteria;Open;Codelicode3;Codelicode3
-US;User Stroy 11;4;3;5;8;A user story content;A user story acceptance criteria;Open;Codelicode;Codelicode
-US;User Stroy 12;5;2;5;8;A user story content;A user story acceptance criteria;Open;Codelicode2;Codelicode2
-US;User Stroy 13;6;1;5;8;A user story content;A user story acceptance criteria;Open;Codelicode3;Codelicode3
+US;User Stroy 1;1;1;5;8;A user story content;A user story acceptance criteria;Open;Codelicode2
+US;User Stroy 2;2;2;5;8;A user story content;A user story acceptance criteria;In progress;Codelicode
+US;User Stroy 3;3;3;5;8;A user story content;A user story acceptance criteria;Open;Codelicode2
+US;User Stroy 4;4;2;5;8;A user story content;A user story acceptance criteria;Done;Codelicode3
+US;User Stroy 6;6;2;5;8;A user story content;A user story acceptance criteria;Open;Codelicode
+US;User Stroy 7;7;1;5;8;A user story content;A user story acceptance criteria;Done;Codelicode
+US;User Stroy 8;1;2;5;8;A user story content;A user story acceptance criteria;Open;Codelicode
+US;User Stroy 9;2;1;5;8;A user story content;A user story acceptance criteria;Open;Codelicode2
+US;User Stroy 10;3;1;5;8;A user story content;A user story acceptance criteria;Open;Codelicode3
+US;User Stroy 11;4;3;5;8;A user story content;A user story acceptance criteria;Open;Codelicode
+US;User Stroy 12;5;2;5;8;A user story content;A user story acceptance criteria;Open;Codelicode2
+US;User Stroy 13;6;1;5;8;A user story content;A user story acceptance criteria;Open;Codelicode3
 Developer;Bassam;1;Codelicode
 Developer;Lina;2;Codelicode4
 Developer;Malte;3;Codelicode2

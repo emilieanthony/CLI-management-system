@@ -18,8 +18,7 @@ public class ControllerProductOwner
     {
         UserStory userStory = null;
         Project project = controllerAll.whichProject();
-        ProductBacklog productBacklog = controllerAll.findBacklogByName(project);
-        Iterator<UserStory> iterator = productBacklog.getAllUserStories().iterator();
+        Iterator<UserStory> iterator = project.getProductBacklog().getAllUserStories().iterator();
         while (userStory == null && iterator.hasNext())
         {
             UserStory foundUserStory = iterator.next();
@@ -46,7 +45,7 @@ public class ControllerProductOwner
                     createBacklog(controllerAll);
                     break;
                 case 2:
-                    viewBacklogs(controllerAll);
+                    viewBacklog(controllerAll);
                     break;
                 case 3:
                     editBacklog(controllerAll);
@@ -66,8 +65,7 @@ public class ControllerProductOwner
     public void createBacklog(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        ProductBacklog productBacklog = getBacklogInfo();
-        project.getAllProductBacklogs().add(productBacklog);
+        project.setProductBacklog(getBacklogInfo());
     }
 
     //*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*//
@@ -110,9 +108,8 @@ public class ControllerProductOwner
    public void addUserStory(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        ProductBacklog productBacklog = controllerAll.findBacklogByName(project);
         UserStory newUserStory = getUSInfo();
-        productBacklog.getAllUserStories().add(newUserStory);
+        project.getProductBacklog().getAllUserStories().add(newUserStory);
     }
 
     public void removeUserStory(ControllerAll controllerAll)
@@ -120,48 +117,33 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         int number = getUSNumber();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
-        ProductBacklog productBacklog = controllerAll.findBacklogByName(project);
-        productBacklog.getAllUserStories().remove(userStory);
+        project.getProductBacklog().getAllUserStories().remove(userStory);
         printRemoved();
     }
-    public void viewBacklogs(ControllerAll controllerAll)
+    public void viewBacklog(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        for (ProductBacklog backlog: project.getAllProductBacklogs()) {
-            Scan.print(backlog.toString());
-        }
-
-    }
-    public void viewABacklog(ControllerAll controllerAll)
-    {
-        Project project = controllerAll.whichProject();
-        ProductBacklog productBacklog = controllerAll.findBacklogByName(project);
-            Scan.print(productBacklog.toString());
-
+            Scan.print(project.getProductBacklog().toString());
     }
 
     public void editBacklogName(ControllerAll controllerAll){
 
         String nameBacklog = getBacklogName();
         Project project = controllerAll.whichProject();
-        ProductBacklog productBacklog = controllerAll.findBacklogByName(project);
-        productBacklog.setName(nameBacklog);
+        project.getProductBacklog().setName(nameBacklog);
         backlogName = nameBacklog;
     }
     public void editBacklogSDate(ControllerAll controllerAll)
     {
 
         Project project = controllerAll.whichProject();
-        ProductBacklog productBacklog = controllerAll.findBacklogByName(project);
         String startDate = getBacklogSDate();
-        productBacklog.setStartDate(startDate);
-    }
+        project.getProductBacklog().setStartDate(startDate);    }
     public void editBacklogEDate(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        ProductBacklog productBacklog = controllerAll.findBacklogByName(project);
         String endDate = getBacklogEDate();
-        productBacklog.setEndDate(endDate);
+        project.getProductBacklog().setEndDate(endDate);
     }
 
     //**//*--------------------------------3rd Menu - menu for editing user stories---------------------------------------*//
@@ -169,7 +151,7 @@ public class ControllerProductOwner
     {
 
         boolean running = true;
-        viewABacklog(controllerAll);
+        viewBacklog(controllerAll);
         int number = getStoryNumber();
 
         do

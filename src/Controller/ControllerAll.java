@@ -78,7 +78,9 @@ public class ControllerAll
         Project project = findProjectByName();
         return project;
     }
+
     public Project findProjectByName(){
+
         Project project = null;
 
         Iterator<Project> iterator = allProjects.iterator();
@@ -92,6 +94,7 @@ public class ControllerAll
         return project;
 
     }
+
     public Project findProjectImport(String name){
 
         Project project = null;
@@ -140,30 +143,5 @@ public class ControllerAll
 
         return developer;
     }
-    public ProductBacklog findBacklogByName(Project project){
-        ProductBacklog productBacklog = null;
-        Iterator<ProductBacklog> iterator = project.getAllProductBacklogs().iterator();
-        while (productBacklog == null && iterator.hasNext())
-        {
-            ProductBacklog foundProductBacklog = iterator.next();
-            if (foundProductBacklog.getName().equalsIgnoreCase(backlogName))
-            {
-                productBacklog = foundProductBacklog;
-            }
-        }
-        return productBacklog;
-    }
-    public ProductBacklog findBacklogImport(String name,Project project){
-        ProductBacklog productBacklog = null;
-        Iterator<ProductBacklog> iterator = project.getAllProductBacklogs().iterator();
-        while (productBacklog == null && iterator.hasNext())
-        {
-            ProductBacklog foundProductBacklog = iterator.next();
-            if (foundProductBacklog.getName().equalsIgnoreCase(name))
-            {
-                productBacklog = foundProductBacklog;
-            }
-        }
-        return productBacklog;
-    }
+
 }
