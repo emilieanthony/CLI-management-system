@@ -2,7 +2,7 @@ package Models;
 
 import java.util.ArrayList;
 
-public class Task
+public class Task implements Comparable<Task>
 {
 	private int id;
 	private int priorityNumber;
@@ -111,6 +111,22 @@ public class Task
 		}
 
 		return output;
+	}
+
+	public int compareTo(Task task)
+	{
+		if(this.priorityNumber < task.priorityNumber)
+		{
+			return 1;
+		}
+		else if(this.priorityNumber > task.priorityNumber)
+		{
+			return -1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 }

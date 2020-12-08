@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ProductBacklog
 {
@@ -98,6 +99,9 @@ public class ProductBacklog
     @Override
     public String toString()
     {
+        Collections.sort(tasks);
+        Collections.sort(allUserStories);
+
         return "\n\nBacklog: \n" +
                 "name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +

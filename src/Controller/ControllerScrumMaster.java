@@ -152,6 +152,8 @@ public class ControllerScrumMaster
 				{
 					int usName = Scan.readInt("Write the the number of the user story you want to move: ");
 					String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
+
+					project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
 					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
 					project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
 

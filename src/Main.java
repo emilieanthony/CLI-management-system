@@ -19,7 +19,10 @@ public class Main
         ControllerScrumMaster contScrum = new ControllerScrumMaster();
         ControllerProductOwner contProOwner = new ControllerProductOwner();
         ControllerDeveloper contDeveloper = new ControllerDeveloper();
-        UserStory userStory = new UserStory("menu", 1, "1",2,2, "create menu","menu must work");
+        UserStory userStory1 = new UserStory("menu", 1, "1",2,2, "create menu","menu must work");
+        UserStory userStory2 = new UserStory("Task class",2,"1",5,3,"make class","it must work");
+        Task task1 = new Task(1,1,"UserStory","Make a US");
+        Task task2 = new Task(2,4,"Team member class","Make a class");
         Sprint sprint = new Sprint("1","2020-01-01", "2020-01-14");
         ScrumMasterView scrumView = new ScrumMasterView();
         ProductOwnerView proOwnerView = new ProductOwnerView();
@@ -28,7 +31,10 @@ public class Main
         controllerAll.getAllProjects().add(project);
         //ProductBacklog backlog = new ProductBacklog("","","");
         project.getAllSprints().add(sprint);
-        project.getProductBacklog().getAllUserStories().add(userStory);
+        project.getProductBacklog().getAllUserStories().add(userStory1);
+        project.getProductBacklog().getAllUserStories().add(userStory2);
+        project.getProductBacklog().getTasks().add(task1);
+        project.getProductBacklog().getTasks().add(task2);
         /*Import importFile = new Import();
         importFile.importProjects(controllerAll,project,backlog);*/
 
