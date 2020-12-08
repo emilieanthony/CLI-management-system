@@ -140,7 +140,10 @@ public class ControllerScrumMaster
 				{
 					int idTask = Scan.readInt("Write the ID of the task you want to move: ");
 					String sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+
+					project.getProductBacklog().getTask(idTask).setSprintName(sprintName);
 					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
+					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
 
 					System.out.println("\n\nYou have successfully moved the task to sprint backlog!\n\n");
 				}
@@ -148,8 +151,9 @@ public class ControllerScrumMaster
 				if(input.equals("2"))
 				{
 					int usName = Scan.readInt("Write the the number of the user story you want to move: ");
-					String sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+					String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
 					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
+					project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
 
 					System.out.println("\n\nYou have successfully moved the user story to sprint backlog!\n\n");
 				}

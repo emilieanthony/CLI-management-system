@@ -12,7 +12,7 @@ public class Task
 	private String name;
 	private String description;
 	private ArrayList<Developer> assignedTeamMembers;
-	//Sprint number
+	private String sprintName;
 
 	public Task(int id, int priorityNumber, int estimatedTime,int actualHours, String name, String description)
 	{
@@ -24,6 +24,7 @@ public class Task
 		this.name = name;
 		this.description = description;
 		this.assignedTeamMembers = new ArrayList<>();
+		this.sprintName = "";
 	}
 
 	public Task(int id, int priorityNumber, String name, String description) {
@@ -52,6 +53,11 @@ public class Task
 		{
 			priorityNumber = priorityNumber;
 		}
+	}
+
+	public void setSprintName(String name)
+	{
+		sprintName = name;
 	}
 
 	public void setOpen()
