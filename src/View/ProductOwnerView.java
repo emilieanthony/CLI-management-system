@@ -26,7 +26,7 @@ public class ProductOwnerView
 
     }
 
-    public static ProductBacklog getBacklogInfo()
+    public ProductBacklog createBacklog()
     {
         String backlogName = Scan.readLine("Please enter product backlog name:");
         String startDate = Scan.readLine("Please enter start date: ex (yyyy/mm/dd)");
@@ -52,8 +52,9 @@ public class ProductOwnerView
                 "7- Back to your menu");
         return option;
     }
-    public static void chooseBacklog(){
-        backlogName = Scan.readLine("\nPlease enter the name of the Product Backlog:");
+    public String chooseBacklog(){
+        String name = Scan.readLine("Please enter the name of the Backlog:");
+        return name;
     }
     public static String getBacklogName()
     {

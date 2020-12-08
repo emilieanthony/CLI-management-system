@@ -3,6 +3,7 @@ package Models;
 import Models.UserStory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ProductBacklog {
 
@@ -11,6 +12,9 @@ public class ProductBacklog {
     private String startDate;
     private String endDate;
     private ArrayList<UserStory> allUserStories;
+    private ArrayList<Task> tasks;
+
+
 
     // Constructor:-
     public ProductBacklog(String name, String startDate, String endDate)
@@ -19,6 +23,7 @@ public class ProductBacklog {
         this.startDate = startDate;
         this.endDate = endDate;
         this.allUserStories = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
 
@@ -54,21 +59,55 @@ public class ProductBacklog {
         this.endDate = endDate;
     }
 
+    public Task getTask(int id)
+    {
+        for(Task task : tasks)
+        {
+            if(task.getId()==id)
+            {
+                return task;
+            }
+        }
+        return null;
+    }
+
+    public UserStory getUserStory(int number)
+    {
+        for(UserStory userStory : allUserStories)
+        {
+            if(userStory.getNumber()==number)
+            {
+                return userStory;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<UserStory> getAllUserStories()
     {
         return allUserStories;
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     //ToString:-
 
     @Override
     public String toString()
     {
-        return "\n\nProduct Backlog: \n" +
+        Collections.sort(tasks);
+        Collections.sort(allUserStories);
+
+        return "\n\nBacklog: \n" +
                 "name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +
-                "End Date = " + endDate + '\n' +
-                "All User Stories:\n " + allUserStories + ".";
+                "End Date = " + endDate + "\n\n" +
+                "All tasks:\n " + tasks + "\n" +
+                "All User Stories:\n " + allUserStories + ".\n\n";
     }
 }

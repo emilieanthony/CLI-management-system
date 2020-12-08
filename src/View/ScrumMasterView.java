@@ -1,6 +1,7 @@
 package View;
 
 import Models.*;
+import Models.Task;
 import Utility.Scan;
 
 import java.util.ArrayList;
@@ -20,25 +21,40 @@ public class ScrumMasterView {
                 "Please enter an option below\n\n" +
                 "1. Create a new project\n" +
                 "2. Create a new sprint\n" +
-                "3. Create a new task\n" +
-                "4. Create a new Development Team Member\n" +
-                "5. Create a new Product owner\n" +
-                "6. Assign a task to Development Team Member\n" +
-                "7. View product backlog\n" +
-                "8. View all Development Team Members\n" +
-                "9. Import Files\n" +
-                "10.Choose project.\n"+
-                "11. Go back to main menu\n");
+                "3. Create a new task for product backlog\n" +
+                "4. Create a new task for sprint backlog\n" +
+                "5. Create a user story for product backlog\n" +
+                "6. Create a new Development Team Member\n" +
+                "7. Create a new Product owner\n" +
+                "8. Assign a task to Development Team Member\n" +
+                "9. View product backlog\n" +
+                "10. View all development Team Members\n" +
+                "11. Move task or user story to sprint backlog\n" +
+                "12. View sprint backlog\n" +
+                "13. Go back to main menu\n");
+        //"9. Import Files\n" +
 
         return option;
     }
 
     public static String getFileName(){
 
+        Scan.print("You have now created a new task!");
+        return new Task(id, prioNumber, name, description);
+    }*/
+    public static String getFileName(){
+
         String fileName = Scan.readLine("Please enter the file path: ex " +
                 "\"C:\\\\User\\\\user\\\\OneDrive\\\\desktop\\\\file name.txt\". \"remember the " +
                 "double \\\\\"");
         return fileName;
+    }
+
+    public String getNewUSStatus()
+    {
+        String newUSStatus = Scan.readLine("Enter new Status for the user " +
+                "story.");
+        return newUSStatus;
     }
 
     public static Task getTaskInfo() {
@@ -50,6 +66,7 @@ public class ScrumMasterView {
 
         return new Task(id,priorityNumber,estimatedHours,name,description);
     }
+
 
     public static void Start(){
         proName = Scan.readLine("\n\nWelcome to Codelicode: \nWhich project you want " +
@@ -75,9 +92,11 @@ public class ScrumMasterView {
         String name = Scan.readLine("Creating a new developer:\nName: ");
         return name;
     }
+    public String getBacklogName(){
+        return Scan.readLine("Please enter name of backlog you want to add a task to:");
+    }
     public static void createdDeveloper(){
         Scan.print("You have successfully created a new developer.\n");
-    }
 }
 
 

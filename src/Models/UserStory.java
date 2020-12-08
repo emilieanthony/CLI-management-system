@@ -2,18 +2,20 @@ package Models;
 
 import Utility.Scan;
 
-public class UserStory
+
+public class UserStory implements Comparable<UserStory>
 {
 
     // Attributes:-
     private String name;
     private int number;
     private String sprint;
-    private int priority;
+    private int priorityNumber;
     private int storyPoints;
     private String content;
     private String acceptanceCriteria;
     private String status;
+    private String sprintName;
 
 
     // Constructors:-
@@ -23,11 +25,12 @@ public class UserStory
         this.name = name;
         this.number = number;
         this.sprint = sprint;
-        this.priority = priority;
+        this.priorityNumber = priority;
         this.storyPoints = storyPoints;
         this.content = content;
         this.acceptanceCriteria = acceptanceCriteria;
         this.status = "open";
+        this.sprintName = "";
     }
 
     // Setters and Getters. Make sure at the end of the project that not used methods are deleted.
@@ -40,6 +43,11 @@ public class UserStory
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public void setSprintName(String name)
+    {
+        sprintName = name;
     }
 
     public int getNumber()
@@ -62,19 +70,19 @@ public class UserStory
         this.sprint = sprint;
     }
 
-    public int getPriority()
+    public int getPriorityNumber()
     {
-        return priority;
+        return priorityNumber;
     }
 
-    public void setPriority(int priority)
+    public void setPriorityNumber(int priorityNumber)
     {
         do
         {
             Scan.print("priority must be between 1 to 5.");
-            priority = this.priority;
+            priorityNumber = this.priorityNumber;
         }
-        while (priority <= 0 || priority >= 6);
+        while (priorityNumber <= 0 || priorityNumber >= 6);
     }
 
     public int getStoryPoints()
@@ -117,6 +125,21 @@ public class UserStory
         this.status = status;
     }
 
+    public int compareTo(UserStory userStory)
+    {
+        if(this.priorityNumber < userStory.priorityNumber)
+        {
+            return 1;
+        }
+        else if(this.priorityNumber > userStory.priorityNumber)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
     // ToString;
 
@@ -126,7 +149,7 @@ public class UserStory
         return "\n\nUser story number : " + number + '\n' +
                 "Name = " + name + '\n' +
                 "SprintBacklog = " + sprint + '\n' +
-                "Priority = " + priority + '\n' +
+                "Priority = " + priorityNumber + '\n' +
                 "Story Points = " + storyPoints + '\n' +
                 "Content = " + content + '\n' +
                 "Acceptance Criteria =\n" + acceptanceCriteria + '\n' +
