@@ -5,26 +5,21 @@ import Models.Task;
 import Utility.Scan;
 import Models.Project;
 import View.DevTeamView;
-
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
+import static View.DevTeamView.getTaskId;
 import static View.DevTeamView.menuTeamMember;
 import static View.ScrumMasterView.getProjectName;
 
-public class ControllerDeveloper
-{
+public class ControllerDeveloper {
 
-    public void teamMemberMenu(ControllerAll controllerAll)
-    {
+    public void teamMemberMenu(ControllerAll controllerAll) {
         boolean running = true;
-        do
-        {
+        do {
 
             int option = menuTeamMember();
-            switch (option)
-            {
+            switch (option) {
                 case 1:
                     viewMyTasks(controllerAll);
                     break;
@@ -42,22 +37,19 @@ public class ControllerDeveloper
 
     //---------------------------------Method----------------------------------------------//
 
-    public void viewMyTasks(ControllerAll controllerAll){
+    public void viewMyTasks(ControllerAll controllerAll) {
         Task task = findTaskByDeveloper(controllerAll);
         Scan.print(task.toString());
     }
 
-    public Task findTaskByDeveloper(ControllerAll controllerAll)
-    {
+    public Task findTaskByDeveloper(ControllerAll controllerAll) {
         Task task = null;
         Developer developer = controllerAll.findDeveloperByID();
         Project project = controllerAll.whichProject();
         Iterator<Task> iterator = project.getAllTasks().iterator();
-        while (task == null && iterator.hasNext())
-        {
+        while (task == null && iterator.hasNext()) {
             Task foundTask = iterator.next();
-            if (foundTask.getAssignedTeamMembers().contains(developer))
-            {
+            if (foundTask.getAssignedTeamMembers().contains(developer)) {
                 task = foundTask;
             }
         }
@@ -65,26 +57,20 @@ public class ControllerDeveloper
     }
 
 
-
-    public void viewAllAssignedTasks(ControllerAll controllerAll)
-    {
+    public void viewAllAssignedTasks(ControllerAll controllerAll) {
         Project project = controllerAll.whichProject();
 
         for (Task task : project.getAllTasks()) {
-            if (task.getStatus().equalsIgnoreCase("In progress")){
+            if (task.getStatus().equalsIgnoreCase("In progress")) {
                 Scan.print(task.toString());
             }
         }
     }
-    public Task openTask(ControllerAll controllerAll, DevTeamView devTeamView){
+
+    public Task openTask(ControllerAll controllerAll) { // needs to be fixed.
 
         Project project = controllerAll.whichProject();
-
-        ArrayList<Task> tasks = project.getAllTasks();
-
-        int taskId = devTeamView.getTaskId();
-
-        Task task = findTaskById(taskId, tasks);
+        Task task = controllerAll.findTaskById(controllerAll);
 
         return task;
     }
@@ -99,50 +85,44 @@ public class ControllerDeveloper
 
         Iterator<Task> iterator = project.getAllTasks().iterator();
 
-        while (task == null && iterator.hasNext())
-        {
+        while (task == null && iterator.hasNext()) {
             Task foundTask = iterator.next();
 
-            if (!(foundTask.getAssignedTeamMembers().isEmpty()))
-            {
+            if (!(foundTask.getAssignedTeamMembers().isEmpty())) {
                 task = foundTask;
-                taskList =  taskList + task.toString() + "\n\n";
+                taskList = taskList + task.toString() + "\n\n";
             }
         }
         return taskList;
     }
 
-    public void viewTasks(ControllerAll controllerAll)
+    public void viewTasks(ControllerAll controllerAll) // which project method.
     {
 
         int id = Scan.readInt("Write your ID: ");
-        int idProject =  Scan.readInt("Write the ID of the project you are working on: ");
+        int idProject = Scan.readInt("Write the ID of the project you are working on: ");
 
-        for (Project project : controllerAll.getAllProjects())
-        {
-            if (project.getId() == idProject)
-            {
-                Scan.print("----YOUR ASSIGNED TASK(S)----\n" + project.printTasks(project.getTeamMember(id)) + "\n" + "-----------------------------");
+        for (Project project : controllerAll.getAllProjects()) {
+            if (project.getId() == idProject) {
+                Scan.print("----YOUR ASSIGNED TASK(S)----\n" + project.printTasks(/*project.getTeamMember(id)*/) + "\n" + "-----------------------------");
             }
         }
     }
 
-}
-    public void viewMyTasks(ControllerAll controllerAll, DevTeamView devTeamView)
-    {   String assignedTasks = "";
+    public void viewMyTasks(ControllerAll controllerAll, DevTeamView devTeamView) {
+        String assignedTasks = "";
 
         int id = devTeamView.getUserId();
-        int idProject =  devTeamView.getProjectId();
+        int idProject = devTeamView.getProjectId();
 
-        for (Project project : controllerAll.getAllProjects())
-        {
-            if (project.getId() == idProject)
-            {
+        for (Project project : controllerAll.getAllProjects()) {
+            if (project.getId() == idProject) {
                 Developer teamMember = project.getTeamMember(id);
                 assignedTasks = "----YOUR ASSIGNED TASK(S)----\n" + project.printAssignedTasks(teamMember) + "\n" + "-----------------------------";
             }
         }
         devTeamView.printTasks(assignedTasks);
     }
+}
 
 

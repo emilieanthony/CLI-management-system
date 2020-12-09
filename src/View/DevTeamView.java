@@ -48,18 +48,7 @@ public class DevTeamView {
         return id;
     }
 
-    public void printUserStories (Backlog backlog){
-        ArrayList<UserStory> userStories = backlog.getAllUserStories();
 
-        for ( UserStory userStory : userStories){
-            Scan.print(userStory.toString());
-        }
-
-    }
-
-    public int getTaskId(){
-        int id = Scan.readInt("Enter task ID:");
-        return id;
     }
 
     public int getProjectId(){
