@@ -35,15 +35,6 @@ public class DevTeamView {
         return option;
     }
 
-    public int uStoryMenu(UserStory userStory) {
-        int option = Scan.readInt("\n\n User story ID:"  + userStory.getNumber() + "\nUser story name: " +
-                userStory.getName() + "\n" +
-                "Please enter an option below\n" +
-                "1. Set User Story as complete and enter actual velocity\n" +
-                "2. \n" +
-                "3. Go back to previous menu\n");
-        return option;
-    }
 
     public static int getDeveloperId(){
 

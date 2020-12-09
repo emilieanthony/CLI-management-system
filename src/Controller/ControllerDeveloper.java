@@ -78,7 +78,7 @@ public class ControllerDeveloper
     }
     public Task openTask(ControllerAll controllerAll, DevTeamView devTeamView){
 
-        Project project = controllerAll.whichProject(controllerAll);
+        Project project = controllerAll.whichProject();
 
         ArrayList<Task> tasks = project.getAllTasks();
 
@@ -88,11 +88,12 @@ public class ControllerDeveloper
 
         return task;
     }
+
     public String viewAllTasks(ControllerAll controllerAll) {
 
         String taskList = "";
 
-        Project project = controllerAll.whichProject(controllerAll);
+        Project project = controllerAll.whichProject();
 
         Task task = null;
 

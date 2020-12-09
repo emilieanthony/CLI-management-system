@@ -15,7 +15,6 @@ public class ProductBacklog {
     private ArrayList<Task> tasks;
 
 
-
     // Constructor:-
     public ProductBacklog(String name, String startDate, String endDate)
     {
@@ -23,7 +22,7 @@ public class ProductBacklog {
         this.startDate = startDate;
         this.endDate = endDate;
         this.allUserStories = new ArrayList<>();
-        this.tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>(); // No tasks in product backlog
     }
 
 

@@ -34,22 +34,22 @@ public class SprintBacklog
 		this.name = name;
 	}
 
-	public /*LocalDate*/ String getStartDate()
+	public String getStartDate()
 	{
 		return startDate;
 	}
 
-	public void setStartDate(/*LocalDate*/ String startDate)
+	public void setStartDate( String startDate)
 	{
 		this.startDate = startDate;
 	}
 
-	public /*LocalDate*/ String getEndDate()
+	public String getEndDate()
 	{
 		return endDate;
 	}
 
-	public void setEndDate(/*LocalDate*/ String endDate)
+	public void setEndDate(String endDate)
 	{
 		this.endDate = endDate;
 	}

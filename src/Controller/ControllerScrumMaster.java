@@ -4,9 +4,12 @@ import Models.*;
 import Utility.Import;
 import Utility.Export;
 import Utility.Scan;
-import View.ScrumMasterView;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
+import static View.ProductOwnerView.getBacklogName;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster {
@@ -85,9 +88,9 @@ public class ControllerScrumMaster {
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 
-	private void createTaskToProductBacklog(ScrumMasterView scrumMasterView, ControllerAll controllerAll)
+	private void createTaskToProductBacklog(ControllerAll controllerAll)
 	{
-		Task newTask = scrumMasterView.createTask();
+		Task newTask = createTask();
 
 		int idProject = Scan.readInt("Write the ID of the project: ");
 
@@ -102,10 +105,10 @@ public class ControllerScrumMaster {
 	}
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
-	private void createTaskToSprint(ScrumMasterView scrumMasterView, ControllerAll controllerAll)
+	private void createTaskToSprint(ControllerAll controllerAll)
 	{
-		Task newTask = scrumMasterView.createTask();
-		String name = scrumMasterView.getBacklogName();
+		Task newTask = createTask();
+		String name = getBacklogName();
 		int idProject = Scan.readInt("Write the ID of the project: ");
 
 		for (Project project : controllerAll.getAllProjects())
@@ -118,20 +121,12 @@ public class ControllerScrumMaster {
 		}
 		Scan.print("Project not found.\n\n");
 	}
-	private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
-												 ControllerAll controllerAll)
-	{
-		contProOwner.addUserStory(controllerAll);
-	}
-	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){
-		Task newTask = scrumMasterView.createTask();
-		String name = scrumMasterView.getBacklogName();
-		findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
-	}
-	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){ //We just add info, we do not create anything
-		Task newTask = scrumMasterView.createTask();
+
+
+	private void createTask(ControllerAll controllerAll){ //We just add info, we do not create anything
+		Task newTask = createTask();
 		Export.exportObject(newTask);
-		String name = scrumMasterView.getBacklogName();
+		String name = getBacklogName();
 		findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
 	}
 
@@ -276,12 +271,6 @@ public class ControllerScrumMaster {
 				" as a new Product Owner with the id " + id );
 	}
 
-	public void assignTask(ControllerAll controllerAll){
-		Task task = controllerAll.findTaskById(controllerAll);
-		Developer developer = controllerAll.findDeveloperByID();
-		task.getAssignedTeamMembers().add(developer);
-		task.setStatus("In progress");
-	}
 
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
@@ -360,7 +349,7 @@ public class ControllerScrumMaster {
 				{
 					id = project.getAllTeamMembers().get(project.getAllTeamMembers().size() - 1).getId() + 1;
 				}
-			}
+
 		}
 		return id;
 	}
@@ -399,8 +388,7 @@ public class ControllerScrumMaster {
 
 	/*------------------------------------Methods etc for sprints-------------------------------------------*/
 
-	public void createSprintAndSprintBacklog(ProductOwnerView proOwnerView, ScrumMasterView scrumMasterView,
-											 ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	public void createSprintAndSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"sprintBacklog:");
@@ -412,10 +400,7 @@ public class ControllerScrumMaster {
 		int endMonth = Scan.readInt("End date (MM):");
 		int endDay = Scan.readInt("End date (DD):");
 
-		//create exception here for non valid input
 
-		/*LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
-		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);*/
 		String startDate = startYear + "-" + startMonth + "-" + startDay;
 		String endDate = endYear + "-" + endMonth + "-" + endDay;
 
@@ -432,7 +417,7 @@ public class ControllerScrumMaster {
 
 		if (input.equals(1))
 		{
-			contProOwner.addUserStory(proOwnerView, controllerAll);
+			contProOwner.addUserStory(controllerAll);
 		}
 
 		if (input.equals(2))
@@ -449,6 +434,7 @@ public class ControllerScrumMaster {
 	public SprintBacklog findSprintBacklogByName(String name, ArrayList<SprintBacklog> allBacklogs)
 	{
 		SprintBacklog sprintBacklog = null;
+
 		Iterator<SprintBacklog> iterator = allBacklogs.iterator();
 		while (sprintBacklog == null && iterator.hasNext())
 		{

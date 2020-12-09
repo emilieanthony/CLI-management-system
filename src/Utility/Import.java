@@ -24,18 +24,8 @@ public class Import {
                 if (projectInfo[0].equalsIgnoreCase("Project")){
                     int number = Integer.parseInt(projectInfo[1]);
                     String name = projectInfo[2];
-
-                    int sYear = Integer.parseInt(projectInfo[3]);
-                    int sMonth = Integer.parseInt(projectInfo[4]);
-                    int sDay = Integer.parseInt(projectInfo[5]);
-
-                    int eYear = Integer.parseInt(projectInfo[6]);
-                    int eMonth = Integer.parseInt(projectInfo[7]);
-                    int eDay = Integer.parseInt(projectInfo[8]);
-
-                    LocalDate startDate = LocalDate.of(sYear,sMonth,sDay);
-                    LocalDate endDate = LocalDate.of(eYear, eMonth, eDay);
-
+                    String startDate = projectInfo[3];
+                    String endDate = projectInfo[4];
                     Project project = new Project(number,name,startDate,endDate);
                     controllerAll.getAllProjects().add(project);
                     Scan.print(project.toString() + "\n");
@@ -44,26 +34,18 @@ public class Import {
                     String name = projectInfo[1];
                     String startDate = projectInfo[2];
                     String endDate = projectInfo[3];
-                    ProductBacklog productBacklog = new ProductBacklog(name,startDate,endDate);
                     String projectName = projectInfo[4];
+                    ProductBacklog productBacklog = new ProductBacklog(name,startDate,endDate);
                     Project foundProject = controllerAll.findProjectImport(projectName);
                     foundProject.setProductBacklog(productBacklog);
                     Scan.print(productBacklog.toString() + "\n");
                 }
                 if (projectInfo[0].equalsIgnoreCase("SprintBacklog")){
                     String name = projectInfo[1];
-                    int sYear = Integer.parseInt(projectInfo[2]);
-                    int sMonth = Integer.parseInt(projectInfo[3]);
-                    int sDay = Integer.parseInt(projectInfo[4]);
-
-                    int eYear = Integer.parseInt(projectInfo[5]);
-                    int eMonth = Integer.parseInt(projectInfo[6]);
-                    int eDay = Integer.parseInt(projectInfo[7]);
-
-                    LocalDate startDate = LocalDate.of(sYear,sMonth,sDay);
-                    LocalDate endDate = LocalDate.of(eYear, eMonth, eDay);
+                    String startDate = projectInfo[2];
+                    String endDate = projectInfo[3];
                     SprintBacklog sprintBacklog = new SprintBacklog(name,startDate,endDate);
-                    String projectName = projectInfo[8];
+                    String projectName = projectInfo[4];
                     Project foundProject = controllerAll.findProjectImport(projectName);
                     foundProject.getAllSprintBacklogs().add(sprintBacklog);
                     Scan.print(sprintBacklog.toString() + "\n");
@@ -71,14 +53,15 @@ public class Import {
                 if (projectInfo[0].equalsIgnoreCase("Task")){
                     int id = Integer.parseInt(projectInfo[1]);
                     int priorityN = Integer.parseInt(projectInfo[2]);
+                    String status = projectInfo[3];
                     String name = projectInfo[4];
                     String description = projectInfo[5];
                     int estimatedH = Integer.parseInt(projectInfo[6]);
-                    Task task = new Task(id,priorityN,estimatedH,name,description);
                     String projectName = projectInfo[7];
+                    Task task = new Task(id,priorityN,estimatedH,name,description);
                     Project foundProject = controllerAll.findProjectImport(projectName);
                     foundProject.getAllTasks().add(task);
-                    String status = projectInfo[3];
+
                     task.setStatus(status);
                     Scan.print(task.toString() + "\n");
                 }
@@ -90,13 +73,12 @@ public class Import {
                     int storyPoints = Integer.parseInt(projectInfo[5]);
                     String content = projectInfo[6];
                     String acceptanceCriteria = projectInfo[7];
+                    String status = projectInfo[8];
+                    String projectName = projectInfo[9];
                     UserStory userStory = new UserStory(name,number,sprint,priorityN,storyPoints
                             ,content,acceptanceCriteria);
-                    String projectName = projectInfo[9];
                     Project foundProject = controllerAll.findProjectImport(projectName);
                     foundProject.getProductBacklog().getAllUserStories().add(userStory);
-                    //Set status
-                    String status = projectInfo[8];
                     userStory.setStatus(status);
                     Scan.print(userStory.toString() + "\n");
                 }

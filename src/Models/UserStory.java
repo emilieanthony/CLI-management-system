@@ -2,6 +2,8 @@ package Models;
 
 import Utility.Scan;
 
+import java.util.ArrayList;
+
 
 public class UserStory implements Comparable<UserStory>
 {
@@ -16,6 +18,7 @@ public class UserStory implements Comparable<UserStory>
     private String acceptanceCriteria;
     private String status;
     private String sprintName;
+    private ArrayList<Developer> assignedDevelopers;
 
 
     // Constructors:-
@@ -150,13 +153,7 @@ public class UserStory implements Comparable<UserStory>
         return assignedDevelopers.contains(member);
     }
 
-    public int getActualVelocity() {
-        return actualVelocity;
-    }
 
-    public void setActualVelocity(int actualVelocity) {
-        this.actualVelocity = actualVelocity;
-    }
 
     // ToString;
 

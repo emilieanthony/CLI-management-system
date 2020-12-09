@@ -42,11 +42,6 @@ public class Task implements Comparable<Task>
 	public String getStatus() {
 		return status;
 	}
-
-	public String getName() {
-		return name;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -54,22 +49,15 @@ public class Task implements Comparable<Task>
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public void setActualHours(int actualHours) {
 		this.actualHours = actualHours;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setEstimatedHours(int estimatedHours) {
 		this.estimatedHours = estimatedHours;
 	}
@@ -120,13 +108,6 @@ public class Task implements Comparable<Task>
 		return id;
 	}
 
-	public int getActualHrs() {
-		return actualHrs;
-	}
-
-	public void setActualHrs(int actualHrs) {
-		this.actualHrs = actualHrs;
-	}
 
 	public boolean isAssigned(Developer member)
 	{
@@ -149,6 +130,7 @@ public class Task implements Comparable<Task>
 			return 0;
 		}
 	}
+
 	public String toString()
 	{
 		String output;

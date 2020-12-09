@@ -26,7 +26,7 @@ public class Project implements Serializable
 
 
     //constructor
-    public Project(int id, String name, /*LocalDate*/String startDate, /*LocalDate*/String endDate)
+    public Project(int id, String name,String startDate,String endDate)
     {
         this.id = id;
         this.name = name;
@@ -64,22 +64,22 @@ public class Project implements Serializable
         this.name = name;
     }
 
-    public /*LocalDate*/ String getStartDate()
+    public String getStartDate()
     {
         return startDate;
     }
 
-    public void setStartDate(/*LocalDate*/ String startDate)
+    public void setStartDate( String startDate)
     {
         this.startDate = startDate;
     }
 
-    public /*LocalDate*/ String getEndDate()
+    public String getEndDate()
     {
         return endDate;
     }
 
-    public void setEndDate(/*LocalDate*/ String endDate)
+    public void setEndDate(String endDate)
     {
         this.endDate = endDate;
     }
@@ -97,6 +97,7 @@ public class Project implements Serializable
     public SprintBacklog getSprintBacklog() {
         return sprintBacklog;
     }
+
     public ProductOwner getProductOwner() {
         return productOwner;
     }
@@ -191,6 +192,7 @@ public class Project implements Serializable
     {
         return allProductOwners;
     }
+
     public void setProductBacklog(ProductBacklog productBacklog) {
         this.productBacklog = productBacklog;
     }
@@ -252,7 +254,6 @@ public class Project implements Serializable
                 "\nTasks: " + allTasks +
                 "\nTeam Members: " + allTeamMembers +
                 "\nProduct Owners: " + allProductOwners +
-                //"\nProduct Backlogs=" + allProductBacklogs +
                 "\nSprintBacklog Backlogs: " + allSprintBacklogs;
     }
 }
