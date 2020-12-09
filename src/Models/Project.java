@@ -1,8 +1,10 @@
 package Models;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Project
+public class Project implements Serializable
 {
     //attributes
     private int id;
