@@ -1,5 +1,6 @@
 package View;
 
+import Models.Task;
 import Utility.Scan;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class DevTeamView {
                 "1. View my own tasks\n" +
                 "2. View assigned tasks\n" +
                 "3. Choose project\n" +
-                "4. Go back to main menu\n");
+                "4. Go back to main menu\n"+
                 "2. View all tasks\n" +
                 "3. Open Task\n" +
                 "4. View my User Stories\n" +
@@ -48,8 +49,6 @@ public class DevTeamView {
         return id;
     }
 
-
-    }
 
     public int getProjectId(){
         int id = Scan.readInt("Enter project ID:");

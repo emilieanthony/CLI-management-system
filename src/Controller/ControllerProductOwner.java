@@ -3,9 +3,6 @@ package Controller;
 import Models.*;
 import Utility.Export;
 import Utility.Scan;
-
-
-import java.io.IOException;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
@@ -70,7 +67,7 @@ public class ControllerProductOwner
     public void createBacklog(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        ProductBacklog backlog = createBacklog(getBacklogInfo());
+        ProductBacklog backlog = getBacklogInfo();
         project.setProductBacklog(backlog);
         Export.exportObject(backlog);
 

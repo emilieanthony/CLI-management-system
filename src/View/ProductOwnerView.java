@@ -26,7 +26,7 @@ public class ProductOwnerView
 
     }
 
-    public ProductBacklog createBacklog()
+    public static ProductBacklog getBacklogInfo()
     {
         String backlogName = Scan.readLine("Please enter product backlog name:");
         String startDate = Scan.readLine("Please enter start date: ex (yyyy/mm/dd)");

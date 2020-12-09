@@ -44,30 +44,24 @@ public class ControllerScrumMaster {
 					assignTask(controllerAll);
 					break;
 				case 7:
-					createProductOwner(controllerAll);
-					break;
-				case 8:
-					assignTask(controllerAll);
-					break;
-				case 9:
 					contProOwner.viewBacklog(controllerAll);
 					break;
-				case 10:
+				case 8:
 					viewTeamMembers(controllerAll);
 					break;
-				case 11:
+				case 9:
 					moveTaskOrUSToSprintBacklog(contProOwner,controllerAll);
 					break;
-				case 12:
+				case 10:
 					viewSprintBacklog(controllerAll);
 					break;
-				case 13:
+				case 11:
 					importFile.importProjects(controllerAll);
 					break;
-				case 14:
+				case 12:
 					getProjectName();
 					break;
-				case 15:
+				case 13:
 					running = false; // Go back to main menu
 					break;
 				default:
@@ -83,35 +77,35 @@ public class ControllerScrumMaster {
 		for (Developer developer: project.getAllTeamMembers()) {
 			Scan.print(developer.toString());
 		}
-		Scan.print("Project not found.\n\n");
+		Scan.print("Project not found.\n\n"); // Move to view class.
 	}
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 
 	private void createTaskToProductBacklog(ControllerAll controllerAll)
 	{
-		Task newTask = createTask();
+		Task newTask = getTaskInfo();
 
-		int idProject = Scan.readInt("Write the ID of the project: ");
+		int idProject = Scan.readInt("Write the ID of the project: "); // Move to view class.
 
-		for (Project project : controllerAll.getAllProjects())
+		for (Project project : controllerAll.getAllProjects()) // Use which project method.
 		{
 			if (project.getId() == idProject)
 			{
 				project.getProductBacklog().getTasks().add(newTask);
 			}
 		}
-		Scan.print("Project not found.\n\n");
+		Scan.print("Project not found.\n\n"); // Move to view class.
 	}
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 	private void createTaskToSprint(ControllerAll controllerAll)
 	{
-		Task newTask = createTask();
+		Task newTask = getTaskInfo();
 		String name = getBacklogName();
-		int idProject = Scan.readInt("Write the ID of the project: ");
+		int idProject = Scan.readInt("Write the ID of the project: "); // Move to view class.
 
-		for (Project project : controllerAll.getAllProjects())
+		for (Project project : controllerAll.getAllProjects()) // Use which project method.
 		{
 			if (project.getId() == idProject)
 			{
@@ -119,26 +113,28 @@ public class ControllerScrumMaster {
 				return;
 			}
 		}
-		Scan.print("Project not found.\n\n");
+		Scan.print("Project not found.\n\n"); // Move to view class.
 	}
 
 
-	private void createTask(ControllerAll controllerAll){ //We just add info, we do not create anything
-		Task newTask = createTask();
+	private void createTask(ControllerAll controllerAll){
+
+		Task newTask = getTaskInfo();
+		Project project = controllerAll.whichProject();
+		project.getAllTasks().add(newTask);
 		Export.exportObject(newTask);
-		String name = getBacklogName();
-		findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
+
 	}
 
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll,
-											 )
+	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		contProOwner.viewBacklog(controllerAll);
 
 		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
-				"Do you want to move a USER STORY from product backlog to sprint backlog, type: 2\n");
+				"Do you want to move a USER STORY from product backlog to sprint backlog, type: " +
+				"2\n"); // Move to view class.
 
-		int idProject = Scan.readInt("Write the ID of the project: ");
+		int idProject = Scan.readInt("Write the ID of the project: "); // Move to view class.
 
 		for (Project project : controllerAll.getAllProjects())
 		{
@@ -146,26 +142,29 @@ public class ControllerScrumMaster {
 			{
 				if (input.equals("1"))
 				{
-					int idTask = Scan.readInt("Write the ID of the task you want to move: ");
+					int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
 					String sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
 					project.getProductBacklog().getTask(idTask).setSprintName(sprintName);
 					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
 					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
 
-					System.out.println("\n\nYou have successfully moved the task to sprint backlog!\n\n");
+					System.out.println("\n\nYou have successfully moved the task to sprint " +
+							"backlog!\n\n"); // Move to view class.
 				}
 
 				if(input.equals("2"))
 				{
-					int usName = Scan.readInt("Write the the number of the user story you want to move: ");
+					int usName = Scan.readInt("Write the the number of the user story you want to" +
+							" move: "); // Move to view class.
 					String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
 
 					project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
 					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
 					project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
 
-					System.out.println("\n\nYou have successfully moved the user story to sprint backlog!\n\n");
+					System.out.println("\n\nYou have successfully moved the user story to sprint " +
+							"backlog!\n\n"); // Move to view class.
 				}
 
 				else
@@ -177,7 +176,7 @@ public class ControllerScrumMaster {
 	}
 	
 
-	private void assignTask(ControllerAll controllerAll)
+	/*private void assignTask(ControllerAll controllerAll) // We have another assign task method.
 	{
 		int idTask = Scan.readInt("Write the ID of the task: ");
 		int idMember = Scan.readInt("Write the ID of Development team member: ");
@@ -193,14 +192,15 @@ public class ControllerScrumMaster {
 			}
 		}
 		Scan.print("Project not found.\n\n");
-	}
-	private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
-												 ControllerAll controllerAll)
+	}*/
+	/*private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
+												 ControllerAll controllerAll) // is this the
+	// right method?
 	{
 		contProOwner.addUserStory(controllerAll);
-	}
+	}*/
 
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	/*private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		contProOwner.viewBacklog(controllerAll);
 
@@ -243,33 +243,7 @@ public class ControllerScrumMaster {
 				}
 			}
 		}
-	}
-	/*------------------------------------------Methods product owner------------------------------------------------*/
-
-	public void createProductOwner(ControllerAll controllerAll)
-	{
-		String name = Scan.readLine("Please type the name of the new Product Owner below: ");
-
-		//System.out.println("Please type the id of the new Product Owner below: ");
-		//int id = scanner.nextInt();
-
-		int idProject = Scan.readInt("Write the ID of the project that the product owner will belong to:" +
-				" ");
-		int id = createIdProductOwner(idProject,controllerAll);
-
-		for (Project project : controllerAll.getAllProjects())
-		{
-			if (project.getId() == idProject)
-			{
-				String sprintName = Scan.readLine("Write the name of the sprint: ");
-				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories());
-				System.out.println("\n\n");
-				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks());
-			}
-		}
-		Scan.print(" You have successfully created " + name +
-				" as a new Product Owner with the id " + id );
-	}
+	}*/
 
 
 	/*------------------------------------------Methods product owner------------------------------------------------*/
@@ -286,13 +260,13 @@ public class ControllerScrumMaster {
 	}
 	private void viewSprintBacklog(ControllerAll controllerAll)
 	{
-		int idProject = Scan.readInt("Write the ID of the project: ");
+		int idProject = Scan.readInt("Write the ID of the project: "); // move to view class
 
-		for (Project project : controllerAll.getAllProjects())
+		for (Project project : controllerAll.getAllProjects()) // use which project method.
 		{
 			if (project.getId() == idProject)
 			{
-				String sprintName = Scan.readLine("Write the name of the sprint: ");
+				String sprintName = Scan.readLine("Write the name of the sprint: "); // move to view class
 				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories());
 				System.out.println("\n\n");
 				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks());
@@ -350,14 +324,13 @@ public class ControllerScrumMaster {
 					id = project.getAllTeamMembers().get(project.getAllTeamMembers().size() - 1).getId() + 1;
 				}
 
-		}
 		return id;
 	}
 
 	/*------------------------------------Methods etc for projects-------------------------------------------*/
 
 
-	public void createProject(ControllerAll controllerAll)
+	public void createProject(ControllerAll controllerAll) // Move all Prints to View class-
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"project:");
@@ -369,11 +342,6 @@ public class ControllerScrumMaster {
 		int endYear = Scan.readInt("End date (YYYY): ");
 		int endMonth = Scan.readInt("End date (MM): ");
 		int endDay = Scan.readInt("End date (DD): ");
-
-		//create exception here for non valid input
-
-		/*LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
-		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);*/
 
 		String startDate = startYear + "-" + startMonth + "-" + startDay;
 		String endDate = endYear + "-" + endMonth + "-" + endDay;
@@ -388,8 +356,7 @@ public class ControllerScrumMaster {
 
 	/*------------------------------------Methods etc for sprints-------------------------------------------*/
 
-	public void createSprintAndSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
-	{
+	public void createSprintAndSprintBacklog(ControllerAll controllerAll) {
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"sprintBacklog:");
 		String name = Scan.readLine("Name:");
@@ -405,31 +372,16 @@ public class ControllerScrumMaster {
 		String endDate = endYear + "-" + endMonth + "-" + endDay;
 
 		SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
-		controllerAll.getSprintBacklog().add(sprintBacklog);
+		Project project = controllerAll.whichProject();
+		project.getAllSprintBacklogs().add(sprintBacklog);
+
 		Export.exportObject(sprintBacklog);
 
-		//export ArrayList to a file
-
-		String input = Scan.readLine("You have successfully created the following sprintBacklog:\n\n"
-				+ sprintBacklog.toString() + "\nDo you want to create a user story type: 1\n" +
-				"Do you want to create a task type: 2\n" +
-				"To exit type: 3\n");
-
-		if (input.equals(1))
-		{
-			contProOwner.addUserStory(controllerAll);
-		}
-
-		if (input.equals(2))
-		{
-			createTaskToSprint(scrumMasterView, controllerAll);
-		}
-		if(input.equals(3))
-		{
-			return;
-		}
+		Scan.print("You have successfully created the following sprintBacklog:\n\n"
+				+ sprintBacklog.toString());
 
 	}
+
 
 	public SprintBacklog findSprintBacklogByName(String name, ArrayList<SprintBacklog> allBacklogs)
 	{
