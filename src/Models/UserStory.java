@@ -31,6 +31,7 @@ public class UserStory implements Comparable<UserStory>
         this.acceptanceCriteria = acceptanceCriteria;
         this.status = "open";
         this.sprintName = "";
+        this.assignedDevelopers = new ArrayList<>();
     }
 
     // Setters and Getters. Make sure at the end of the project that not used methods are deleted.
@@ -139,6 +140,22 @@ public class UserStory implements Comparable<UserStory>
         {
             return 0;
         }
+    }
+    public ArrayList<Developer> getAssignedDevelopers() {
+        return assignedDevelopers;
+    }
+
+    public boolean isAssigned(Developer member)
+    {
+        return assignedDevelopers.contains(member);
+    }
+
+    public int getActualVelocity() {
+        return actualVelocity;
+    }
+
+    public void setActualVelocity(int actualVelocity) {
+        this.actualVelocity = actualVelocity;
     }
 
     // ToString;

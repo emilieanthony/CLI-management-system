@@ -112,19 +112,31 @@ public class ControllerScrumMaster {
 		{
 			if (project.getId() == idProject)
 			{
-				findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
+				project.viewAllDevelopmentMembers();
+				return;
 			}
 		}
+		Scan.print("Project not found.\n\n");
 	}
-
 	private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
 												 ControllerAll controllerAll)
 	{
 		contProOwner.addUserStory(controllerAll);
 	}
+	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){
+		Task newTask = scrumMasterView.createTask();
+		String name = scrumMasterView.getBacklogName();
+		findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
+	}
+	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){ //We just add info, we do not create anything
+		Task newTask = scrumMasterView.createTask();
+		Export.exportObject(newTask);
+		String name = scrumMasterView.getBacklogName();
+		findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
+	}
 
 	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll,
-											  )
+											 )
 	{
 		contProOwner.viewBacklog(controllerAll);
 
@@ -168,18 +180,7 @@ public class ControllerScrumMaster {
 			}
 		}
 	}
-	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){
-			Task newTask = scrumMasterView.createTask();
-			String name = scrumMasterView.getBacklogName();
-			findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
-		}
-	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){ //We just add info, we do not create anything
-		Task newTask = scrumMasterView.createTask();
-		Export.exportObject(newTask);
-		String name = scrumMasterView.getBacklogName();
-		findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
-	}
-
+	
 
 	private void assignTask(ControllerAll controllerAll)
 	{
@@ -271,6 +272,8 @@ public class ControllerScrumMaster {
 				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks());
 			}
 		}
+		Scan.print(" You have successfully created " + name +
+				" as a new Product Owner with the id " + id );
 	}
 
 	public void assignTask(ControllerAll controllerAll){
@@ -391,6 +394,7 @@ public class ControllerScrumMaster {
 
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
+
 
 
 	/*------------------------------------Methods etc for sprints-------------------------------------------*/

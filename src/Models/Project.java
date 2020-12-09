@@ -126,6 +126,39 @@ public class Project implements Serializable
         return task;
     }
 
+    public String printTasks()
+    {
+        String output = "";
+
+        for (Task task : allTasks)
+        {
+            output = output + task.toString();
+        }
+        return output;
+    }
+
+    public String printAssignedTasks(Developer member)
+    {
+        String output = "";
+
+        if (allTasks == null)
+        {
+            output = "You have no tasks assigned.";
+        }
+        else
+        {
+            for (Task task : allTasks)
+            {
+                if (task.isAssigned(member))
+                {
+                    output = output + task.toString() + "\n";
+                }
+            }
+        }
+        return output;
+    }
+
+
     public Developer getTeamMember(int id)
     {
         for (Developer member : allTeamMembers)

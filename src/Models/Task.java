@@ -74,6 +74,14 @@ public class Task implements Comparable<Task>
 		this.estimatedHours = estimatedHours;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void setPriorityNumber(int priorityNumber)
 	{
 		if(priorityNumber > 0  && priorityNumber < 6)
@@ -110,6 +118,14 @@ public class Task implements Comparable<Task>
 	public int getId()
 	{
 		return id;
+	}
+
+	public int getActualHrs() {
+		return actualHrs;
+	}
+
+	public void setActualHrs(int actualHrs) {
+		this.actualHrs = actualHrs;
 	}
 
 	public boolean isAssigned(Developer member)

@@ -95,6 +95,30 @@ public class ProductBacklog {
         this.tasks = tasks;
     }
 
+
+    public String printAssignedUStories(Developer member)
+    {
+        String output = "";
+
+        if (allUserStories.isEmpty())
+        {
+            output = "You have no tasks assigned.";
+        }
+        else
+        {
+            for (UserStory userStory : allUserStories)
+            {
+                if (userStory.isAssigned(member))
+                {
+                    output = output + userStory.toString() + "\n";
+                }
+            }
+        }
+        return output;
+    }
+
+
+
     //ToString:-
 
     @Override
