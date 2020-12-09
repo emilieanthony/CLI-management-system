@@ -31,7 +31,7 @@ public class Import {
                     LocalDate startDate = LocalDate.of(sYear,sMonth,sDay);
                     LocalDate endDate = LocalDate.of(eYear, eMonth, eDay);
 
-                    project = new Project(number,name,startDate,endDate);
+                    project = new Project(number,name,startDate,endDate, backlog);
                     controllerAll.getAllProjects().add(project);
                 }
                 if (projectInfo[0].equalsIgnoreCase("Backlog")){

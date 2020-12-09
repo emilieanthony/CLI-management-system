@@ -1,5 +1,7 @@
 package Models;
 
+import View.DevTeamView;
+
 import java.util.ArrayList;
 
 public class Backlog
@@ -10,6 +12,7 @@ public class Backlog
     private String startDate;
     private String endDate;
     private ArrayList<UserStory> allUserStories;
+
 
 
     // Constructor:-
@@ -58,6 +61,30 @@ public class Backlog
     {
         return allUserStories;
     }
+
+
+    public String printAssignedUStories(Developer member)
+    {
+        String output = "";
+
+        if (allUserStories.isEmpty())
+        {
+            output = "You have no tasks assigned.";
+        }
+        else
+        {
+            for (UserStory userStory : allUserStories)
+            {
+                if (userStory.isAssigned(member))
+                {
+                    output = output + userStory.toString() + "\n";
+                }
+            }
+        }
+        return output;
+    }
+
+
 
     //ToString:-
 

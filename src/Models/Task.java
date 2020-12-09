@@ -10,6 +10,7 @@ public class Task
 	private String name;
 	private String description;
 	private ArrayList<Developer> assignedTeamMembers;
+	private int actualHrs;
 
 	public Task(int id, int priorityNumber, String name, String description)
 	{
@@ -19,6 +20,14 @@ public class Task
 		this.name = name;
 		this.description = description;
 		this.assignedTeamMembers = new ArrayList<>();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setPriorityNumber(int priorityNumber)
@@ -52,6 +61,14 @@ public class Task
 	public int getId()
 	{
 		return id;
+	}
+
+	public int getActualHrs() {
+		return actualHrs;
+	}
+
+	public void setActualHrs(int actualHrs) {
+		this.actualHrs = actualHrs;
 	}
 
 	public boolean isAssigned(Developer member)

@@ -13,9 +13,10 @@ public class Project
     private ArrayList<Task> allTasks;
     private ArrayList<Developer> allTeamMembers;
     private java.util.ArrayList<ProductOwner> allProductOwners;
+    private Backlog backlog;
 
     //constructor
-    public Project(int id, String name, LocalDate startDate, LocalDate endDate)
+    public Project(int id, String name, LocalDate startDate, LocalDate endDate, Backlog backlog)
     {
         this.id = id;
         this.name = name;
@@ -24,6 +25,7 @@ public class Project
         this.allTasks = new ArrayList<>();
         this.allTeamMembers = new ArrayList<>();
         this.allProductOwners = new java.util.ArrayList<>();
+        this.backlog = backlog;
     }
 
     //all getters & setters
@@ -62,6 +64,10 @@ public class Project
         this.endDate = endDate;
     }
 
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
     public Task getTask(int id)
     {
         for (Task task : allTasks)
@@ -85,7 +91,7 @@ public class Project
         return output;
     }
 
-    public String printTasks(Developer member)
+    public String printAssignedTasks(Developer member)
     {
         String output = "";
 

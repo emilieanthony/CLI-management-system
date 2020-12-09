@@ -2,6 +2,8 @@ package Models;
 
 import Utility.Scan;
 
+import java.util.ArrayList;
+
 public class UserStory
 {
 
@@ -14,6 +16,8 @@ public class UserStory
     private String content;
     private String acceptanceCriteria;
     private String status;
+    private ArrayList<Developer> assignedDevelopers;
+    private int actualVelocity;
 
 
     // Constructors:-
@@ -28,6 +32,7 @@ public class UserStory
         this.content = content;
         this.acceptanceCriteria = acceptanceCriteria;
         this.status = "open";
+        this.assignedDevelopers = new ArrayList<>();
     }
 
     // Setters and Getters. Make sure at the end of the project that not used methods are deleted.
@@ -116,6 +121,22 @@ public class UserStory
         this.status = status;
     }
 
+    public ArrayList<Developer> getAssignedDevelopers() {
+        return assignedDevelopers;
+    }
+
+    public boolean isAssigned(Developer member)
+    {
+        return assignedDevelopers.contains(member);
+    }
+
+    public int getActualVelocity() {
+        return actualVelocity;
+    }
+
+    public void setActualVelocity(int actualVelocity) {
+        this.actualVelocity = actualVelocity;
+    }
 
     // ToString;
 

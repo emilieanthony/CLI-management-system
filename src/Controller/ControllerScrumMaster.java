@@ -197,7 +197,9 @@ public class ControllerScrumMaster {
 
 		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
 		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
-		Project project = new Project(id, name, startDate, endDate);
+		Backlog backlog = new Backlog("backlog", "", ""); //this is wrong FIX I think backlog class has wrong attributes or smth /Lili
+
+		Project project = new Project(id, name, startDate, endDate, backlog);
 		controllerAll.getAllProjects().add(project);
 
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());

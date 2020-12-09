@@ -73,7 +73,7 @@ public class ControllerAll
                     contProOwner.backlogMenu(proOwnerView,controllerAll,contProOwner);
                     break;
                 case 3:
-                    contDeveloper.teamMemberMenu(developerView,controllerAll,project);
+                    contDeveloper.teamMemberMenu(contDeveloper, developerView, controllerAll, project);
                     break;
                 case 4: running = false; // Exit system.
                     break;
@@ -82,11 +82,13 @@ public class ControllerAll
             }
         } while (running);
     }
+
     public Project whichProject(ControllerAll controllerAll){
         int projectId = Scan.readInt("Enter project id: ");
         Project project = controllerAll.findProjectById(projectId);
         return project;
     }
+
     public Project findProjectById(int id){
         Project project = null;
 
@@ -100,6 +102,23 @@ public class ControllerAll
         }
         return project;
 
+    }
+
+    public Task getTaskById(Project project, int taskId){
+        Task task = null;
+
+        ArrayList<Task> tasks = project.getAllTasks();
+
+        Iterator<Task> iterator = tasks.iterator();
+
+        while (iterator.hasNext() && task==null){
+            Task currentTask = iterator.next();
+            if(currentTask.getId() == taskId){
+                task = currentTask;
+            }
+        }
+
+        return task;
     }
 
 

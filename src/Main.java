@@ -23,14 +23,17 @@ public class Main
         ScrumMasterView scrumView = new ScrumMasterView();
         ProductOwnerView proOwnerView = new ProductOwnerView();
         DevTeamView developerView = new DevTeamView();
+        Backlog backlog = new Backlog("","","");
         Project project = new Project(
                 1,
                 "Test Project",
                 LocalDate.now(),
-                LocalDate.now().plusDays(10));
-        Backlog backlog = new Backlog("","","");
-        Import importFile = new Import();
-        importFile.importProjects(controllerAll,project,backlog);
+                LocalDate.now().plusDays(10), backlog);
+        controllerAll.getAllProjects().add(project);
+        UserStory userStory = new UserStory("a user strory", 1, "Sprint1", 1, 3, "what", "just make sure it works or whatever");
+        backlog.getAllUserStories().add(userStory);
+       // Import importFile = new Import();
+       // importFile.importProjects(controllerAll,project,backlog);
 
 
 //________________________TEST__________________________//
