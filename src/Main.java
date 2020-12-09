@@ -7,7 +7,6 @@ import Utility.Import;
 import View.DevTeamView;
 import View.ProductOwnerView;
 import View.ScrumMasterView;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 

@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.*;
+import Utility.Export;
 import Utility.PrintUtility;
 import View.ProductOwnerView;
 import View.ScrumMasterView;
@@ -73,8 +74,9 @@ public class ControllerScrumMaster {
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 
-	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){
+	private void createTask(ScrumMasterView scrumMasterView, ControllerAll controllerAll){ //We just add info, we do not create anything
 			Task newTask = scrumMasterView.createTask();
+			Export.exportObject(newTask);
 			String name = scrumMasterView.getBacklogName();
 			findBacklogByName(name, controllerAll.getProjectBacklog()).getTasks().add(newTask);
 		}
@@ -115,9 +117,9 @@ public class ControllerScrumMaster {
 		{
 			if (project.getId() == idProject)
 			{
-				project.getAllProductOwners().add(new ProductOwner(name, id));
-
-
+				ProductOwner productOwner = new ProductOwner(name, id);
+				project.getAllProductOwners().add(productOwner);
+				Export.exportObject(productOwner);
 			}
 		}
 		Scan.print(" You have successfully created " + name +
@@ -159,7 +161,9 @@ public class ControllerScrumMaster {
 		{
 			if (project.getId() == idProject)
 			{
-				project.getAllDevelopmentMembers().add(new Developer(name, id));
+				Developer developer = new Developer(name, id);
+				project.getAllDevelopmentMembers().add(developer);
+				Export.exportObject(developer);
 			}
 		}
 		Scan.print(" You have successfully created " + name +
@@ -209,6 +213,7 @@ public class ControllerScrumMaster {
 		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
 		Project project = new Project(id, name, startDate, endDate);
 		controllerAll.getAllProjects().add(project);
+		Export.exportObject(project);
 
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
@@ -234,6 +239,7 @@ public class ControllerScrumMaster {
 		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
 		Sprint sprint = new Sprint(name, startDate, endDate);
 		controllerAll.getSprintBacklog().add(sprint);
+		Export.exportObject(sprint);
 
 		//export ArrayList to a file
 

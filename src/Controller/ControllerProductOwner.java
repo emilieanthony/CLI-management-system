@@ -1,10 +1,12 @@
 package Controller;
 
 import Models.*;
+import Utility.Export;
 import Utility.PrintUtility;
 import Utility.Scan;
 import View.ProductOwnerView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -57,9 +59,9 @@ public class ControllerProductOwner
         } while (running);
     }
 
-    public void createBacklog(ProductOwnerView proOwnerView, ControllerAll controllerAll)
-    {
+    public void createBacklog(ProductOwnerView proOwnerView, ControllerAll controllerAll) {
         Backlog backlog = proOwnerView.createBacklog();
+        Export.exportObject(backlog);
         controllerAll.getProjectBacklog().add(backlog);
     }
 
@@ -105,6 +107,7 @@ public class ControllerProductOwner
         String name = proOwnerView.chooseBacklog();
         Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
         UserStory newUserStory = proOwnerView.getUSInfo();
+        Export.exportObject(newUserStory);
         backlog.getAllUserStories().add(newUserStory);
     }
 
