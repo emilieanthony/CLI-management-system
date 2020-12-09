@@ -3,7 +3,6 @@ package Controller;
 import Models.*;
 import Utility.Import;
 import Utility.Export;
-import Utility.PrintUtility;
 import Utility.Scan;
 import View.ScrumMasterView;
 
@@ -199,16 +198,15 @@ public class ControllerScrumMaster {
 		}
 		Scan.print("Project not found.\n\n");
 	}
-	private void createUserStoryToProductBacklog(ProductOwnerView proOwnerView, ControllerProductOwner contProOwner,
+	private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
 												 ControllerAll controllerAll)
 	{
-		contProOwner.addUserStory(proOwnerView, controllerAll);
+		contProOwner.addUserStory(controllerAll);
 	}
 
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll,
-											 ProductOwnerView proOwnerView)
+	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
-		contProOwner.viewBacklog(controllerAll, proOwnerView);
+		contProOwner.viewBacklog(controllerAll);
 
 		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
 				"Do you want to move a USER STORY from product backlog to sprint backlog, type: 2\n");

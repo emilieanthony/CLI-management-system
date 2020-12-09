@@ -4,11 +4,6 @@ import Models.*;
 import Models.Task;
 import Utility.Scan;
 
-import java.util.ArrayList;
-
-import static View.ProductOwnerView.chooseBacklog;
-
-
 public class ScrumMasterView {
 
 
@@ -37,11 +32,6 @@ public class ScrumMasterView {
         return option;
     }
 
-    public static String getFileName(){
-
-        Scan.print("You have now created a new task!");
-        return new Task(id, prioNumber, name, description);
-    }*/
     public static String getFileName(){
 
         String fileName = Scan.readLine("Please enter the file path: ex " +

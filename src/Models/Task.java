@@ -19,21 +19,12 @@ public class Task implements Comparable<Task>
 		this.id = id;
 		this.priorityNumber = priorityNumber;
 		this.estimatedHours = estimatedTime;
-		this.actualHours = actualHours;
+		this.actualHours = 0;
 		this.status = "Open";
 		this.name = name;
 		this.description = description;
 		this.assignedTeamMembers = new ArrayList<>();
 		this.sprintName = "";
-	}
-
-	public Task(int id, int priorityNumber, String name, String description) {
-		this.id = id;
-		this.priorityNumber = priorityNumber;
-		this.status = "Open";
-		this.name = name;
-		this.description = description;
-		this.assignedTeamMembers = new ArrayList<>();
 	}
 
 	public int getPriorityNumber() {
@@ -60,20 +51,8 @@ public class Task implements Comparable<Task>
 		return description;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	// constructor for creating a new task without knowing actual hours
-	public Task(int id, int priorityNumber, int estimatedHours, String name, String description) {
-		this.id = id;
-		this.priorityNumber = priorityNumber;
-		this.estimatedHours = estimatedHours;
-		this.status = "Open";
-		this.name = name;
-		this.description = description;
-		this.assignedTeamMembers = new ArrayList<>();
 	}
 
 	public void setActualHours(int actualHours) {
@@ -138,6 +117,22 @@ public class Task implements Comparable<Task>
 		return assignedTeamMembers.contains(member);
 	}
 
+
+	public int compareTo(Task task)
+	{
+		if(this.priorityNumber < task.priorityNumber)
+		{
+			return 1;
+		}
+		else if(this.priorityNumber > task.priorityNumber)
+		{
+			return -1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 	public String toString()
 	{
 		String output;
@@ -158,31 +153,6 @@ public class Task implements Comparable<Task>
 			}
 		}
 
-		return output;
-	}
-
-	public int compareTo(Task task)
-	{
-		if(this.priorityNumber < task.priorityNumber)
-		{
-			return 1;
-		}
-		else if(this.priorityNumber > task.priorityNumber)
-		{
-			return -1;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-	@Override
-	public String toString() {
-		String output =
-				"Task: "+ "\nID:" + id + "\nName: " + name + "\nPriority number: " +
-						priorityNumber + "\nEstimated hours: "+ estimatedHours + "\nActual hours: " +
-						"\nStatus: " + status+ "\nDescription: " + description + "\nAssigned Team" +
-						" Members:" + assignedTeamMembers;
 		return output;
 	}
 

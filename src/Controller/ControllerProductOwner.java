@@ -2,13 +2,16 @@ package Controller;
 
 import Models.*;
 import Utility.Export;
-import Utility.PrintUtility;
 import Utility.Scan;
 import View.ProductOwnerView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
+
+import static Utility.PrintUtility.defaultMessage;
+import static View.ProductOwnerView.*;
+import static View.ScrumMasterView.backlogName;
+import static View.ScrumMasterView.getProjectName;
 
 
 public class ControllerProductOwner
@@ -67,12 +70,10 @@ public class ControllerProductOwner
     public void createBacklog(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        project.setProductBacklog(getBacklogInfo());
-    }
-    public void createBacklog(ProductOwnerView proOwnerView, ControllerAll controllerAll) {
-        Backlog backlog = proOwnerView.createBacklog();
+        ProductBacklog backlog = createBacklog(getBacklogInfo());
+        project.setProductBacklog(backlog);
         Export.exportObject(backlog);
-        controllerAll.getProjectBacklog().add(backlog);
+
     }
 
     //*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*//
@@ -116,14 +117,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         UserStory newUserStory = getUSInfo();
         project.getProductBacklog().getAllUserStories().add(newUserStory);
-    }
-    public void addUserStory(ProductOwnerView proOwnerView, ControllerAll controllerAll)
-    {
-        String name = proOwnerView.chooseBacklog();
-        Backlog backlog = findBacklogByName(name, controllerAll.getProjectBacklog());
-        UserStory newUserStory = proOwnerView.getUSInfo();
         Export.exportObject(newUserStory);
-        backlog.getAllUserStories().add(newUserStory);
     }
 
     public void removeUserStory(ControllerAll controllerAll)
@@ -236,7 +230,7 @@ public class ControllerProductOwner
     {
         int newUSPriority = getNewUSPriority();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
-        userStory.setPriority(newUSPriority);
+        userStory.setPriorityNumber(newUSPriority);
     }
 
     public void editUSStoryPoints(int number,ControllerAll controllerAll)
