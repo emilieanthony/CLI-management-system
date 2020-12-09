@@ -51,6 +51,7 @@ public class ControllerAll
                          ControllerDeveloper contDeveloper)
     {
         boolean running = true;
+        Start();
         do
         {
             int option = mainMenu();
