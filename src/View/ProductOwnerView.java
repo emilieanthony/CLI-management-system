@@ -80,11 +80,10 @@ public class ProductOwnerView
         int number = Scan.readInt("User story number: ");
         String sprint = Scan.readLine("SprintBacklog: ");
         int priority = Scan.readInt("Priority: ");
-        int storyPoints = Scan.readInt("Story points: ");
         String content = Scan.readLine("Content: ");
         String acceptanceCriteria = Scan.readLine("Acceptance criteria: ");
         Scan.print("You have now added a new user story!");
-        return new UserStory(name, number, sprint, priority, storyPoints, content, acceptanceCriteria);
+        return new UserStory(name, number, sprint, priority,content, acceptanceCriteria);
 
     }
 

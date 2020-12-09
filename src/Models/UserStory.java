@@ -22,14 +22,14 @@ public class UserStory implements Comparable<UserStory>
 
 
     // Constructors:-
-    public UserStory(String name, int number, String sprint, int priority, int storyPoints,
+    public UserStory(String name, int number, String sprint, int priority,
                      String content, String acceptanceCriteria)
     {
         this.name = name;
         this.number = number;
         this.sprint = sprint;
         this.priorityNumber = priority;
-        this.storyPoints = storyPoints;
+        this.storyPoints = 0;
         this.content = content;
         this.acceptanceCriteria = acceptanceCriteria;
         this.status = "open";
