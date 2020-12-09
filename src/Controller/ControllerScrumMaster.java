@@ -48,13 +48,13 @@ public class ControllerScrumMaster {
 					assignTask(controllerAll);
 					break;
 				case 9:
-					contProOwner.viewBacklog(controllerAll, proOwnerView);
+					contProOwner.viewBacklog(controllerAll);
 					break;
 				case 10:
 					viewTeamMembers(controllerAll);
 					break;
 				case 11:
-					moveTaskOrUSToSprintBacklog(contProOwner, controllerAll, proOwnerView);
+					moveTaskOrUSToSprintBacklog(contProOwner,controllerAll);
 					break;
 				case 12:
 					viewSprintBacklog(controllerAll);
@@ -118,16 +118,16 @@ public class ControllerScrumMaster {
 		}
 	}
 
-	private void createUserStoryToProductBacklog(ProductOwnerView proOwnerView, ControllerProductOwner contProOwner,
+	private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
 												 ControllerAll controllerAll)
 	{
-		contProOwner.addUserStory(proOwnerView, controllerAll);
+		contProOwner.addUserStory(controllerAll);
 	}
 
 	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll,
-											 ProductOwnerView proOwnerView)
+											  )
 	{
-		contProOwner.viewBacklog(controllerAll, proOwnerView);
+		contProOwner.viewBacklog(controllerAll);
 
 		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
 				"Do you want to move a USER STORY from product backlog to sprint backlog, type: 2\n");
