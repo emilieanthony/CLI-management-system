@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
+import static Utility.PrintUtility.projectNotFound;
 import static View.ProductOwnerView.getBacklogName;
 import static View.ScrumMasterView.*;
 
@@ -77,7 +78,7 @@ public class ControllerScrumMaster {
 		for (Developer developer: project.getAllTeamMembers()) {
 			Scan.print(developer.toString());
 		}
-		Scan.print("Project not found.\n\n"); // Move to view class.
+		projectNotFound();
 	}
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
@@ -95,7 +96,7 @@ public class ControllerScrumMaster {
 				project.getProductBacklog().getTasks().add(newTask);
 			}
 		}
-		Scan.print("Project not found.\n\n"); // Move to view class.
+		projectNotFound();
 	}
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
@@ -113,7 +114,7 @@ public class ControllerScrumMaster {
 				return;
 			}
 		}
-		Scan.print("Project not found.\n\n"); // Move to view class.
+		projectNotFound();
 	}
 
 
