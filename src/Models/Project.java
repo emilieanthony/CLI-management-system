@@ -24,7 +24,6 @@ public class Project implements Serializable
     private ArrayList<SprintBacklog> allSprintBacklogs;
 
 
-
     //constructor
     public Project(int id, String name,String startDate,String endDate)
     {

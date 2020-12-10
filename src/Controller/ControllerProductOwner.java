@@ -3,6 +3,8 @@ package Controller;
 import Models.*;
 import Utility.Export;
 import Utility.Scan;
+import View.ProductOwnerView;
+
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
@@ -64,14 +66,13 @@ public class ControllerProductOwner
         } while (running);
     }
 
-    public void createBacklog(ControllerAll controllerAll)
-    {
+   public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
         Project project = controllerAll.whichProject();
         ProductBacklog backlog = getBacklogInfo();
         project.setProductBacklog(backlog);
         Export.exportObject(backlog);
-
     }
+
 
     //*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*//
     public void editBacklog(ControllerAll controllerAll)

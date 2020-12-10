@@ -61,16 +61,17 @@ public class ControllerScrumMaster {
 					importFile.importProjects(controllerAll);
 					break;
 				case 13:
-					getProjectName();
-					break;
-				case 14:
 					running = false; // Go back to main menu
 					break;
+					//case 14:
+					//getProjectName(); What does this method do? There is no menu option for this in view.
+					//break;
 				default:
 					defaultMessage();
 			}
 		} while (running);
 	}
+
 
 	private void viewTeamMembers(ControllerAll controllerAll)
 	{
