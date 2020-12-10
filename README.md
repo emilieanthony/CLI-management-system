@@ -1,34 +1,34 @@
 # mini-project
-###Product description
+### Product description
 The task for this software development project is to develop a software tool to manage a software
 project, i.e. a software project management tool. The management tool is preloaded with the project team's own data. 
 
-###Features
+### Features
 A scrum master can:
 - Create new project
 - Create new sprint
--  Create a new task for product backlog
--  Create a new task for sprint backlog
- - Create a user story for product backlog
-  -Create a new Development Team Member
-  -Create a new Product owner
-  -Assign a task to Development Team Member
- - View product backlog
-  -View all development Team Members
--  Move task or user story to sprint backlog 
- - View sprint backlog
+- Create a new task for product backlog
+- Create a new task for sprint backlog
+- Create a user story for product backlog
+- Create a new Development Team Member
+- Create a new Product owner
+- Assign a task to Development Team Member
+- View product backlog
+- View all development Team Members
+- Move task or user story to sprint backlog 
+- View sprint backlog
   
-  A product owner can:
-  -Create a new product backlog
+A product owner can:
+- Create a new product backlog
 -  View product backlog
- - Edit product backlog
+- Edit product backlog
    
-  A development team member can:
--  View their own tasks
- - View all assigned tasks
-  -View all tasks
- - View their own user stories
- - View all user stories
+A development team member can:
+- View their own tasks
+- View all assigned tasks
+- View all tasks
+- View their own user stories
+- View all user stories
   
 
 # Installation/ how to run
@@ -36,7 +36,7 @@ Preconditions and required software (e.g. Java version). Command to run the code
 # Structure
 Structure of the project. Architecture. 
 
-###Folder/ package structure
+### Folder/ package structure
 - Main
 - Controllers
 - Models
