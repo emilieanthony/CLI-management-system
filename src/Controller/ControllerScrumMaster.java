@@ -8,7 +8,7 @@ import Utility.Scan;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static Utility.PrintUtility.defaultMessage;
+import static Utility.PrintUtility.*;
 import static View.ProductOwnerView.getBacklogName;
 import static View.ScrumMasterView.*;
 
@@ -34,41 +34,44 @@ public class ControllerScrumMaster {
 				case 3:
 					createTaskToProductBacklog(controllerAll);
 					break;
-				case 4:
-					createDevelopmentMember(controllerAll);
+				case 4: createTaskToSprint(controllerAll);
 					break;
 				case 5:
-					createProductOwner(controllerAll);
+					createDevelopmentMember(controllerAll);
 					break;
 				case 6:
-					assignTask(controllerAll);
+					createProductOwner(controllerAll);
 					break;
 				case 7:
-					contProOwner.viewBacklog(controllerAll);
+					assignTaskToDevelopmentMember(controllerAll);
 					break;
 				case 8:
-					viewTeamMembers(controllerAll);
+					contProOwner.viewBacklog(controllerAll);
 					break;
 				case 9:
-					moveTaskOrUSToSprintBacklog(contProOwner,controllerAll);
+					viewTeamMembers(controllerAll);
 					break;
 				case 10:
-					viewSprintBacklog(controllerAll);
+					moveTaskOrUSToSprintBacklog(contProOwner,controllerAll);
 					break;
 				case 11:
-					importFile.importProjects(controllerAll);
+					viewSprintBacklog(controllerAll);
 					break;
 				case 12:
-					getProjectName();
+					importFile.importProjects(controllerAll);
 					break;
 				case 13:
 					running = false; // Go back to main menu
 					break;
+					//case 14:
+					//getProjectName(); What does this method do? There is no menu option for this in view.
+					//break;
 				default:
 					defaultMessage();
 			}
 		} while (running);
 	}
+
 
 	private void viewTeamMembers(ControllerAll controllerAll)
 	{
@@ -77,7 +80,7 @@ public class ControllerScrumMaster {
 		for (Developer developer: project.getAllTeamMembers()) {
 			Scan.print(developer.toString());
 		}
-		Scan.print("Project not found.\n\n"); // Move to view class.
+		projectNotFound();
 	}
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
@@ -85,41 +88,29 @@ public class ControllerScrumMaster {
 	private void createTaskToProductBacklog(ControllerAll controllerAll)
 	{
 		Task newTask = getTaskInfo();
+		Project project = controllerAll.whichProject();
 
-		int idProject = Scan.readInt("Write the ID of the project: "); // Move to view class.
-
-		for (Project project : controllerAll.getAllProjects()) // Use which project method.
-		{
-			if (project.getId() == idProject)
-			{
-				project.getProductBacklog().getTasks().add(newTask);
-			}
+		if (project == null){
+			projectNotFound();
 		}
-		Scan.print("Project not found.\n\n"); // Move to view class.
+
+		project.getProductBacklog().getTasks().add(newTask);
 	}
 
-	/*------------------------------------------Methods for tasks------------------------------------------------*/
-	private void createTaskToSprint(ControllerAll controllerAll)
-	{
+	private void createTaskToSprint(ControllerAll controllerAll) {
 		Task newTask = getTaskInfo();
-		String name = getBacklogName();
-		int idProject = Scan.readInt("Write the ID of the project: "); // Move to view class.
+		String name = getSprintBacklogName();
+		Project project = controllerAll.whichProject();
 
-		for (Project project : controllerAll.getAllProjects()) // Use which project method.
-		{
-			if (project.getId() == idProject)
-			{
-				project.viewAllDevelopmentMembers();
-				return;
-			}
+		if (project == null){
+			projectNotFound();
 		}
-		Scan.print("Project not found.\n\n"); // Move to view class.
-		Export.exportObject(newTask);
+
+		findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
 	}
 
 
-
-	/*private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		contProOwner.viewBacklog(controllerAll);
 
@@ -142,8 +133,7 @@ public class ControllerScrumMaster {
 					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
 					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
 
-					System.out.println("\n\nYou have successfully moved the task to sprint " +
-							"backlog!\n\n"); // Move to view class.
+					movedObject();
 				}
 
 				if(input.equals("2"))
@@ -156,8 +146,7 @@ public class ControllerScrumMaster {
 					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
 					project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
 
-					System.out.println("\n\nYou have successfully moved the user story to sprint " +
-							"backlog!\n\n"); // Move to view class.
+					movedObject();
 				}
 
 				else
@@ -166,11 +155,9 @@ public class ControllerScrumMaster {
 				}
 			}
 		}
-	}*/
-	
+	}
 
-	/*private void assignTask(ControllerAll controllerAll) // We have another assign task method.
-	{
+	private void assignTaskToDevelopmentMember(ControllerAll controllerAll) {
 		int idTask = Scan.readInt("Write the ID of the task: ");
 		int idMember = Scan.readInt("Write the ID of Development team member: ");
 		int idProject = Scan.readInt("Write the ID of the project: ");
@@ -184,60 +171,16 @@ public class ControllerScrumMaster {
 				return;
 			}
 		}
-		Scan.print("Project not found.\n\n");
+		projectNotFound();
+	}
+
+	// Do not recognise this methods and where it is supposed to be.
+	/*public void assignTask(ControllerAll controllerAll){
+		Task task = controllerAll.findTaskById(controllerAll);
+		Developer developer = controllerAll.findDeveloperByID();
+		task.getAssignedTeamMembers().add(developer);
+		task.setStatus("In progress");
 	}*/
-	private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
-												 ControllerAll controllerAll) // is this the
-	// right method?
-	{
-		contProOwner.addUserStory(controllerAll);
-	}
-
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
-	{
-		contProOwner.viewBacklog(controllerAll);
-
-		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
-				"Do you want to move a USER STORY from product backlog to sprint backlog, type: 2\n");
-
-		int idProject = Scan.readInt("Write the ID of the project: ");
-
-		for (Project project : controllerAll.getAllProjects())
-		{
-			if (project.getId() == idProject)
-			{
-				if (input.equals("1"))
-				{
-					int idTask = Scan.readInt("Write the ID of the task you want to move: ");
-					String sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
-
-					project.getProductBacklog().getTask(idTask).setSprintName(sprintName);
-					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
-					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
-
-					System.out.println("\n\nYou have successfully moved the task to sprint backlog!\n\n");
-				}
-
-				if(input.equals("2"))
-				{
-					int usName = Scan.readInt("Write the the number of the user story you want to move: ");
-					String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
-
-					project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
-					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
-					project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
-
-					System.out.println("\n\nYou have successfully moved the user story to sprint backlog!\n\n");
-				}
-
-				else
-				{
-					return;
-				}
-			}
-		}
-	}
-
 
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
@@ -266,14 +209,6 @@ public class ControllerScrumMaster {
 			}
 		}
 	}
-
-	public void assignTask(ControllerAll controllerAll){
-		Task task = controllerAll.findTaskById(controllerAll);
-		Developer developer = controllerAll.findDeveloperByID();
-		task.getAssignedTeamMembers().add(developer);
-		task.setStatus("In progress");
-	}
-
 
 	public int createIdProductOwner(ControllerAll controllerAll)
 	{

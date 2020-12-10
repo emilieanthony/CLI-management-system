@@ -16,19 +16,19 @@ public class ScrumMasterView {
                 "You're working on Project " + proName + "." + "\n\n" +
                 "Please enter an option below\n\n" +
                 "1. Create a new project\n" +
-                "2. Create a new sprint\n" +
+                "2. Create a new sprint and sprint backlog\n" +
                 "3. Create a new task for product backlog\n" +
                 "4. Create a new task for sprint backlog\n" +
-                "5. Create a user story for product backlog\n" +
-                "6. Create a new Development Team Member\n" +
-                "7. Create a new Product owner\n" +
-                "8. Assign a task to Development Team Member\n" +
-                "9. View product backlog\n" +
-                "10. View all development Team Members\n" +
-                "11. Move task or user story to sprint backlog\n" +
-                "12. View sprint backlog\n" +
+                "5. Create a new Development Team Member\n" +
+                "6. Create a new Product owner\n" +
+                "7. Assign a task to Development Team Member\n" +
+                "8. View product backlog\n" +
+                "9. View all development Team Members\n" +
+                "10. Move task or user story to sprint backlog\n" +
+                "11. View sprint backlog\n" +
+                "12. Import file\n" +
                 "13. Go back to main menu\n");
-        //"9. Import Files\n" +
+        
 
         return option;
     }
@@ -94,8 +94,12 @@ public class ScrumMasterView {
     public static void createdDeveloper() {
         Scan.print("You have successfully created a new developer.\n");
     }
-}
 
+    public static String getSprintBacklogName() {
+        String nameSprintBacklog = Scan.readLine("\nPlease enter the name of the sprint backlog you want to add the task to:");
+        return nameSprintBacklog;
+    }
+}
 
 
 

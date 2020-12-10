@@ -23,7 +23,6 @@ public class Project implements Serializable
     private ArrayList<SprintBacklog> allSprintBacklogs;
 
 
-
     //constructor
     public Project(int id, String name,String startDate,String endDate)
     {
@@ -160,19 +159,19 @@ public class Project implements Serializable
         return null;
     }
 
-    public void assignTask(int memberID, int taskID)        //This one is using method below
+    public void assignTask(int memberID, int taskID)        //Used in method in ControllerScrumMaster - this one also is using method below
     {
         for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
-            assignTask(getTeamMember(memberID), sprintBacklog.getTask(taskID));
+            assignTaskAdd(getTeamMember(memberID), sprintBacklog.getTask(taskID));
         }
     }
     public ArrayList<Developer> getAllTeamMembers() {
+
         return allTeamMembers;
     }
 
-    public void assignTask(Developer member, Task task)
-    {
+    public void assignTaskAdd(Developer member, Task task) { // method used in assign task method
         task.getAssignedTeamMembers().add(member);
     }
 
