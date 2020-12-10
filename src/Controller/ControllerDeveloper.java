@@ -29,6 +29,7 @@ public class ControllerDeveloper {
                 case 3:
                     running = false;
                     break;
+                    // Switch project.
                 default:
                     defaultMessage();
             }
@@ -67,15 +68,15 @@ public class ControllerDeveloper {
         }
     }
 
-    public Task openTask(ControllerAll controllerAll) { // needs to be fixed.
+   /* public Task openTask(ControllerAll controllerAll) { // needs to be fixed.
 
         Project project = controllerAll.whichProject();
         Task task = controllerAll.findTaskById(controllerAll);
 
         return task;
-    }
+    }*/
 
-    public String viewAllTasks(ControllerAll controllerAll) {
+    /*public String viewAllTasks(ControllerAll controllerAll) {
 
         String taskList = "";
 
@@ -104,7 +105,7 @@ public class ControllerDeveloper {
 
         for (Project project : controllerAll.getAllProjects()) {
             if (project.getId() == idProject) {
-                Scan.print("----YOUR ASSIGNED TASK(S)----\n" + project.printTasks(/*project.getTeamMember(id)*/) + "\n" + "-----------------------------");
+                Scan.print("----YOUR ASSIGNED TASK(S)----\n" + project.printTasks(*//*project.getTeamMember(id)*//*) + "\n" + "-----------------------------");
             }
         }
     }
@@ -122,7 +123,7 @@ public class ControllerDeveloper {
             }
         }
         devTeamView.printTasks(assignedTasks);
-    }
+    }*/
 }
 
 

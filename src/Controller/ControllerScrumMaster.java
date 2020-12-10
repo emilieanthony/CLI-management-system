@@ -114,19 +114,12 @@ public class ControllerScrumMaster {
 			}
 		}
 		Scan.print("Project not found.\n\n"); // Move to view class.
-	}
-
-
-	private void createTask(ControllerAll controllerAll){
-
-		Task newTask = getTaskInfo();
-		Project project = controllerAll.whichProject();
-		project.getAllTasks().add(newTask);
 		Export.exportObject(newTask);
-
 	}
 
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
+
+
+	/*private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		contProOwner.viewBacklog(controllerAll);
 
@@ -173,7 +166,7 @@ public class ControllerScrumMaster {
 				}
 			}
 		}
-	}
+	}*/
 	
 
 	/*private void assignTask(ControllerAll controllerAll) // We have another assign task method.
@@ -193,14 +186,14 @@ public class ControllerScrumMaster {
 		}
 		Scan.print("Project not found.\n\n");
 	}*/
-	/*private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
+	private void createUserStoryToProductBacklog(ControllerProductOwner contProOwner,
 												 ControllerAll controllerAll) // is this the
 	// right method?
 	{
 		contProOwner.addUserStory(controllerAll);
-	}*/
+	}
 
-	/*private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		contProOwner.viewBacklog(controllerAll);
 
@@ -243,7 +236,7 @@ public class ControllerScrumMaster {
 				}
 			}
 		}
-	}*/
+	}
 
 
 	/*------------------------------------------Methods product owner------------------------------------------------*/

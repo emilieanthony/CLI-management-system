@@ -142,13 +142,13 @@ public class ControllerAll
 
         return developer;
     }
-    public void printUserStories (){
+    /*public void printUserStories (){
 
         Project project =  whichProject();
         for (UserStory userStory :project.getProductBacklog().getAllUserStories()) {
             Scan.print(userStory.toString());
         }
     }
-
+*/
 
 }
