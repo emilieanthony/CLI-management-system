@@ -94,8 +94,12 @@ public class ScrumMasterView {
     public static void createdDeveloper() {
         Scan.print("You have successfully created a new developer.\n");
     }
-}
 
+    public static String getSprintBacklogName() {
+        String nameSprintBacklog = Scan.readLine("\nPlease enter the name of the sprint backlog you want to add the task to:");
+        return nameSprintBacklog;
+    }
+}
 
 
 
