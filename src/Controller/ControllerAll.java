@@ -9,6 +9,7 @@ import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.getDeveloperId;
 import static View.DevTeamView.getTaskId;
+import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.*;
 
 public class ControllerAll
@@ -64,7 +65,7 @@ public class ControllerAll
                     contProOwner.productOwnerMenu(controllerAll);
                     break;
                 case 3:
-                    contDeveloper.teamMemberMenu(controllerAll);
+                    contDeveloper.teamMemberMenu(controllerAll,contProOwner);
                     break;
                 case 4:
                     running = false; // Exit system.
@@ -115,7 +116,7 @@ public class ControllerAll
         int id = getTaskId();
         Task task = null;
         Project project = controllerAll.whichProject();
-        Iterator<Task> iterator = project.getAllTasks().iterator();
+        Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
         while (task == null && iterator.hasNext())
         {
             Task foundTask = iterator.next();
