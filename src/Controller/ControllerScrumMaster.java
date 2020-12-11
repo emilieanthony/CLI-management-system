@@ -126,41 +126,38 @@ public class ControllerScrumMaster {
 				"Do you want to move a USER STORY from product backlog to sprint backlog, type: " +
 				"2\n"); // Move to view class.
 
-		int idProject = Scan.readInt("Write the ID of the project: "); // Move to view class.
+		Project project = controllerAll.whichProject();
 
-		for (Project project : controllerAll.getAllProjects())
-		{
-			if (project.getId() == idProject)
+		if (project == null){
+			projectNotFound();
+		}else{
+			if (input.equals("1"))
 			{
-				if (input.equals("1"))
-				{
-					int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
-					String sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+				int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+				String sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
-					project.getProductBacklog().getTask(idTask).setSprintName(sprintName);
-					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
-					project.getProductBacklog().getTasksImport().remove(project.getProductBacklog().getTask(idTask));
+				project.getProductBacklog().getTask(idTask).setSprintName(sprintName);
+				findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
+				project.getProductBacklog().getTasksImport().remove(project.getProductBacklog().getTask(idTask));
 
-					movedObject();
-				}
+				movedObject();
+			}
 
-				if(input.equals("2"))
-				{
-					int usName = Scan.readInt("Write the the number of the user story you want to" +
-							" move: "); // Move to view class.
-					String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
+			if(input.equals("2"))
+			{
+				int usName = Scan.readInt("Write the the number of the user story you want to" +
+						" move: "); // Move to view class.
+				String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
 
-					project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
-					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
-					project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
+				project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
+				findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
+				project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
 
-					movedObject();
-				}
-
-				else
-				{
-					return;
-				}
+				movedObject();
+			}
+			else
+			{
+				return;
 			}
 		}
 	}
