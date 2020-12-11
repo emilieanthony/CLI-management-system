@@ -310,7 +310,6 @@ public class ControllerScrumMaster {
 
 	}
 
-
 	public SprintBacklog findSprintBacklogByName(String name, ArrayList<SprintBacklog> allBacklogs)
 	{
 		SprintBacklog sprintBacklog = null;
