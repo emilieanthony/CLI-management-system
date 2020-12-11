@@ -1,6 +1,8 @@
 package Models;
 
-public class ProductOwner
+import java.io.Serializable;
+
+public class ProductOwner implements Serializable
 {
 
     //attributes

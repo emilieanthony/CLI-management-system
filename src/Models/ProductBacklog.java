@@ -2,10 +2,11 @@ package Models;
 
 import Models.UserStory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ProductBacklog {
+public class ProductBacklog implements Serializable {
 
     //Attributes:-
     private String name;

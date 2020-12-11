@@ -1,9 +1,10 @@
 package Models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class SprintBacklog
+public class SprintBacklog implements Serializable
 {
 
 	//attributes

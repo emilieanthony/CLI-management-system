@@ -1,8 +1,9 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Task implements Comparable<Task>
+public class Task implements Comparable<Task>, Serializable
 {
 	private int id;
 	private int priorityNumber;

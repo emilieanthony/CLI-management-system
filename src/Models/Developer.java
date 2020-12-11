@@ -1,6 +1,8 @@
 package Models;
 
-public class Developer
+import java.io.Serializable;
+
+public class Developer implements Serializable
 {
 
     private String name;

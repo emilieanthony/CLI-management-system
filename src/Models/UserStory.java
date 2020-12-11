@@ -2,10 +2,11 @@ package Models;
 
 import Utility.Scan;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class UserStory implements Comparable<UserStory>
+public class UserStory implements Comparable<UserStory>, Serializable
 {
 
     // Attributes:-
