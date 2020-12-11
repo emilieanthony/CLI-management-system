@@ -227,7 +227,7 @@ public class ControllerScrumMaster {
 		Project project = controllerAll.whichProject();
 		Developer developer = new Developer(name,id);
 		project.getAllTeamMembers().add(developer);
-		//Export.exportObject(developer);
+		Export.exportObject(developer);
 		createdDeveloper();
 	}
 
@@ -295,7 +295,7 @@ public class ControllerScrumMaster {
 		Project project = controllerAll.whichProject();
 		project.getAllSprintBacklogs().add(sprintBacklog);
 
-		Export.exportObject(sprintBacklog);
+		//Export.exportObject(sprintBacklog);
 
 		Scan.print("You have successfully created the following sprintBacklog:\n\n"
 				+ sprintBacklog.toString());

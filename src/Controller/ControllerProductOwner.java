@@ -68,7 +68,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         ProductBacklog backlog = getBacklogInfo();
         project.setProductBacklog(backlog);
-        Export.exportObject(backlog);
+        //Export.exportObject(backlog);
     }
 
 
