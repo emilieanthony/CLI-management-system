@@ -68,7 +68,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         ProductBacklog backlog = getBacklogInfo();
         project.setProductBacklog(backlog);
-        //Export.exportObject(backlog);
+        Export.exportObject(backlog);
     }
 
 
@@ -113,7 +113,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         UserStory newUserStory = getUSInfo();
         project.getProductBacklog().getAllUserStories().add(newUserStory);
-        //Export.exportObject(newUserStory);
+        Export.exportObject(newUserStory);
     }
 
     public void removeUserStory(ControllerAll controllerAll)
@@ -142,7 +142,8 @@ public class ControllerProductOwner
 
         Project project = controllerAll.whichProject();
         String startDate = getBacklogSDate();
-        project.getProductBacklog().setStartDate(startDate);    }
+        project.getProductBacklog().setStartDate(startDate);
+    }
     public void editBacklogEDate(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();

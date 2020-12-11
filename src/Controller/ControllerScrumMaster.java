@@ -192,7 +192,7 @@ public class ControllerScrumMaster {
 		ProductOwner newProOwner = new ProductOwner(name,id);
 		Project project = controllerAll.whichProject();
 		project.getAllProductOwners().add(newProOwner);
-		//Export.exportObject(newProOwner);
+		Export.exportObject(newProOwner);
 		createdProOwner();
 	}
 
@@ -222,7 +222,7 @@ public class ControllerScrumMaster {
 		}else{
 			Developer developer = new Developer(name,id);
 			project.getAllTeamMembers().add(developer);
-			//Export.exportObject(developer);
+			Export.exportObject(developer);
 			createdDeveloper();
 		}
 	}
@@ -264,7 +264,7 @@ public class ControllerScrumMaster {
 		Project project = new Project(id, name, startDate, endDate);
 		controllerAll.getAllProjects().add(project);
 		proName = name;
-		//Export.exportObject(project);
+		Export.exportObject(project);
 
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
@@ -291,8 +291,7 @@ public class ControllerScrumMaster {
 		SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
 		Project project = controllerAll.whichProject();
 		project.getAllSprintBacklogs().add(sprintBacklog);
-
-		//Export.exportObject(sprintBacklog);
+		Export.exportObject(sprintBacklog);
 
 		Scan.print("You have successfully created the following sprintBacklog:\n\n"
 				+ sprintBacklog.toString());
@@ -307,9 +306,7 @@ public class ControllerScrumMaster {
 		} else{
 			String name = ScrumMasterView.getSprintBacklogByName();
 			SprintBacklog sprint = findSprintBacklogByName(name,project.getAllSprints());
-			ScrumMasterView.printSprintBacklog(
-					sprint.getAllUserStories(),
-					sprint.getAllTasks()
+			ScrumMasterView.printSprintBacklog(sprint.getAllUserStories(),sprint.getAllTasks()
 			);
 		}
 	}
