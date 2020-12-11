@@ -4,6 +4,8 @@ import Models.*;
 import Models.Task;
 import Utility.Scan;
 
+import java.util.ArrayList;
+
 public class ScrumMasterView {
 
 
@@ -99,6 +101,20 @@ public class ScrumMasterView {
     public static String getSprintBacklogName() {
         String nameSprintBacklog = Scan.readLine("\nPlease enter the name of the sprint backlog you want to add the task to:");
         return nameSprintBacklog;
+    }
+
+    public static String getSprintBacklogByName(){
+        return Scan.readLine("Write the name of the sprint: ");
+    }
+
+    public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks){
+        for (UserStory story : allUserStories){
+            Scan.print(story.toString());
+        }
+        for (Task task : allTasks){
+            Scan.print(task.toString());
+        }
+
     }
 }
 

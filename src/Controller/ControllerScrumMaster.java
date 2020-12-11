@@ -4,6 +4,7 @@ import Models.*;
 import Utility.Import;
 import Utility.Export;
 import Utility.Scan;
+import View.ScrumMasterView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -92,9 +93,12 @@ public class ControllerScrumMaster {
 
 		if (project == null){
 			projectNotFound();
+
+		}else{
+			project.getProductBacklog().getTasksImport().add(newTask);
 		}
 
-		project.getProductBacklog().getTasksImport().add(newTask);
+
 	}
 
 	private void createTaskToSprint(ControllerAll controllerAll) {
@@ -104,9 +108,13 @@ public class ControllerScrumMaster {
 
 		if (project == null){
 			projectNotFound();
+
+		}else{
+			findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
+
 		}
 
-		findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
+
 	}
 
 
@@ -185,21 +193,6 @@ public class ControllerScrumMaster {
 		//Export.exportObject(newProOwner);
 		createdProOwner();
 	}
-	private void viewSprintBacklog(ControllerAll controllerAll)
-	{
-		int idProject = Scan.readInt("Write the ID of the project: "); // move to view class
-
-		for (Project project : controllerAll.getAllProjects()) // use which project method.
-		{
-			if (project.getId() == idProject)
-			{
-				String sprintName = Scan.readLine("Write the name of the sprint: "); // move to view class
-				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories());
-				System.out.println("\n\n");
-				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks());
-			}
-		}
-	}
 
 	public int createIdProductOwner(ControllerAll controllerAll)
 	{
@@ -218,9 +211,7 @@ public class ControllerScrumMaster {
 
 	/*------------------------------------Methods create development member-------------------------------------------*/
 
-	public void createDevelopmentMember(ControllerAll controllerAll)
-	{
-
+	public void createDevelopmentMember(ControllerAll controllerAll) {
 		String name = getDeveloperInfo();
 		int id = createIdDevelopmentMember(controllerAll);
 		Project project = controllerAll.whichProject();
@@ -249,7 +240,7 @@ public class ControllerScrumMaster {
 	/*------------------------------------Methods etc for projects-------------------------------------------*/
 
 
-	public void createProject(ControllerAll controllerAll) // Move all Prints to View class-
+	public void createProject(ControllerAll controllerAll) // Move all Prints to View class - sprint 3
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"project:");
@@ -300,6 +291,21 @@ public class ControllerScrumMaster {
 		Scan.print("You have successfully created the following sprintBacklog:\n\n"
 				+ sprintBacklog.toString());
 
+	}
+
+	private void viewSprintBacklog(ControllerAll controllerAll) {
+		Project project = controllerAll.whichProject();
+
+		if (project == null){
+			projectNotFound();
+		} else{
+			String name = ScrumMasterView.getSprintBacklogByName();
+			SprintBacklog sprint = findSprintBacklogByName(name,project.getAllSprints());
+			ScrumMasterView.printSprintBacklog(
+					sprint.getAllUserStories(),
+					sprint.getAllTasks()
+			);
+		}
 	}
 
 	public SprintBacklog findSprintBacklogByName(String name, ArrayList<SprintBacklog> allBacklogs)
