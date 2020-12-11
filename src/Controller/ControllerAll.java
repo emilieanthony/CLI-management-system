@@ -66,7 +66,8 @@ public class ControllerAll
                 case 3:
                     contDeveloper.teamMemberMenu(controllerAll);
                     break;
-                case 4: running = false; // Exit system.
+                case 4:
+                    running = false; // Exit system.
                     break;
                 default:
                     defaultMessage();
@@ -126,29 +127,34 @@ public class ControllerAll
         return task;
     }
 
-    public Developer findDeveloperByID(){
+    public Developer findDeveloperByID() {
         int id = getDeveloperId();
         Project project = whichProject();
         Developer developer = null;
         Iterator<Developer> iterator = project.getAllTeamMembers().iterator();
-        while (developer == null && iterator.hasNext())
-        {
+        while (developer == null && iterator.hasNext()) {
             Developer foundDeveloper = iterator.next();
-            if (foundDeveloper.getId()==id)
-            {
+            if (foundDeveloper.getId() == id) {
                 developer = foundDeveloper;
             }
         }
 
         return developer;
     }
-    /*public void printUserStories (){
+    public SprintBacklog findSprintByNameImport(String name,Project project)
+    {
+        SprintBacklog sprintBacklog = null;
+         project = whichProject();
 
-        Project project =  whichProject();
-        for (UserStory userStory :project.getProductBacklog().getAllUserStories()) {
-            Scan.print(userStory.toString());
+        Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
+        while (sprintBacklog == null && iterator.hasNext())
+        {
+            SprintBacklog foundBacklog = iterator.next();
+            if (foundBacklog.getName().equalsIgnoreCase(name))
+            {
+                sprintBacklog = foundBacklog;
+            }
         }
+        return sprintBacklog;
     }
-*/
-
 }

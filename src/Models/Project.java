@@ -125,7 +125,7 @@ public class Project implements Serializable
     }
 
 
-    public String printAssignedTasks(Developer member) // refactor.
+   /* public String printAssignedTasks(Developer member) // refactor.
     {
         String output = "";
 
@@ -144,7 +144,7 @@ public class Project implements Serializable
             }
         }
         return output;
-    }
+    }*/
 
 
     public Developer getTeamMember(int id)

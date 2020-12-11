@@ -4,13 +4,14 @@ import Models.Developer;
 import Models.Task;
 import Utility.Scan;
 import Models.Project;
-import View.DevTeamView;
+
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
-import static View.DevTeamView.getTaskId;
+
 import static View.DevTeamView.menuTeamMember;
 import static View.ScrumMasterView.getProjectName;
+
 
 public class ControllerDeveloper {
 
@@ -27,9 +28,11 @@ public class ControllerDeveloper {
                     viewAllAssignedTasks(controllerAll);
                     break;
                 case 3:
+                    getProjectName();// Switch project.
+                    break;
+                case 4:
                     running = false;
                     break;
-                    // Switch project.
                 default:
                     defaultMessage();
             }
@@ -61,7 +64,7 @@ public class ControllerDeveloper {
     public void viewAllAssignedTasks(ControllerAll controllerAll) {
         Project project = controllerAll.whichProject();
 
-        for (Task task : project.getAllTasks()) {
+        for (Task task : project.getProductBacklog().getTasks()) {
             if (task.getStatus().equalsIgnoreCase("In progress")) {
                 Scan.print(task.toString());
             }

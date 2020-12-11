@@ -3,8 +3,6 @@ package Controller;
 import Models.*;
 import Utility.Export;
 import Utility.Scan;
-import View.ProductOwnerView;
-
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
@@ -70,7 +68,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         ProductBacklog backlog = getBacklogInfo();
         project.setProductBacklog(backlog);
-        Export.exportObject(backlog);
+        //Export.exportObject(backlog);
     }
 
 
@@ -115,7 +113,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         UserStory newUserStory = getUSInfo();
         project.getProductBacklog().getAllUserStories().add(newUserStory);
-        Export.exportObject(newUserStory);
+        //Export.exportObject(newUserStory);
     }
 
     public void removeUserStory(ControllerAll controllerAll)

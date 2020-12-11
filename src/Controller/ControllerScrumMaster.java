@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
-import static View.ProductOwnerView.getBacklogName;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster {
@@ -34,7 +33,8 @@ public class ControllerScrumMaster {
 				case 3:
 					createTaskToProductBacklog(controllerAll);
 					break;
-				case 4: createTaskToSprint(controllerAll);
+				case 4:
+					createTaskToSprint(controllerAll);
 					break;
 				case 5:
 					createDevelopmentMember(controllerAll);
@@ -61,11 +61,10 @@ public class ControllerScrumMaster {
 					importFile.importProjects(controllerAll);
 					break;
 				case 13:
-					running = false; // Go back to main menu
+					getProjectName();// Switch project.
 					break;
-					//case 14:
-					//getProjectName(); What does this method do? There is no menu option for this in view.
-					//break;
+				case 14:
+					running = false;
 				default:
 					defaultMessage();
 			}
@@ -174,14 +173,6 @@ public class ControllerScrumMaster {
 		projectNotFound();
 	}
 
-	// Do not recognise this methods and where it is supposed to be.
-	/*public void assignTask(ControllerAll controllerAll){
-		Task task = controllerAll.findTaskById(controllerAll);
-		Developer developer = controllerAll.findDeveloperByID();
-		task.getAssignedTeamMembers().add(developer);
-		task.setStatus("In progress");
-	}*/
-
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
 	public void createProductOwner(ControllerAll controllerAll)
@@ -191,7 +182,7 @@ public class ControllerScrumMaster {
 		ProductOwner newProOwner = new ProductOwner(name,id);
 		Project project = controllerAll.whichProject();
 		project.getAllProductOwners().add(newProOwner);
-		Export.exportObject(newProOwner);
+		//Export.exportObject(newProOwner);
 		createdProOwner();
 	}
 	private void viewSprintBacklog(ControllerAll controllerAll)
@@ -235,7 +226,7 @@ public class ControllerScrumMaster {
 		Project project = controllerAll.whichProject();
 		Developer developer = new Developer(name,id);
 		project.getAllTeamMembers().add(developer);
-		Export.exportObject(developer);
+		//Export.exportObject(developer);
 		createdDeveloper();
 	}
 
@@ -275,7 +266,7 @@ public class ControllerScrumMaster {
 		String endDate = endYear + "-" + endMonth + "-" + endDay;
 		Project project = new Project(id, name, startDate, endDate);
 		controllerAll.getAllProjects().add(project);
-		Export.exportObject(project);
+		//Export.exportObject(project);
 
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
@@ -303,7 +294,7 @@ public class ControllerScrumMaster {
 		Project project = controllerAll.whichProject();
 		project.getAllSprintBacklogs().add(sprintBacklog);
 
-		Export.exportObject(sprintBacklog);
+		//Export.exportObject(sprintBacklog);
 
 		Scan.print("You have successfully created the following sprintBacklog:\n\n"
 				+ sprintBacklog.toString());
