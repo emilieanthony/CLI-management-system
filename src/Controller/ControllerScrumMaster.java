@@ -303,6 +303,7 @@ public class ControllerScrumMaster {
 
 		if (project == null){
 			projectNotFound();
+
 		} else{
 			String name = ScrumMasterView.getSprintBacklogByName();
 			SprintBacklog sprint = findSprintBacklogByName(name,project.getAllSprints());
