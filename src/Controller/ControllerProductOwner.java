@@ -6,6 +6,7 @@ import Utility.Scan;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
+import static Utility.PrintUtility.projectNotFound;
 import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.backlogName;
 import static View.ScrumMasterView.getProjectName;
@@ -127,7 +128,12 @@ public class ControllerProductOwner
     public void viewBacklog(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
+        if (project==null){
+            projectNotFound();
+        }else{
             Scan.print(project.getProductBacklog().toString());
+        }
+
     }
 
     public void editBacklogName(ControllerAll controllerAll){
