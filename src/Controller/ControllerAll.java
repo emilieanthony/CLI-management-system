@@ -139,7 +139,6 @@ public class ControllerAll
                 developer = foundDeveloper;
             }
         }
-
         return developer;
     }
     public SprintBacklog findSprintByNameImport(String name,Project project)
