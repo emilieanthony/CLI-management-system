@@ -99,7 +99,7 @@ public class ControllerDeveloper {
             }
         }
     }
-    public Task openTask(ControllerAll controllerAll) { // needs to be fixed.
+    public Task openTask(ControllerAll controllerAll) {
 
         Task task = controllerAll.findTaskById(controllerAll);
         Scan.print(task.toString());
