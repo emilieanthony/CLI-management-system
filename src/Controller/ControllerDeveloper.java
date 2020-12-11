@@ -10,7 +10,7 @@ import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 
 import static View.DevTeamView.*;
-import static View.ProductOwnerView.getUSNumber;
+import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.getProjectName;
 
 
@@ -33,7 +33,8 @@ public class ControllerDeveloper {
                     break;
                 case 4:
                     proCont.viewBacklog(controllerAll);
-                    proCont.editUSStatus(getUSNumber(),controllerAll);
+                    proCont.editUSStatus(getStoryNumber(),controllerAll);
+                    break;
                 case 5:
                     getProjectName();// Switch project.
                     break;

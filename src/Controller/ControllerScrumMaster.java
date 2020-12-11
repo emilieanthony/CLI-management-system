@@ -266,6 +266,7 @@ public class ControllerScrumMaster {
 		String endDate = endYear + "-" + endMonth + "-" + endDay;
 		Project project = new Project(id, name, startDate, endDate);
 		controllerAll.getAllProjects().add(project);
+		proName = name;
 		//Export.exportObject(project);
 
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
