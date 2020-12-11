@@ -44,7 +44,7 @@ public class ControllerScrumMaster
 					createProductOwner(controllerAll);
 					break;
 				case 7:
-					assignTaskToDevelopmentMember(controllerAll);
+					assignATask(controllerAll);
 					break;
 				case 8:
 					contProOwner.viewBacklog(controllerAll);
@@ -158,20 +158,14 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private void assignTaskToDevelopmentMember(ControllerAll controllerAll)
+	public void assignATask(ControllerAll controllerAll)
 	{
-
-		int idTask = Scan.readInt("Write the ID of the task: ");
-		int idMember = Scan.readInt("Write the ID of Development team member: ");
-
-		Project project = controllerAll.whichProject();
-
-		project.assignTask(idMember, idTask);
-		Scan.print("Task is now assigned to development team member!\n\n");
-		return;
+		Developer developer = controllerAll.findDeveloperByID();
+		Task task = controllerAll.findTaskById(controllerAll);
+		task.getAssignedTeamMembers().add(developer);
+		task.setStatus("In progress");
 
 	}
-
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
 	public void createProductOwner(ControllerAll controllerAll)
