@@ -58,7 +58,7 @@ public class ProductBacklog {
         this.endDate = endDate;
     }
 
-    /*public Task getTask(int id)
+    public Task getTask(int id)
     {
         for(Task task : tasks)
         {
@@ -68,7 +68,7 @@ public class ProductBacklog {
             }
         }
         return null;
-    }*/
+    }
 
     public UserStory getUserStory(int number)
     {
@@ -88,7 +88,7 @@ public class ProductBacklog {
         return allUserStories;
     }
 
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasksImport() {
         return tasks;
     }
     public void setTasks(ArrayList<Task> tasks) {

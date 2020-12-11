@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 
 public class Export {
 
-   /* public static void exportObject(Object object) {
+    public static void exportObject(Object object) {
         try (FileOutputStream fos = new FileOutputStream("File.txt")) {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(object);
@@ -17,5 +17,5 @@ public class Export {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-    }*/
+    }
 }

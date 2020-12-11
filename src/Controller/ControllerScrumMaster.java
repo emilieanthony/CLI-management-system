@@ -65,6 +65,7 @@ public class ControllerScrumMaster {
 					break;
 				case 14:
 					running = false;
+					break;
 				default:
 					defaultMessage();
 			}
@@ -93,7 +94,7 @@ public class ControllerScrumMaster {
 			projectNotFound();
 		}
 
-		project.getProductBacklog().getTasks().add(newTask);
+		project.getProductBacklog().getTasksImport().add(newTask);
 	}
 
 	private void createTaskToSprint(ControllerAll controllerAll) {
@@ -130,7 +131,7 @@ public class ControllerScrumMaster {
 
 					project.getProductBacklog().getTask(idTask).setSprintName(sprintName);
 					findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
-					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
+					project.getProductBacklog().getTasksImport().remove(project.getProductBacklog().getTask(idTask));
 
 					movedObject();
 				}
@@ -294,7 +295,7 @@ public class ControllerScrumMaster {
 		Project project = controllerAll.whichProject();
 		project.getAllSprintBacklogs().add(sprintBacklog);
 
-		//Export.exportObject(sprintBacklog);
+		Export.exportObject(sprintBacklog);
 
 		Scan.print("You have successfully created the following sprintBacklog:\n\n"
 				+ sprintBacklog.toString());

@@ -64,7 +64,7 @@ public class ControllerDeveloper {
     public void viewAllAssignedTasks(ControllerAll controllerAll) {
         Project project = controllerAll.whichProject();
 
-        for (Task task : project.getProductBacklog().getTasks()) {
+        for (Task task : project.getProductBacklog().getTasksImport()) {
             if (task.getStatus().equalsIgnoreCase("In progress")) {
                 Scan.print(task.toString());
             }
