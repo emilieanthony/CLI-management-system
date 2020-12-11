@@ -198,17 +198,16 @@ public class ControllerScrumMaster {
 
 	public int createIdProductOwner(ControllerAll controllerAll)
 	{
-		int id = 200;
+		int FIRST_ID = 1;
 		Project project = controllerAll.whichProject();
-				if (project.getAllProductOwners().isEmpty())
-				{
-					id = 200;
-				}
-				else
-				{
-					id = project.getAllProductOwners().get(project.getAllProductOwners().size() - 1).getId() + 1;
-				}
-		return id;
+		if(project != null) {
+			if(!project.getAllProductOwners().isEmpty()) {
+				return project.getAllProductOwners().get(project.getAllProductOwners().size() - 1).getId() + 1;
+			}
+		} else {
+			projectNotFound();
+		}
+		return FIRST_ID;
 	}
 
 	/*------------------------------------Methods create development member-------------------------------------------*/
