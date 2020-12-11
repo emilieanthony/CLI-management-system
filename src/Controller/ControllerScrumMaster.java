@@ -184,21 +184,7 @@ public class ControllerScrumMaster
 		Export.exportObject(newProOwner);
 		createdProOwner();
 	}
-	private void viewSprintBacklog(ControllerAll controllerAll)
-	{
-		int idProject = Scan.readInt("Write the ID of the project: "); // move to view class
 
-		for (Project project : controllerAll.getAllProjects()) // use which project method.
-		{
-			if (project.getId() == idProject)
-			{
-				String sprintName = Scan.readLine("Write the name of the sprint: "); // move to view class
-				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories());
-				System.out.println("\n\n");
-				System.out.println(findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks());
-			}
-		}
-	}
 
 	public int createIdProductOwner(ControllerAll controllerAll)
 	{
@@ -309,9 +295,9 @@ public class ControllerScrumMaster
 			projectNotFound();
 
 		} else{
-			String name = ScrumMasterView.getSprintBacklogByName();
+			String name = getSprintBacklogByName();
 			SprintBacklog sprint = findSprintBacklogByName(name,project.getAllSprints());
-			ScrumMasterView.printSprintBacklog(sprint.getAllUserStories(),sprint.getAllTasks()
+			printSprintBacklog(sprint.getAllUserStories(),sprint.getAllTasks()
 			);
 		}
 	}

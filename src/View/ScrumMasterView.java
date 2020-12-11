@@ -44,12 +44,6 @@ public class ScrumMasterView {
         return fileName;
     }
 
-    public String getNewUSStatus() {
-        String newUSStatus = Scan.readLine("Enter new Status for the user " +
-                "story.");
-        return newUSStatus;
-    }
-
     public static Task getTaskInfo() {
         int id = Scan.readInt("Please enter task id:");
         String name = Scan.readLine("Please enter name of task:");

@@ -9,7 +9,6 @@ import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.getDeveloperId;
 import static View.DevTeamView.getTaskId;
-import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.*;
 
 public class ControllerAll
@@ -142,20 +141,5 @@ public class ControllerAll
 
         return developer;
     }
-    public SprintBacklog findSprintByNameImport(String name,Project project)
-    {
-        SprintBacklog sprintBacklog = null;
-         project = whichProject();
 
-        Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
-        while (sprintBacklog == null && iterator.hasNext())
-        {
-            SprintBacklog foundBacklog = iterator.next();
-            if (foundBacklog.getName().equalsIgnoreCase(name))
-            {
-                sprintBacklog = foundBacklog;
-            }
-        }
-        return sprintBacklog;
-    }
 }
