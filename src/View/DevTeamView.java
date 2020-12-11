@@ -16,23 +16,17 @@ public class DevTeamView {
                 "Please enter an option below\n" +
                 "1. View my own tasks\n" +
                 "2. View assigned tasks\n" +
-                "3. Choose project\n" +
-                "4. Go back to main menu\n"+
-                "2. View all tasks\n" +
-                "3. Open Task\n" +
-                "4. View my User Stories\n" +
-                "5. View all User Stories\n" +
-                "6. Open User Story\n" +
-                "7. Go back to main menu\n");
+                "3. change Task status\n" +
+                "4. change User Story status\n" +
+                "5. Choose project\n" +
+                "6. Go back to main menu\n");
         return option;
     }
 
-    public int taskMenu(Task task) {
-        int option = Scan.readInt("\n\n Task ID:"  + task.getId() + "Task name: " + task.getName() + "\n" +
-                "Please enter an option below\n" +
+    public static int getTaskMenu() {
+        int option = Scan.readInt("\n\nPlease enter an option below\n" +
                 "1. Set Task as complete and enter actual hrs\n" +
-                "2. \n" +
-                "3. Go back to previous menu\n");
+                "2. Go back to previous menu\n");
         return option;
     }
 
@@ -55,7 +49,7 @@ public class DevTeamView {
         return id;
     }
 
-    public int getActualHrs(){
+    public static int getActualHrs(){
         int actualHrs = Scan.readInt("Enter actual hours of task: ");
         return actualHrs;
     }

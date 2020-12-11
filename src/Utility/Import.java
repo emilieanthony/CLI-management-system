@@ -44,7 +44,7 @@ public class Import {
                     foundProject.setProductBacklog(productBacklog);
                     Scan.print(productBacklog.toString() + "\n");
                 }
-                if (projectInfo[0].equalsIgnoreCase("SprintBacklog")){
+                if (projectInfo[0].equalsIgnoreCase("Sprint")){
                     String name = projectInfo[1];
                     String startDate = projectInfo[2];
                     String endDate = projectInfo[3];
@@ -63,7 +63,7 @@ public class Import {
                     String projectName = projectInfo[6];
                     Task task = new Task(id,priorityN,estimatedH,name,description);
                     Project foundProject = controllerAll.findProjectImport(projectName);
-                    foundProject.getAllTasks().add(task);
+                    foundProject.getProductBacklog().getTasksImport().add(task);
                     Scan.print(task.toString() + "\n");
                 }
                 if (projectInfo[0].equalsIgnoreCase("US")){

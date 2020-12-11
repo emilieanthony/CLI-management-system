@@ -82,12 +82,13 @@ public class ProductBacklog {
         return null;
     }
 
+
     public ArrayList<UserStory> getAllUserStories()
     {
         return allUserStories;
     }
 
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasksImport() {
         return tasks;
     }
     public void setTasks(ArrayList<Task> tasks) {

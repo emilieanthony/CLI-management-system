@@ -9,6 +9,7 @@ import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.getDeveloperId;
 import static View.DevTeamView.getTaskId;
+import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.*;
 
 public class ControllerAll
@@ -64,9 +65,10 @@ public class ControllerAll
                     contProOwner.productOwnerMenu(controllerAll);
                     break;
                 case 3:
-                    contDeveloper.teamMemberMenu(controllerAll);
+                    contDeveloper.teamMemberMenu(controllerAll,contProOwner);
                     break;
-                case 4: running = false; // Exit system.
+                case 4:
+                    running = false; // Exit system.
                     break;
                 default:
                     defaultMessage();
@@ -114,7 +116,7 @@ public class ControllerAll
         int id = getTaskId();
         Task task = null;
         Project project = controllerAll.whichProject();
-        Iterator<Task> iterator = project.getAllTasks().iterator();
+        Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
         while (task == null && iterator.hasNext())
         {
             Task foundTask = iterator.next();
@@ -126,29 +128,34 @@ public class ControllerAll
         return task;
     }
 
-    public Developer findDeveloperByID(){
+    public Developer findDeveloperByID() {
         int id = getDeveloperId();
         Project project = whichProject();
         Developer developer = null;
         Iterator<Developer> iterator = project.getAllTeamMembers().iterator();
-        while (developer == null && iterator.hasNext())
-        {
+        while (developer == null && iterator.hasNext()) {
             Developer foundDeveloper = iterator.next();
-            if (foundDeveloper.getId()==id)
-            {
+            if (foundDeveloper.getId() == id) {
                 developer = foundDeveloper;
             }
         }
 
         return developer;
     }
-    public void printUserStories (){
+    public SprintBacklog findSprintByNameImport(String name,Project project)
+    {
+        SprintBacklog sprintBacklog = null;
+         project = whichProject();
 
-        Project project =  whichProject();
-        for (UserStory userStory :project.getProductBacklog().getAllUserStories()) {
-            Scan.print(userStory.toString());
+        Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
+        while (sprintBacklog == null && iterator.hasNext())
+        {
+            SprintBacklog foundBacklog = iterator.next();
+            if (foundBacklog.getName().equalsIgnoreCase(name))
+            {
+                sprintBacklog = foundBacklog;
+            }
         }
+        return sprintBacklog;
     }
-
-
 }

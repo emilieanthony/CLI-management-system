@@ -10,7 +10,7 @@ public class SprintBacklog
 	private String name;
 	private String startDate;
 	private String endDate;
-	private ArrayList<Task> allTasks;      //sprintBacklog is allTasks and userStories
+	private ArrayList<Task> allTasks;
 	private ArrayList<UserStory> userStories;
 
 	//constructor

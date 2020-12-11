@@ -18,7 +18,6 @@ public class Project implements Serializable
     private Developer developer;
     private Task task;
 
-    private ArrayList<Task> allTasks;
     private ArrayList<Developer> allTeamMembers;
     private ArrayList<ProductOwner> allProductOwners;
     private ArrayList<SprintBacklog> allSprintBacklogs;
@@ -38,7 +37,6 @@ public class Project implements Serializable
         developer = new Developer(null,0);
         task = new Task(0,0,0,null,null);
 
-        allTasks = new ArrayList<>();
         allTeamMembers = new ArrayList<>();
         allProductOwners = new ArrayList<>();
         allSprintBacklogs = new ArrayList<>();
@@ -126,18 +124,8 @@ public class Project implements Serializable
         return task;
     }
 
-    public String printTasks()
-    {
-        String output = "";
 
-        for (Task task : allTasks)
-        {
-            output = output + task.toString();
-        }
-        return output;
-    }
-
-    public String printAssignedTasks(Developer member)
+   /* public String printAssignedTasks(Developer member) // refactor.
     {
         String output = "";
 
@@ -156,7 +144,7 @@ public class Project implements Serializable
             }
         }
         return output;
-    }
+    }*/
 
 
     public Developer getTeamMember(int id)
@@ -250,7 +238,6 @@ public class Project implements Serializable
                 //"\nSprint Backlog: " + sprintBacklog +
                 //"\nProduct Owner: " + productOwner +
                 //"\nDeveloper: " + developer +
-                "\nTasks: " + allTasks +
                 "\nTeam Members: " + allTeamMembers +
                 "\nProduct Owners: " + allProductOwners +
                 "\nSprintBacklog Backlogs: " + allSprintBacklogs;
