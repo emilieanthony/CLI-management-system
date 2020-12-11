@@ -83,7 +83,7 @@ public class ControllerScrumMaster {
 			membersView();
 			for (Developer developer: project.getAllTeamMembers()) {
 				Scan.print(developer.toString());
-			} 
+			}
 		}
 
 
@@ -217,10 +217,14 @@ public class ControllerScrumMaster {
 		String name = getDeveloperInfo();
 		int id = createIdDevelopmentMember(controllerAll);
 		Project project = controllerAll.whichProject();
-		Developer developer = new Developer(name,id);
-		project.getAllTeamMembers().add(developer);
-		//Export.exportObject(developer);
-		createdDeveloper();
+		if (project==null){
+			projectNotFound();
+		}else{
+			Developer developer = new Developer(name,id);
+			project.getAllTeamMembers().add(developer);
+			//Export.exportObject(developer);
+			createdDeveloper();
+		}
 	}
 
 	public int createIdDevelopmentMember(ControllerAll controllerAll)
