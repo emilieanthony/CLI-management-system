@@ -15,7 +15,7 @@ public class PrintUtility {
     }
 
     public static void projectNotFound(){
-        Scan.print("\nProject not found\n");
+        Scan.print("\nProject not found, please create a project before you proceed.\n");
     }
 
     public static void movedObject(){

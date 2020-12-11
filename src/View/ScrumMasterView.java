@@ -102,6 +102,9 @@ public class ScrumMasterView {
     }
 
     public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks){
+        if(allUserStories.isEmpty()&&allTasks.isEmpty()){
+            Scan.print("The sprint backlog is empty.");
+        }
         for (UserStory story : allUserStories){
             Scan.print(story.toString());
         }

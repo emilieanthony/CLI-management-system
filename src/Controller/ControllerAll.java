@@ -138,7 +138,6 @@ public class ControllerAll
                 developer = foundDeveloper;
             }
         }
-
         return developer;
     }
 
