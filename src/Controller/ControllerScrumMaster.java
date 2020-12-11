@@ -77,11 +77,16 @@ public class ControllerScrumMaster {
 	private void viewTeamMembers(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
-		membersView();
-		for (Developer developer: project.getAllTeamMembers()) {
-			Scan.print(developer.toString());
+		if (project==null) {
+			projectNotFound();
+		}else{
+			membersView();
+			for (Developer developer: project.getAllTeamMembers()) {
+				Scan.print(developer.toString());
+			} 
 		}
-		projectNotFound();
+
+
 	}
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
