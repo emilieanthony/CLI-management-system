@@ -89,30 +89,118 @@ public class ControllerScrumMaster
 
 	private void createTaskToProductBacklog(ControllerAll controllerAll)
 	{
-		Task newTask = getTaskInfo();
 		Project project = controllerAll.whichProject();
 
 		if (project == null){
 			projectNotFound();
-		}
+		} else {
 
-		project.getProductBacklog().getTasksImport().add(newTask);
+			int id = taskUSIdGenerator(project);
+
+			Task newTask = getTaskInfo(id);
+
+
+			project.getProductBacklog().getTasksImport().add(newTask);}
+
 	}
 
 	private void createTaskToSprint(ControllerAll controllerAll)
 	{
-		Task newTask = getTaskInfo();
-		String name = getSprintBacklogName();
+
 		Project project = controllerAll.whichProject();
 
 		if (project == null)
 		{
 			projectNotFound();
-		}
+		} else {
 
-		findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
+			int id = taskUSIdGenerator(project);
+			Task newTask = getTaskInfo(id);
+			String name = getSprintBacklogName();
+
+			findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
+		}
 	}
 
+	private int taskUSIdGenerator(Project project){
+		// initialize int variable for ID
+		int id = project.getId() * 1000 + 1;
+
+		ArrayList<Task> tasks = collectAllTasks(project);
+		ArrayList<UserStory> stories = collectAllStories(project);
+
+
+		if (!tasks.isEmpty()){
+			for (Task task : tasks){
+				if (task.getId() == id){
+					id++;
+				}
+			}
+		}
+
+		if (!stories.isEmpty()) {
+			for (UserStory userStory : stories) {
+				if (userStory.getNumber() == id) {
+					id++;
+				}
+			}
+		}
+
+
+		return id;
+	}
+
+
+	private ArrayList<Task> collectAllTasks(Project project){
+
+		//put all tasks in one and the same arrayList
+		ArrayList<Task> allTasks = new ArrayList<>();
+
+		//fetch tasks from product backlog
+		ArrayList<Task> productBLTasks = project.getProductBacklog().getTasksImport();
+
+		for (Task task : productBLTasks){
+			allTasks.add(task);
+		}
+
+		//fetch tasks from sprint BL
+		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
+
+		for (SprintBacklog sprintBL : sprintBLs){
+			ArrayList<Task> sprintTasks = sprintBL.getAllTasks();
+			for (Task task : sprintTasks){
+				allTasks.add(task);
+			}
+		}
+
+		return allTasks;
+	}
+
+	private ArrayList<UserStory> collectAllStories(Project project ) {
+
+		//put all user stories in one and the same ArrayList
+		ArrayList<UserStory> allStories = new ArrayList<>();
+
+		// fetch all user stories from product backlog
+		ArrayList<UserStory> productBLStories = project.getProductBacklog().getAllUserStories();
+
+		for (UserStory story : productBLStories){
+			allStories.add(story);
+		}
+
+		//fetch user story from sprint BL
+		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
+
+		for (SprintBacklog sprintBL : sprintBLs){
+			//
+			ArrayList<UserStory> sprintBLStories = sprintBL.getAllUserStories();
+			for (UserStory story : sprintBLStories){
+				allStories.add(story);
+			}
+		}
+
+		return allStories;
+	}
 
 	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
@@ -214,14 +302,14 @@ public class ControllerScrumMaster
 	{
 		int id = 1;
 		Project project = controllerAll.whichProject();
-				if (project.getAllTeamMembers().isEmpty())
-				{
-					id = 1;
-				}
-				else
-				{
-					id = project.getAllTeamMembers().get(project.getAllTeamMembers().size() - 1).getId() + 1;
-				}
+		if (project.getAllTeamMembers().isEmpty())
+		{
+			id = 1;
+		}
+		else
+		{
+			id = project.getAllTeamMembers().get(project.getAllTeamMembers().size() - 1).getId() + 1;
+		}
 
 		return id;
 	}

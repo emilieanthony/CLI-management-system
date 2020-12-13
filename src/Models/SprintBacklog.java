@@ -15,7 +15,7 @@ public class SprintBacklog implements Serializable
 	private ArrayList<UserStory> userStories;
 
 	//constructor
-	public SprintBacklog(String name,String startDate, String endDate)
+	public SprintBacklog(String name, String startDate, String endDate)
 	{
 		this.name = name;
 		this.startDate = startDate;
