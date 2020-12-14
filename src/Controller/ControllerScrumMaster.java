@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
+import static View.DevTeamView.getTaskId;
+import static View.ProductOwnerView.getUSNumber;
+import static View.ProductOwnerView.printRemoved;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster
+
 {
 
 	private Import importFile = new Import();
@@ -46,25 +50,56 @@ public class ControllerScrumMaster
 				case 7:
 					assignATask(controllerAll);
 					break;
-				case 8:
-					contProOwner.viewBacklog(controllerAll);
+				case 8: scrumMasterEditTaskMenu(controllerAll);
 					break;
 				case 9:
-					viewTeamMembers(controllerAll);
+					contProOwner.viewBacklog(controllerAll);
 					break;
 				case 10:
-					moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+					viewTeamMembers(controllerAll);
 					break;
 				case 11:
-					viewSprintBacklog(controllerAll);
+					moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 					break;
 				case 12:
-					importFile.importProjects(controllerAll);
+					viewSprintBacklog(controllerAll);
 					break;
 				case 13:
-					getProjectName();// Switch project.
+					importFile.importProjects(controllerAll);
 					break;
 				case 14:
+					getProjectName();// Switch project.
+					break;
+				case 15:
+					running = false;
+					break;
+				default:
+					defaultMessage();
+			}
+		} while (running);
+	}
+
+	//-----------------------------------------------------Second Switch----------------------------------------------
+
+	public void scrumMasterEditTaskMenu(ControllerAll controllerAll)
+	{
+
+		boolean running = true;
+		do
+		{
+			int option = menuEditTask();
+			switch (option)
+			{
+				case 1:
+					editPriorityNumberTask();
+					break;
+				case 2:
+					editStatusTask();
+					break;
+				case 3:
+					removeTask(controllerAll);
+					break;
+				case 4:
 					running = false;
 					break;
 				default:
@@ -74,6 +109,8 @@ public class ControllerScrumMaster
 	}
 
 
+
+	//-------------------------------------------------------------------------------------------------------------------
 	private void viewTeamMembers(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
@@ -85,7 +122,28 @@ public class ControllerScrumMaster
 		projectNotFound();
 	}
 
+
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
+
+	private void editPriorityNumberTask() {
+
+	}
+	private void editStatusTask() {
+
+	}
+
+	private void removeTask(ControllerAll controllerAll ) {
+		Project project = controllerAll.whichProject();
+
+		if (project == null){
+			projectNotFound();
+		} else {
+
+			Task task = findTaskById(controllerAll);
+			project.getAllTasks().remove(task);
+			removeObject();
+		}
+	}
 
 	private void createTaskToProductBacklog(ControllerAll controllerAll)
 	{
@@ -309,6 +367,23 @@ public class ControllerScrumMaster
 			}
 		}
 		return sprintBacklog;
+	}
+
+	public Task findTaskById(ControllerAll controllerAll)
+	{
+		int id = getTaskId();
+		Task task = null;
+		Project project = controllerAll.whichProject();
+		Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
+		while (task == null && iterator.hasNext())
+		{
+			Task foundTask = iterator.next();
+			if (foundTask.getId() == id)
+			{
+				task = foundTask;
+			}
+		}
+		return task;
 	}
 }
 

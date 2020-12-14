@@ -24,17 +24,38 @@ public class ScrumMasterView {
                 "5. Create a new Development Team Member\n" +
                 "6. Create a new Product owner\n" +
                 "7. Assign a task to Development Team Member\n" +
-                "8. View product backlog\n" +
-                "9. View all development Team Members\n" +
-                "10. Move task or user story to sprint backlog\n" +
-                "11. View sprint backlog\n" +
-                "12. Import file\n" +
-                "13. Switch project\n" +
-                "14. Go back to main menu\n");
+                "8. Edit Task Menu \n" +
+                "9. View product backlog\n" +
+                "10. View all development Team Members\n" +
+                "11. Move task or user story to sprint backlog\n" +
+                "12. View sprint backlog\n" +
+                "13. Import file\n" +
+                "14. Switch project\n" +
+                "15. Go back to main menu\n");
         
 
         return option;
     }
+
+
+    //----------------------------------------------------------Edit task menu---------------------------------------------
+    public static int menuEditTask()
+    {
+        int option = Scan.readInt
+                ("\n\nWhich part of the task do you want to edit, enter a number:\n\n" +
+                        "1- Edit Task Priority Number.\n" +
+                        "2- Edit Task Status.\n" +
+                        "3- Remove Task .\n" +
+                        "4- Back to your menu.\n");
+        return option;
+    }
+
+    public static int getTaskId() {
+        int getTaskId = Scan.readInt("\nEnter the Task id.");
+        return getTaskId;
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     public static String getFileName() {
 
