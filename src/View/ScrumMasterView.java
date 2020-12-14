@@ -50,15 +50,19 @@ public class ScrumMasterView {
         return option;
     }
 
-    public static int getTaskId() {
-        int getTaskId = Scan.readInt("\nEnter the Task id.");
-        return getTaskId;
-    }
-
     public static int newPriorityNumberTask (){
         int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number.");
+
     return newPriorityNumberTask;
     }
+
+    public static String newStatusTask (){
+
+        String newStatusTask = Scan.readLine("\nEnter the new status; Complete, Work in progress, Open.");
+        return newStatusTask;
+
+    }
+
 
     //-------------------------------------------------------------------------------------------------------------------
 

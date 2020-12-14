@@ -134,7 +134,8 @@ public class ControllerScrumMaster
 	private void editStatusTask(ControllerAll controllerAll) {
 
 			Task task = findTaskById(controllerAll);
-			task.setStatus(status);
+			String newStatusTask = newStatusTask();
+			task.setStatus(newStatusTask);
 		}
 
 	private void removeTask(ControllerAll controllerAll ) {
