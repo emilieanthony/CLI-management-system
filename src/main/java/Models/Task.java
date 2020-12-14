@@ -15,6 +15,11 @@ public class Task implements Comparable<Task>, Serializable
 	private ArrayList<Developer> assignedTeamMembers;
 	private String sprintName;
 
+	//Empty constructor for data exporting and importing.
+	public Task(){
+
+	}
+
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description)
 	{
 		this.id = id;
@@ -102,6 +107,10 @@ public class Task implements Comparable<Task>, Serializable
 	public ArrayList<Developer> getAssignedTeamMembers()
 	{
 		return assignedTeamMembers;
+	}
+
+	public void setAssignedTeamMembers(ArrayList<Developer> assignedTeamMembers) {
+		this.assignedTeamMembers = assignedTeamMembers;
 	}
 
 	public int getId()

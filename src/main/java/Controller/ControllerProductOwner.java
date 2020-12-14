@@ -1,7 +1,6 @@
 package Controller;
 
 import Models.*;
-import Utility.Export;
 import Utility.Scan;
 import java.util.Iterator;
 
@@ -65,11 +64,12 @@ public class ControllerProductOwner
         } while (running);
     }
 
-   public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
+
+    public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
         Project project = controllerAll.whichProject();
         ProductBacklog backlog = getBacklogInfo();
         project.setProductBacklog(backlog);
-        Export.exportObject(backlog);
+        //Export.exportObject(backlog);
     }
 
 
@@ -114,7 +114,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         UserStory newUserStory = getUSInfo();
         project.getProductBacklog().getAllUserStories().add(newUserStory);
-        Export.exportObject(newUserStory);
+        //Export.exportObject(newUserStory);
     }
 
     public void removeUserStory(ControllerAll controllerAll)

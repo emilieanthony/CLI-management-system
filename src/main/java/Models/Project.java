@@ -23,6 +23,11 @@ public class Project implements Serializable
     private ArrayList<SprintBacklog> allSprintBacklogs;
 
 
+    //Empty constructor for data exporting and importing.
+    public Project(){
+
+    }
+
     //constructor
     public Project(int id, String name,String startDate,String endDate)
     {

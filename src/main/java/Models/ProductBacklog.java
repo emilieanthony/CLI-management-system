@@ -16,6 +16,10 @@ public class ProductBacklog implements Serializable {
     private ArrayList<Task> tasks;
 
 
+    //Empty constructor for data exporting and importing.
+    public ProductBacklog(){
+
+    }
     // Constructor:-
     public ProductBacklog(String name, String startDate, String endDate)
     {
@@ -90,6 +94,9 @@ public class ProductBacklog implements Serializable {
     }
 
     public ArrayList<Task> getTasksImport() {
+        return tasks;
+    }
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
     public void setTasks(ArrayList<Task> tasks) {

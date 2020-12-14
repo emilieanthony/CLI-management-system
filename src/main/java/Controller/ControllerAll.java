@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.*;
+import Utility.DataManagement;
 import Utility.Scan;
 
 import java.util.ArrayList;
@@ -16,11 +17,13 @@ public class ControllerAll
 
     //attributes
     private ArrayList<Project> allProjects;
+    private DataManagement Data;
 
     //Constructor:
     public ControllerAll()
     {
         allProjects = new ArrayList<>();
+        Data = new DataManagement();
 
     }
 
@@ -29,6 +32,9 @@ public class ControllerAll
         return allProjects;
     }
 
+    public void setAllProjects(ArrayList<Project> allProjects) {
+        this.allProjects = allProjects;
+    }
     //methods
     /*--------------------------------------------Main menu -----------------------------------------------------*/
 
@@ -41,7 +47,8 @@ public class ControllerAll
                 "1. Scrum master\n" +
                 "2. Product owner\n" +
                 "3. Development team member\n" +
-                "4. Exit system\n");
+                "4. View all Projects.\n" +
+                "5. Save and Exit system\n");
         return option;
     }
 
@@ -51,6 +58,7 @@ public class ControllerAll
                          ControllerDeveloper contDeveloper)
     {
         boolean running = true;
+        loadData();
         Start();
         do
         {
@@ -66,13 +74,21 @@ public class ControllerAll
                 case 3:
                     contDeveloper.teamMemberMenu(controllerAll,contProOwner);
                     break;
-                case 4:
+                case 4: viewProjects();
+                    break;
+                case 5:
+                    saveData();
                     running = false; // Exit system.
                     break;
                 default:
                     defaultMessage();
             }
         } while (running);
+    }
+    private void viewProjects() {
+        for (Project project:allProjects) {
+            Scan.print(project.toString());
+        }
     }
     public Project whichProject(){
         Project project = findProjectByName();
@@ -139,6 +155,15 @@ public class ControllerAll
             }
         }
         return developer;
+    }
+
+    public void loadData(){
+
+        setAllProjects(Data.readProData(allProjects));
+    }
+
+    public void saveData(){
+        Data.writeData(allProjects);
     }
 
 }
