@@ -12,7 +12,7 @@ public class Task implements Comparable<Task>, Serializable
 	private String status;
 	private String name;
 	private String description;
-	private ArrayList<Developer> assignedTeamMembers;
+	private ArrayList<Developer> assignedDevelopers;
 	private String sprintName;
 
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description)
@@ -24,7 +24,7 @@ public class Task implements Comparable<Task>, Serializable
 		this.status = "Open";
 		this.name = name;
 		this.description = description;
-		this.assignedTeamMembers = new ArrayList<>();
+		this.assignedDevelopers = new ArrayList<>();
 		this.sprintName = "";
 	}
 
@@ -99,9 +99,9 @@ public class Task implements Comparable<Task>, Serializable
 		status = "Done";
 	}
 
-	public ArrayList<Developer> getAssignedTeamMembers()
+	public ArrayList<Developer> getAssignedDevelopers()
 	{
-		return assignedTeamMembers;
+		return assignedDevelopers;
 	}
 
 	public int getId()
@@ -112,7 +112,7 @@ public class Task implements Comparable<Task>, Serializable
 
 	public boolean isAssigned(Developer member)
 	{
-		return assignedTeamMembers.contains(member);
+		return assignedDevelopers.contains(member);
 	}
 
 
@@ -142,13 +142,13 @@ public class Task implements Comparable<Task>, Serializable
 						"hours: " + estimatedHours + "\nActual hours: " + actualHours +
 						"\nAssigned Team Members:";
 
-		if(assignedTeamMembers == null)
+		if(assignedDevelopers == null)
 		{
 			output = output + "\n";
 		}
 		else
 		{
-			for (Developer member : assignedTeamMembers)
+			for (Developer member : assignedDevelopers)
 			{
 				output = output + "\n" + member.toString();
 			}

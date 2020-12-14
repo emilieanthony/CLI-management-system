@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
-import static View.DevTeamView.getDeveloperId;
-import static View.DevTeamView.getTaskId;
+import static View.DevTeamView.*;
 import static View.ScrumMasterView.*;
 
 public class ControllerAll
@@ -125,6 +124,23 @@ public class ControllerAll
             }
         }
         return task;
+    }
+
+    public UserStory findUserStoryById(ControllerAll controllerAll)
+    {
+        int number = getUserStoryNumber();     //Do we want to sort by the User story's number?
+        UserStory userStory = null;
+        Project project = controllerAll.whichProject();
+        Iterator<UserStory> iterator = project.getProductBacklog().getAllUserStories().iterator();
+        while (userStory == null && iterator.hasNext())
+        {
+            UserStory foundUserStory = iterator.next();
+            if (foundUserStory.getNumber() == number)
+            {
+                userStory = foundUserStory;
+            }
+        }
+        return userStory;
     }
 
     public Developer findDeveloperByID() {

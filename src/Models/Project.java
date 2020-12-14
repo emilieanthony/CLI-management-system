@@ -1,7 +1,6 @@
 package Models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Project implements Serializable
@@ -151,7 +150,7 @@ public class Project implements Serializable
     }
 
     public void assignTaskAdd(Developer member, Task task) { // method used in assign task method
-        task.getAssignedTeamMembers().add(member);
+        task.getAssignedDevelopers().add(member);
     }
 
     public ArrayList<ProductOwner> getAllProductOwners()

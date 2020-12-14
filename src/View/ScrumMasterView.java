@@ -24,14 +24,15 @@ public class ScrumMasterView {
                 "5. Create a new Development Team Member\n" +
                 "6. Create a new Product owner\n" +
                 "7. Assign a task to Development Team Member\n" +
-                "8. View product backlog\n" +
-                "9. View all development Team Members\n" +
-                "10. Move task or user story to sprint backlog\n" +
-                "11. View sprint backlog\n" +
-                "12. Import file\n" +
-                "13. Switch project\n" +
-                "14. Go back to main menu\n");
-        
+                "8. Assign a user story to Development Team Member" +
+                "9. View product backlog\n" +
+                "10. View all development Team Members\n" +
+                "11. Move task or user story to sprint backlog\n" +
+                "12. Move task or user story to product backlog" +
+                "13. View sprint backlog\n" +
+                "14. Import file\n" +
+                "15. Switch project\n" +
+                "16. Go back to main menu\n");
 
         return option;
     }

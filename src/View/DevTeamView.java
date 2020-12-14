@@ -43,10 +43,15 @@ public class DevTeamView {
         return id;
     }
 
+    public static int getUserStoryNumber(){
+
+        int id = Scan.readInt("Please enter the User Story's number");
+        return id;
+    }
 
     public int getProjectId(){
-        int id = Scan.readInt("Enter project ID:");
-        return id;
+        int number = Scan.readInt("Enter project ID:");
+        return number;
     }
 
     public static int getActualHrs(){

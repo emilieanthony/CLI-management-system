@@ -44,27 +44,33 @@ public class ControllerScrumMaster
 					createProductOwner(controllerAll);
 					break;
 				case 7:
-					assignATask(controllerAll);
+					assignTask(controllerAll);
 					break;
 				case 8:
-					contProOwner.viewBacklog(controllerAll);
+					assignUserStory(controllerAll);
 					break;
 				case 9:
-					viewTeamMembers(controllerAll);
+					contProOwner.viewBacklog(controllerAll);
 					break;
 				case 10:
-					moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+					viewTeamMembers(controllerAll);
 					break;
 				case 11:
-					viewSprintBacklog(controllerAll);
+					moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 					break;
 				case 12:
-					importFile.importProjects(controllerAll);
+					moveTaskOrUSToProductBacklog(contProOwner, controllerAll);
 					break;
 				case 13:
-					getProjectName();// Switch project.
+					viewSprintBacklog(controllerAll);
 					break;
 				case 14:
+					importFile.importProjects(controllerAll);
+					break;
+				case 15:
+					getProjectName();// Switch project.
+					break;
+				case 16:
 					running = false;
 					break;
 				default:
@@ -229,13 +235,13 @@ public class ControllerScrumMaster
 
 			if(input.equals("2"))
 			{
-				int usName = Scan.readInt("Write the the number of the user story you want to" +
+				int usNumber = Scan.readInt("Write the the number of the user story you want to" +
 						" move: "); // Move to view class.
 				String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
 
-				project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
-				findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
-				project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
+				project.getProductBacklog().getUserStory(usNumber).setSprintName(sprintName);
+				findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usNumber));
+				project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usNumber));
 
 				movedObject();
 			}
@@ -246,14 +252,73 @@ public class ControllerScrumMaster
 		}
 	}
 
-	public void assignATask(ControllerAll controllerAll)
+
+	private void moveTaskOrUSToProductBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	{
+		viewSprintBacklog(controllerAll);
+
+		String input = Scan.readLine("Do you want to move a TASK from sprint backlog to product backlog, type: 1\n" +
+				"Do you want to move a USER STORY from sprint backlog to product backlog, type: " +
+				"2\n"); // Move to view class.
+
+		Project project = controllerAll.whichProject();
+
+		if (project == null){
+			projectNotFound();
+		}else{
+			if (input.equals("1"))
+			{
+				int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+				String sprintName = Scan.readLine("Write the name of the sprint you want to move your task from: ");
+
+				project.getSprintBacklog().getTask(idTask).setSprintName("None");
+				project.getProductBacklog().getTasksImport().add(findSprintBacklogByName(sprintName,project.getAllSprints()).getTask(idTask));
+				findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().remove(idTask);
+
+				movedObject();
+			}
+
+			if(input.equals("2"))
+			{
+				int usNumber = Scan.readInt("Write the the number of the user story you want to" +
+						" move: "); // Move to view class.
+				String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story from: ");
+
+				project.getProductBacklog().getUserStory(usNumber).setSprintName(sprintName);
+				findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usNumber));
+				project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usNumber));
+
+				project.getSprintBacklog().getUserStory(usNumber).setSprintName("None");
+				project.getProductBacklog().getAllUserStories().add(findSprintBacklogByName(sprintName,project.getAllSprints()).getUserStory(usNumber));
+				findSprintBacklogByName(sprintName,project.getAllSprints()).getAllUserStories().remove(usNumber);
+
+				movedObject();
+			}
+			else
+			{
+				return;
+			}
+		}
+	}
+
+	public void assignTask(ControllerAll controllerAll)
 	{
 		Developer developer = controllerAll.findDeveloperByID();
 		Task task = controllerAll.findTaskById(controllerAll);
-		task.getAssignedTeamMembers().add(developer);
+		task.getAssignedDevelopers().add(developer);
 		task.setStatus("In progress");
 
 	}
+
+	public void assignUserStory(ControllerAll controllerAll)
+	{
+		Developer developer = controllerAll.findDeveloperByID();
+		UserStory userStory = controllerAll.findUserStoryById(controllerAll);
+		userStory.getAssignedDevelopers().add(developer);
+		userStory.setStatus("In progress");	//We have different methods for setting status, which one should we use?
+
+	}
+
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
 	public void createProductOwner(ControllerAll controllerAll)
@@ -266,7 +331,6 @@ public class ControllerScrumMaster
 		Export.exportObject(newProOwner);
 		createdProOwner();
 	}
-
 
 	public int createIdProductOwner(ControllerAll controllerAll)
 	{
