@@ -54,12 +54,6 @@ public class DevTeamView {
         return actualHrs;
     }
 
-
-
-
-
-
-
     public int getActualVelocity(){
         int actualVelocity = Scan.readInt("Enter actual velocity: ");
         return actualVelocity;
