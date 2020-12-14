@@ -35,7 +35,7 @@ public class ControllerProductOwner
     }
 
     //*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*//
-    public void productOwnerMenu(ControllerAll controllerAll)
+    public void productOwnerMenu(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster)
     {
         boolean running = true;
         do
@@ -51,7 +51,7 @@ public class ControllerProductOwner
                     viewBacklog(controllerAll);
                     break;
                 case 3:
-                    editBacklog(controllerAll);
+                    editBacklog(controllerAll, controllerScrumMaster);
                     break;
                 case 4:
                     getProjectName();
@@ -74,7 +74,7 @@ public class ControllerProductOwner
 
 
     //*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*//
-    public void editBacklog(ControllerAll controllerAll)
+    public void editBacklog(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster)
     {
         boolean running = true;
         do
@@ -95,7 +95,7 @@ public class ControllerProductOwner
                     editUserStory(controllerAll);
                     break;
                 case 5:
-                    addUserStory(controllerAll);
+                    addUserStory(controllerAll, controllerScrumMaster);
                     break;
                 case 6:
                     removeUserStory(controllerAll);
@@ -109,10 +109,11 @@ public class ControllerProductOwner
         } while (running);
     }
 
-   public void addUserStory(ControllerAll controllerAll)
+   public void addUserStory(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster)
     {
         Project project = controllerAll.whichProject();
-        UserStory newUserStory = getUSInfo();
+        int number = controllerScrumMaster.taskUSIdGenerator(project);
+        UserStory newUserStory = getUSInfo(number);
         project.getProductBacklog().getAllUserStories().add(newUserStory);
         Export.exportObject(newUserStory);
     }

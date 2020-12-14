@@ -74,10 +74,10 @@ public class ProductOwnerView
         return endDate;
     }
 
-    public static UserStory getUSInfo() {
+    public static UserStory getUSInfo(int number ) {
         Scan.print("Add new user story");
         String name = Scan.readLine("Name: ");
-        int number = Scan.readInt("User story number: ");
+        //int number = Scan.readInt("User story number: ");
         String sprint = Scan.readLine("SprintBacklog: ");
         int priority = Scan.readInt("Priority: ");
         String content = Scan.readLine("Content: ");

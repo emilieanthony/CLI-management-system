@@ -122,7 +122,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private int taskUSIdGenerator(Project project){
+	public int taskUSIdGenerator(Project project){
 		// initialize int variable for ID
 		int id = project.getId() * 1000 + 1;
 

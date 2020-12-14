@@ -11,8 +11,7 @@ public class Import {
 
     public void importProjects(ControllerAll controllerAll){
 
-        String fileName = getFileName();
-        File file = new File(fileName);
+        File file = new File("ProjectInfo");
 
         try {
 
