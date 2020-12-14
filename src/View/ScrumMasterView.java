@@ -55,6 +55,11 @@ public class ScrumMasterView {
         return getTaskId;
     }
 
+    public static int newPriorityNumberTask (){
+        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number.");
+    return newPriorityNumberTask;
+    }
+
     //-------------------------------------------------------------------------------------------------------------------
 
     public static String getFileName() {

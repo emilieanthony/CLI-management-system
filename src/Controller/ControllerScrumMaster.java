@@ -90,10 +90,10 @@ public class ControllerScrumMaster
 			switch (option)
 			{
 				case 1:
-					editPriorityNumberTask();
+					editPriorityNumberTask(controllerAll);
 					break;
 				case 2:
-					editStatusTask();
+					editStatusTask(controllerAll);
 					break;
 				case 3:
 					removeTask(controllerAll);
@@ -124,16 +124,18 @@ public class ControllerScrumMaster
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 
-	private void editPriorityNumberTask(int newPriorityNumber,ControllerAll controllerAll) {
+	private void editPriorityNumberTask(ControllerAll controllerAll) {
 
 			Task task = findTaskById(controllerAll);
-			task.setPriorityNumber(newPriorityNumber);
-		}
-	
-	private void editStatusTask() {
-
-
+			int priorityNumber = newPriorityNumberTask();
+			task.setPriorityNumber(priorityNumber);
 	}
+
+	private void editStatusTask(ControllerAll controllerAll) {
+
+			Task task = findTaskById(controllerAll);
+			task.setStatus(status);
+		}
 
 	private void removeTask(ControllerAll controllerAll ) {
 		Project project = controllerAll.whichProject();
