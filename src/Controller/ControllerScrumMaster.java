@@ -10,8 +10,7 @@ import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
 import static View.DevTeamView.getTaskId;
-import static View.ProductOwnerView.getUSNumber;
-import static View.ProductOwnerView.printRemoved;
+import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster
@@ -125,10 +124,14 @@ public class ControllerScrumMaster
 
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 
-	private void editPriorityNumberTask() {
+	private void editPriorityNumberTask(int newPriorityNumber,ControllerAll controllerAll) {
 
-	}
+			Task task = findTaskById(controllerAll);
+			task.setPriorityNumber(newPriorityNumber);
+		}
+	
 	private void editStatusTask() {
+
 
 	}
 
