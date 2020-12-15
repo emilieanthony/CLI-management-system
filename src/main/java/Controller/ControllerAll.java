@@ -69,7 +69,7 @@ public class ControllerAll
                     contScrum.scrumMasterMenu(contProOwner,controllerAll);
                     break;
                 case 2:
-                    contProOwner.productOwnerMenu(controllerAll);
+                    contProOwner.productOwnerMenu(controllerAll, contScrum);
                     break;
                 case 3:
                     contDeveloper.teamMemberMenu(controllerAll,contProOwner);

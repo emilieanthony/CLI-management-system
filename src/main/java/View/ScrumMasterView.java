@@ -44,8 +44,8 @@ public class ScrumMasterView {
         return fileName;
     }
 
-    public static Task getTaskInfo() {
-        int id = Scan.readInt("Please enter task id:");
+    public static Task getTaskInfo(int id) {
+       // int id = Scan.readInt("Please enter task id:");
         String name = Scan.readLine("Please enter name of task:");
         int priorityNumber = Scan.readInt("Please enter priority number:");
         int estimatedHours = Scan.readInt("Please enter estimated hours:");
@@ -111,6 +111,11 @@ public class ScrumMasterView {
         for (Task task : allTasks){
             Scan.print(task.toString());
         }
+
+    }
+
+    public static void createdTaskReceipt(Task task){
+        Scan.print("\nThe following task has been created:\n " + task.soloToString() + "\n");
 
     }
 }
