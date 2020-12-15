@@ -25,17 +25,48 @@ public class ScrumMasterView {
                 "5. Create a new Development Team Member\n" +
                 "6. Create a new Product owner\n" +
                 "7. Assign a task to Development Team Member\n" +
-                "8. View product backlog\n" +
-                "9. View all development Team Members\n" +
-                "10. Move task or user story to sprint backlog\n" +
-                "11. View sprint backlog\n" +
-                "12. Import file\n" +
-                "13. Switch project\n" +
-                "14. Go back to main menu\n");
+                "8. Edit Task Menu \n" +
+                "9. View product backlog\n" +
+                "10. View all development Team Members\n" +
+                "11. Move task or user story to sprint backlog\n" +
+                "12. View sprint backlog\n" +
+                "13. Import file\n" +
+                "14. Switch project\n" +
+                "15. Go back to main menu\n");
         
 
         return option;
     }
+
+
+    //----------------------------------------------------------Edit task menu---------------------------------------------
+    public static int menuEditTask()
+    {
+        int option = Scan.readInt
+                ("\n\nWhich part of the task do you want to edit, enter a number:\n\n" +
+                        "1- Edit Task Priority Number.\n" +
+                        "2- Edit Task Status.\n" +
+                        "3- Remove Task from Sprint Backlog.\n" +
+                        "4- Remove Task from Product Backlog.\n" +
+                        "5- Back to your menu.\n");
+        return option;
+    }
+
+    public static int newPriorityNumberTask (){
+        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number.");
+
+    return newPriorityNumberTask;
+    }
+
+    public static String newStatusTask (){
+
+        String newStatusTask = Scan.readLine("\nEnter the new status; Complete, Work in progress, Open.");
+        return newStatusTask;
+
+    }
+
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     public static String getFileName() {
 

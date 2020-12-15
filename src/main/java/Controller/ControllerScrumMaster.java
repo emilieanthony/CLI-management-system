@@ -8,22 +8,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
+import static View.DevTeamView.getTaskId;
+import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;
 
-public class ControllerScrumMaster
-{
+public class ControllerScrumMaster {
 
 	private Import importFile = new Import();
+	static String name;
 
-	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll)
-	{
+	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll) {
 
 		boolean running = true;
-		do
-		{
+		do {
 			int option = menuScrumMaster();
-			switch (option)
-			{
+			switch (option) {
 				case 1:
 					createProject(controllerAll);
 					break;
@@ -46,24 +45,53 @@ public class ControllerScrumMaster
 					assignATask(controllerAll);
 					break;
 				case 8:
-					contProOwner.viewBacklog(controllerAll);
+					scrumMasterEditTaskMenu(controllerAll);
 					break;
 				case 9:
-					viewTeamMembers(controllerAll);
+					contProOwner.viewBacklog(controllerAll);
 					break;
 				case 10:
-					moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+					viewTeamMembers(controllerAll);
 					break;
 				case 11:
-					viewSprintBacklog(controllerAll);
+					moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 					break;
 				case 12:
-					importFile.importProjects(controllerAll);
+					viewSprintBacklog(controllerAll);
 					break;
 				case 13:
-					getProjectName();// Switch project.
+					importFile.importProjects(controllerAll);
 					break;
 				case 14:
+					getProjectName();// Switch project.
+					break;
+				case 15:
+					running = false;
+					break;
+				default:
+					defaultMessage();
+			}
+		} while (running);
+	}
+
+	//-----------------------------------------------------Second Switch----------------------------------------------
+
+	public void scrumMasterEditTaskMenu(ControllerAll controllerAll) {
+
+		boolean running = true;
+		do {
+			int option = menuEditTask();
+			switch (option) {
+				case 1:
+					editPriorityNumberTask(controllerAll);
+					break;
+				case 2:
+					editStatusTask(controllerAll);
+					break;
+				case 3:
+					removeTask(controllerAll);
+					break;
+				case 4:
 					running = false;
 					break;
 				default:
@@ -73,58 +101,129 @@ public class ControllerScrumMaster
 	}
 
 
-	private void viewTeamMembers(ControllerAll controllerAll)
-	{
+	//-------------------------------------------------------------------------------------------------------------------
+	private void viewTeamMembers(ControllerAll controllerAll) {
 		Project project = controllerAll.whichProject();
 		membersView();
-		for (Developer developer : project.getAllTeamMembers())
-		{
+		for (Developer developer : project.getAllTeamMembers()) {
 			Scan.print(developer.toString());
 		}
 		projectNotFound();
 	}
 
+
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 
-	private void createTaskToProductBacklog(ControllerAll controllerAll)
-	{
-		Project project = controllerAll.whichProject();
+	private void editPriorityNumberTask(ControllerAll controllerAll) {
 
-		if (project == null){
+		Project project = controllerAll.whichProject();
+		if (project == null) {
 			projectNotFound();
 		} else {
 
-			int id = taskUSIdGenerator(project);
+			Task task = findTaskById(controllerAll);
 
-			Task newTask = getTaskInfo(id);
+			if (task == null) {
+				taskNotFound();
+			} else {
 
-			createdTaskReceipt(newTask);
-
-			project.getProductBacklog().getTasksImport().add(newTask);
-
+				int priorityNumber = newPriorityNumberTask();
+				task.setPriorityNumber(priorityNumber);
+			}
 		}
-
 	}
 
-	private void createTaskToSprint(ControllerAll controllerAll)
-	{
+	private void editStatusTask(ControllerAll controllerAll) {
 
 		Project project = controllerAll.whichProject();
-
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
 		} else {
 
-			int id = taskUSIdGenerator(project);
-			Task newTask = getTaskInfo(id);
+			Task task = findTaskById(controllerAll);
 
-			createdTaskReceipt(newTask);
+			if (task == null) {
+				taskNotFound();
+			} else {
 
-			String name = getSprintBacklogName();
 
-			findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
+				String newStatusTask = newStatusTask();
+				task.setStatus(newStatusTask);
+			}
 		}
+	}
+
+
+	private void removeTaskSprint(ControllerAll controllerAll) {
+
+		Project project = controllerAll.whichProject();
+
+		if (project == null) {
+			projectNotFound();
+		} else {
+
+			name = getSprintBacklogName();
+			findSprintBacklogByName(project.getAllSprintBacklogs());
+			SprintBacklog sprintBacklog = findSprintBacklogByName();
+			Task task = findTaskByIdSprint(controllerAll); // letar upp vilken sprint
+
+			if (task == null) {
+				taskNotFound();
+			} else {
+
+
+				sprintBacklog.getAllTasks().remove(task);
+
+
+				project.getSprintBacklog().getAllTasks().remove(task);
+				//project.getAllTasks().remove(task);          // arraylist sprint backlog, if else?
+				removeObject();
+			}
+		}
+	}
+
+	private void removeTaskProductBacklog(ControllerAll controllerAll) {
+
+		Project project = controllerAll.whichProject();
+
+		if (project == null) {
+			projectNotFound();
+		} else {
+
+			Task task = findTaskByIdProductBacklog(controllerAll);
+
+			if (task == null) {
+				taskNotFound();
+			} else {
+
+				project.getSprintBacklog().getAllTasks().remove(task);
+				//project.getAllTasks().remove(task);          // arraylist sprint backlog, if else?
+				removeObject();
+			}
+		}
+	}
+
+	private void createTaskToProductBacklog(ControllerAll controllerAll) {
+		Task newTask = getTaskInfo();
+		Project project = controllerAll.whichProject();
+
+		if (project == null) {
+			projectNotFound();
+		}
+
+		project.getProductBacklog().getTasksImport().add(newTask);
+	}
+
+	private void createTaskToSprint(ControllerAll controllerAll) {
+		Task newTask = getTaskInfo();
+		String name = getSprintBacklogName();
+		Project project = controllerAll.whichProject();
+
+		if (project == null) {
+			projectNotFound();
+		}
+
+		findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
 	}
 
 	public int taskUSIdGenerator(Project project){
@@ -207,8 +306,7 @@ public class ControllerScrumMaster
 		return allStories;
 	}
 
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
-	{
+	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll) {
 		contProOwner.viewBacklog(controllerAll);
 
 		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
@@ -217,42 +315,37 @@ public class ControllerScrumMaster
 
 		Project project = controllerAll.whichProject();
 
-		if (project == null){
+		if (project == null) {
 			projectNotFound();
-		}else{
-			if (input.equals("1"))
-			{
+		} else {
+			if (input.equals("1")) {
 				int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
 				String sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
 				project.getProductBacklog().getTask(idTask).setSprintName(sprintName);
-				findSprintBacklogByName(sprintName,project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
+				findSprintBacklogByName(sprintName, project.getAllSprints()).getAllTasks().add(project.getProductBacklog().getTask(idTask));
 				project.getProductBacklog().getTasksImport().remove(project.getProductBacklog().getTask(idTask));
 
 				movedObject();
 			}
 
-			if(input.equals("2"))
-			{
+			if (input.equals("2")) {
 				int usName = Scan.readInt("Write the the number of the user story you want to" +
 						" move: "); // Move to view class.
 				String sprintName = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
 
 				project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
-				findSprintBacklogByName(sprintName,project.getAllSprints()).getUserStories().add(project.getProductBacklog().getUserStory(usName));
+				findSprintBacklogByName(sprintName, project.getAllSprints()).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
 				project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
 
 				movedObject();
-			}
-			else
-			{
+			} else {
 				return;
 			}
 		}
 	}
 
-	public void assignATask(ControllerAll controllerAll)
-	{
+	public void assignATask(ControllerAll controllerAll) {
 		Developer developer = controllerAll.findDeveloperByID();
 		Task task = controllerAll.findTaskById(controllerAll);
 		task.getAssignedTeamMembers().add(developer);
@@ -261,8 +354,7 @@ public class ControllerScrumMaster
 	}
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
-	public void createProductOwner(ControllerAll controllerAll)
-	{
+	public void createProductOwner(ControllerAll controllerAll) {
 		String name = getProOwnerInfo();
 		int id = createIdProductOwner(controllerAll);
 		ProductOwner newProOwner = new ProductOwner(name, id);
@@ -273,12 +365,11 @@ public class ControllerScrumMaster
 	}
 
 
-	public int createIdProductOwner(ControllerAll controllerAll)
-	{
+	public int createIdProductOwner(ControllerAll controllerAll) {
 		int FIRST_ID = 1;
 		Project project = controllerAll.whichProject();
-		if(project != null) {
-			if(!project.getAllProductOwners().isEmpty()) {
+		if (project != null) {
+			if (!project.getAllProductOwners().isEmpty()) {
 				return project.getAllProductOwners().get(project.getAllProductOwners().size() - 1).getId() + 1;
 			}
 		} else {
@@ -293,26 +384,22 @@ public class ControllerScrumMaster
 		String name = getDeveloperInfo();
 		int id = createIdDevelopmentMember(controllerAll);
 		Project project = controllerAll.whichProject();
-		if (project==null){
+		if (project == null) {
 			projectNotFound();
-		}else{
-			Developer developer = new Developer(name,id);
+		} else {
+			Developer developer = new Developer(name, id);
 			project.getAllTeamMembers().add(developer);
 			//Export.exportObject(developer);
 			createdDeveloper();
 		}
 	}
 
-	public int createIdDevelopmentMember(ControllerAll controllerAll)
-	{
+	public int createIdDevelopmentMember(ControllerAll controllerAll) {
 		int id = 1;
 		Project project = controllerAll.whichProject();
-		if (project.getAllTeamMembers().isEmpty())
-		{
+		if (project.getAllTeamMembers().isEmpty()) {
 			id = 1;
-		}
-		else
-		{
+		} else {
 			id = project.getAllTeamMembers().get(project.getAllTeamMembers().size() - 1).getId() + 1;
 		}
 
@@ -377,33 +464,69 @@ public class ControllerScrumMaster
 	private void viewSprintBacklog(ControllerAll controllerAll) {
 		Project project = controllerAll.whichProject();
 
-		if (project == null){
+		if (project == null) {
 			projectNotFound();
 
-		} else{
-			String name = getSprintBacklogByName();
-			SprintBacklog sprint = findSprintBacklogByName(name,project.getAllSprints());
-			printSprintBacklog(sprint.getUserStories(),sprint.getAllTasks()
+		} else {
+
+			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
+			printSprintBacklog(sprint.getAllUserStories(), sprint.getAllTasks()
 			);
 		}
 	}
 
-	public SprintBacklog findSprintBacklogByName(String name, ArrayList<SprintBacklog> allBacklogs)
-	{
+	public SprintBacklog findSprintBacklogByName(ControllerAll controllerAll) {
 		SprintBacklog sprintBacklog = null;
-
-		Iterator<SprintBacklog> iterator = allBacklogs.iterator();
-		while (sprintBacklog == null && iterator.hasNext())
-		{
+		String name = getSprintBacklogByName();
+		Project project = controllerAll.whichProject();
+		Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
+		while (sprintBacklog == null && iterator.hasNext()) {
 			SprintBacklog foundBacklog = iterator.next();
-			if (foundBacklog.getName().equalsIgnoreCase(name))
-			{
+			if (foundBacklog.getName().equalsIgnoreCase(name)) {
 				sprintBacklog = foundBacklog;
 			}
 		}
 		return sprintBacklog;
 	}
-}
 
+	public Task findTaskByIdProductBacklog(ControllerAll controllerAll) { // in product backlog
+
+
+		int id = getTaskId();
+		Task task = null;
+
+		Project project = controllerAll.whichProject();
+
+			Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
+			while (task == null && iterator.hasNext()) {
+				Task foundTask = iterator.next();
+				if (foundTask.getId() == id) {
+					task = foundTask;
+				}
+			}
+	//	}
+			return task;
+		}
+
+
+	public Task findTaskByIdSprint(ControllerAll controllerAll) {
+
+
+		int id = getTaskId();
+		Task task = null;
+
+		Project project = controllerAll.whichProject();
+
+		Iterator<Task> iterator = project.getSprintBacklog().getAllTasks().iterator();
+		while (task == null && iterator.hasNext()) {
+			Task foundTask = iterator.next();
+			if (foundTask.getId() == id) {
+				task = foundTask;
+			}
+		}
+		//	}
+		return task;
+	}
+}
 
 
