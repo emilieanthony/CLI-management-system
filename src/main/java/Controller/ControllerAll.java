@@ -42,13 +42,17 @@ public class ControllerAll
     {
 
         int option = Scan.readInt("\n\nWelcome to Codelicode, your project management tool\n\n" +
-                "Shift between your projects to be able to make any changes or view options,\nYou will find an option in your " +
-                        "menu to choose between projects! \n" + "\nPlease enter a option below:\n" +
-                "1. Scrum master\n" +
-                "2. Product owner\n" +
-                "3. Development team member\n" +
+                "IMPORTANT:- Shift between your projects to be able to make any changes or view " +
+                "options,\nYou will find an option in your menu to choose between projects! \n" +
+                "\nPlease enter a option below:\n"+
+                "You're working on Project " + proName + "." + "\n\n"+
+                "1. Scrum master.\n" +
+                "2. Product owner.\n" +
+                "3. Development team member.\n" +
                 "4. View all Projects.\n" +
-                "5. Save and Exit system\n");
+                "5. Change project.\n" +
+                "6. Save and Exit system.\n");
+
         return option;
     }
 
@@ -59,6 +63,7 @@ public class ControllerAll
     {
         boolean running = true;
         loadData();
+        viewProjectMenu(controllerAll);
         Start();
         do
         {
@@ -74,9 +79,13 @@ public class ControllerAll
                 case 3:
                     contDeveloper.teamMemberMenu(controllerAll,contProOwner);
                     break;
-                case 4: viewProjects();
+                case 4:
+                    viewProjects();
                     break;
                 case 5:
+                    getProjectName();
+                    break;
+                case 6:
                     saveData();
                     running = false; // Exit system.
                     break;
@@ -90,6 +99,7 @@ public class ControllerAll
             Scan.print(project.toString());
         }
     }
+
     public Project whichProject(){
         Project project = findProjectByName();
         return project;

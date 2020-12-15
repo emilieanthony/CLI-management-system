@@ -1,5 +1,6 @@
 package View;
 
+import Controller.ControllerAll;
 import Models.*;
 import Models.Task;
 import Utility.Scan;
@@ -10,7 +11,7 @@ public class ScrumMasterView {
 
 
     public static String proName;
-    public static String backlogName;
+    public static String name;
 
     public static int menuScrumMaster() {
 
@@ -53,17 +54,23 @@ public class ScrumMasterView {
 
         return new Task(id, priorityNumber, estimatedHours, name, description);
     }
+    public static void viewProjectMenu(ControllerAll contAll){
 
+        int order = 1;
+        Scan.print("\n\nWelcome to Codelicode: \n\nProject List:\n");
+        for (Project project:contAll.getAllProjects()) {
+            Scan.print(order++ + ". " + project.getName()+ ".\n");
+        }
+    }
 
     public static void Start() {
-        proName = Scan.readLine("\n\nWelcome to Codelicode: \nWhich project you want " +
+        proName = Scan.readLine("\nWhich project you want " +
                 "to access? Enter the name of the project or press enter to ignore: ");
     }
 
     public static void getProjectName() {
-        proName = Scan.readLine("Which project you want to access: Please enter the project " +
+        proName = Scan.readLine("\nWhich project you want to access: Please enter the project " +
                 "name:\n");
-
     }
 
     public static void membersView() {
@@ -84,10 +91,6 @@ public class ScrumMasterView {
         return name;
     }
 
-    public String getBacklogName() {
-        return Scan.readLine("Please enter name of backlog you want to add a task to:");
-    }
-
     public static void createdDeveloper() {
         Scan.print("You have successfully created a new developer.\n");
     }
@@ -98,11 +101,13 @@ public class ScrumMasterView {
     }
 
     public static String getSprintBacklogByName(){
-        return Scan.readLine("Write the name of the sprint: ");
+        name = Scan.readLine("Write the name of the sprint: ");
+        return name;
     }
 
     public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks){
-        if(allUserStories.isEmpty()&&allTasks.isEmpty()){
+        if(allUserStories.isEmpty()&&allTasks.isEmpty()){ //what happens if one of them is not
+            // empty!
             Scan.print("The sprint backlog is empty.");
         }
         for (UserStory story : allUserStories){
@@ -111,7 +116,6 @@ public class ScrumMasterView {
         for (Task task : allTasks){
             Scan.print(task.toString());
         }
-
     }
 
     public static void createdTaskReceipt(Task task){
