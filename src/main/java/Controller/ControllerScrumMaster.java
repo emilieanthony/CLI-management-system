@@ -509,7 +509,6 @@ public class ControllerScrumMaster {
 		}
 
 
-
 	public Task findTaskByIdSprint(ControllerAll controllerAll) {
 
 

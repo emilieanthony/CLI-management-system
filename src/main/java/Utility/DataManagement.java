@@ -25,7 +25,6 @@ public class DataManagement {
         }
     }
 
-    //@Test
     public ArrayList<Project> readProData(ArrayList<Project> projects){
 
         try {
