@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
+import static Utility.PrintUtility.projectNotFound;
 import static View.DevTeamView.getDeveloperId;
 import static View.DevTeamView.getTaskId;
 import static View.ScrumMasterView.*;
@@ -115,6 +116,7 @@ public class ControllerAll
         int id = getTaskId();
         Task task = null;
         Project project = controllerAll.whichProject();
+
         Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
         while (task == null && iterator.hasNext())
         {

@@ -10,7 +10,7 @@ public class ScrumMasterView {
 
 
     public static String proName;
-    public static String backlogName;
+    public static String name;
 
     public static int menuScrumMaster() {
 
@@ -45,8 +45,9 @@ public class ScrumMasterView {
                 ("\n\nWhich part of the task do you want to edit, enter a number:\n\n" +
                         "1- Edit Task Priority Number.\n" +
                         "2- Edit Task Status.\n" +
-                        "3- Remove Task .\n" +
-                        "4- Back to your menu.\n");
+                        "3- Remove Task from Sprint Backlog.\n" +
+                        "4- Remove Task from Product Backlog.\n" +
+                        "5- Back to your menu.\n");
         return option;
     }
 
@@ -128,7 +129,8 @@ public class ScrumMasterView {
     }
 
     public static String getSprintBacklogByName(){
-        return Scan.readLine("Write the name of the sprint: ");
+        name = Scan.readLine("Write the name of the sprint: ");
+        return name;
     }
 
     public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks){

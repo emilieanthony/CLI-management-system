@@ -16,6 +16,7 @@ import static View.ScrumMasterView.*;
 public class ControllerScrumMaster {
 
 	private Import importFile = new Import();
+	static String name;
 
 	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll) {
 
@@ -126,6 +127,7 @@ public class ControllerScrumMaster {
 			if (task == null) {
 				taskNotFound();
 			} else {
+
 				int priorityNumber = newPriorityNumberTask();
 				task.setPriorityNumber(priorityNumber);
 			}
@@ -153,7 +155,7 @@ public class ControllerScrumMaster {
 	}
 
 
-	private void removeTask(ControllerAll controllerAll) {
+	private void removeTaskSprint(ControllerAll controllerAll) {
 
 		Project project = controllerAll.whichProject();
 
@@ -161,14 +163,42 @@ public class ControllerScrumMaster {
 			projectNotFound();
 		} else {
 
-			Task task = findTaskById(controllerAll);
+			name = getSprintBacklogName();
+			findSprintBacklogByName(project.getAllSprintBacklogs());
+			SprintBacklog sprintBacklog = findSprintBacklogByName();
+			Task task = findTaskByIdSprint(controllerAll); // letar upp vilken sprint
 
 			if (task == null) {
 				taskNotFound();
 			} else {
 
 
-				project.getAllTasks().remove(task);          // arraylist sprint backlog, if else?
+				sprintBacklog.getAllTasks().remove(task);
+
+
+				project.getSprintBacklog().getAllTasks().remove(task);
+				//project.getAllTasks().remove(task);          // arraylist sprint backlog, if else?
+				removeObject();
+			}
+		}
+	}
+
+	private void removeTaskProductBacklog(ControllerAll controllerAll) {
+
+		Project project = controllerAll.whichProject();
+
+		if (project == null) {
+			projectNotFound();
+		} else {
+
+			Task task = findTaskByIdProductBacklog(controllerAll);
+
+			if (task == null) {
+				taskNotFound();
+			} else {
+
+				project.getSprintBacklog().getAllTasks().remove(task);
+				//project.getAllTasks().remove(task);          // arraylist sprint backlog, if else?
 				removeObject();
 			}
 		}
@@ -360,17 +390,18 @@ public class ControllerScrumMaster {
 			projectNotFound();
 
 		} else {
-			String name = getSprintBacklogByName();
-			SprintBacklog sprint = findSprintBacklogByName(name, project.getAllSprints());
+
+			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
 			printSprintBacklog(sprint.getAllUserStories(), sprint.getAllTasks()
 			);
 		}
 	}
 
-	public SprintBacklog findSprintBacklogByName(String name, ArrayList<SprintBacklog> allBacklogs) {
+	public SprintBacklog findSprintBacklogByName(ControllerAll controllerAll) {
 		SprintBacklog sprintBacklog = null;
-
-		Iterator<SprintBacklog> iterator = allBacklogs.iterator();
+		String name = getSprintBacklogByName();
+		Project project = controllerAll.whichProject();
+		Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
 		while (sprintBacklog == null && iterator.hasNext()) {
 			SprintBacklog foundBacklog = iterator.next();
 			if (foundBacklog.getName().equalsIgnoreCase(name)) {
@@ -380,20 +411,13 @@ public class ControllerScrumMaster {
 		return sprintBacklog;
 	}
 
-	public Task findTaskById(ControllerAll controllerAll) {
+	public Task findTaskByIdProductBacklog(ControllerAll controllerAll) { // in product backlog
 
 
 		int id = getTaskId();
 		Task task = null;
 
 		Project project = controllerAll.whichProject();
-
-		//if (project == null) {
-		//	projectNotFound();
-		//} else {
-		//if (task == null) {
-		//	taskNotFound();
-		//} else {
 
 			Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
 			while (task == null && iterator.hasNext()) {
@@ -405,7 +429,26 @@ public class ControllerScrumMaster {
 	//	}
 			return task;
 		}
-	}
 
+
+	public Task findTaskByIdSprint(ControllerAll controllerAll) {
+
+
+		int id = getTaskId();
+		Task task = null;
+
+		Project project = controllerAll.whichProject();
+
+		Iterator<Task> iterator = project.getSprintBacklog().getAllTasks().iterator();
+		while (task == null && iterator.hasNext()) {
+			Task foundTask = iterator.next();
+			if (foundTask.getId() == id) {
+				task = foundTask;
+			}
+		}
+		//	}
+		return task;
+	}
+}
 
 
