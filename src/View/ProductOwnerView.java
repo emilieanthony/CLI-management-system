@@ -87,6 +87,10 @@ public class ProductOwnerView
 
     }
 
+    public static void createdUStoryReceipt(UserStory userStory){
+        Scan.print("\nYou have added the following user story: \n" + userStory.toString());
+    }
+
     public static int getUSNumber()
     {
         Scan.print("\nRemove a user story");

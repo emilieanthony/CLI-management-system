@@ -116,6 +116,7 @@ public class ControllerProductOwner
         UserStory newUserStory = getUSInfo(number);
         project.getProductBacklog().getAllUserStories().add(newUserStory);
         Export.exportObject(newUserStory);
+        createdUStoryReceipt(newUserStory);
     }
 
     public void removeUserStory(ControllerAll controllerAll)

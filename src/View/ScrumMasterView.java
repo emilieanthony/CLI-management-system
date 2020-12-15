@@ -113,6 +113,11 @@ public class ScrumMasterView {
         }
 
     }
+
+    public static void createdTaskReceipt(Task task){
+        Scan.print("\nThe following task has been created:\n " + task.soloToString() + "\n");
+
+    }
 }
 
 

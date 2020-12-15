@@ -99,8 +99,11 @@ public class ControllerScrumMaster
 
 			Task newTask = getTaskInfo(id);
 
+			createdTaskReceipt(newTask);
 
-			project.getProductBacklog().getTasksImport().add(newTask);}
+			project.getProductBacklog().getTasksImport().add(newTask);
+
+		}
 
 	}
 
@@ -116,6 +119,9 @@ public class ControllerScrumMaster
 
 			int id = taskUSIdGenerator(project);
 			Task newTask = getTaskInfo(id);
+
+			createdTaskReceipt(newTask);
+
 			String name = getSprintBacklogName();
 
 			findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
