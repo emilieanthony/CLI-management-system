@@ -144,6 +144,8 @@ public class SprintBacklog implements Serializable
 	{
 		return "SprintBacklog Name: " + name +
 				"\nStart Date: " + startDate +
-				"\nEnd Date: " + endDate;
+				"\nEnd Date: " + endDate +
+				"\nUser Stories:" + userStories +
+				"\nTasks:" + allTasks;
 	}
 }
