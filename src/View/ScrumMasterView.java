@@ -11,6 +11,7 @@ public class ScrumMasterView {
 
     public static String proName;
     public static String name;
+    public static String backlogName;
 
     public static int menuScrumMaster() {
 
@@ -31,8 +32,11 @@ public class ScrumMasterView {
                 "12. View sprint backlog\n" +
                 "13. Import file\n" +
                 "14. Switch project\n" +
-                "15. Go back to main menu\n");
+                "15. Calculate average velocity\n"+
+                "16. Go back to main menu\n");
         
+
+
 
         return option;
     }
@@ -75,8 +79,8 @@ public class ScrumMasterView {
         return fileName;
     }
 
-    public static Task getTaskInfo() {
-        int id = Scan.readInt("Please enter task id:");
+    public static Task getTaskInfo(int id) {
+       // int id = Scan.readInt("Please enter task id:");
         String name = Scan.readLine("Please enter name of task:");
         int priorityNumber = Scan.readInt("Please enter priority number:");
         int estimatedHours = Scan.readInt("Please enter estimated hours:");
@@ -144,6 +148,16 @@ public class ScrumMasterView {
             Scan.print(task.toString());
         }
 
+    }
+
+    public static void createdTaskReceipt(Task task){
+        Scan.print("\nThe following task has been created:\n " + task.soloToString() + "\n");
+
+    }
+
+    public static String getVelocity (){
+        String input = Scan.readLine("Please enter the velocity for each sprint separated by a comma without spaces (e.g. 19,27,23):");
+        return input;
     }
 }
 

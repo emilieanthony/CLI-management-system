@@ -59,10 +59,10 @@ public class ControllerAll
             switch (option)
             {
                 case 1:
-                    contScrum.scrumMasterMenu(contProOwner,controllerAll);
+                    contScrum.scrumMasterMenu(contProOwner,controllerAll,contScrum);
                     break;
                 case 2:
-                    contProOwner.productOwnerMenu(controllerAll);
+                    contProOwner.productOwnerMenu(controllerAll, contScrum);
                     break;
                 case 3:
                     contDeveloper.teamMemberMenu(controllerAll,contProOwner);
