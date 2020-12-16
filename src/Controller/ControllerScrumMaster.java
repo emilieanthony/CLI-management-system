@@ -338,7 +338,6 @@ public class ControllerScrumMaster
 		int averageVelocity = getAverageVelocity(numbers);
 		Scan.print("The average velocity is: " + averageVelocity);
 	}
-
 }
 
 
