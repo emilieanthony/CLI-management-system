@@ -77,7 +77,7 @@ public class SprintBacklog implements Serializable
 	{
 		for(UserStory userStory : userStories)
 		{
-			if(userStory.getName().equals(number))
+			if(userStory.getNumber() == number)
 			{
 				return userStory;
 			}

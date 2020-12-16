@@ -125,6 +125,7 @@ public class ControllerProductOwner
         project.getProductBacklog().getAllUserStories().remove(userStory);
         printRemoved();
     }
+
     public void viewBacklog(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();

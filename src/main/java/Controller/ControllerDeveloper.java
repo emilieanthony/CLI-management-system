@@ -82,7 +82,7 @@ public class ControllerDeveloper {
         Iterator<Task> iterator = project.getAllTasks().iterator();
         while (task == null && iterator.hasNext()) {
             Task foundTask = iterator.next();
-            if (foundTask.getAssignedTeamMembers().contains(developer)) {
+            if (foundTask.getAssignedDevelopers().contains(developer)) {
                 task = foundTask;
             }
         }
