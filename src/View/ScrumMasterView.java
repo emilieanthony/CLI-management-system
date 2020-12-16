@@ -113,6 +113,11 @@ public class ScrumMasterView {
         }
 
     }
+
+    public static String getVelocity (){
+        String input = Scan.readLine("Please enter the velocity for each sprint separated by a comma without spaces (e.g. 19,27,23):");
+        return input;
+    }
 }
 
 

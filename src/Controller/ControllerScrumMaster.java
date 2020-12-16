@@ -315,11 +315,6 @@ public class ControllerScrumMaster
 	}
 	/*------------------------------------Methods for velocity-------------------------------------------*/
 
-	public static String getVelocity (){
-		String input = Scan.readLine("Please enter the velocity or each sprint separated by a comma (e.g. 19,27,23)");
-		return input;
-	}
-
 	public int [] arrayOfVelocity(String input){
 		String[] strArray = input.split(",");
 		int[] intArray = new int[strArray.length];
