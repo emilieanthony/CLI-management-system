@@ -137,14 +137,19 @@ public class Task implements Comparable<Task>, Serializable
 		String output;
 
 		output =
-				"Tasks: "+ "\nID:" + id + "\nName: " + name + "\nPriority number: " + priorityNumber +
-						"\nStatus: " + status+ "\nDescription: " + description + "\nEstimated " +
-						"hours: " + estimatedHours + "\nActual hours: " + actualHours +
-						"\nAssigned Team Members:";
+				"Tasks: \n"+
+						"ID:" + id +
+						"\nName: " + name +
+						"\nPriority number: " + priorityNumber +
+						"\nStatus: " + status +
+						"\nDescription: " + description +
+						"\nEstimated hours: " + estimatedHours +
+						"\nActual hours: " + actualHours +
+						"\nAssigned Team Members:" + "\n";
 
 		if(assignedDevelopers == null)
 		{
-			output = output + "\n";
+			output = output + "None\n";
 		}
 		else
 		{

@@ -24,11 +24,11 @@ public class ScrumMasterView {
                 "5. Create a new Development Team Member\n" +
                 "6. Create a new Product owner\n" +
                 "7. Assign a task to Development Team Member\n" +
-                "8. Assign a user story to Development Team Member" +
+                "8. Assign a user story to Development Team Member\n" +
                 "9. View product backlog\n" +
                 "10. View all development Team Members\n" +
                 "11. Move task or user story to sprint backlog\n" +
-                "12. Move task or user story to product backlog" +
+                "12. Move task or user story to product backlog\n" +
                 "13. View sprint backlog\n" +
                 "14. Import file\n" +
                 "15. Switch project\n" +
@@ -113,6 +113,67 @@ public class ScrumMasterView {
             Scan.print(task.toString());
         }
 
+    }
+
+    public static void assignmentCompleted()
+    {
+        Scan.print("\nAssignment completed!");
+    }
+
+    public static int assignTaskPrintIdTask()
+    {
+        int idTask = Scan.readInt("Write the ID of the task you want to assign: ");
+        return idTask;
+    }
+
+    public static String assignTaskPrintSprintName()
+    {
+        String sprintName = Scan.readLine("Write the name of which sprint backlog the task belongs to: ");
+        return sprintName;
+    }
+
+    public static int assignUsPrintIdUs()
+    {
+        int number = Scan.readInt("Write the number of the User Story you want to assign: ");
+        return number;
+    }
+
+    public static String assignUsPrintSprintName()
+    {
+        String sprintName = Scan.readLine("Write the name of which sprint backlog the User Story belongs to: ");
+        return sprintName;
+    }
+
+    public static String moveObjectToBacklogPrint()
+    {
+        String input = Scan.readLine("Do you want to move a TASK from sprint backlog to product backlog, type: 1\n" +
+                "Do you want to move a USER STORY from sprint backlog to product backlog, type: " +
+                "2\n");
+        return input;
+    }
+
+    public static int IdTaskToMovePrint()
+    {
+        int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+        return idTask;
+    }
+
+    public static String sprintNameToMovePrint()
+    {
+        String sprintName = Scan.readLine("Write the name of the sprint you want to move your task from: ");
+        return sprintName;
+    }
+
+    public static int numerUsToMove()
+    {
+        int usNumber = Scan.readInt("Write the the number of the user story you want to move: ");
+        return usNumber;
+    }
+
+    public static String sprintNameToMove()
+    {
+        String sprintName = Scan.readLine("Write the name of the sprint backlog you want to move your user story from: ");
+        return sprintName;
     }
 }
 

@@ -21,4 +21,5 @@ public class PrintUtility {
     public static void movedObject(){
         Scan.print("\nYou have successfully moved the object!\n");
     }
+
 }
