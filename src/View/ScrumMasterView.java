@@ -30,8 +30,8 @@ public class ScrumMasterView {
                 "11. View sprint backlog\n" +
                 "12. Import file\n" +
                 "13. Switch project\n" +
-                "14. Go back to main menu\n");
-        
+                "14. Calculate average velocity\n"+
+                "15. Go back to main menu\n");
 
         return option;
     }
@@ -117,6 +117,11 @@ public class ScrumMasterView {
     public static void createdTaskReceipt(Task task){
         Scan.print("\nThe following task has been created:\n " + task.soloToString() + "\n");
 
+    }
+
+    public static String getVelocity (){
+        String input = Scan.readLine("Please enter the velocity for each sprint separated by a comma without spaces (e.g. 19,27,23):");
+        return input;
     }
 }
 

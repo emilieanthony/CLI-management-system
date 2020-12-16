@@ -5,6 +5,7 @@ import Utility.Import;
 import Utility.Export;
 import Utility.Scan;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -65,6 +66,8 @@ public class ControllerScrumMaster
 					getProjectName();// Switch project.
 					break;
 				case 14:
+					velocity();
+				case 15:
 					running = false;
 					break;
 				default:
@@ -403,6 +406,31 @@ public class ControllerScrumMaster
 			}
 		}
 		return sprintBacklog;
+	}
+	/*------------------------------------Methods for velocity-------------------------------------------*/
+
+	public int [] arrayOfVelocity(String input){
+		String[] strArray = input.split(",");
+		int[] intArray = new int[strArray.length];
+			for(int i = 0; i < strArray.length; i++) {
+			intArray[i] = Integer.parseInt(strArray[i]);
+			}
+			return intArray;
+	}
+
+	public int getAverageVelocity(int[] numbers){
+		int sum = 0;
+		for (int i = 0; i<numbers.length; i++){
+		sum=sum + numbers[i];
+		}
+		return (sum/numbers.length);
+	}
+
+	public void velocity(){   //Call this one in menu
+		String input = getVelocity();
+		int[] numbers = arrayOfVelocity(input);
+		int averageVelocity = getAverageVelocity(numbers);
+		Scan.print("The average velocity is: " + averageVelocity);
 	}
 }
 
