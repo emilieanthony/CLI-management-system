@@ -30,8 +30,8 @@ public class ScrumMasterView {
                 "11. View sprint backlog\n" +
                 "12. Import file\n" +
                 "13. Switch project\n" +
-                "14. Go back to main menu\n");
-        
+                "14. Calculate average velocity\n"+
+                "15. Go back to main menu\n");
 
         return option;
     }
