@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DataManagement {
 
-    public void writeData(ArrayList<Project> allProjects){
+    public void exportProData(ArrayList<Project> allProjects){
         ObjectMapper mapper = new ObjectMapper();
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File("allProjects.json"),
@@ -25,7 +25,7 @@ public class DataManagement {
         }
     }
 
-    public ArrayList<Project> readProData(ArrayList<Project> projects){
+    public ArrayList<Project> importProData(ArrayList<Project> projects){
 
         try {
 

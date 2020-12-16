@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
-import static Utility.PrintUtility.projectNotFound;
 import static View.DevTeamView.getDeveloperId;
 import static View.DevTeamView.getTaskId;
 import static View.ScrumMasterView.*;
@@ -171,11 +170,11 @@ public class ControllerAll
 
     public void loadData(){
 
-        setAllProjects(Data.readProData(allProjects));
+        setAllProjects(Data.importProData(allProjects));
     }
 
     public void saveData(){
-        Data.writeData(allProjects);
+        Data.exportProData(allProjects);
     }
 
 }

@@ -141,7 +141,7 @@ public class Task implements Comparable<Task>, Serializable
 		}
 	}
 
-	public String soloToString() { // had to use a weird name here because original toString was already taken ???? would appreciate an explanation whoever did that //Lina
+	public String soloToString() { // had to use a weird sprintName here because original toString was already taken ???? would appreciate an explanation whoever did that //Lina
 		return "Task ID: " + id +
 				"\nPriority Number: " + priorityNumber +
 				"\nEstimated Hours: " + estimatedHours +
@@ -150,7 +150,7 @@ public class Task implements Comparable<Task>, Serializable
 				"\nName: " + name +
 				"\nDescription: " + description +
 				"\nAssigned team members: " + assignedTeamMembers +
-				"\nSprint name: " + sprintName ;
+				"\nSprint sprintName: " + sprintName ;
 	}
 
 	public String toString()
