@@ -318,7 +318,7 @@ public class ControllerScrumMaster {
 
 		for (SprintBacklog sprintBL : sprintBLs){
 			//
-			ArrayList<UserStory> sprintBLStories = sprintBL.getAllUserStories();
+			ArrayList<UserStory> sprintBLStories = sprintBL.getUserStories();
 			for (UserStory story : sprintBLStories){
 				allStories.add(story);
 			}
@@ -356,7 +356,7 @@ public class ControllerScrumMaster {
 				name = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
 
 				project.getProductBacklog().getUserStory(usName).setSprintName(name);
-				findSprintBacklogByName(controllerAll).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
+				findSprintBacklogByName(controllerAll).getUserStories().add(project.getProductBacklog().getUserStory(usName));
 				project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
 
 				movedObject();

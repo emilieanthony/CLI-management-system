@@ -1,14 +1,11 @@
 package Controller;
 
 import Models.*;
-import Utility.Export;
 import Utility.Scan;
 import java.util.Iterator;
-
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
 import static View.ProductOwnerView.*;
-import static View.ScrumMasterView.backlogName;
 import static View.ScrumMasterView.getProjectName;
 
 
@@ -116,7 +113,7 @@ public class ControllerProductOwner
         int number = controllerScrumMaster.taskUSIdGenerator(project);
         UserStory newUserStory = getUSInfo(number);
         project.getProductBacklog().getAllUserStories().add(newUserStory);
-        Export.exportObject(newUserStory);
+        //Export.exportObject(newUserStory);
         createdUStoryReceipt(newUserStory);
     }
 
@@ -144,7 +141,7 @@ public class ControllerProductOwner
         String nameBacklog = getBacklogName();
         Project project = controllerAll.whichProject();
         project.getProductBacklog().setName(nameBacklog);
-        backlogName = nameBacklog;
+        //backlogName = nameBacklog;
     }
     public void editBacklogSDate(ControllerAll controllerAll)
     {
