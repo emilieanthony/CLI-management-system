@@ -2,16 +2,13 @@ package Controller;
 
 import Models.*;
 import Utility.Import;
-import Utility.Export;
 import Utility.Scan;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
 import static View.DevTeamView.getTaskId;
-import static View.ProductOwnerView.*;
+
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster {
@@ -124,7 +121,6 @@ public class ControllerScrumMaster {
 
 
 	private void createTaskToProductBacklog(ControllerAll controllerAll) {
-		//Task newTask = getTaskInfo();
 		Project project = controllerAll.whichProject();
 
 		if (project == null) {
@@ -233,7 +229,7 @@ public class ControllerScrumMaster {
 
 		for (SprintBacklog sprintBL : sprintBLs) {
 			//
-			ArrayList<UserStory> sprintBLStories = sprintBL.getAllUserStories();
+			ArrayList<UserStory> sprintBLStories = sprintBL.getUserStories();
 			for (UserStory story : sprintBLStories) {
 				allStories.add(story);
 			}
@@ -271,7 +267,7 @@ public class ControllerScrumMaster {
 				name = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
 
 				project.getProductBacklog().getUserStory(usName).setSprintName(name);
-				findSprintBacklogByName(controllerAll).getAllUserStories().add(project.getProductBacklog().getUserStory(usName));
+				findSprintBacklogByName(controllerAll).getUserStories().add(project.getProductBacklog().getUserStory(usName));
 				project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
 
 				movedObject();
@@ -284,7 +280,7 @@ public class ControllerScrumMaster {
 	public void assignATask(ControllerAll controllerAll) {
 		Developer developer = controllerAll.findDeveloperByID();
 		Task task = controllerAll.findTaskById(controllerAll);
-		task.getAssignedTeamMembers().add(developer);
+		task.getAssignedDevelopers().add(developer);
 		task.setStatus("In progress");
 
 	}
@@ -376,7 +372,6 @@ public class ControllerScrumMaster {
 
 			int idTask = Scan.readInt("Write the ID of the task you want to remove: ");
 			project.getProductBacklog().getTasksImport().remove(project.getProductBacklog().getTask(idTask));
-
 			removeObject();
 
 		}
@@ -399,7 +394,6 @@ public class ControllerScrumMaster {
 		ProductOwner newProOwner = new ProductOwner(name, id);
 		Project project = controllerAll.whichProject();
 		project.getAllProductOwners().add(newProOwner);
-		//Export.exportObject(newProOwner);
 		createdProOwner();
 	}
 
@@ -428,7 +422,6 @@ public class ControllerScrumMaster {
 		} else {
 			Developer developer = new Developer(name, id);
 			project.getAllTeamMembers().add(developer);
-			//Export.exportObject(developer);
 			createdDeveloper();
 		}
 	}
@@ -466,7 +459,6 @@ public class ControllerScrumMaster {
 		Project project = new Project(id, name, startDate, endDate);
 		controllerAll.getAllProjects().add(project);
 		proName = name;
-		//Export.exportObject(project);
 
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
@@ -493,7 +485,6 @@ public class ControllerScrumMaster {
 		SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
 		Project project = controllerAll.whichProject();
 		project.getAllSprintBacklogs().add(sprintBacklog);
-		//Export.exportObject(sprintBacklog);
 
 		Scan.print("You have successfully created the following sprintBacklog:\n\n"
 				+ sprintBacklog.toString());
@@ -522,8 +513,6 @@ public class ControllerScrumMaster {
 		} else {
 
 			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
-			//printSprintBacklog(sprint.getUserStories(),sprint.getAllTasks()
-			//);
 			Scan.print(sprint.toString());
 		}
 	}
@@ -556,11 +545,8 @@ public class ControllerScrumMaster {
 				task = foundTask;
 			}
 		}
-		//	}
 		return task;
 	}
-
-		/*
 
 
 	/*------------------------------------Methods for velocity-------------------------------------------*/
@@ -587,47 +573,6 @@ public class ControllerScrumMaster {
 		int[] numbers = arrayOfVelocity(input);
 		int averageVelocity = getAverageVelocity(numbers);
 		Scan.print("The average velocity is: " + averageVelocity);
-	}
-}
-
-	private void viewSprintBacklog(ControllerAll controllerAll) {
-		name = getSprintBacklogByName();
-		Project project = controllerAll.whichProject();
-		if (project == null){
-			projectNotFound();
-		} else{
-
-			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
-			//printSprintBacklog(sprint.getUserStories(),sprint.getAllTasks()
-			//);
-			Scan.print(sprint.toString());
-		}
-	}
-
-	public SprintBacklog findSprintBacklogByName(ControllerAll controllerAll)
-	{
-		SprintBacklog sprintBacklog = null;
-		Project project = controllerAll.whichProject();
-		Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
-		while (sprintBacklog == null && iterator.hasNext())
-		{
-			SprintBacklog foundBacklog = iterator.next();
-			if (foundBacklog.getName().equalsIgnoreCase(name))
-			{
-				sprintBacklog = foundBacklog;
-			}
-		}
-		return sprintBacklog;
-	}
-
-	public void removeTaskSprintBacklog(ControllerAll controllerAll, ControllerScrumMaster contScrum){
-
-		name = getSprintBacklogByName();
-
-		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
-		Task task = findTaskByIdSprint(controllerAll,contScrum);
-		sprintBacklog.getAllTasks().remove(task);
-		removeObject();
 	}
 
 }

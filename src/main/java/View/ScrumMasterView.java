@@ -12,8 +12,6 @@ public class ScrumMasterView {
 
     public static String proName;
     public static String name;
-    public static String backlogName;
-
     public static int menuScrumMaster() {
 
         int option = Scan.readInt("\n\nWelcome Scrum Master!\n" +

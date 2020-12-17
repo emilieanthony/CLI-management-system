@@ -112,7 +112,7 @@ public class Task implements Comparable<Task>, Serializable
 	}
 
 	public void setAssignedTeamMembers(ArrayList<Developer> assignedTeamMembers) {
-		this.assignedTeamMembers = assignedTeamMembers;
+		this.assignedDevelopers = assignedTeamMembers;
 	}
 
 	public int getId()
@@ -151,7 +151,7 @@ public class Task implements Comparable<Task>, Serializable
 				"\nStatus: " + status +
 				"\nName: " + name +
 				"\nDescription: " + description +
-				"\nAssigned team members: " + assignedTeamMembers +
+				"\nAssigned team members: " + assignedDevelopers +
 				"\nSprint sprintName: " + sprintName ;
 	}
 

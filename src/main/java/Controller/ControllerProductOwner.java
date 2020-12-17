@@ -81,7 +81,7 @@ public class ControllerProductOwner
             switch (option)
             {
                 case 1:
-                    editBacklogName(controllerAll);
+                    editProductBacklogName(controllerAll);
                     break;
                 case 2:
                     editBacklogSDate(controllerAll);
@@ -137,12 +137,11 @@ public class ControllerProductOwner
 
     }
 
-    public void editBacklogName(ControllerAll controllerAll){
+    public void editProductBacklogName(ControllerAll controllerAll){
 
         String nameBacklog = getBacklogName();
         Project project = controllerAll.whichProject();
         project.getProductBacklog().setName(nameBacklog);
-        //backlogName = nameBacklog;
     }
     public void editBacklogSDate(ControllerAll controllerAll)
     {
