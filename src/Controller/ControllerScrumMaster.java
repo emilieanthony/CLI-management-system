@@ -20,7 +20,7 @@ public class ControllerScrumMaster {
 	static String name;
 
 	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll,
-								ControllerScrumMaster contScrum, Project project) {
+								ControllerScrumMaster contScrum) {
 
 		boolean running = true;
 		do {
@@ -48,7 +48,7 @@ public class ControllerScrumMaster {
 					assignATask(controllerAll);
 					break;
 				case 8:
-					scrumMasterEditTaskMenu(controllerAll, contScrum, project);
+					scrumMasterEditTaskMenu(controllerAll, contScrum);
 					break;
 				case 9:
 					contProOwner.viewBacklog(controllerAll);
@@ -82,17 +82,17 @@ public class ControllerScrumMaster {
 
 	//-----------------------------------------------------Second Switch----------------------------------------------
 
-	public void scrumMasterEditTaskMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum, Project project) {
+	public void scrumMasterEditTaskMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
 
 		boolean running = true;
 		do {
 			int option = menuEditTask();
 			switch (option) {
 				case 1:
-					editPriorityNumberTask(project);
+					editPriorityNumberTask(controllerAll);
 					break;
 				case 2:
-					editStatusTask(project);
+					editStatusTask(controllerAll);
 					break;
 				case 3:
 					removeTaskSprintBacklog(controllerAll, contScrum);
@@ -289,56 +289,79 @@ public class ControllerScrumMaster {
 
 	}
 
-	private void editPriorityNumberTask (Project project) {
+	private void editPriorityNumberTask (ControllerAll controllerAll) {
 		final int PRIORITY_LOWEST = 1;
 		final int PRIORITY_HIGHEST = 5;
 
-		ArrayList <Task> tasks = collectAllTasks(project);
+		Project project = controllerAll.whichProject();
 
-		int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
+		if (project == null) {
+			projectNotFound();
+		} else {
 
-		for (Task task: tasks) {
-			if (task.getId()==idTask) {
-				int newPriorityNumberTask = newPriorityNumberTask();
+			ArrayList<Task> tasks = collectAllTasks(project);
 
-				if ((newPriorityNumberTask >= PRIORITY_LOWEST)  && (newPriorityNumberTask <= PRIORITY_HIGHEST))
-				{ task.setPriorityNumber(newPriorityNumberTask);
+			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
 
-				} else { defaultMessage(); }
+			for (Task task : tasks) {
+				if (task.getId() == idTask) {
+					int newPriorityNumberTask = newPriorityNumberTask();
 
-				return;
+						if ((newPriorityNumberTask >= PRIORITY_LOWEST) && (newPriorityNumberTask <= PRIORITY_HIGHEST)) {
+						task.setPriorityNumber(newPriorityNumberTask);
+						objectEdited();
+
+				} else {
+					defaultMessage();
+						}
+
+					return;
+				}
 			}
-		}
 
-		taskNotFound();
+			taskNotFound();
+		}
 	}
 
-	private void editStatusTask(Project project) {
+	private void editStatusTask(ControllerAll controllerAll) {
+		Project project = controllerAll.whichProject();
 
-		ArrayList <Task> tasks = collectAllTasks(project);
+		if (project == null) {
+			projectNotFound();
+		} else {
 
-		int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
+			ArrayList<Task> tasks = collectAllTasks(project);
 
-		for (Task task: tasks) {
-			if (task.getId()==idTask) {
-				int newStatusTask = newStatusTask();
 
-				if (newStatusTask == 1)
-				{ task.setStatus("Open");
+			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
 
-				} else if (newStatusTask == 2){
-					task.setStatus("Work in Progress");
+			for (Task task : tasks) {
+				if (task.getId() == idTask) {
+					int newStatusTask = newStatusTask();
 
-				} else if (newStatusTask == 3){
-					task.setStatus("Complete");
+					if (newStatusTask == 1) {
+						task.setStatus("Open");
+						objectEdited();
 
-				} else { defaultMessage(); }
+					} else if (newStatusTask == 2) {
+						task.setStatus("Work in Progress");
+						objectEdited();
 
-				return;
+					} else if (newStatusTask == 3) {
+						task.setStatus("Complete");
+						objectEdited();
+
+					} else {
+						defaultMessage();
+					}
+
+					return;
+				}
 			}
-		}
 
-		taskNotFound();
+
+			taskNotFound();
+		}
 	}
 
 

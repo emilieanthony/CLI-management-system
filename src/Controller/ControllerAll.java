@@ -49,7 +49,7 @@ public class ControllerAll
 
     public void menuMain(ControllerAll controllerAll, ControllerScrumMaster contScrum ,
                          ControllerProductOwner contProOwner,
-                         ControllerDeveloper contDeveloper, Project project)
+                         ControllerDeveloper contDeveloper)
     {
         boolean running = true;
         Start();
@@ -59,7 +59,7 @@ public class ControllerAll
             switch (option)
             {
                 case 1:
-                    contScrum.scrumMasterMenu(contProOwner,controllerAll,contScrum, project);
+                    contScrum.scrumMasterMenu(contProOwner,controllerAll,contScrum);
                     break;
                 case 2:
                     contProOwner.productOwnerMenu(controllerAll, contScrum);

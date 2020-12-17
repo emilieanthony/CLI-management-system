@@ -71,13 +71,15 @@ public class Task implements Comparable<Task>, Serializable
 		this.name = name;
 	}
 
-	public void setPriorityNumber(int priorityNumber)
+	/*public void setPriorityNumber(int priorityNumber) // this affects editing tasks
 	{
 		if(priorityNumber > 0  && priorityNumber < 6)
 		{
 			priorityNumber = priorityNumber;
 		}
-	}
+	}*/
+
+	public void setPriorityNumber (int priorityNumber) {this.priorityNumber = priorityNumber; }
 
 	public void setSprintName(String name)
 	{
