@@ -5,6 +5,7 @@ import Utility.Import;
 import Utility.Export;
 import Utility.Scan;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -71,6 +72,9 @@ public class ControllerScrumMaster
 					getProjectName();// Switch project.
 					break;
 				case 16:
+					velocity();
+					break;
+				case 17:
 					running = false;
 					break;
 				default:
@@ -108,8 +112,10 @@ public class ControllerScrumMaster
 
 			Task newTask = getTaskInfo(id);
 
+			createdTaskReceipt(newTask);
 
 			project.getProductBacklog().getTasksImport().add(newTask);
+
 		}
 
 	}
@@ -128,6 +134,9 @@ public class ControllerScrumMaster
 
 			int id = taskUSIdGenerator(project);
 			Task newTask = getTaskInfo(id);
+
+			createdTaskReceipt(newTask);
+
 			String name = getSprintBacklogName();
 
 			findSprintBacklogByName(name, project.getAllSprints()).getAllTasks().add(newTask);
@@ -143,23 +152,17 @@ public class ControllerScrumMaster
 		ArrayList<UserStory> stories = collectAllStories(project);
 
 
-		if (!tasks.isEmpty())
-		{
-			for (Task task : tasks)
-			{
-				if (task.getId() == id)
-				{
+		if (!tasks.isEmpty()){
+			for (Task task : tasks){
+				if (task.getId() == id){
 					id++;
 				}
 			}
 		}
 
-		if (!stories.isEmpty())
-		{
-			for (UserStory userStory : stories)
-			{
-				if (userStory.getNumber() == id)
-				{
+		if (!stories.isEmpty()) {
+			for (UserStory userStory : stories) {
+				if (userStory.getNumber() == id) {
 					id++;
 				}
 			}
@@ -170,8 +173,7 @@ public class ControllerScrumMaster
 	}
 
 
-	private ArrayList<Task> collectAllTasks(Project project)
-	{
+	private ArrayList<Task> collectAllTasks(Project project){
 
 		//put all tasks in one and the same arrayList
 		ArrayList<Task> allTasks = new ArrayList<>();
@@ -179,19 +181,16 @@ public class ControllerScrumMaster
 		//fetch tasks from product backlog
 		ArrayList<Task> productBLTasks = project.getProductBacklog().getTasksImport();
 
-		for (Task task : productBLTasks)
-		{
+		for (Task task : productBLTasks){
 			allTasks.add(task);
 		}
 
 		//fetch tasks from sprint BL
 		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
 
-		for (SprintBacklog sprintBL : sprintBLs)
-		{
+		for (SprintBacklog sprintBL : sprintBLs){
 			ArrayList<Task> sprintTasks = sprintBL.getAllTasks();
-			for (Task task : sprintTasks)
-			{
+			for (Task task : sprintTasks){
 				allTasks.add(task);
 			}
 		}
@@ -199,8 +198,7 @@ public class ControllerScrumMaster
 		return allTasks;
 	}
 
-	private ArrayList<UserStory> collectAllStories(Project project)
-	{
+	private ArrayList<UserStory> collectAllStories(Project project ) {
 
 		//put all user stories in one and the same ArrayList
 		ArrayList<UserStory> allStories = new ArrayList<>();
@@ -208,20 +206,17 @@ public class ControllerScrumMaster
 		// fetch all user stories from product backlog
 		ArrayList<UserStory> productBLStories = project.getProductBacklog().getAllUserStories();
 
-		for (UserStory story : productBLStories)
-		{
+		for (UserStory story : productBLStories){
 			allStories.add(story);
 		}
 
 		//fetch user story from sprint BL
 		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
 
-		for (SprintBacklog sprintBL : sprintBLs)
-		{
+		for (SprintBacklog sprintBL : sprintBLs){
 			//
 			ArrayList<UserStory> sprintBLStories = sprintBL.getAllUserStories();
-			for (UserStory story : sprintBLStories)
-			{
+			for (UserStory story : sprintBLStories){
 				allStories.add(story);
 			}
 		}
@@ -239,12 +234,9 @@ public class ControllerScrumMaster
 
 		Project project = controllerAll.whichProject();
 
-		if (project == null)
-		{
+		if (project == null){
 			projectNotFound();
-		}
-		else
-		{
+		}else{
 			if (input.equals("1"))
 			{
 				int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
@@ -515,6 +507,31 @@ public class ControllerScrumMaster
 			}
 		}
 		return sprintBacklog;
+	}
+	/*------------------------------------Methods for velocity-------------------------------------------*/
+
+	public int [] arrayOfVelocity(String input){
+		String[] strArray = input.split(",");
+		int[] intArray = new int[strArray.length];
+			for(int i = 0; i < strArray.length; i++) {
+			intArray[i] = Integer.parseInt(strArray[i]);
+			}
+			return intArray;
+	}
+
+	public int getAverageVelocity(int[] numbers){
+		int sum = 0;
+		for (int i = 0; i<numbers.length; i++){
+		sum=sum + numbers[i];
+		}
+		return (sum/numbers.length);
+	}
+
+	public void velocity(){   //Call this one in menu
+		String input = getVelocity();
+		int[] numbers = arrayOfVelocity(input);
+		int averageVelocity = getAverageVelocity(numbers);
+		Scan.print("The average velocity is: " + averageVelocity);
 	}
 }
 

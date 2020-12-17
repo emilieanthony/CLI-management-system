@@ -32,7 +32,8 @@ public class ScrumMasterView {
                 "13. View sprint backlog\n" +
                 "14. Import file\n" +
                 "15. Switch project\n" +
-                "16. Go back to main menu\n");
+                "16. Calculate average velocity\n"+
+                "17. Go back to main menu\n");
 
         return option;
     }
@@ -174,6 +175,16 @@ public class ScrumMasterView {
     {
         String sprintName = Scan.readLine("Write the name of the sprint backlog you want to move your user story from: ");
         return sprintName;
+    }
+
+    public static void createdTaskReceipt(Task task){
+        Scan.print("\nThe following task has been created:\n " + task.soloToString() + "\n");
+
+    }
+
+    public static String getVelocity (){
+        String input = Scan.readLine("Please enter the velocity for each sprint separated by a comma without spaces (e.g. 19,27,23):");
+        return input;
     }
 }
 
