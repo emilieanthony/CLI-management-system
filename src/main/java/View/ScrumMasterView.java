@@ -47,7 +47,8 @@ public class ScrumMasterView {
     public static int menuEditTask()
     {
         int option = Scan.readInt
-                ("\n\nWhich part of the task do you want to edit, enter a number:\n\n" +
+                ("\n\nEdit Task Menu. \n " +
+                        "Which part of the task do you want to edit, enter a number:\n\n" +
                         "1- Edit Task Priority Number.\n" +
                         "2- Edit Task Status.\n" +
                         "3- Remove Task from Sprint Backlog.\n" +
@@ -57,14 +58,17 @@ public class ScrumMasterView {
     }
 
     public static int newPriorityNumberTask (){
-        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number.");
+        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
 
     return newPriorityNumberTask;
     }
 
-    public static String newStatusTask (){
+    public static int newStatusTask (){
 
-        String newStatusTask = Scan.readLine("\nEnter the new status; Complete, Work in progress, Open.");
+        int newStatusTask = Scan.readInt("\nEnter the number for the new status; \n" +
+                "1 = Open\n " +
+                "2 = Work in progress\n " +
+                "3 = Complete.");
         return newStatusTask;
 
     }
@@ -83,7 +87,7 @@ public class ScrumMasterView {
     public static Task getTaskInfo(int id) {
        // int id = Scan.readInt("Please enter task id:");
         String name = Scan.readLine("Please enter name of task:");
-        int priorityNumber = Scan.readInt("Please enter priority number:");
+        int priorityNumber = Scan.readInt("Please enter priority number 1-5:");
         int estimatedHours = Scan.readInt("Please enter estimated hours:");
         String description = Scan.readLine("Please enter a description of the task:");
 

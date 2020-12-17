@@ -29,4 +29,5 @@ public class PrintUtility {
         Scan.print("\nTask not found, please create a task before you proceed.\n");
     }
 
+    public static void objectEdited () {Scan.print("\n You have successfully edited the object. \n ");}
 }
