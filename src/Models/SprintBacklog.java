@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class SprintBacklog implements Serializable
 {
-
 	//attributes
 	private String name;
 	private String startDate;
@@ -14,7 +13,7 @@ public class SprintBacklog implements Serializable
 	private ArrayList<Task> allTasks;
 	private ArrayList<UserStory> userStories;
 
-	//constructor
+
 	public SprintBacklog(String name, String startDate, String endDate)
 	{
 		this.name = name;
@@ -24,7 +23,6 @@ public class SprintBacklog implements Serializable
 		this.userStories = new ArrayList<>();
 	}
 
-	//all getters & setters
 	public String getName()
 	{
 		return name;
@@ -55,7 +53,6 @@ public class SprintBacklog implements Serializable
 		this.endDate = endDate;
 	}
 
-	//--------------------------------
 	public Task getTask(int id)
 	{
 		for (Task task : allTasks)
