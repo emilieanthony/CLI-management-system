@@ -56,14 +56,17 @@ public class ScrumMasterView {
     }
 
     public static int newPriorityNumberTask (){
-        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number.");
+        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
 
     return newPriorityNumberTask;
     }
 
-    public static String newStatusTask (){
+    public static int newStatusTask (){
 
-        String newStatusTask = Scan.readLine("\nEnter the new status; Complete, Work in progress, Open.");
+        int newStatusTask = Scan.readInt("\nEnter the number for the new status; \n" +
+                "1 = Open \n " +
+                "2 = Work in progress \n " +
+                "3 = Complete.");
         return newStatusTask;
 
     }

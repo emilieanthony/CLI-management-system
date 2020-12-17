@@ -19,7 +19,8 @@ public class ControllerScrumMaster {
 	private Import importFile = new Import();
 	static String name;
 
-	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll, ControllerScrumMaster contScrum) {
+	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll,
+								ControllerScrumMaster contScrum, Project project) {
 
 		boolean running = true;
 		do {
@@ -47,7 +48,7 @@ public class ControllerScrumMaster {
 					assignATask(controllerAll);
 					break;
 				case 8:
-					scrumMasterEditTaskMenu(controllerAll, contScrum);
+					scrumMasterEditTaskMenu(controllerAll, contScrum, project);
 					break;
 				case 9:
 					contProOwner.viewBacklog(controllerAll);
@@ -81,17 +82,17 @@ public class ControllerScrumMaster {
 
 	//-----------------------------------------------------Second Switch----------------------------------------------
 
-	public void scrumMasterEditTaskMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
+	public void scrumMasterEditTaskMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum, Project project) {
 
 		boolean running = true;
 		do {
 			int option = menuEditTask();
 			switch (option) {
 				case 1:
-					//editPriorityNumberTask(controllerAll);
+					editPriorityNumberTask(project);
 					break;
 				case 2:
-					//editStatusTask(controllerAll);
+					editStatusTask(project);
 					break;
 				case 3:
 					removeTaskSprintBacklog(controllerAll, contScrum);
@@ -288,45 +289,59 @@ public class ControllerScrumMaster {
 
 	}
 
-	/*	private void editPriorityNumberTask(ControllerAll controllerAll) {
+	private void editPriorityNumberTask (Project project) {
+		final int PRIORITY_LOWEST = 1;
+		final int PRIORITY_HIGHEST = 5;
 
-		Project project = controllerAll.whichProject();
-		if (project == null) {
-			projectNotFound();
-		} else {
+		ArrayList <Task> tasks = collectAllTasks(project);
 
-			Task task = findTaskById(controllerAll);
+		int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
 
-			if (task == null) {
-				taskNotFound();
-			} else {
+		for (Task task: tasks) {
+			if (task.getId()==idTask) {
+				int newPriorityNumberTask = newPriorityNumberTask();
 
-				int priorityNumber = newPriorityNumberTask();
-				task.setPriorityNumber(priorityNumber);
+				if ((newPriorityNumberTask >= PRIORITY_LOWEST)  && (newPriorityNumberTask <= PRIORITY_HIGHEST))
+				{ task.setPriorityNumber(newPriorityNumberTask);
+
+				} else { defaultMessage(); }
+
+				return;
 			}
 		}
+
+		taskNotFound();
 	}
 
-	private void editStatusTask(ControllerAll controllerAll) {
-// go through all task list we have and edit the one with right id?
+	private void editStatusTask(Project project) {
 
+		ArrayList <Task> tasks = collectAllTasks(project);
 
-		Project project = controllerAll.whichProject();
-		if (project == null) {
-			projectNotFound();
-		} else {
+		int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
 
-			Task task = findTaskById(controllerAll);
+		for (Task task: tasks) {
+			if (task.getId()==idTask) {
+				int newStatusTask = newStatusTask();
 
-			if (task == null) {
-				taskNotFound();
-			} else {
+				if (newStatusTask == 1)
+				{ task.setStatus("Open");
 
-				String newStatusTask = newStatusTask();
-				task.setStatus(newStatusTask);
+				} else if (newStatusTask == 2){
+					task.setStatus("Work in Progress");
+
+				} else if (newStatusTask == 3){
+					task.setStatus("Complete");
+
+				} else { defaultMessage(); }
+
+				return;
 			}
 		}
-	}*/
+
+		taskNotFound();
+	}
+
+
 
 	public void removeTaskProductBacklog (ControllerAll controllerAll) {
 
@@ -367,7 +382,7 @@ public class ControllerScrumMaster {
 
 
 	public int createIdProductOwner(ControllerAll controllerAll) {
-		int FIRST_ID = 1;
+		final int FIRST_ID = 1;
 		Project project = controllerAll.whichProject();
 		if (project != null) {
 			if (!project.getAllProductOwners().isEmpty()) {
