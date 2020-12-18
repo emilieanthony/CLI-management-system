@@ -132,18 +132,6 @@ public class Task implements Comparable<Task>, Serializable
 		}
 	}
 
-/*	public String soloToString() {
-		return "Task ID: " + id +
-				"\nPriority Number: " + priorityNumber +
-				"\nEstimated Hours: " + estimatedHours +
-				"\nActual Hours: " + actualHours +
-				"\nStatus: " + status +
-				"\nName: " + name +
-				"\nDescription: " + description +
-				"\nAssigned team members: " + assignedTeamMembers +
-				"\nSprint name: " + sprintName ;
-	}*/
-
 	public String toString()
 	{
 		String output;
