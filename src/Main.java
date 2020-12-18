@@ -15,14 +15,13 @@ public class Main {
         ControllerProductOwner contProOwner = new ControllerProductOwner();
         ControllerDeveloper contDeveloper = new ControllerDeveloper();
 
-        testSetup(controllerAll);
+        //testSetup(controllerAll);
 
         controllerAll.menuMain(controllerAll, contScrum, contProOwner, contDeveloper);
 
-
     }
 
-    public static void testSetup(ControllerAll controllerAll)
+    /*public static void testSetup(ControllerAll controllerAll)
     {
         Project project = new Project(1,"Test project","2020-01-01","2020-02-01");
         controllerAll.getAllProjects().add(project);
@@ -38,5 +37,5 @@ public class Main {
         sprintBacklog.getAllTasks().add(task);
         sprintBacklog.getAllUserStories().add(userStory);
         project.getAllSprintBacklogs().add(sprintBacklog);
-    }
+    }*/
 }
