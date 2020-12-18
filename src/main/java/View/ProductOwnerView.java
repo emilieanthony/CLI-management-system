@@ -4,7 +4,6 @@ import Models.ProductBacklog;
 import Models.UserStory;
 import Utility.Scan;
 
-import static View.ScrumMasterView.backlogName;
 import static View.ScrumMasterView.proName;
 
 public class ProductOwnerView
@@ -28,7 +27,7 @@ public class ProductOwnerView
 
     public static ProductBacklog getBacklogInfo()
     {
-        String backlogName = Scan.readLine("Please enter product backlog name:");
+        String backlogName = Scan.readLine("Please enter product backlog sprintName:");
         String startDate = Scan.readLine("Please enter start date: ex (yyyy/mm/dd)");
         String endDate = Scan.readLine("Please enter end date: ex (yyyy/mm/dd)");
         return new ProductBacklog(backlogName, startDate, endDate);
@@ -41,9 +40,9 @@ public class ProductOwnerView
     {
         int option;
         option =
-                Scan.readInt("\n\nNow you're accessing " + backlogName + " Backlog in "+  proName + " project!" +
+                Scan.readInt("\n\nNow you're accessing " + proName + " project!" +
                         "\n\nPlease enter the number of which part of the backlog you want to edit:\n\n" +
-                "1- Edit Product Backlog name\n" +
+                "1- Edit Product Backlog sprintName\n" +
                 "2- Edit Product Backlog start date\n" +
                 "3- Edit Product Backlog end date\n" +
                 "4- Edit Product Backlog user stories\n" +
@@ -52,13 +51,9 @@ public class ProductOwnerView
                 "7- Back to your menu");
         return option;
     }
-    public String chooseBacklog(){
-        String name = Scan.readLine("Please enter the name of the Backlog:");
-        return name;
-    }
     public static String getBacklogName()
     {
-        String nameBacklog = Scan.readLine("\nPlease enter a new name for the backlog:");
+        String nameBacklog = Scan.readLine("\nPlease enter a new sprintName for the backlog:");
         return nameBacklog;
     }
 
@@ -103,10 +98,9 @@ public class ProductOwnerView
     public static int menuEditUserStory()
     {
         int option = Scan.readInt
-                ("\n\nNow you're accessing a "+ backlogName + "'s backlog User story." + "\nWhich" +
-                        " part of the user story you want to edit, enter a number:\n\n" +
+                ("\n\\nWhich part of the user story you want to edit, enter a number:\n\n" +
                         "1- Edit user story number.\n" +
-                        "2- Edit user story name.\n" +
+                        "2- Edit user story sprintName.\n" +
                         "3- Edit user story sprint.\n" +
                         "4- Edit user story priority.\n" +
                         "5- Edit user story story points.\n" +
@@ -129,7 +123,7 @@ public class ProductOwnerView
     }
 
     public static String getNewUSName() {
-        String newUSName = Scan.readLine("\nEnter a new name for the user story.");
+        String newUSName = Scan.readLine("\nEnter a new sprintName for the user story.");
         return newUSName;
     }
 

@@ -15,6 +15,11 @@ public class Task implements Comparable<Task>, Serializable
 	private ArrayList<Developer> assignedDevelopers;
 	private String sprintName;
 
+	//Empty constructor for data exporting and importing.
+	public Task(){
+
+	}
+
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description)
 	{
 		this.id = id;
@@ -71,13 +76,15 @@ public class Task implements Comparable<Task>, Serializable
 		this.name = name;
 	}
 
-	public void setPriorityNumber(int priorityNumber)
+	/*public void setPriorityNumber(int priorityNumber) // this affects editing tasks
 	{
 		if(priorityNumber > 0  && priorityNumber < 6)
 		{
 			priorityNumber = priorityNumber;
 		}
-	}
+	}*/
+
+	public void setPriorityNumber (int priorityNumber) {this.priorityNumber = priorityNumber; }
 
 	public void setSprintName(String name)
 	{
@@ -102,6 +109,10 @@ public class Task implements Comparable<Task>, Serializable
 	public ArrayList<Developer> getAssignedDevelopers()
 	{
 		return assignedDevelopers;
+	}
+
+	public void setAssignedTeamMembers(ArrayList<Developer> assignedTeamMembers) {
+		this.assignedDevelopers = assignedTeamMembers;
 	}
 
 	public int getId()

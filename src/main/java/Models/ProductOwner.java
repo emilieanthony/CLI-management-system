@@ -9,6 +9,11 @@ public class ProductOwner implements Serializable
     private String name;
     private int id;
 
+    //Empty constructor for data exporting and importing.
+    public ProductOwner(){
+
+    }
+
     public ProductOwner(String name , int id)
     {
         this.name = name;

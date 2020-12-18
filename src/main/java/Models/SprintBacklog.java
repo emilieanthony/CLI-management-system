@@ -13,7 +13,12 @@ public class SprintBacklog implements Serializable
 	private ArrayList<Task> allTasks;
 	private ArrayList<UserStory> userStories;
 
+	//Empty constructor for data exporting and importing.
+	public SprintBacklog(){
 
+	}
+
+	//constructor
 	public SprintBacklog(String name, String startDate, String endDate)
 	{
 		this.name = name;
@@ -23,6 +28,7 @@ public class SprintBacklog implements Serializable
 		this.userStories = new ArrayList<>();
 	}
 
+	//all getters & setters
 	public String getName()
 	{
 		return name;
@@ -53,6 +59,7 @@ public class SprintBacklog implements Serializable
 		this.endDate = endDate;
 	}
 
+	//--------------------------------
 	public Task getTask(int id)
 	{
 		for (Task task : allTasks)
@@ -114,7 +121,15 @@ public class SprintBacklog implements Serializable
 		return allTasks;
 	}
 
-	public ArrayList<UserStory> getAllUserStories()
+	public void setAllTasks(ArrayList<Task> allTasks) {
+		this.allTasks = allTasks;
+	}
+
+	public void setUserStories(ArrayList<UserStory> userStories) {
+		this.userStories = userStories;
+	}
+
+	public ArrayList<UserStory> getUserStories()
 	{
 		return userStories;
 	}
@@ -128,6 +143,8 @@ public class SprintBacklog implements Serializable
 	{
 		return "SprintBacklog Name: " + name +
 				"\nStart Date: " + startDate +
-				"\nEnd Date: " + endDate;
+				"\nEnd Date: " + endDate +
+				"\nUser Stories:" + userStories +
+				"\nTasks:" + allTasks;
 	}
 }

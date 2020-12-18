@@ -1,14 +1,11 @@
 package Controller;
 
 import Models.*;
-import Utility.Export;
 import Utility.Scan;
 import java.util.Iterator;
-
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
 import static View.ProductOwnerView.*;
-import static View.ScrumMasterView.backlogName;
 import static View.ScrumMasterView.getProjectName;
 
 
@@ -65,11 +62,12 @@ public class ControllerProductOwner
         } while (running);
     }
 
-   public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
+
+    public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
         Project project = controllerAll.whichProject();
         ProductBacklog backlog = getBacklogInfo();
         project.setProductBacklog(backlog);
-        Export.exportObject(backlog);
+        //Export.exportObject(backlog);
     }
 
 
@@ -83,7 +81,7 @@ public class ControllerProductOwner
             switch (option)
             {
                 case 1:
-                    editBacklogName(controllerAll);
+                    editProductBacklogName(controllerAll);
                     break;
                 case 2:
                     editBacklogSDate(controllerAll);
@@ -115,7 +113,7 @@ public class ControllerProductOwner
         int number = controllerScrumMaster.taskUSIdGenerator(project);
         UserStory newUserStory = getUSInfo(number);
         project.getProductBacklog().getAllUserStories().add(newUserStory);
-        Export.exportObject(newUserStory);
+        //Export.exportObject(newUserStory);
         createdUStoryReceipt(newUserStory);
     }
 
@@ -139,12 +137,11 @@ public class ControllerProductOwner
 
     }
 
-    public void editBacklogName(ControllerAll controllerAll){
+    public void editProductBacklogName(ControllerAll controllerAll){
 
         String nameBacklog = getBacklogName();
         Project project = controllerAll.whichProject();
         project.getProductBacklog().setName(nameBacklog);
-        backlogName = nameBacklog;
     }
     public void editBacklogSDate(ControllerAll controllerAll)
     {

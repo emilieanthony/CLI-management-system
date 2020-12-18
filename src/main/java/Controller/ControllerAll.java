@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.*;
+import Utility.DataManagement;
 import Utility.Scan;
 
 import java.util.ArrayList;
@@ -15,11 +16,13 @@ public class ControllerAll
 
     //attributes
     private ArrayList<Project> allProjects;
+    private DataManagement Data;
 
     //Constructor:
     public ControllerAll()
     {
         allProjects = new ArrayList<>();
+        Data = new DataManagement();
 
     }
 
@@ -28,6 +31,9 @@ public class ControllerAll
         return allProjects;
     }
 
+    public void setAllProjects(ArrayList<Project> allProjects) {
+        this.allProjects = allProjects;
+    }
     //methods
     /*--------------------------------------------Main menu -----------------------------------------------------*/
 
@@ -35,12 +41,17 @@ public class ControllerAll
     {
 
         int option = Scan.readInt("\n\nWelcome to Codelicode, your project management tool\n\n" +
-                "Shift between your projects to be able to make any changes or view options,\nYou will find an option in your " +
-                        "menu to choose between projects! \n" + "\nPlease enter a option below:\n" +
-                "1. Scrum master\n" +
-                "2. Product owner\n" +
-                "3. Development team member\n" +
-                "4. Exit system\n");
+                "IMPORTANT:- Shift between your projects to be able to make any changes or view " +
+                "options,\nYou will find an option in your menu to choose between projects! \n" +
+                "\nPlease enter a option below:\n"+
+                "You're working on Project " + proName + "." + "\n\n"+
+                "1. Scrum master.\n" +
+                "2. Product owner.\n" +
+                "3. Development team member.\n" +
+                "4. View all Projects.\n" +
+                "5. Change project.\n" +
+                "6. Save and Exit system.\n");
+
         return option;
     }
 
@@ -50,6 +61,8 @@ public class ControllerAll
                          ControllerDeveloper contDeveloper)
     {
         boolean running = true;
+        loadData();
+        viewProjectMenu(controllerAll);
         Start();
         do
         {
@@ -57,7 +70,7 @@ public class ControllerAll
             switch (option)
             {
                 case 1:
-                    contScrum.scrumMasterMenu(contProOwner,controllerAll);
+                    contScrum.scrumMasterMenu(contProOwner,controllerAll,contScrum);
                     break;
                 case 2:
                     contProOwner.productOwnerMenu(controllerAll, contScrum);
@@ -66,6 +79,13 @@ public class ControllerAll
                     contDeveloper.teamMemberMenu(controllerAll,contProOwner);
                     break;
                 case 4:
+                    viewProjects();
+                    break;
+                case 5:
+                    getProjectName();
+                    break;
+                case 6:
+                    saveData();
                     running = false; // Exit system.
                     break;
                 default:
@@ -73,6 +93,12 @@ public class ControllerAll
             }
         } while (running);
     }
+    private void viewProjects() {
+        for (Project project:allProjects) {
+            Scan.print(project.toString());
+        }
+    }
+
     public Project whichProject(){
         Project project = findProjectByName();
         return project;
@@ -95,6 +121,7 @@ public class ControllerAll
 
     public Project findProjectImport(String name){
 
+
         Project project = null;
 
         Iterator<Project> iterator = allProjects.iterator();
@@ -114,6 +141,7 @@ public class ControllerAll
         int id = getTaskId();
         Task task = null;
         Project project = controllerAll.whichProject();
+
         Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
         while (task == null && iterator.hasNext())
         {
@@ -155,6 +183,15 @@ public class ControllerAll
             }
         }
         return developer;
+    }
+
+    public void loadData(){
+
+        setAllProjects(Data.importProData(allProjects));
+    }
+
+    public void saveData(){
+        Data.exportProData(allProjects);
     }
 
 }

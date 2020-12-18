@@ -21,6 +21,11 @@ public class UserStory implements Comparable<UserStory>, Serializable
     private String sprintName;
     private ArrayList<Developer> assignedDevelopers;
 
+    //Empty constructor for data exporting and importing.
+    public UserStory(){
+
+    }
+
 
     // Constructors:-
     public UserStory(String name, int number, String sprint, int priority,
@@ -82,12 +87,12 @@ public class UserStory implements Comparable<UserStory>, Serializable
 
     public void setPriorityNumber(int priorityNumber)
     {
-        do
+        /*do
         {
-            Scan.print("priority must be between 1 to 5.");
-            priorityNumber = this.priorityNumber;
-        }
-        while (priorityNumber <= 0 || priorityNumber >= 6);
+            Scan.print("priority must be between 1 to 5.");*/
+        this.priorityNumber = priorityNumber;
+        /*}
+        while (priorityNumber <= 0 || priorityNumber >= 6);*/
     }
 
     public int getStoryPoints()

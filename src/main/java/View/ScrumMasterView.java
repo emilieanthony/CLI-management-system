@@ -1,5 +1,6 @@
 package View;
 
+import Controller.ControllerAll;
 import Models.*;
 import Models.Task;
 import Utility.Scan;
@@ -10,8 +11,7 @@ public class ScrumMasterView {
 
 
     public static String proName;
-    public static String backlogName;
-
+    public static String name;
     public static int menuScrumMaster() {
 
         int option = Scan.readInt("\n\nWelcome Scrum Master!\n" +
@@ -24,19 +24,57 @@ public class ScrumMasterView {
                 "5. Create a new Development Team Member\n" +
                 "6. Create a new Product owner\n" +
                 "7. Assign a task to Development Team Member\n" +
-                "8. Assign a user story to Development Team Member\n" +
+                "8. Edit Task Menu\n" +
                 "9. View product backlog\n" +
                 "10. View all development Team Members\n" +
-                "11. Move task or user story to sprint backlog\n" +
-                "12. Move task or user story to product backlog\n" +
+                "11. Move task or user story to product backlog\n" +
+                "12. Move task or user story to sprint backlog\n" +
                 "13. View sprint backlog\n" +
                 "14. Import file\n" +
                 "15. Switch project\n" +
                 "16. Calculate average velocity\n"+
                 "17. Go back to main menu\n");
+                "18. Assign a user story to Development Team Member\n" +
+
+
+
 
         return option;
     }
+
+
+    //----------------------------------------------------------Edit task menu---------------------------------------------
+    public static int menuEditTask()
+    {
+        int option = Scan.readInt
+                ("\n\nEdit Task Menu. \n " +
+                        "Which part of the task do you want to edit, enter a number:\n\n" +
+                        "1- Edit Task Priority Number.\n" +
+                        "2- Edit Task Status.\n" +
+                        "3- Remove Task from Sprint Backlog.\n" +
+                        "4- Remove Task from Product Backlog.\n" +
+                        "5- Back to your menu.\n");
+        return option;
+    }
+
+    public static int newPriorityNumberTask (){
+        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
+
+    return newPriorityNumberTask;
+    }
+
+    public static int newStatusTask (){
+
+        int newStatusTask = Scan.readInt("\nEnter the number for the new status; \n" +
+                "1 = Open\n " +
+                "2 = Work in progress\n " +
+                "3 = Complete.");
+        return newStatusTask;
+
+    }
+
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     public static String getFileName() {
 
@@ -49,23 +87,29 @@ public class ScrumMasterView {
     public static Task getTaskInfo(int id) {
        // int id = Scan.readInt("Please enter task id:");
         String name = Scan.readLine("Please enter name of task:");
-        int priorityNumber = Scan.readInt("Please enter priority number:");
+        int priorityNumber = Scan.readInt("Please enter priority number 1-5:");
         int estimatedHours = Scan.readInt("Please enter estimated hours:");
         String description = Scan.readLine("Please enter a description of the task:");
 
         return new Task(id, priorityNumber, estimatedHours, name, description);
     }
+    public static void viewProjectMenu(ControllerAll contAll){
 
+        int order = 1;
+        Scan.print("\n\nWelcome to Codelicode: \n\nProject List:\n");
+        for (Project project:contAll.getAllProjects()) {
+            Scan.print(order++ + ". " + project.getName()+ ".\n");
+        }
+    }
 
     public static void Start() {
-        proName = Scan.readLine("\n\nWelcome to Codelicode: \nWhich project you want " +
+        proName = Scan.readLine("\nWhich project you want " +
                 "to access? Enter the name of the project or press enter to ignore: ");
     }
 
     public static void getProjectName() {
-        proName = Scan.readLine("Which project you want to access: Please enter the project " +
+        proName = Scan.readLine("\nWhich project you want to access: Please enter the project " +
                 "name:\n");
-
     }
 
     public static void membersView() {
@@ -86,10 +130,6 @@ public class ScrumMasterView {
         return name;
     }
 
-    public String getBacklogName() {
-        return Scan.readLine("Please enter name of backlog you want to add a task to:");
-    }
-
     public static void createdDeveloper() {
         Scan.print("You have successfully created a new developer.\n");
     }
@@ -100,11 +140,13 @@ public class ScrumMasterView {
     }
 
     public static String getSprintBacklogByName(){
-        return Scan.readLine("Write the name of the sprint: ");
+        name = Scan.readLine("Write the name of the sprint: ");
+        return name;
     }
 
     public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks){
-        if(allUserStories.isEmpty()&&allTasks.isEmpty()){
+        if(allUserStories.isEmpty()&&allTasks.isEmpty()){ //what happens if one of them is not
+            // empty!
             Scan.print("The sprint backlog is empty.");
         }
         for (UserStory story : allUserStories){
@@ -113,7 +155,6 @@ public class ScrumMasterView {
         for (Task task : allTasks){
             Scan.print(task.toString());
         }
-
     }
 
     public static void assignmentCompleted()
