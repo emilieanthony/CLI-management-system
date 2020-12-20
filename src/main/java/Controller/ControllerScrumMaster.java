@@ -32,7 +32,7 @@ public class ControllerScrumMaster
 					createProject(controllerAll);
 					break;
 				case 2:
-					createSprintAndSprintBacklog(controllerAll);
+					createSprintBacklog(controllerAll);
 					break;
 				case 3:
 					createTaskToProductBacklog(controllerAll);
@@ -53,9 +53,10 @@ public class ControllerScrumMaster
 					assignUserStory(controllerAll);
 					break;
 				case 9:
-					scrumMasterEditTaskMenu(controllerAll, contScrum);
-				case 10:
 					contProOwner.viewBacklog(controllerAll);
+					break;
+				case 10:
+					scrumMasterEditTaskMenu(controllerAll, contScrum);
 					break;
 				case 11:
 					viewTeamMembers(controllerAll);
@@ -70,13 +71,13 @@ public class ControllerScrumMaster
 					viewSprintBacklog(controllerAll);
 					break;
 				case 15:
-					getProjectName();
+					velocity();
 					break;
 				case 16:
-					importFile.importProjects(controllerAll);
+					getProjectName();
 					break;
 				case 17:
-					velocity();
+					importFile.importProjects(controllerAll);
 					break;
 				case 18:
 					running = false;
@@ -297,8 +298,9 @@ public class ControllerScrumMaster
 				name = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
 				project.getProductBacklog().getTask(idTask).setSprintName(name);
-				findSprintBacklogByName(controllerAll).getAllTasks().add(project.getProductBacklog().getTask(idTask));
-				project.getProductBacklog().getTasksImport().remove(project.getProductBacklog().getTask(idTask));
+				Task taskToMove = project.getProductBacklog().getTask(idTask);
+				findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
+				project.getProductBacklog().getTasksImport().remove(taskToMove);
 
 				movedObject();
 			}
@@ -310,8 +312,56 @@ public class ControllerScrumMaster
 				name = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
 
 				project.getProductBacklog().getUserStory(usName).setSprintName(name);
-				findSprintBacklogByName(controllerAll).getUserStories().add(project.getProductBacklog().getUserStory(usName));
-				project.getProductBacklog().getAllUserStories().remove(project.getProductBacklog().getUserStory(usName));
+				UserStory userStoryToMove = project.getProductBacklog().getUserStory(usName);
+				findSprintBacklogByName(controllerAll).getUserStories().add(userStoryToMove);
+				project.getProductBacklog().getAllUserStories().remove(userStoryToMove);
+
+				movedObject();
+			}
+			else
+			{
+				return;
+			}
+		}
+	}
+
+	private void moveTaskOrUSToProductBacklog(ControllerProductOwner contProOwner, ControllerAll
+			controllerAll)
+	{
+		viewSprintBacklog(controllerAll);
+
+		String input = moveObjectToBacklogPrint();
+
+		Project project = controllerAll.whichProject();
+
+		if (project == null)
+		{
+			projectNotFound();
+		}
+		else
+		{
+			if (input.equals("1"))
+			{
+				int idTask = IdTaskToMovePrint();
+				name = sprintNameToMovePrint();
+
+				findSprintBacklogByName(controllerAll).getTask(idTask).setSprintName("");
+				Task taskToMove = findSprintBacklogByName(controllerAll).getTask(idTask);
+				project.getProductBacklog().getTasksImport().add(taskToMove);
+				findSprintBacklogByName(controllerAll).getAllTasks().remove(taskToMove);
+
+				movedObject();
+			}
+
+			if (input.equals("2"))
+			{
+				int usNumber = numerUsToMove();
+				name = sprintNameToMove();
+
+				findSprintBacklogByName(controllerAll).getUserStory(usNumber).setSprintName("");
+				UserStory userStoryToMove = findSprintBacklogByName(controllerAll).getUserStory(usNumber);
+				project.getProductBacklog().getAllUserStories().add(userStoryToMove);
+				findSprintBacklogByName(controllerAll).getUserStories().remove(userStoryToMove);
 
 				movedObject();
 			}
@@ -533,7 +583,7 @@ public class ControllerScrumMaster
 
 	/*------------------------------------Methods etc for sprints-------------------------------------------*/
 
-	public void createSprintAndSprintBacklog(ControllerAll controllerAll)
+	public void createSprintBacklog(ControllerAll controllerAll)
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"sprintBacklog:");
@@ -660,51 +710,7 @@ public class ControllerScrumMaster
 		Scan.print("The average velocity is: " + averageVelocity);
 	}
 
-	private void moveTaskOrUSToProductBacklog(ControllerProductOwner contProOwner, ControllerAll
-			controllerAll)
-	{
-		viewSprintBacklog(controllerAll);
-
-		String input = moveObjectToBacklogPrint();
-
-		Project project = controllerAll.whichProject();
-
-		if (project == null)
-		{
-			projectNotFound();
-		}
-		else
-		{
-			if (input.equals("1"))
-			{
-				int idTask = IdTaskToMovePrint();
-				name = sprintNameToMovePrint();
-
-				findSprintBacklogByName(controllerAll).getTask(idTask).setSprintName("");
-				project.getProductBacklog().getTasksImport().add(findSprintBacklogByName(controllerAll).getTask(idTask));
-				findSprintBacklogByName(controllerAll).getAllTasks().remove(project.getProductBacklog().getTask(idTask));
-
-				movedObject();
-			}
-
-			if (input.equals("2"))
-			{
-				int usNumber = numerUsToMove();
-				name = sprintNameToMove();
-
-				findSprintBacklogByName(controllerAll).getUserStory(usNumber).setSprintName("");
-				project.getProductBacklog().getAllUserStories().add(findSprintBacklogByName(controllerAll).getUserStory(usNumber));
-				findSprintBacklogByName(controllerAll).getUserStories().remove(project.getProductBacklog().getUserStory(usNumber));
-
-				movedObject();
-			}
-			else
-			{
-				return;
-			}
-		}
-	}
-
+	/*------------------------------------Methods for Assigning object-------------------------------------------*/
 	public void assignTask(ControllerAll controllerAll)
 	{
 		int idTask = assignTaskPrintIdTask();
@@ -738,7 +744,7 @@ public class ControllerScrumMaster
 
 		UserStory userStory = findSprintBacklogByName(controllerAll).getUserStory(number);
 		userStory.getAssignedDevelopers().add(developer);
-		userStory.setStatus("In progress"); //We have different methods for setting status, which one should we use?
+		userStory.setStatus("In progress");
 
 		assignmentCompleted();
 

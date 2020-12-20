@@ -20,23 +20,23 @@ public class ScrumMasterView
 				"You're working on Project " + proName + "." + "\n\n" +
 				"Please enter an option below\n\n" +
 				"1. Create a new project\n" +
-				"2. Create a new sprint and sprint backlog\n" +
+				"2. Create a new sprint backlog\n" +
 				"3. Create a new task for product backlog\n" +
 				"4. Create a new task for sprint backlog\n" +
 				"5. Create a new Development Team Member\n" +
 				"6. Create a new Product owner\n" +
 				"7. Assign a task to Development Team Member\n" +
-				"8. Edit Task Menu\n" +
+				"8. Assign a user story to Development Team Member\n" +
 				"9. View product backlog\n" +
-				"10. View all development Team Members\n" +
-				"11. Move task or user story to product backlog\n" +
+				"10. Edit Task Menu\n" +
+				"11. View all development Team Members\n" +
 				"12. Move task or user story to sprint backlog\n" +
-				"13. View sprint backlog\n" +
-				"14. Import file\n" +
-				"15. Switch project\n" +
-				"16. Calculate average velocity\n" +
-				"17. Go back to main menu\n" +
-				"18. Assign a user story to Development Team Member\n");
+				"13. Move task or user story to product backlog\n" +
+				"14. View sprint backlog\n" +
+				"15. Calculate average velocity\n" +
+				"16. Switch project\n" +
+				"17. Import file\n" +
+				"18. Go back to main menu\n");
 
 
 		return option;
