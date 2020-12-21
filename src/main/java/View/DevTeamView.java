@@ -30,6 +30,9 @@ public class DevTeamView {
         return option;
     }
 
+    public static void invalidInputPrint(){
+        Scan.print("There was a problem entering input data.");
+    }
 
     public static int getDeveloperId(){
 
@@ -41,6 +44,18 @@ public class DevTeamView {
 
         int id = Scan.readInt("Please enter the task's id");
         return id;
+    }
+
+    public static void noNamePrint(){
+        Scan.print("Names cannot be empty.");
+    }
+
+    public static void negativeIDPrint() {
+        Scan.print("ID cannot be negative.");
+    }
+
+    public static void negativeNumberPrint() {
+        Scan.print("Number cannot be negative.");
     }
 
     public static int getUserStoryNumber(){

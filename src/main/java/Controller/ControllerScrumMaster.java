@@ -9,6 +9,7 @@ import java.util.Iterator;
 import static Utility.PrintUtility.*;
 import static View.DevTeamView.getTaskId;
 
+import static View.DevTeamView.invalidInputPrint;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster {
@@ -80,7 +81,7 @@ public class ControllerScrumMaster {
 						defaultMessage();
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("There was a problem entering input data.");
+				numberFormatMessage();
 			}
 		} while (running);
 	}
@@ -115,7 +116,7 @@ public class ControllerScrumMaster {
 						defaultMessage();
 				}
 			} catch (Exception e) {
-				System.out.println("There was a problem with the user input. Please try again.");
+				invalidInputPrint();
 			}
 		} while (running);
 	}
@@ -149,7 +150,7 @@ public class ControllerScrumMaster {
 				createdTaskReceipt(newTask);
 				project.getProductBacklog().getTasksImport().add(newTask);
 			} catch (Exception e) {
-				System.out.println("There was a problem trying to create this task, please try again.");
+				registerTaskFail();
 			}
 		}
 	}
@@ -170,7 +171,7 @@ public class ControllerScrumMaster {
 				name = getSprintBacklogName();
 				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
 			} catch	(Exception e) {
-				System.out.println("There was a problem trying to create a new task, please try again.");
+				registerTaskFail();
 			}
 		}
 	}
@@ -414,7 +415,7 @@ public class ControllerScrumMaster {
 			project.getAllProductOwners().add(newProOwner);
 			createdProOwner();
 		} catch (Exception e) {
-			System.out.println("There was a problem trying to register a new product owner, please try again.");
+			registerProOwnerFail();
 		}
 	}
 
@@ -446,7 +447,7 @@ public class ControllerScrumMaster {
 				project.getAllTeamMembers().add(developer);
 				createdDeveloper();
 			} catch (Exception e) {
-				System.out.println("There was a problem registering a new developer, please try again.");
+				registerDeveloperFail();
 			}
 		}
 	}
@@ -489,10 +490,8 @@ public class ControllerScrumMaster {
 
 			Scan.print("You have successfully created the following project:\n\n" + project.toString());
 		} catch (Exception e) {
-			e.printStackTrace();
+			registerProjectFail();
 		}
-		//	System.out.println("There was a problem trying to register a new project, please try again.");
-		//}
 	}
 
 
@@ -522,11 +521,9 @@ public class ControllerScrumMaster {
 			Scan.print("You have successfully created the following sprintBacklog:\n\n"
 					+ sprintBacklog.toString());
 		} catch (NumberFormatException e) {
-			System.out.println("There was a problem with user input trying to register a sprint backlog, please try again.");
-		} catch (NullPointerException e) {
-			System.out.println("Tried to add backlog to null project.");
+			numberFormatMessage();
 		} catch (Exception e) {
-			System.out.println("There was a problem trying to register a sprint backlog, please try again.");
+			backlogFail();
 		}
 	}
 

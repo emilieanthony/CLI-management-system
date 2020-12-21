@@ -2,6 +2,9 @@ package Models;
 
 import java.io.Serializable;
 
+import static View.DevTeamView.negativeIDPrint;
+import static View.DevTeamView.noNamePrint;
+
 public class Developer implements Serializable
 {
 
@@ -16,9 +19,14 @@ public class Developer implements Serializable
 
     public Developer(String name, int id) throws Exception {
 
-        this.name = name;
+        if (name.isEmpty()) {
+            noNamePrint();
+        } else {
+            this.name = name;
+        }
+
         if(id < 0) {
-            System.out.println("ID cannot be negative, please try again.");
+            negativeIDPrint();
         } else {
             this.id = id;
         }

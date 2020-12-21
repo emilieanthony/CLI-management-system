@@ -25,6 +25,10 @@ public class ProductOwnerView
 
     }
 
+    public static void userStoryFail(){
+        Scan.print("There was a problem in creating the user story, please try again.");
+    }
+
     public static ProductBacklog getBacklogInfo() throws Exception
     {
         String backlogName = Scan.readLine("Please enter product backlog sprintName:");

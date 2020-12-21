@@ -3,6 +3,8 @@ package Models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static View.DevTeamView.*;
+
 public class Task implements Comparable<Task>, Serializable
 {
 	private int id;
@@ -22,16 +24,30 @@ public class Task implements Comparable<Task>, Serializable
 
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception
 	{
-		if (id < 0){
-			throw new Exception("ID must be a positive integer.");
+		if (name.isEmpty()) {
+			noNamePrint();
+		} else {
+			this.name = name;
+		}
+
+		if(id < 0) {
+			negativeIDPrint();
 		} else {
 			this.id = id;
 		}
-		this.priorityNumber = priorityNumber;
-		this.estimatedHours = estimatedTime;
+		if(priorityNumber < 0) {
+			negativeNumberPrint();
+		} else {
+			this.priorityNumber = priorityNumber;
+		}
+		if(estimatedTime < 0) {
+			negativeNumberPrint();
+		} else {
+			this.estimatedHours = estimatedTime;
+		}
+
 		this.actualHours = 0;
 		this.status = "Open";
-		this.name = name;
 		this.description = description;
 		this.assignedDevelopers = new ArrayList<>();
 		this.sprintName = "";

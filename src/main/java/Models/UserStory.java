@@ -5,6 +5,8 @@ import Utility.Scan;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static View.DevTeamView.*;
+
 
 public class UserStory implements Comparable<UserStory>, Serializable
 {
@@ -31,10 +33,25 @@ public class UserStory implements Comparable<UserStory>, Serializable
     public UserStory(String name, int number, String sprint, int priority,
                      String content, String acceptanceCriteria) throws Exception
     {
-        this.name = name;
-        this.number = number;
+        if (name.isEmpty()) {
+            noNamePrint();
+        } else {
+            this.name = name;
+        }
+
+        if(number < 0) {
+            negativeNumberPrint();
+        } else {
+            this.number = number;
+        }
+
         this.sprint = sprint;
-        this.priorityNumber = priority;
+
+        if(priority < 0) {
+            negativeNumberPrint();
+        } else {
+            this.priorityNumber = priority;
+        }
         this.storyPoints = 0;
         this.content = content;
         this.acceptanceCriteria = acceptanceCriteria;

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static View.DevTeamView.negativeIDPrint;
+import static View.DevTeamView.noNamePrint;
+
 public class SprintBacklog implements Serializable
 {
 
@@ -22,7 +25,12 @@ public class SprintBacklog implements Serializable
 	//constructor
 	public SprintBacklog(String name, String startDate, String endDate) throws Exception
 	{
-		this.name = name;
+		if (name.isEmpty()) {
+			noNamePrint();
+		} else {
+			this.name = name;
+		}
+
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.allTasks = new ArrayList<>();

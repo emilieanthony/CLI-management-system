@@ -5,8 +5,9 @@ import Utility.Scan;
 import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
+import static View.DevTeamView.invalidInputPrint;
 import static View.ProductOwnerView.*;
-import static View.ScrumMasterView.getProjectName;
+import static View.ScrumMasterView.*;
 
 
 public class ControllerProductOwner
@@ -62,7 +63,7 @@ public class ControllerProductOwner
                         defaultMessage();
                 }
             } catch (NumberFormatException e) {
-                System.out.println("There was a problem upon entering input data. Please try again.");
+                numberFormatMessage();
             }
         } while (running);
     }
@@ -76,7 +77,7 @@ public class ControllerProductOwner
             //Export.exportObject(backlog);
         }
         catch(Exception e) {
-            System.out.println("There was an error trying to create a backlog. Please try again.");
+            backlogFail();
         }
     }
 
@@ -118,7 +119,7 @@ public class ControllerProductOwner
                         defaultMessage();
                 }
             } catch (Exception e) {
-                System.out.println("There was a problem entering a menu option. Please try again.");
+                invalidInputPrint();
             }
         } while (running);
     }
@@ -133,7 +134,7 @@ public class ControllerProductOwner
             //Export.exportObject(newUserStory);
             createdUStoryReceipt(newUserStory);
         } catch (Exception e) {
-            System.out.println("There was a problem in creating the user story, please try again.");
+            userStoryFail();
         }
     }
 
@@ -286,10 +287,3 @@ public class ControllerProductOwner
     }
 
 }
-
-
-
-
-
-
-

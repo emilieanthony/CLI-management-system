@@ -52,6 +52,30 @@ public class ScrumMasterView {
         return option;
     }
 
+    public static void numberFormatMessage() {
+        Scan.print("There was a problem entering input data.");
+    }
+
+    public static void registerProjectFail() {
+        Scan.print("There was a problem trying to register a new project, please try again.");
+    }
+
+    public static void registerTaskFail() {
+        Scan.print("There was a problem trying to register a new task, please try again.");
+    }
+
+    public static void registerProOwnerFail(){
+        Scan.print("There was a problem trying to register a new product owner, please try again.");
+    }
+
+    public static void registerDeveloperFail() {
+        Scan.print("There was a problem registering a new developer, please try again.");
+    }
+
+    public static void backlogFail(){
+        Scan.print("There was a problem trying to register a backlog, please try again.");
+    }
+
     public static int newPriorityNumberTask (){
         int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
 

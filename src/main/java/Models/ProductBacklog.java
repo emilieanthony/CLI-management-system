@@ -5,6 +5,7 @@ import Models.UserStory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import static View.DevTeamView.noNamePrint;
 
 public class ProductBacklog implements Serializable {
 
@@ -23,7 +24,12 @@ public class ProductBacklog implements Serializable {
     // Constructor:-
     public ProductBacklog(String name, String startDate, String endDate) throws Exception
     {
-        this.name = name;
+        if (name.isEmpty()) {
+            noNamePrint();
+        } else {
+            this.name = name;
+        }
+
         this.startDate = startDate;
         this.endDate = endDate;
         this.allUserStories = new ArrayList<>();

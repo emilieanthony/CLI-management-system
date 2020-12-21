@@ -93,7 +93,7 @@ public class ControllerAll
                         defaultMessage();
                 }
             } catch (NumberFormatException e) {
-                System.out.println("There was a problem upon entering a menu option. Please try again.");
+                numberFormatMessage();
             }
         } while (running);
     }

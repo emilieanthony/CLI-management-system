@@ -49,7 +49,7 @@ public class ControllerDeveloper {
                         defaultMessage();
                 }
             } catch (Exception e) {
-                System.out.println("There was a problem entering input data.");
+                invalidInputPrint();
             }
         } while (running);
     }
