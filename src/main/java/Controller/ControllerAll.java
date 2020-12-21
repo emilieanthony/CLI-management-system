@@ -37,7 +37,7 @@ public class ControllerAll
     //methods
     /*--------------------------------------------Main menu -----------------------------------------------------*/
 
-    public int mainMenu() throws NumberFormatException
+    public int mainMenu()
     {
 
         int option = Scan.readInt("\n\nWelcome to Codelicode, your project management tool\n\n" +
@@ -77,7 +77,7 @@ public class ControllerAll
                         contProOwner.productOwnerMenu(controllerAll, contScrum);
                         break;
                     case 3:
-                        contDeveloper.teamMemberMenu(controllerAll, contProOwner);
+                        contDeveloper.teamMemberMenu(controllerAll, contProOwner, contScrum);
                         break;
                     case 4:
                         viewProjects();

@@ -183,14 +183,33 @@ public class UserStory implements Comparable<UserStory>, Serializable
     @Override
     public String toString()
     {
-        return "\nUser story number : " + number + '\n' +
-                "Name: " + name + '\n' +
-                "SprintBacklog: " + sprint + '\n' +
-                "Priority: " + priorityNumber + '\n' +
-                "Story Points: " + storyPoints + '\n' +
-                "Content: " + content + '\n' +
-                "Acceptance Criteria:\n" + acceptanceCriteria + '\n' +
-                "Status: " + status + "\n\n";
+        String output;
+
+        output =
+                "\nUser Story: " +
+                        "\nUser story number : " + number +
+                        "\nName = " + name +
+                        "\nSprintBacklog = " + sprint +
+                        "\nPriority = " + priorityNumber +
+                        "\nStory Points = " + storyPoints +
+                        "\nContent = " + content +
+                        "\nAcceptance Criteria = " + acceptanceCriteria +
+                        "\nStatus = " + status +
+                        "\nAssigned Team Members:" ;
+
+        if(assignedDevelopers.isEmpty())
+        {
+            output = output + " None\n";
+        }
+        else
+        {
+            for (Developer member : assignedDevelopers)
+            {
+                output = output + "\n" + member.toString() + "\n";
+            }
+        }
+
+        return output;
     }
 }
 

@@ -146,6 +146,6 @@ public class ProductBacklog implements Serializable {
                 "Start Date = " + startDate + '\n' +
                 "End Date = " + endDate + "\n\n" +
                 "All tasks:\n " + tasks + "\n" +
-                "All User Stories:\n " + allUserStories + ".\n\n";
+                "\nAll User Stories:\n " + allUserStories + ".\n\n";
     }
 }

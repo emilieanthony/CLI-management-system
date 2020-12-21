@@ -4,7 +4,10 @@ import Models.Developer;
 import Models.Task;
 import Utility.Scan;
 import Models.Project;
+import View.DevTeamView;
+import org.junit.TestCouldNotBeSkippedException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.defaultMessage;
@@ -16,7 +19,7 @@ import static View.ScrumMasterView.getProjectName;
 
 public class ControllerDeveloper {
 
-    public void teamMemberMenu(ControllerAll controllerAll,ControllerProductOwner proCont) {
+    public void teamMemberMenu(ControllerAll controllerAll,ControllerProductOwner proCont, ControllerScrumMaster scrumMaster) {
         boolean running = true;
         do {
 
@@ -36,13 +39,22 @@ public class ControllerDeveloper {
                         taskMenu(controllerAll);
                         break;
                     case 4:
-                        proCont.viewBacklog(controllerAll);
-                        proCont.editUSStatus(getStoryNumber(), controllerAll);
+                        proCont.viewProBacklog(controllerAll);
+                        proCont.editUSStatus(getStoryNumber(),controllerAll);
                         break;
                     case 5:
-                        getProjectName();// Switch project.
+                        proCont.viewProBacklog(controllerAll);//View product backlog
                         break;
                     case 6:
+                        scrumMaster.viewSprintBacklog(controllerAll);//View sprint backlog
+                        break;
+                    case 7:
+                        viewAllTasks(controllerAll, scrumMaster);//View all tasks
+                        break;
+                    case 8:
+                        getProjectName();// Switch project.
+                        break;
+                    case 9:
                         running = false;
                         break;
                     default:
@@ -106,6 +118,14 @@ public class ControllerDeveloper {
             }
         }
     }
+
+    public void viewAllTasks(ControllerAll controllerAll, ControllerScrumMaster scrumMaster){
+        Project project = controllerAll.whichProject();
+        ArrayList<Task> allTasks = scrumMaster.collectAllTasks(project);
+        printAllTasks(allTasks);
+    }
+
+
     public Task openTask(ControllerAll controllerAll) {
 
         Task task = controllerAll.findTaskById(controllerAll);

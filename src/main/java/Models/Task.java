@@ -163,42 +163,29 @@ public class Task implements Comparable<Task>, Serializable
 		}
 	}
 
-	public String soloToString() { // had to use a weird sprintName here because original toString was already taken ???? would appreciate an explanation whoever did that //Lina
-		return "Task ID: " + id +
-				"\nPriority Number: " + priorityNumber +
-				"\nEstimated Hours: " + estimatedHours +
-				"\nActual Hours: " + actualHours +
-				"\nStatus: " + status +
-				"\nName: " + name +
-				"\nDescription: " + description +
-				"\nAssigned team members: " + assignedDevelopers +
-				"\nSprint sprintName: " + sprintName ;
-	}
-
 	public String toString()
 	{
 		String output;
 
 		output =
-				"Tasks: \n"+
-						"ID:" + id +
+				"\nTask ID: " + id +
 						"\nName: " + name +
 						"\nPriority number: " + priorityNumber +
 						"\nStatus: " + status +
 						"\nDescription: " + description +
 						"\nEstimated hours: " + estimatedHours +
 						"\nActual hours: " + actualHours +
-						"\nAssigned Team Members:" + "\n";
+						"\nAssigned Team Members:" ;
 
-		if(assignedDevelopers == null)
+		if(assignedDevelopers.isEmpty())
 		{
-			output = output + "None\n";
+			output = output + " None\n";
 		}
 		else
 		{
 			for (Developer member : assignedDevelopers)
 			{
-				output = output + "\n" + member.toString();
+				output = output + "\n" + member.toString() + "\n";
 			}
 		}
 

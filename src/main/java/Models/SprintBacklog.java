@@ -9,7 +9,6 @@ import static View.DevTeamView.noNamePrint;
 
 public class SprintBacklog implements Serializable
 {
-
 	//attributes
 	private String name;
 	private String startDate;
