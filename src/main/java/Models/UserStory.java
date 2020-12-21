@@ -5,6 +5,8 @@ import Utility.Scan;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static View.DevTeamView.*;
+
 
 public class UserStory implements Comparable<UserStory>, Serializable
 {
@@ -29,12 +31,27 @@ public class UserStory implements Comparable<UserStory>, Serializable
 
     // Constructors:-
     public UserStory(String name, int number, String sprint, int priority,
-                     String content, String acceptanceCriteria)
+                     String content, String acceptanceCriteria) throws Exception
     {
-        this.name = name;
-        this.number = number;
+        if (name.isEmpty()) {
+            noNamePrint();
+        } else {
+            this.name = name;
+        }
+
+        if(number < 0) {
+            negativeNumberPrint();
+        } else {
+            this.number = number;
+        }
+
         this.sprint = sprint;
-        this.priorityNumber = priority;
+
+        if(priority < 0) {
+            negativeNumberPrint();
+        } else {
+            this.priorityNumber = priority;
+        }
         this.storyPoints = 0;
         this.content = content;
         this.acceptanceCriteria = acceptanceCriteria;
@@ -166,14 +183,33 @@ public class UserStory implements Comparable<UserStory>, Serializable
     @Override
     public String toString()
     {
-        return "\nUser story number : " + number + '\n' +
-                "Name: " + name + '\n' +
-                "SprintBacklog: " + sprint + '\n' +
-                "Priority: " + priorityNumber + '\n' +
-                "Story Points: " + storyPoints + '\n' +
-                "Content: " + content + '\n' +
-                "Acceptance Criteria:\n" + acceptanceCriteria + '\n' +
-                "Status: " + status + "\n\n";
+        String output;
+
+        output =
+                "\nUser Story: " +
+                        "\nUser story number : " + number +
+                        "\nName = " + name +
+                        "\nSprintBacklog = " + sprint +
+                        "\nPriority = " + priorityNumber +
+                        "\nStory Points = " + storyPoints +
+                        "\nContent = " + content +
+                        "\nAcceptance Criteria = " + acceptanceCriteria +
+                        "\nStatus = " + status +
+                        "\nAssigned Team Members:" ;
+
+        if(assignedDevelopers.isEmpty())
+        {
+            output = output + " None\n";
+        }
+        else
+        {
+            for (Developer member : assignedDevelopers)
+            {
+                output = output + "\n" + member.toString() + "\n";
+            }
+        }
+
+        return output;
     }
 }
 

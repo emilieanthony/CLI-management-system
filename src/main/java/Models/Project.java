@@ -3,6 +3,9 @@ package Models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static View.DevTeamView.negativeIDPrint;
+import static View.DevTeamView.noNamePrint;
+
 public class Project implements Serializable
 {
     //attributes
@@ -28,17 +31,26 @@ public class Project implements Serializable
     }
 
     //constructor
-    public Project(int id, String name,String startDate,String endDate)
+    public Project(int id, String name,String startDate,String endDate) throws Exception
     {
-        this.id = id;
-        this.name = name;
+        if (name.isEmpty()) {
+            noNamePrint();
+        } else {
+            this.name = name;
+        }
+
+        if(id < 0) {
+            negativeIDPrint();
+        } else {
+            this.id = id;
+        }
         this.startDate = startDate;
         this.endDate = endDate;
 
         productBacklog = new ProductBacklog(null,null,null);
         sprintBacklog = new SprintBacklog(null,null,null);
-        productOwner = new ProductOwner(null,0);
-        developer = new Developer(null,0);
+        productOwner = new ProductOwner(null,0); // tas bort???
+        developer = new Developer(null,0); // tas bort???
         task = new Task(0,0,0,null,null);
 
         allTeamMembers = new ArrayList<>();
