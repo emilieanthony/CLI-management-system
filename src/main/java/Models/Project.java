@@ -28,9 +28,13 @@ public class Project implements Serializable
     }
 
     //constructor
-    public Project(int id, String name,String startDate,String endDate)
+    public Project(int id, String name,String startDate,String endDate) throws Exception
     {
-        this.id = id;
+        if (id < 0){
+            throw new Exception("ID must be a positive integer.");
+        } else {
+            this.id = id;
+        }
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;

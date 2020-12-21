@@ -14,10 +14,14 @@ public class Developer implements Serializable
 
     }
 
-    public Developer(String name, int id) {
-        this.name = name;
-        this.id = id;
+    public Developer(String name, int id) throws Exception {
 
+        this.name = name;
+        if(id < 0) {
+            System.out.println("ID cannot be negative, please try again.");
+        } else {
+            this.id = id;
+        }
     }
 
     public void setName(String name) {

@@ -20,9 +20,13 @@ public class Task implements Comparable<Task>, Serializable
 
 	}
 
-	public Task(int id, int priorityNumber, int estimatedTime, String name, String description)
+	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception
 	{
-		this.id = id;
+		if (id < 0){
+			throw new Exception("ID must be a positive integer.");
+		} else {
+			this.id = id;
+		}
 		this.priorityNumber = priorityNumber;
 		this.estimatedHours = estimatedTime;
 		this.actualHours = 0;

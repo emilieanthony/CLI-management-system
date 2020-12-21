@@ -29,7 +29,7 @@ public class UserStory implements Comparable<UserStory>, Serializable
 
     // Constructors:-
     public UserStory(String name, int number, String sprint, int priority,
-                     String content, String acceptanceCriteria)
+                     String content, String acceptanceCriteria) throws Exception
     {
         this.name = name;
         this.number = number;

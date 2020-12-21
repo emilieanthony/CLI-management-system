@@ -99,10 +99,8 @@ public class Import {
                 }
             }
             reader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Error, mf!!!!!!!");
         }
     }
 }
