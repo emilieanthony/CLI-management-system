@@ -1,7 +1,11 @@
 package View;
 
+import Models.Project;
+import Models.SprintBacklog;
 import Models.Task;
 import Utility.Scan;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static View.ScrumMasterView.proName;
@@ -10,15 +14,18 @@ public class DevTeamView {
 
     /*-------------------------------------------Menu Development Team ----------------------------------------------*/
 
-    public static int menuTeamMember() {
+    public static int menuTeamMember() throws Exception {
         int option = Scan.readInt("\n\nWelcome development team member!\n" +
                 "You're working on Project " + proName +"." + "\n\n" +
                 "Please enter an option below\n" +
                 "1. View my own tasks\n" +
                 "2. View assigned tasks\n" +
-                "3. change Task status\n" +
-                "4. change User Story status\n" +
-                "5. Choose project\n" +
+                "3. Change Task status\n" +
+                "4. Change User Story status\n" +
+                "5. View product backlog\n" +
+                "6. View sprint backlog\n" +
+                "7. View all tasks\n" +
+                "8. Switch projects\n" +
                 "6. Go back to main menu\n");
         return option;
     }
@@ -30,6 +37,9 @@ public class DevTeamView {
         return option;
     }
 
+    public static void invalidInputPrint(){
+        Scan.print("There was a problem entering input data.");
+    }
 
     public static int getDeveloperId(){
 
@@ -41,6 +51,18 @@ public class DevTeamView {
 
         int id = Scan.readInt("Please enter the task's id");
         return id;
+    }
+
+    public static void noNamePrint(){
+        Scan.print("Names cannot be empty.");
+    }
+
+    public static void negativeIDPrint() {
+        Scan.print("ID cannot be negative.");
+    }
+
+    public static void negativeNumberPrint() {
+        Scan.print("Number cannot be negative.");
     }
 
     public static int getUserStoryNumber(){
@@ -79,6 +101,19 @@ public class DevTeamView {
         Scan.print(assignedTasks);
     }
 
+    public static void printAllTasks(ArrayList<Task> tasks){
+        for (Task task : tasks){
+            Scan.print(task.toString());
+        }
+    }
 
+    public static void viewSprints(Project project){
+        Scan.print("Sprints: \n" );
+        for(SprintBacklog sprintBacklog : project.getAllSprints()){
+            Scan.print(sprintBacklog.getName());
+        }
+    }
 }
+
+
 

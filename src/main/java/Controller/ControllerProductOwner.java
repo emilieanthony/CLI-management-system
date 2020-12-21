@@ -5,8 +5,9 @@ import Utility.Scan;
 import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
+import static View.DevTeamView.invalidInputPrint;
 import static View.ProductOwnerView.*;
-import static View.ScrumMasterView.getProjectName;
+import static View.ScrumMasterView.*;
 
 
 public class ControllerProductOwner
@@ -38,36 +39,46 @@ public class ControllerProductOwner
         do
         {
 
-            int option = menuProductOwner();
-            switch (option)
-            {
-                case 1:
-                    createBacklog(controllerAll);
-                    break;
-                case 2:
-                    viewBacklog(controllerAll);
-                    break;
-                case 3:
-                    editBacklog(controllerAll, controllerScrumMaster);
-                    break;
-                case 4:
-                    getProjectName();
-                    break;
-                case 5:
-                    running = false; //go back to main menu
-                    break;
-                default:
-                    defaultMessage();
+            int option;
+            try {
+                option = menuProductOwner();
+
+                switch (option) {
+                    case 1:
+                        createBacklog(controllerAll);
+                        break;
+                    case 2:
+                        viewProBacklog(controllerAll);
+                        break;
+                    case 3:
+                        editBacklog(controllerAll, controllerScrumMaster);
+                        break;
+                    case 4:
+                        getProjectName();
+                        break;
+                    case 5:
+                        running = false; //go back to main menu
+                        break;
+                    default:
+                        defaultMessage();
+                }
+            } catch (NumberFormatException e) {
+                numberFormatMessage();
             }
         } while (running);
     }
 
 
     public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
-        Project project = controllerAll.whichProject();
-        ProductBacklog backlog = getBacklogInfo();
-        project.setProductBacklog(backlog);
-        //Export.exportObject(backlog);
+        try {
+            Project project = controllerAll.whichProject();
+            ProductBacklog backlog = getBacklogInfo();
+            project.setProductBacklog(backlog);
+            controllerAll.saveData();
+        }
+        catch(Exception e) {
+            backlogFail();
+        }
     }
 
 
@@ -77,32 +88,38 @@ public class ControllerProductOwner
         boolean running = true;
         do
         {
-            int option = menuEditBacklog();
-            switch (option)
-            {
-                case 1:
-                    editProductBacklogName(controllerAll);
-                    break;
-                case 2:
-                    editBacklogSDate(controllerAll);
-                    break;
-                case 3:
-                    editBacklogEDate(controllerAll);
-                    break;
-                case 4:
-                    editUserStory(controllerAll);
-                    break;
-                case 5:
-                    addUserStory(controllerAll, controllerScrumMaster);
-                    break;
-                case 6:
-                    removeUserStory(controllerAll);
-                    break;
-                case 7:
-                    running = false;
-                    break;
-                default:
-                    defaultMessage();
+            int option;
+
+            try {
+                option = menuEditBacklog();
+
+                switch (option) {
+                    case 1:
+                        editProductBacklogName(controllerAll);
+                        break;
+                    case 2:
+                        editBacklogSDate(controllerAll);
+                        break;
+                    case 3:
+                        editBacklogEDate(controllerAll);
+                        break;
+                    case 4:
+                        editUserStory(controllerAll);
+                        break;
+                    case 5:
+                        addUserStory(controllerAll, controllerScrumMaster);
+                        break;
+                    case 6:
+                        removeUserStory(controllerAll);
+                        break;
+                    case 7:
+                        running = false;
+                        break;
+                    default:
+                        defaultMessage();
+                }
+            } catch (Exception e) {
+                invalidInputPrint();
             }
         } while (running);
     }
@@ -111,10 +128,14 @@ public class ControllerProductOwner
     {
         Project project = controllerAll.whichProject();
         int number = controllerScrumMaster.taskUSIdGenerator(project);
-        UserStory newUserStory = getUSInfo(number);
-        project.getProductBacklog().getAllUserStories().add(newUserStory);
-        //Export.exportObject(newUserStory);
-        createdUStoryReceipt(newUserStory);
+        try {
+            UserStory newUserStory = getUSInfo(number);
+            project.getProductBacklog().getAllUserStories().add(newUserStory);
+            createdUStoryReceipt(newUserStory);
+            controllerAll.saveData();
+        } catch (Exception e) {
+            userStoryFail();
+        }
     }
 
     public void removeUserStory(ControllerAll controllerAll)
@@ -123,10 +144,11 @@ public class ControllerProductOwner
         int number = getUSNumber();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         project.getProductBacklog().getAllUserStories().remove(userStory);
+        controllerAll.saveData();
         printRemoved();
     }
 
-    public void viewBacklog(ControllerAll controllerAll)
+    public void viewProBacklog(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
         if (project==null){
@@ -162,7 +184,7 @@ public class ControllerProductOwner
     {
 
         boolean running = true;
-        viewBacklog(controllerAll);
+        viewProBacklog(controllerAll);
         int number = getStoryNumber();
 
         do
@@ -266,10 +288,3 @@ public class ControllerProductOwner
     }
 
 }
-
-
-
-
-
-
-
