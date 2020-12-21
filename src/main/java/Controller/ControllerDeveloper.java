@@ -20,29 +20,36 @@ public class ControllerDeveloper {
         boolean running = true;
         do {
 
-            int option = menuTeamMember();
-            switch (option) {
-                case 1:
-                    viewMyTasks(controllerAll);
-                    break;
-                case 2:
-                    viewAllAssignedTasks(controllerAll);
-                    break;
-                case 3:
-                    taskMenu(controllerAll);
-                    break;
-                case 4:
-                    proCont.viewBacklog(controllerAll);
-                    proCont.editUSStatus(getStoryNumber(),controllerAll);
-                    break;
-                case 5:
-                    getProjectName();// Switch project.
-                    break;
-                case 6:
-                    running = false;
-                    break;
-                default:
-                    defaultMessage();
+            int option;
+
+            try {
+                option = menuTeamMember();
+
+                switch (option) {
+                    case 1:
+                        viewMyTasks(controllerAll);
+                        break;
+                    case 2:
+                        viewAllAssignedTasks(controllerAll);
+                        break;
+                    case 3:
+                        taskMenu(controllerAll);
+                        break;
+                    case 4:
+                        proCont.viewBacklog(controllerAll);
+                        proCont.editUSStatus(getStoryNumber(), controllerAll);
+                        break;
+                    case 5:
+                        getProjectName();// Switch project.
+                        break;
+                    case 6:
+                        running = false;
+                        break;
+                    default:
+                        defaultMessage();
+                }
+            } catch (Exception e) {
+                System.out.println("There was a problem entering input data.");
             }
         } while (running);
     }

@@ -10,7 +10,7 @@ public class DevTeamView {
 
     /*-------------------------------------------Menu Development Team ----------------------------------------------*/
 
-    public static int menuTeamMember() {
+    public static int menuTeamMember() throws Exception {
         int option = Scan.readInt("\n\nWelcome development team member!\n" +
                 "You're working on Project " + proName +"." + "\n\n" +
                 "Please enter an option below\n" +

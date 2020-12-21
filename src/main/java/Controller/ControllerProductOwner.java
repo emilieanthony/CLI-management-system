@@ -38,36 +38,46 @@ public class ControllerProductOwner
         do
         {
 
-            int option = menuProductOwner();
-            switch (option)
-            {
-                case 1:
-                    createBacklog(controllerAll);
-                    break;
-                case 2:
-                    viewBacklog(controllerAll);
-                    break;
-                case 3:
-                    editBacklog(controllerAll, controllerScrumMaster);
-                    break;
-                case 4:
-                    getProjectName();
-                    break;
-                case 5:
-                    running = false; //go back to main menu
-                    break;
-                default:
-                    defaultMessage();
+            int option;
+            try {
+                option = menuProductOwner();
+
+                switch (option) {
+                    case 1:
+                        createBacklog(controllerAll);
+                        break;
+                    case 2:
+                        viewBacklog(controllerAll);
+                        break;
+                    case 3:
+                        editBacklog(controllerAll, controllerScrumMaster);
+                        break;
+                    case 4:
+                        getProjectName();
+                        break;
+                    case 5:
+                        running = false; //go back to main menu
+                        break;
+                    default:
+                        defaultMessage();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("There was a problem upon entering input data. Please try again.");
             }
         } while (running);
     }
 
 
     public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
-        Project project = controllerAll.whichProject();
-        ProductBacklog backlog = getBacklogInfo();
-        project.setProductBacklog(backlog);
-        //Export.exportObject(backlog);
+        try {
+            Project project = controllerAll.whichProject();
+            ProductBacklog backlog = getBacklogInfo();
+            project.setProductBacklog(backlog);
+            //Export.exportObject(backlog);
+        }
+        catch(Exception e) {
+            System.out.println("There was an error trying to create a backlog. Please try again.");
+        }
     }
 
 
@@ -77,32 +87,38 @@ public class ControllerProductOwner
         boolean running = true;
         do
         {
-            int option = menuEditBacklog();
-            switch (option)
-            {
-                case 1:
-                    editProductBacklogName(controllerAll);
-                    break;
-                case 2:
-                    editBacklogSDate(controllerAll);
-                    break;
-                case 3:
-                    editBacklogEDate(controllerAll);
-                    break;
-                case 4:
-                    editUserStory(controllerAll);
-                    break;
-                case 5:
-                    addUserStory(controllerAll, controllerScrumMaster);
-                    break;
-                case 6:
-                    removeUserStory(controllerAll);
-                    break;
-                case 7:
-                    running = false;
-                    break;
-                default:
-                    defaultMessage();
+            int option;
+
+            try {
+                option = menuEditBacklog();
+
+                switch (option) {
+                    case 1:
+                        editProductBacklogName(controllerAll);
+                        break;
+                    case 2:
+                        editBacklogSDate(controllerAll);
+                        break;
+                    case 3:
+                        editBacklogEDate(controllerAll);
+                        break;
+                    case 4:
+                        editUserStory(controllerAll);
+                        break;
+                    case 5:
+                        addUserStory(controllerAll, controllerScrumMaster);
+                        break;
+                    case 6:
+                        removeUserStory(controllerAll);
+                        break;
+                    case 7:
+                        running = false;
+                        break;
+                    default:
+                        defaultMessage();
+                }
+            } catch (Exception e) {
+                System.out.println("There was a problem entering a menu option. Please try again.");
             }
         } while (running);
     }
@@ -111,10 +127,14 @@ public class ControllerProductOwner
     {
         Project project = controllerAll.whichProject();
         int number = controllerScrumMaster.taskUSIdGenerator(project);
-        UserStory newUserStory = getUSInfo(number);
-        project.getProductBacklog().getAllUserStories().add(newUserStory);
-        //Export.exportObject(newUserStory);
-        createdUStoryReceipt(newUserStory);
+        try {
+            UserStory newUserStory = getUSInfo(number);
+            project.getProductBacklog().getAllUserStories().add(newUserStory);
+            //Export.exportObject(newUserStory);
+            createdUStoryReceipt(newUserStory);
+        } catch (Exception e) {
+            System.out.println("There was a problem in creating the user story, please try again.");
+        }
     }
 
     public void removeUserStory(ControllerAll controllerAll)

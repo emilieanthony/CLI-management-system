@@ -20,7 +20,7 @@ public class SprintBacklog implements Serializable
 	}
 
 	//constructor
-	public SprintBacklog(String name, String startDate, String endDate)
+	public SprintBacklog(String name, String startDate, String endDate) throws Exception
 	{
 		this.name = name;
 		this.startDate = startDate;

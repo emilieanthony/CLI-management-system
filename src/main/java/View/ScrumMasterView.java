@@ -12,7 +12,7 @@ public class ScrumMasterView {
 
     public static String proName;
     public static String name;
-    public static int menuScrumMaster() {
+    public static int menuScrumMaster() throws NumberFormatException{
 
         int option = Scan.readInt("\n\nWelcome Scrum Master!\n" +
                 "You're working on Project " + proName + "." + "\n\n" +
@@ -34,15 +34,12 @@ public class ScrumMasterView {
                 "15. Calculate average velocity\n"+
                 "16. Go back to main menu\n");
 
-
-
-
         return option;
     }
 
 
     //----------------------------------------------------------Edit task menu---------------------------------------------
-    public static int menuEditTask()
+    public static int menuEditTask() throws Exception
     {
         int option = Scan.readInt
                 ("\n\nEdit Task Menu. \n " +
@@ -82,7 +79,7 @@ public class ScrumMasterView {
         return fileName;
     }
 
-    public static Task getTaskInfo(int id) {
+    public static Task getTaskInfo(int id) throws Exception {
        // int id = Scan.readInt("Please enter task id:");
         String name = Scan.readLine("Please enter name of task:");
         int priorityNumber = Scan.readInt("Please enter priority number 1-5:");

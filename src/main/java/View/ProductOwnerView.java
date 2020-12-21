@@ -11,7 +11,7 @@ public class ProductOwnerView
 
     /*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*/
 
-    public static int menuProductOwner()
+    public static int menuProductOwner() throws NumberFormatException
     {
         int option = Scan.readInt("\n\nWelcome product owner!\n\n" +
                 "You're working on Project " + proName +"." + "\n\n" +
@@ -25,7 +25,7 @@ public class ProductOwnerView
 
     }
 
-    public static ProductBacklog getBacklogInfo()
+    public static ProductBacklog getBacklogInfo() throws Exception
     {
         String backlogName = Scan.readLine("Please enter product backlog sprintName:");
         String startDate = Scan.readLine("Please enter start date: ex (yyyy/mm/dd)");
@@ -36,7 +36,7 @@ public class ProductOwnerView
 
     /*----------------------------------------------2nd Menu---------------------------------------------------------*/
 
-    public static int menuEditBacklog()
+    public static int menuEditBacklog() throws Exception
     {
         int option;
         option =
@@ -69,7 +69,7 @@ public class ProductOwnerView
         return endDate;
     }
 
-    public static UserStory getUSInfo(int number ) {
+    public static UserStory getUSInfo(int number ) throws Exception{
         Scan.print("Add new user story");
         String name = Scan.readLine("Name: ");
         //int number = Scan.readInt("User story number: ");

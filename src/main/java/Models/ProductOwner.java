@@ -14,10 +14,14 @@ public class ProductOwner implements Serializable
 
     }
 
-    public ProductOwner(String name , int id)
+    public ProductOwner(String name , int id) throws Exception
     {
         this.name = name;
-        this.id = id;
+        if (id < 0){
+            throw new Exception("ID must be a positive integer.");
+        } else {
+            this.id = id;
+        }
     }
 
     // getters & setters

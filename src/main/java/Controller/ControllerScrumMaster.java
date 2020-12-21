@@ -21,58 +21,66 @@ public class ControllerScrumMaster {
 
 		boolean running = true;
 		do {
-			int option = menuScrumMaster();
-			switch (option) {
-				case 1:
-					createProject(controllerAll);
-					break;
-				case 2:
-					createSprintAndSprintBacklog(controllerAll);
-					break;
-				case 3:
-					createTaskToProductBacklog(controllerAll);
-					break;
-				case 4:
-					createTaskToSprint(controllerAll);
-					break;
-				case 5:
-					createDevelopmentMember(controllerAll);
-					break;
-				case 6:
-					createProductOwner(controllerAll);
-					break;
-				case 7:
-					assignATask(controllerAll);
-					break;
-				case 8:
-					scrumMasterEditTaskMenu(controllerAll, contScrum);
-					break;
-				case 9:
-					contProOwner.viewBacklog(controllerAll);
-					break;
-				case 10:
-					viewTeamMembers(controllerAll);
-					break;
-				case 11:
-					moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
-					break;
-				case 12:
-					viewSprintBacklog(controllerAll);
-					break;
-				case 13:
-					importFile.importProjects(controllerAll);
-					break;
-				case 14:
-					getProjectName();// Switch project.
-					break;
-				case 15:
-					velocity();
-					break;
-				case 16:
-					running = false;
-					break;
-				default:
-					defaultMessage();
+
+			int option;
+
+			try {
+				option = menuScrumMaster();
+
+				switch (option) {
+					case 1:
+						createProject(controllerAll);
+						break;
+					case 2:
+						createSprintAndSprintBacklog(controllerAll);
+						break;
+					case 3:
+						createTaskToProductBacklog(controllerAll);
+						break;
+					case 4:
+						createTaskToSprint(controllerAll);
+						break;
+					case 5:
+						createDevelopmentMember(controllerAll);
+						break;
+					case 6:
+						createProductOwner(controllerAll);
+						break;
+					case 7:
+						assignATask(controllerAll);
+						break;
+					case 8:
+						scrumMasterEditTaskMenu(controllerAll, contScrum);
+						break;
+					case 9:
+						contProOwner.viewBacklog(controllerAll);
+						break;
+					case 10:
+						viewTeamMembers(controllerAll);
+						break;
+					case 11:
+						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+						break;
+					case 12:
+						viewSprintBacklog(controllerAll);
+						break;
+					case 13:
+						importFile.importProjects(controllerAll);
+						break;
+					case 14:
+						getProjectName();// Switch project.
+						break;
+					case 15:
+						velocity();
+						break;
+					case 16:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("There was a problem entering input data.");
 			}
 		} while (running);
 	}
@@ -83,24 +91,31 @@ public class ControllerScrumMaster {
 
 		boolean running = true;
 		do {
-			int option = menuEditTask();
-			switch (option) {
-				case 1:
-					editPriorityNumberTask(controllerAll);
-					break;
-				case 2:
-					editStatusTask(controllerAll);
-					break;
-				case 3:
-					removeTaskSprintBacklog(controllerAll, contScrum);
-					break;
-				case 4:
-					removeTaskProductBacklog(controllerAll);
-				case 5:
-					running = false;
-					break;
-				default:
-					defaultMessage();
+
+			int option;
+
+			try {
+				option = menuEditTask();
+				switch (option) {
+					case 1:
+						editPriorityNumberTask(controllerAll);
+						break;
+					case 2:
+						editStatusTask(controllerAll);
+						break;
+					case 3:
+						removeTaskSprintBacklog(controllerAll, contScrum);
+						break;
+					case 4:
+						removeTaskProductBacklog(controllerAll);
+					case 5:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e) {
+				System.out.println("There was a problem with the user input. Please try again.");
 			}
 		} while (running);
 	}
@@ -129,14 +144,14 @@ public class ControllerScrumMaster {
 
 			int id = taskUSIdGenerator(project);
 
-			Task newTask = getTaskInfo(id);
-
-			createdTaskReceipt(newTask);
-
-			project.getProductBacklog().getTasksImport().add(newTask);
-
+			try {
+				Task newTask = getTaskInfo(id);
+				createdTaskReceipt(newTask);
+				project.getProductBacklog().getTasksImport().add(newTask);
+			} catch (Exception e) {
+				System.out.println("There was a problem trying to create this task, please try again.");
+			}
 		}
-
 	}
 
 	private void createTaskToSprint(ControllerAll controllerAll) {
@@ -148,13 +163,15 @@ public class ControllerScrumMaster {
 		} else {
 
 			int id = taskUSIdGenerator(project);
-			Task newTask = getTaskInfo(id);
 
-			createdTaskReceipt(newTask);
-
-			name = getSprintBacklogName();
-
-			findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
+			try {
+				Task newTask = getTaskInfo(id);
+				createdTaskReceipt(newTask);
+				name = getSprintBacklogName();
+				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
+			} catch	(Exception e) {
+				System.out.println("There was a problem trying to create a new task, please try again.");
+			}
 		}
 	}
 
@@ -391,10 +408,14 @@ public class ControllerScrumMaster {
 	public void createProductOwner(ControllerAll controllerAll) {
 		String name = getProOwnerInfo();
 		int id = createIdProductOwner(controllerAll);
-		ProductOwner newProOwner = new ProductOwner(name, id);
-		Project project = controllerAll.whichProject();
-		project.getAllProductOwners().add(newProOwner);
-		createdProOwner();
+		try {
+			ProductOwner newProOwner = new ProductOwner(name, id);
+			Project project = controllerAll.whichProject();
+			project.getAllProductOwners().add(newProOwner);
+			createdProOwner();
+		} catch (Exception e) {
+			System.out.println("There was a problem trying to register a new product owner, please try again.");
+		}
 	}
 
 
@@ -420,9 +441,13 @@ public class ControllerScrumMaster {
 		if (project == null) {
 			projectNotFound();
 		} else {
-			Developer developer = new Developer(name, id);
-			project.getAllTeamMembers().add(developer);
-			createdDeveloper();
+			try {
+				Developer developer = new Developer(name, id);
+				project.getAllTeamMembers().add(developer);
+				createdDeveloper();
+			} catch (Exception e) {
+				System.out.println("There was a problem registering a new developer, please try again.");
+			}
 		}
 	}
 
@@ -456,11 +481,18 @@ public class ControllerScrumMaster {
 
 		String startDate = startYear + "-" + startMonth + "-" + startDay;
 		String endDate = endYear + "-" + endMonth + "-" + endDay;
-		Project project = new Project(id, name, startDate, endDate);
-		controllerAll.getAllProjects().add(project);
-		proName = name;
 
-		Scan.print("You have successfully created the following project:\n\n" + project.toString());
+		try {
+			Project project = new Project(id, name, startDate, endDate);
+			controllerAll.getAllProjects().add(project);
+			proName = name;
+
+			Scan.print("You have successfully created the following project:\n\n" + project.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//	System.out.println("There was a problem trying to register a new project, please try again.");
+		//}
 	}
 
 
@@ -482,13 +514,20 @@ public class ControllerScrumMaster {
 		String startDate = startYear + "-" + startMonth + "-" + startDay;
 		String endDate = endYear + "-" + endMonth + "-" + endDay;
 
-		SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
-		Project project = controllerAll.whichProject();
-		project.getAllSprintBacklogs().add(sprintBacklog);
+		try {
+			SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
+			Project project = controllerAll.whichProject();
+			project.getAllSprintBacklogs().add(sprintBacklog); //project here gives null pointer.
 
-		Scan.print("You have successfully created the following sprintBacklog:\n\n"
-				+ sprintBacklog.toString());
-
+			Scan.print("You have successfully created the following sprintBacklog:\n\n"
+					+ sprintBacklog.toString());
+		} catch (NumberFormatException e) {
+			System.out.println("There was a problem with user input trying to register a sprint backlog, please try again.");
+		} catch (NullPointerException e) {
+			System.out.println("Tried to add backlog to null project.");
+		} catch (Exception e) {
+			System.out.println("There was a problem trying to register a sprint backlog, please try again.");
+		}
 	}
 
 	public Task findTaskByIdSprint(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
