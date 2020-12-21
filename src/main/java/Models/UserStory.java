@@ -169,7 +169,7 @@ public class UserStory implements Comparable<UserStory>, Serializable
         String output;
 
         output =
-                "User Story: " +
+                "\nUser Story: " +
                         "\nUser story number : " + number +
                         "\nName = " + name +
                         "\nSprintBacklog = " + sprint +
@@ -178,17 +178,17 @@ public class UserStory implements Comparable<UserStory>, Serializable
                         "\nContent = " + content +
                         "\nAcceptance Criteria = " + acceptanceCriteria +
                         "\nStatus = " + status +
-                        "\n\nAssigned Team Members:" + "\n";
+                        "\nAssigned Team Members:" ;
 
-        if(assignedDevelopers == null)
+        if(assignedDevelopers.isEmpty())
         {
-            output = output + "None\n";
+            output = output + " None\n";
         }
         else
         {
             for (Developer member : assignedDevelopers)
             {
-                output = output + "\n" + member.toString();
+                output = output + "\n" + member.toString() + "\n";
             }
         }
 

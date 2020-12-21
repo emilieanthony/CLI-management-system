@@ -45,7 +45,7 @@ public class ControllerProductOwner
                     createBacklog(controllerAll);
                     break;
                 case 2:
-                    viewBacklog(controllerAll);
+                    viewProBacklog(controllerAll);
                     break;
                 case 3:
                     editBacklog(controllerAll, controllerScrumMaster);
@@ -126,7 +126,7 @@ public class ControllerProductOwner
         printRemoved();
     }
 
-    public void viewBacklog(ControllerAll controllerAll)
+    public void viewProBacklog(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
         if (project==null){
@@ -162,7 +162,7 @@ public class ControllerProductOwner
     {
 
         boolean running = true;
-        viewBacklog(controllerAll);
+        viewProBacklog(controllerAll);
         int number = getStoryNumber();
 
         do

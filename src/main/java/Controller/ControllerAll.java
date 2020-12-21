@@ -76,7 +76,7 @@ public class ControllerAll
                     contProOwner.productOwnerMenu(controllerAll, contScrum);
                     break;
                 case 3:
-                    contDeveloper.teamMemberMenu(controllerAll,contProOwner);
+                    contDeveloper.teamMemberMenu(controllerAll,contProOwner, contScrum);
                     break;
                 case 4:
                     viewProjects();

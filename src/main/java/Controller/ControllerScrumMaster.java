@@ -10,6 +10,7 @@ import java.util.Iterator;
 import static Utility.PrintUtility.*;
 import static View.DevTeamView.getTaskId;
 
+import static View.DevTeamView.viewSprints;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster
@@ -53,7 +54,7 @@ public class ControllerScrumMaster
 					assignUserStory(controllerAll);
 					break;
 				case 9:
-					contProOwner.viewBacklog(controllerAll);
+					contProOwner.viewProBacklog(controllerAll);
 					break;
 				case 10:
 					scrumMasterEditTaskMenu(controllerAll, contScrum);
@@ -217,7 +218,7 @@ public class ControllerScrumMaster
 	}
 
 
-	private ArrayList<Task> collectAllTasks(Project project)
+	public ArrayList<Task> collectAllTasks(Project project)
 	{
 
 		//put all tasks in one and the same arrayList
@@ -278,7 +279,7 @@ public class ControllerScrumMaster
 
 	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
-		contProOwner.viewBacklog(controllerAll);
+		contProOwner.viewProBacklog(controllerAll);
 
 		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
 				"Do you want to move a USER STORY from product backlog to sprint backlog, type: " +
@@ -625,10 +626,12 @@ public class ControllerScrumMaster
 		return task;
 	}
 
-	private void viewSprintBacklog(ControllerAll controllerAll)
+	public void viewSprintBacklog(ControllerAll controllerAll)
 	{
-		name = getSprintBacklogByName();
 		Project project = controllerAll.whichProject();
+		viewSprints(project);
+
+		name = getSprintBacklogByName();
 		if (project == null)
 		{
 			projectNotFound();

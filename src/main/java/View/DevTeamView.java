@@ -1,7 +1,11 @@
 package View;
 
+import Models.Project;
+import Models.SprintBacklog;
 import Models.Task;
 import Utility.Scan;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static View.ScrumMasterView.proName;
@@ -18,7 +22,10 @@ public class DevTeamView {
                 "2. View assigned tasks\n" +
                 "3. Change Task status\n" +
                 "4. Change User Story status\n" +
-                "5. Switch project\n" +
+                "5. View product backlog\n" +
+                "6. View sprint backlog\n" +
+                "7. View all tasks\n" +
+                "8. Switch projects\n" +
                 "6. Go back to main menu\n");
         return option;
     }
@@ -79,6 +86,19 @@ public class DevTeamView {
         Scan.print(assignedTasks);
     }
 
+    public static void printAllTasks(ArrayList<Task> tasks){
+        for (Task task : tasks){
+            Scan.print(task.toString());
+        }
+    }
 
+    public static void viewSprints(Project project){
+        Scan.print("Sprints: \n" );
+        for(SprintBacklog sprintBacklog : project.getAllSprints()){
+            Scan.print(sprintBacklog.getName());
+        }
+    }
 }
+
+
 

@@ -148,25 +148,24 @@ public class Task implements Comparable<Task>, Serializable
 		String output;
 
 		output =
-				"Tasks: \n"+
-						"ID:" + id +
+				"\nTask ID: " + id +
 						"\nName: " + name +
 						"\nPriority number: " + priorityNumber +
 						"\nStatus: " + status +
 						"\nDescription: " + description +
 						"\nEstimated hours: " + estimatedHours +
 						"\nActual hours: " + actualHours +
-						"\nAssigned Team Members:" + "\n";
+						"\nAssigned Team Members:" ;
 
-		if(assignedDevelopers == null)
+		if(assignedDevelopers.isEmpty())
 		{
-			output = output + "None\n";
+			output = output + " None\n";
 		}
 		else
 		{
 			for (Developer member : assignedDevelopers)
 			{
-				output = output + "\n" + member.toString();
+				output = output + "\n" + member.toString() + "\n";
 			}
 		}
 
