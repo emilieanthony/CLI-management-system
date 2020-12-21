@@ -33,8 +33,8 @@ public class ScrumMasterView
 				"14. View sprint backlog\n" +
 				"15. Calculate average velocity\n" +
 				"16. Switch project\n" +
-				"17. Import file\n" +
-				"18. Go back to main menu\n");
+				//"17. Import file\n" +
+				"17. Go back to main menu\n");
 
 
 		return option;
@@ -53,10 +53,6 @@ public class ScrumMasterView
                         "4- Remove Task from Product Backlog.\n" +
                         "5- Back to your menu.\n");
         return option;
-    }
-
-    public static int newPriorityNumberTask() {
-        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
     }
 
     public static void numberFormatMessage() {

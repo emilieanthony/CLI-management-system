@@ -74,7 +74,7 @@ public class ControllerProductOwner
             Project project = controllerAll.whichProject();
             ProductBacklog backlog = getBacklogInfo();
             project.setProductBacklog(backlog);
-            //Export.exportObject(backlog);
+            controllerAll.saveData();
         }
         catch(Exception e) {
             backlogFail();
@@ -131,8 +131,8 @@ public class ControllerProductOwner
         try {
             UserStory newUserStory = getUSInfo(number);
             project.getProductBacklog().getAllUserStories().add(newUserStory);
-            //Export.exportObject(newUserStory);
             createdUStoryReceipt(newUserStory);
+            controllerAll.saveData();
         } catch (Exception e) {
             userStoryFail();
         }
@@ -144,6 +144,7 @@ public class ControllerProductOwner
         int number = getUSNumber();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         project.getProductBacklog().getAllUserStories().remove(userStory);
+        controllerAll.saveData();
         printRemoved();
     }
 

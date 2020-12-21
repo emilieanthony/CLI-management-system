@@ -1,7 +1,6 @@
 package Controller;
 
 import Models.*;
-import Utility.Import;
 import Utility.Scan;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import static View.ScrumMasterView.*;
 public class ControllerScrumMaster
 {
 
-	private Import importFile = new Import();
+	//private Import importFile = new Import();
 	static String name;
 
 	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll,
@@ -70,7 +69,7 @@ public class ControllerScrumMaster
 						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 						break;
 					case 13:
-						moveTaskOrUSToProductBacklog(contProOwner, controllerAll);
+						moveTaskOrUSToProductBacklog(controllerAll);
 						break;
 					case 14:
 						viewSprintBacklog(controllerAll);
@@ -81,10 +80,10 @@ public class ControllerScrumMaster
 					case 16:
 						getProjectName();
 						break;
-					case 17:
+					/*case 17:
 						importFile.importProjects(controllerAll);
-						break;
-					case 18:
+						break;*/
+					case 17:
 						running = false;
 						break;
 					default:
@@ -166,6 +165,7 @@ public class ControllerScrumMaster
 				Task newTask = getTaskInfo(id);
 				createdTaskReceipt(newTask);
 				project.getProductBacklog().getTasksImport().add(newTask);
+				controllerAll.saveData();
 			} catch (Exception e) {
 				registerTaskFail();
 			}
@@ -191,6 +191,7 @@ public class ControllerScrumMaster
 				createdTaskReceipt(newTask);
 				name = getSprintBacklogName();
 				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
+				controllerAll.saveData();
 			} catch	(Exception e) {
 				registerTaskFail();
 			}
@@ -317,7 +318,7 @@ public class ControllerScrumMaster
 				Task taskToMove = project.getProductBacklog().getTask(idTask);
 				findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
 				project.getProductBacklog().getTasksImport().remove(taskToMove);
-
+				controllerAll.saveData();
 				movedObject();
 			}
 
@@ -331,7 +332,7 @@ public class ControllerScrumMaster
 				UserStory userStoryToMove = project.getProductBacklog().getUserStory(usName);
 				findSprintBacklogByName(controllerAll).getUserStories().add(userStoryToMove);
 				project.getProductBacklog().getAllUserStories().remove(userStoryToMove);
-
+				controllerAll.saveData();
 				movedObject();
 			}
 			else
@@ -341,8 +342,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private void moveTaskOrUSToProductBacklog(ControllerProductOwner contProOwner, ControllerAll
-			controllerAll)
+	private void moveTaskOrUSToProductBacklog(ControllerAll controllerAll)
 	{
 		viewSprintBacklog(controllerAll);
 
@@ -365,7 +365,7 @@ public class ControllerScrumMaster
 				Task taskToMove = findSprintBacklogByName(controllerAll).getTask(idTask);
 				project.getProductBacklog().getTasksImport().add(taskToMove);
 				findSprintBacklogByName(controllerAll).getAllTasks().remove(taskToMove);
-
+				controllerAll.saveData();
 				movedObject();
 			}
 
@@ -378,7 +378,7 @@ public class ControllerScrumMaster
 				UserStory userStoryToMove = findSprintBacklogByName(controllerAll).getUserStory(usNumber);
 				project.getProductBacklog().getAllUserStories().add(userStoryToMove);
 				findSprintBacklogByName(controllerAll).getUserStories().remove(userStoryToMove);
-
+				controllerAll.saveData();
 				movedObject();
 			}
 			else
@@ -491,6 +491,7 @@ public class ControllerScrumMaster
 
 			int idTask = Scan.readInt("Write the ID of the task you want to remove: ");
 			project.getProductBacklog().getTasksImport().remove(project.getProductBacklog().getTask(idTask));
+			controllerAll.saveData();
 			removeObject();
 
 		}
@@ -502,6 +503,7 @@ public class ControllerScrumMaster
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
 		Task task = findTaskByIdSprint(controllerAll, contScrum);
 		sprintBacklog.getAllTasks().remove(task);
+		controllerAll.saveData();
 		removeObject();
 	}
 	/*------------------------------------------Methods product owner------------------------------------------------*/
@@ -514,6 +516,7 @@ public class ControllerScrumMaster
 			ProductOwner newProOwner = new ProductOwner(name, id);
 			Project project = controllerAll.whichProject();
 			project.getAllProductOwners().add(newProOwner);
+			controllerAll.saveData();
 			createdProOwner();
 		} catch (Exception e) {
 			registerProOwnerFail();
@@ -553,6 +556,7 @@ public class ControllerScrumMaster
 			try {
 				Developer developer = new Developer(name, id);
 				project.getAllTeamMembers().add(developer);
+				controllerAll.saveData();
 				createdDeveloper();
 			} catch (Exception e) {
 				registerDeveloperFail();
@@ -599,7 +603,7 @@ public class ControllerScrumMaster
 			Project project = new Project(id, name, startDate, endDate);
 			controllerAll.getAllProjects().add(project);
 			proName = name;
-
+			controllerAll.saveData();
 			Scan.print("You have successfully created the following project:\n\n" + project.toString());
 		} catch (Exception e) {
 			registerProjectFail();
@@ -630,7 +634,7 @@ public class ControllerScrumMaster
 			SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
 			Project project = controllerAll.whichProject();
 			project.getAllSprintBacklogs().add(sprintBacklog); //project here gives null pointer.
-
+			controllerAll.saveData();
 			Scan.print("You have successfully created the following sprintBacklog:\n\n"
 					+ sprintBacklog.toString());
 		} catch (NumberFormatException e) {
