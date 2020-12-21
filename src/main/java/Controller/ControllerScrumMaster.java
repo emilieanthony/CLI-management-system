@@ -606,6 +606,7 @@ public class ControllerScrumMaster
 			controllerAll.saveData();
 			Scan.print("You have successfully created the following project:\n\n" + project.toString());
 		} catch (Exception e) {
+
 			registerProjectFail();
 		}
 	}
