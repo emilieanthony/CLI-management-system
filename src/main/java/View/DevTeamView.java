@@ -16,9 +16,9 @@ public class DevTeamView {
                 "Please enter an option below\n" +
                 "1. View my own tasks\n" +
                 "2. View assigned tasks\n" +
-                "3. change Task status\n" +
-                "4. change User Story status\n" +
-                "5. Choose project\n" +
+                "3. Change Task status\n" +
+                "4. Change User Story status\n" +
+                "5. Switch project\n" +
                 "6. Go back to main menu\n");
         return option;
     }
