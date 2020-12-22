@@ -137,11 +137,10 @@ public class ControllerScrumMaster
 	{
 		Project project = controllerAll.whichProject();
 		membersView();
-		for (Developer developer : project.getAllTeamMembers())
+		for (Developer developer : project.getAllDevelopmentMembers())
 		{
 			Scan.print(developer.toString());
 		}
-		projectNotFound();
 	}
 
 
@@ -606,6 +605,7 @@ public class ControllerScrumMaster
 			controllerAll.saveData();
 			Scan.print("You have successfully created the following project:\n\n" + project.toString());
 		} catch (Exception e) {
+
 			registerProjectFail();
 		}
 	}
@@ -758,7 +758,7 @@ public class ControllerScrumMaster
 		Project project = controllerAll.whichProject();
 		if (project == null)
 		{
-			projectNotFound();
+			projectNotFound();  
 		}
 
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
@@ -782,7 +782,7 @@ public class ControllerScrumMaster
 
 		UserStory userStory = findSprintBacklogByName(controllerAll).getUserStory(number);
 		userStory.getAssignedDevelopers().add(developer);
-		userStory.setStatus("In progress");
+		userStory.setInProgress();
 
 		assignmentCompleted();
 

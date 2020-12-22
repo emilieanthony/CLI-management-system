@@ -72,9 +72,11 @@ public class ControllerProductOwner
     public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
         try {
             Project project = controllerAll.whichProject();
-            ProductBacklog backlog = getBacklogInfo();
-            project.setProductBacklog(backlog);
+            ProductBacklog ProBacklog = getBacklogInfo();
+            project.setProductBacklog(ProBacklog);
+            Scan.print(ProBacklog.toString());
             controllerAll.saveData();
+            proBacklogCreationConf();
         }
         catch(Exception e) {
             backlogFail();
@@ -133,6 +135,7 @@ public class ControllerProductOwner
             project.getProductBacklog().getAllUserStories().add(newUserStory);
             createdUStoryReceipt(newUserStory);
             controllerAll.saveData();
+            Scan.print(newUserStory.toString());
         } catch (Exception e) {
             userStoryFail();
         }
@@ -161,9 +164,12 @@ public class ControllerProductOwner
 
     public void editProductBacklogName(ControllerAll controllerAll){
 
-        String nameBacklog = getBacklogName();
+        String nameBacklog = getProBacklogName();
         Project project = controllerAll.whichProject();
         project.getProductBacklog().setName(nameBacklog);
+        proBacklogEditConf();
+        Scan.print(project.getProductBacklog().toString());
+
     }
     public void editBacklogSDate(ControllerAll controllerAll)
     {
@@ -171,12 +177,16 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         String startDate = getBacklogSDate();
         project.getProductBacklog().setStartDate(startDate);
+        proBacklogEditConf();
+        Scan.print(project.getProductBacklog().toString());
     }
     public void editBacklogEDate(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
         String endDate = getBacklogEDate();
         project.getProductBacklog().setEndDate(endDate);
+        proBacklogEditConf();
+        Scan.print(project.getProductBacklog().toString());
     }
 
     //**//*--------------------------------3rd Menu - menu for editing user stories---------------------------------------*//
@@ -232,6 +242,9 @@ public class ControllerProductOwner
         int newUSNumber = getNewUSNumber();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         userStory.setNumber(newUSNumber);
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+
     }
 
     public void editUSName(int number,ControllerAll controllerAll)
@@ -240,6 +253,8 @@ public class ControllerProductOwner
         String newUSName = getNewUSName();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         userStory.setName(newUSName);
+        userStoryEditConf();
+        Scan.print(userStory.toString());
 
     }
 
@@ -248,6 +263,8 @@ public class ControllerProductOwner
         String newUSSprint = getNewUSSprint();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         userStory.setSprint(newUSSprint);
+        userStoryEditConf();
+        Scan.print(userStory.toString());
 
     }
 
@@ -256,6 +273,8 @@ public class ControllerProductOwner
         int newUSPriority = getNewUSPriority();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         userStory.setPriorityNumber(newUSPriority);
+        userStoryEditConf();
+        Scan.print(userStory.toString());
     }
 
     public void editUSStoryPoints(int number,ControllerAll controllerAll)
@@ -263,6 +282,8 @@ public class ControllerProductOwner
         int newUSSPoints = getNewUSStoryPoints();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         userStory.setStoryPoints(newUSSPoints);
+        userStoryEditConf();
+        Scan.print(userStory.toString());
     }
 
     public void editUSContent(int number, ControllerAll controllerAll)
@@ -270,6 +291,8 @@ public class ControllerProductOwner
         String newUSContent = getNewUSContent();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         userStory.setContent(newUSContent);
+        userStoryEditConf();
+        Scan.print(userStory.toString());
     }
 
     public void editUSAcceptanceC(int number,ControllerAll controllerAll)
@@ -277,14 +300,32 @@ public class ControllerProductOwner
         String newUSAcceptanceC = getNewUSAcceptanceC();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
+        userStoryEditConf();
+        Scan.print(userStory.toString());
 
     }
 
     public void editUSStatus(int number,ControllerAll controllerAll)
     {
-        String newUSStatus = getNewUSStatus();
+        int newUSStatus = getNewUSStatus();
+
         UserStory userStory = findUStoryByNumber(number,controllerAll);
-        userStory.setStatus(newUSStatus);
+        if (newUSStatus == 1){
+            userStory.setOpen();
+            userStoryEditConf();
+        }
+        else if (newUSStatus == 2){
+            userStory.setInProgress();
+            userStoryEditConf();
+        }
+        else if (newUSStatus == 3){
+            userStory.setDone();
+            userStoryEditConf();
+        } else {
+            changeStatusMessage();
+        }
+
+        Scan.print(userStory.toString());
     }
 
 }

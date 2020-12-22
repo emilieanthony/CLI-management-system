@@ -142,7 +142,7 @@ public class ProductBacklog implements Serializable {
         Collections.sort(allUserStories);
 
         return "\n\nBacklog: \n" +
-                "sprintName = " + name + '\n' +
+                "Name = " + name + '\n' +
                 "Start Date = " + startDate + '\n' +
                 "End Date = " + endDate + "\n\n" +
                 "All tasks:\n " + tasks + "\n" +

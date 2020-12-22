@@ -28,12 +28,22 @@ public class ProductOwnerView
     public static void userStoryFail(){
         Scan.print("There was a problem in creating the user story, please try again.");
     }
+    public static void proBacklogCreationConf(){
+        Scan.print("You have successfully created a new Product Backlog .");
+    }
 
     public static ProductBacklog getBacklogInfo() throws Exception
     {
-        String backlogName = Scan.readLine("Please enter product backlog sprintName:");
-        String startDate = Scan.readLine("Please enter start date: ex (yyyy/mm/dd)");
-        String endDate = Scan.readLine("Please enter end date: ex (yyyy/mm/dd)");
+        String backlogName = Scan.readLine("Please enter product backlog Name:");
+        int startYear = Scan.readInt("Start date (YYYY): ");
+        int startMonth = Scan.readInt("Start date (MM): ");
+        int startDay = Scan.readInt("Start date (DD): ");
+        int endYear = Scan.readInt("End date (YYYY): ");
+        int endMonth = Scan.readInt("End date (MM): ");
+        int endDay = Scan.readInt("End date (DD): ");
+
+        String startDate = startYear + "-" + startMonth + "-" + startDay;
+        String endDate = endYear + "-" + endMonth + "-" + endDay;
         return new ProductBacklog(backlogName, startDate, endDate);
     }
 
@@ -46,7 +56,7 @@ public class ProductOwnerView
         option =
                 Scan.readInt("\n\nNow you're accessing " + proName + " project!" +
                         "\n\nPlease enter the number of which part of the backlog you want to edit:\n\n" +
-                "1- Edit Product Backlog sprintName\n" +
+                "1- Edit Product Backlog Name\n" +
                 "2- Edit Product Backlog start date\n" +
                 "3- Edit Product Backlog end date\n" +
                 "4- Edit Product Backlog user stories\n" +
@@ -55,6 +65,11 @@ public class ProductOwnerView
                 "7- Back to your menu");
         return option;
     }
+    public static String getProBacklogName()
+    {
+        String nameBacklog = Scan.readLine("\nPlease enter a new name for the product backlog:");
+        return nameBacklog;
+    }
     public static String getBacklogName()
     {
         String nameBacklog = Scan.readLine("\nPlease enter a new sprintName for the backlog:");
@@ -62,14 +77,22 @@ public class ProductOwnerView
     }
 
     public static String getBacklogSDate() {
-        String startDate = Scan.readLine("\nPlease enter a new start date for the backlog ex" +
-                "(day/Nov/2020):");
+        String startDate;
+        Scan.print("\nPlease enter a new start date for the product backlog");
+        int startYear = Scan.readInt("Start date (YYYY): ");
+        int startMonth = Scan.readInt("Start date (MM): ");
+        int startDay = Scan.readInt("Start date (DD): ");
+        startDate = startYear + "-" + startMonth + "-" + startDay;
         return startDate;
     }
 
     public static String getBacklogEDate() {
-        String endDate = Scan.readLine("\nPlease enter a new End date for the backlog ex" +
-                "(day/Nov/2020):");
+        String endDate;
+        Scan.print("\nPlease enter a new End date for the product backlog.");
+        int endYear = Scan.readInt("End date (YYYY): ");
+        int endMonth = Scan.readInt("End date (MM): ");
+        int endDay = Scan.readInt("End date (DD): ");
+        endDate = endYear + "-" + endMonth + "-" + endDay;
         return endDate;
     }
 
@@ -102,7 +125,7 @@ public class ProductOwnerView
     public static int menuEditUserStory()
     {
         int option = Scan.readInt
-                ("\n\\nWhich part of the user story you want to edit, enter a number:\n\n" +
+                ("\n\nWhich part of the user story you want to edit, enter a number:\n\n" +
                         "1- Edit user story number.\n" +
                         "2- Edit user story sprintName.\n" +
                         "3- Edit user story sprint.\n" +
@@ -157,14 +180,31 @@ public class ProductOwnerView
         return newUSAcceptanceC;
     }
 
-    public static String getNewUSStatus() {
-        String newUSStatus = Scan.readLine("\nEnter new Status for the user " +
-                "story.");
+    public static int getNewUSStatus() {
+        int newUSStatus = Scan.readInt("\nChoose the number of the status's option for the user " +
+                "story.\n" +
+                "1. Open.\n" +
+                "2. In progress.\n" +
+                "3. Done\n");
         return newUSStatus;
     }
     public static void printRemoved(){
         Scan.print("\nThis User Story has been removed");
     }
+    public static void proBacklogEditConf(){
+        Scan.print("\nYou hav e successfully edited the product backlog.");
+    }
+    public static void userStoryEditConf(){
+        Scan.print("\nYou hav e successfully edited the user story.");
+    }
+    public static void changeStatusMessage(){
+        Scan.print("\nthe user story has not been edited, You have to enter a number between 1 - " +
+                "3 .");
+    }
+    public static void changePriorityMessage(){
+        Scan.print("\nthe user story has not been edited, You have to enter a number between 1 - 5");
+    }
+
 
 }
 
