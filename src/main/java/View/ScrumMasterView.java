@@ -7,11 +7,12 @@ import Utility.Scan;
 
 import java.util.ArrayList;
 
+import static Controller.ControllerScrumMaster.sprintName;
+
 public class ScrumMasterView
 {
 
     public static String proName;
-    public static String name;
     public static int menuScrumMaster() throws NumberFormatException{
 
 		int option = Scan.readInt("\n\nWelcome Scrum Master!\n" +
@@ -176,8 +177,8 @@ public class ScrumMasterView
 
 	public static String getSprintBacklogByName()
 	{
-		name = Scan.readLine("Write the name of the sprint: ");
-		return name;
+		sprintName = Scan.readLine("Write the name of the sprint: ");
+		return sprintName;
 	}
 
 	public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks)

@@ -123,7 +123,7 @@ public class ControllerAll
         return project;
     }
 
-   /* public Project findProjectImport(String name){
+   /* public Project findProjectImport(String sprintName){
 
 
         Project project = null;
@@ -132,7 +132,7 @@ public class ControllerAll
 
         while (iterator.hasNext() && project==null){
             Project currentProject = iterator.next();
-            if(currentProject.getName().equalsIgnoreCase(name)){
+            if(currentProject.getName().equalsIgnoreCase(sprintName)){
                 project = currentProject;
             }
         }
@@ -146,7 +146,7 @@ public class ControllerAll
         Task task = null;
         Project project = controllerAll.whichProject();
 
-        Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
+        Iterator<Task> iterator = project.getProductBacklog().getTasks().iterator();
         while (task == null && iterator.hasNext())
         {
             Task foundTask = iterator.next();

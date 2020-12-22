@@ -22,13 +22,13 @@ public class ProductBacklog implements Serializable {
 
     }
     // Constructor:-
-    public ProductBacklog(String name, String startDate, String endDate) throws Exception
+    public ProductBacklog(String name, String startDate, String endDate) //throws Exception
     {
-        if (name.isEmpty()) {
+        /*if (name.isEmpty()) {
             noNamePrint();
-        } else {
+        } else {*/
             this.name = name;
-        }
+        //}
 
         this.startDate = startDate;
         this.endDate = endDate;
@@ -99,9 +99,9 @@ public class ProductBacklog implements Serializable {
         return allUserStories;
     }
 
-    public ArrayList<Task> getTasksImport() {
+    /*public ArrayList<Task> getTasksImport() {
         return tasks;
-    }
+    }*/
     public ArrayList<Task> getTasks() {
         return tasks;
     }

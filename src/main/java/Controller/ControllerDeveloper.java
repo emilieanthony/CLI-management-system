@@ -1,11 +1,10 @@
 package Controller;
 
 import Models.Developer;
+import Models.SprintBacklog;
 import Models.Task;
 import Utility.Scan;
 import Models.Project;
-import View.DevTeamView;
-import org.junit.TestCouldNotBeSkippedException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,6 +14,7 @@ import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.*;
 import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.getProjectName;
+import static View.ScrumMasterView.getSprintBacklogByName;
 
 
 public class ControllerDeveloper {
@@ -98,7 +98,7 @@ public class ControllerDeveloper {
         Task task = null;
         Developer developer = controllerAll.findDeveloperByID();
         Project project = controllerAll.whichProject();
-        Iterator<Task> iterator = project.getAllTasks().iterator();
+        Iterator<Task> iterator = project.AllTasksInSprintBacklog().iterator();
         while (task == null && iterator.hasNext()) {
             Task foundTask = iterator.next();
             if (foundTask.getAssignedDevelopers().contains(developer)) {
@@ -110,7 +110,9 @@ public class ControllerDeveloper {
 
     public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-        for (Task task : contScrum.collectAllTasks(controllerAll)) {
+        //sprintName = getSprintBacklogByName();
+        SprintBacklog sprintBacklog = contScrum.findSprintBacklogByName(controllerAll);
+        for (Task task : sprintBacklog.getAllTasks()) {
             if (task == null) {
                 noAssignedTasks();
             }else if(task.getStatus().equalsIgnoreCase("In progress")) {
