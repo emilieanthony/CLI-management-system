@@ -13,6 +13,7 @@ public class ScrumMasterView
 {
 
     public static String proName;
+
     public static int menuScrumMaster() throws NumberFormatException{
 
 		int option = Scan.readInt("\n\nWelcome Scrum Master!\n" +
