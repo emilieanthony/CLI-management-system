@@ -47,6 +47,10 @@ public class DevTeamView {
         return id;
     }
 
+    public static void noAssignedTasks(){
+        Scan.print("There are no assigned tasks found!");
+    }
+
     public static int getTaskId(){
 
         int id = Scan.readInt("Please enter the task's id");
