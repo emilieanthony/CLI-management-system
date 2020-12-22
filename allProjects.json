@@ -19,7 +19,16 @@
     "name" : "s",
     "startDate" : "2020-2-3",
     "endDate" : "2020-3-3",
-    "allTasks" : [ ],
+    "allTasks" : [ {
+      "id" : 1002,
+      "priorityNumber" : 2,
+      "estimatedHours" : 3,
+      "actualHours" : 0,
+      "status" : "In progress",
+      "name" : "task",
+      "description" : "des",
+      "assignedDevelopers" : [ ]
+    } ],
     "userStories" : [ {
       "name" : "us",
       "number" : 1001,
