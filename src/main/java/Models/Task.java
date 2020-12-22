@@ -24,11 +24,7 @@ public class Task implements Comparable<Task>, Serializable
 
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception
 	{
-		if (name.isEmpty()) {
-			noNamePrint();
-		} else {
-			this.name = name;
-		}
+		this.name = name;
 
 		if(id < 0) {
 			negativeIDPrint();

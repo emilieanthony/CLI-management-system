@@ -55,6 +55,28 @@ public class ScrumMasterView
         return option;
     }
 
+    public static Project projectInput()throws Exception{
+		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
+				"project:");
+		String name = Scan.readLine("Name: ");
+		int id = Scan.readInt("ID: ");
+		int startYear = Scan.readInt("Start date (YYYY): ");
+		int startMonth = Scan.readInt("Start date (MM): ");
+		int startDay = Scan.readInt("Start date (DD): ");
+		int endYear = Scan.readInt("End date (YYYY): ");
+		int endMonth = Scan.readInt("End date (MM): ");
+		int endDay = Scan.readInt("End date (DD): ");
+
+		String startDate = startYear + "-" + startMonth + "-" + startDay;
+		String endDate = endYear + "-" + endMonth + "-" + endDay;
+		Project project = new Project(id, name, startDate, endDate);
+		return project;
+	}
+
+	public static void createProjectPrint(Project project){
+		Scan.print("You have successfully created the following project:\n\n" + project.toString());
+	}
+
     public static void numberFormatMessage() {
         Scan.print("There was a problem entering input data.");
     }
