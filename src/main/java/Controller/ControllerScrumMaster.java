@@ -599,7 +599,7 @@ public class ControllerScrumMaster
 		try {
 			Project project = projectInput();
 			controllerAll.getAllProjects().add(project);
-			proName = sprintName;
+
 			controllerAll.saveData();
 			createProjectPrint(project);
 		} catch (Exception e) {
