@@ -125,7 +125,7 @@ public class ProductOwnerView
     public static int menuEditUserStory()
     {
         int option = Scan.readInt
-                ("\n\\nWhich part of the user story you want to edit, enter a number:\n\n" +
+                ("\n\nWhich part of the user story you want to edit, enter a number:\n\n" +
                         "1- Edit user story number.\n" +
                         "2- Edit user story sprintName.\n" +
                         "3- Edit user story sprint.\n" +
@@ -180,9 +180,12 @@ public class ProductOwnerView
         return newUSAcceptanceC;
     }
 
-    public static String getNewUSStatus() {
-        String newUSStatus = Scan.readLine("\nEnter new Status for the user " +
-                "story.");
+    public static int getNewUSStatus() {
+        int newUSStatus = Scan.readInt("\nChoose the number of the status's option for the user " +
+                "story.\n" +
+                "1. Open.\n" +
+                "2. In progress.\n" +
+                "3. Done\n");
         return newUSStatus;
     }
     public static void printRemoved(){
@@ -190,6 +193,16 @@ public class ProductOwnerView
     }
     public static void proBacklogEditConf(){
         Scan.print("\nYou hav e successfully edited the product backlog.");
+    }
+    public static void userStoryEditConf(){
+        Scan.print("\nYou hav e successfully edited the user story.");
+    }
+    public static void changeStatusMessage(){
+        Scan.print("\nthe user story has not been edited, You have to enter a number between 1 - " +
+                "3 .");
+    }
+    public static void changePriorityMessage(){
+        Scan.print("\nthe user story has not been edited, You have to enter a number between 1 - 5");
     }
 
 

@@ -147,9 +147,23 @@ public class UserStory implements Comparable<UserStory>, Serializable
         return status;
     }
 
-    public void setStatus(String status)
-    {
+    //public void setStatus(String status)
+    /*{
         this.status = status;
+    }*/
+    public void setOpen()
+    {
+        status = "Open";
+    }
+
+    public void setInProgress()
+    {
+        status = "In progress";
+    }
+
+    public void setDone()
+    {
+        status = "Done";
     }
 
     public int compareTo(UserStory userStory)

@@ -782,7 +782,7 @@ public class ControllerScrumMaster
 
 		UserStory userStory = findSprintBacklogByName(controllerAll).getUserStory(number);
 		userStory.getAssignedDevelopers().add(developer);
-		userStory.setStatus("In progress");
+		userStory.setInProgress();
 
 		assignmentCompleted();
 
