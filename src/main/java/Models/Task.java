@@ -1,9 +1,12 @@
 package Models;
 
+import View.ScrumMasterView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import static View.DevTeamView.*;
+
+
 
 public class Task implements Comparable<Task>, Serializable
 {
@@ -24,23 +27,19 @@ public class Task implements Comparable<Task>, Serializable
 
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception
 	{
-		if (name.isEmpty()) {
-			noNamePrint();
-		} else {
-			this.name = name;
-		}
+		this.name = name;
 
 		if(id < 0) {
 			negativeIDPrint();
 		} else {
 			this.id = id;
 		}
-		if(priorityNumber < 0) {
-			negativeNumberPrint();
+		if(priorityNumber < 0 || priorityNumber > 5) {
+			ScrumMasterView.invalidNumberPrint();
 		} else {
 			this.priorityNumber = priorityNumber;
 		}
-		if(estimatedTime < 0) {
+		if(estimatedTime < 0 ) {
 			negativeNumberPrint();
 		} else {
 			this.estimatedHours = estimatedTime;

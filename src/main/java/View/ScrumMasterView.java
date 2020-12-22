@@ -57,6 +57,67 @@ public class ScrumMasterView
         return option;
     }
 
+    public static Project projectInput()throws Exception{
+		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
+				"project:");
+		String name = Scan.readLine("Name: ");
+		int id = Scan.readInt("ID: ");
+		int startYear = Scan.readInt("Start date (YYYY): ");
+		int startMonth = Scan.readInt("Start date (MM): ");
+		int startDay = Scan.readInt("Start date (DD): ");
+		int endYear = Scan.readInt("End date (YYYY): ");
+		int endMonth = Scan.readInt("End date (MM): ");
+		int endDay = Scan.readInt("End date (DD): ");
+		proName = name;
+
+		String startDate = startYear + "-" + startMonth + "-" + startDay;
+		String endDate = endYear + "-" + endMonth + "-" + endDay;
+		Project project = new Project(id, name, startDate, endDate);
+		return project;
+	}
+
+	public static void nullTaskPrint(){
+    	Scan.print("This task does not exist, please try again.");
+		menuScrumMaster();
+	}
+
+	public static void invalidTaskPrint(){
+    	Scan.print("The ID of the task was not found. Please try again");
+    	menuScrumMaster();
+	}
+
+	public static void invalidSprintBacklog(){
+		Scan.print("The name of the sprint was not found. Please try again");
+		menuScrumMaster();
+	}
+
+	public static int specifyTask(){
+		int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+
+		return idTask;
+
+	}
+
+	public static String specifySprint(){
+		proName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+
+		return proName;
+
+	}
+
+	public static void invalidNumberPrint(){
+    	Scan.print("Priority number must be between 1-5. Please try again.");
+    	menuScrumMaster();
+	}
+
+	public static void noSprintPrint(){
+    	Scan.print("No sprint exists with that name, please try again.");
+	}
+
+	public static void createProjectPrint(Project project){
+		Scan.print("You have successfully created the following project:\n\n" + project.toString());
+	}
+
     public static void numberFormatMessage() {
         Scan.print("There was a problem entering input data.");
     }

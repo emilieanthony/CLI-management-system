@@ -8,6 +8,7 @@ import Utility.Scan;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static View.ScrumMasterView.menuScrumMaster;
 import static View.ScrumMasterView.proName;
 
 public class DevTeamView {
@@ -58,7 +59,9 @@ public class DevTeamView {
     }
 
     public static void noNamePrint(){
-        Scan.print("Names cannot be empty.");
+        Scan.print("Names cannot be empty. Please try again");
+        menuScrumMaster();
+
     }
 
     public static void negativeIDPrint() {

@@ -8,7 +8,25 @@
     "startDate" : null,
     "endDate" : null,
     "allUserStories" : [ ],
-    "tasks" : [ ]
+    "tasks" : [ {
+      "id" : 1002,
+      "priorityNumber" : 0,
+      "estimatedHours" : 3,
+      "actualHours" : 0,
+      "status" : "Open",
+      "name" : "Malte",
+      "description" : "sgdrg",
+      "assignedDevelopers" : [ ]
+    }, {
+      "id" : 1002,
+      "priorityNumber" : 0,
+      "estimatedHours" : 4,
+      "actualHours" : 0,
+      "status" : "Open",
+      "name" : "Malte",
+      "description" : "kdg",
+      "assignedDevelopers" : [ ]
+    } ]
   },
   "allTeamMembers" : [ {
     "name" : "LoLo",
@@ -21,12 +39,12 @@
     "endDate" : "2020-3-3",
     "allTasks" : [ {
       "id" : 1002,
-      "priorityNumber" : 2,
-      "estimatedHours" : 3,
+      "priorityNumber" : 5,
+      "estimatedHours" : 5,
       "actualHours" : 0,
-      "status" : "In progress",
-      "name" : "task",
-      "description" : "des",
+      "status" : "Open",
+      "name" : "MalteTest",
+      "description" : "Testing",
       "assignedDevelopers" : [ ]
     } ],
     "userStories" : [ {

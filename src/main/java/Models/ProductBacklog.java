@@ -26,11 +26,8 @@ public class ProductBacklog implements Serializable {
     // Constructor:-
     public ProductBacklog(String name, LocalDate startDate, LocalDate endDate) //throws Exception
     {
-        /*if (name.isEmpty()) {
-            noNamePrint();
-        } else {*/
-            this.name = name;
-        //}
+
+        this.name = name;
         if (startDate.isAfter(endDate)){
             ScrumMasterView.wrongDatePrint();
         } else {
