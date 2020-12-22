@@ -66,30 +66,34 @@ public class ControllerAll
         Start();
         do
         {
-            int option = mainMenu();
-            switch (option)
-            {
-                case 1:
-                    contScrum.scrumMasterMenu(contProOwner,controllerAll,contScrum);
-                    break;
-                case 2:
-                    contProOwner.productOwnerMenu(controllerAll, contScrum);
-                    break;
-                case 3:
-                    contDeveloper.teamMemberMenu(controllerAll,contProOwner, contScrum);
-                    break;
-                case 4:
-                    viewProjects();
-                    break;
-                case 5:
-                    getProjectName();
-                    break;
-                case 6:
-                    saveData();
-                    running = false; // Exit system.
-                    break;
-                default:
-                    defaultMessage();
+            int option;
+            try {
+                option = mainMenu();
+                switch (option) {
+                    case 1:
+                        contScrum.scrumMasterMenu(contProOwner, controllerAll, contScrum);
+                        break;
+                    case 2:
+                        contProOwner.productOwnerMenu(controllerAll, contScrum);
+                        break;
+                    case 3:
+                        contDeveloper.teamMemberMenu(controllerAll, contProOwner, contScrum);
+                        break;
+                    case 4:
+                        viewProjects();
+                        break;
+                    case 5:
+                        getProjectName();
+                        break;
+                    case 6:
+                        saveData();
+                        running = false; // Exit system.
+                        break;
+                    default:
+                        defaultMessage();
+                }
+            } catch (NumberFormatException e) {
+                numberFormatMessage();
             }
         } while (running);
     }
@@ -119,7 +123,7 @@ public class ControllerAll
         return project;
     }
 
-    public Project findProjectImport(String name){
+   /* public Project findProjectImport(String sprintName){
 
 
         Project project = null;
@@ -128,13 +132,13 @@ public class ControllerAll
 
         while (iterator.hasNext() && project==null){
             Project currentProject = iterator.next();
-            if(currentProject.getName().equalsIgnoreCase(name)){
+            if(currentProject.getName().equalsIgnoreCase(sprintName)){
                 project = currentProject;
             }
         }
         return project;
 
-    }
+    }*/
 
     public Task findTaskById(ControllerAll controllerAll)
     {
@@ -142,7 +146,7 @@ public class ControllerAll
         Task task = null;
         Project project = controllerAll.whichProject();
 
-        Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
+        Iterator<Task> iterator = project.getProductBacklog().getTasks().iterator();
         while (task == null && iterator.hasNext())
         {
             Task foundTask = iterator.next();

@@ -14,7 +14,7 @@ public class DevTeamView {
 
     /*-------------------------------------------Menu Development Team ----------------------------------------------*/
 
-    public static int menuTeamMember() {
+    public static int menuTeamMember() throws Exception {
         int option = Scan.readInt("\n\nWelcome development team member!\n" +
                 "You're working on Project " + proName +"." + "\n\n" +
                 "Please enter an option below\n" +
@@ -37,6 +37,9 @@ public class DevTeamView {
         return option;
     }
 
+    public static void invalidInputPrint(){
+        Scan.print("There was a problem entering input data.");
+    }
 
     public static int getDeveloperId(){
 
@@ -44,10 +47,26 @@ public class DevTeamView {
         return id;
     }
 
+    public static void noAssignedTasks(){
+        Scan.print("There are no assigned tasks found!");
+    }
+
     public static int getTaskId(){
 
         int id = Scan.readInt("Please enter the task's id");
         return id;
+    }
+
+    public static void noNamePrint(){
+        Scan.print("Names cannot be empty.");
+    }
+
+    public static void negativeIDPrint() {
+        Scan.print("ID cannot be negative.");
+    }
+
+    public static void negativeNumberPrint() {
+        Scan.print("Number cannot be negative.");
     }
 
     public static int getUserStoryNumber(){
@@ -94,7 +113,7 @@ public class DevTeamView {
 
     public static void viewSprints(Project project){
         Scan.print("Sprints: \n" );
-        for(SprintBacklog sprintBacklog : project.getAllSprints()){
+        for(SprintBacklog sprintBacklog : project.getAllSprintBacklogs()){
             Scan.print(sprintBacklog.getName());
         }
     }

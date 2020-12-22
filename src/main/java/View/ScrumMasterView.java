@@ -7,14 +7,13 @@ import Utility.Scan;
 
 import java.util.ArrayList;
 
+import static Controller.ControllerScrumMaster.sprintName;
+
 public class ScrumMasterView
 {
 
-	public static String proName;
-	public static String name;
-
-	public static int menuScrumMaster()
-	{
+    public static String proName;
+    public static int menuScrumMaster() throws NumberFormatException{
 
 		int option = Scan.readInt("\n\nWelcome Scrum Master!\n" +
 				"You're working on Project " + proName + "." + "\n\n" +
@@ -35,31 +34,54 @@ public class ScrumMasterView
 				"14. View sprint backlog\n" +
 				"15. Calculate average velocity\n" +
 				"16. Switch project\n" +
-				"17. Import file\n" +
-				"18. Go back to main menu\n");
+				//"17. Import file\n" +
+				"17. Go back to main menu\n");
 
 
 		return option;
 	}
 
 
-	//----------------------------------------------------------Edit task menu---------------------------------------------
-	public static int menuEditTask()
-	{
-		int option = Scan.readInt
-				("\n\nEdit Task Menu. \n " +
-						"Which part of the task do you want to edit, enter a number:\n\n" +
-						"1- Edit Task Priority Number.\n" +
-						"2- Edit Task Status.\n" +
-						"3- Remove Task from Sprint Backlog.\n" +
-						"4- Remove Task from Product Backlog.\n" +
-						"5- Back to your menu.\n");
-		return option;
-	}
+    //----------------------------------------------------------Edit task menu---------------------------------------------
+    public static int menuEditTask() throws Exception
+    {
+        int option = Scan.readInt
+                ("\n\nEdit Task Menu. \n " +
+                        "Which part of the task do you want to edit, enter a number:\n\n" +
+                        "1- Edit Task Priority Number.\n" +
+                        "2- Edit Task Status.\n" +
+                        "3- Remove Task from Sprint Backlog.\n" +
+                        "4- Remove Task from Product Backlog.\n" +
+                        "5- Back to your menu.\n");
+        return option;
+    }
 
-	public static int newPriorityNumberTask()
-	{
-		int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
+    public static void numberFormatMessage() {
+        Scan.print("There was a problem entering input data.");
+    }
+
+    public static void registerProjectFail() {
+        Scan.print("There was a problem trying to register a new project, please try again.");
+    }
+
+    public static void registerTaskFail() {
+        Scan.print("There was a problem trying to register a new task, please try again.");
+    }
+
+    public static void registerProOwnerFail(){
+        Scan.print("There was a problem trying to register a new product owner, please try again.");
+    }
+
+    public static void registerDeveloperFail() {
+        Scan.print("There was a problem registering a new developer, please try again.");
+    }
+
+    public static void backlogFail(){
+        Scan.print("There was a problem trying to register a backlog, please try again.");
+    }
+
+    public static int newPriorityNumberTask (){
+        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
 
 		return newPriorityNumberTask;
 	}
@@ -87,13 +109,12 @@ public class ScrumMasterView
 		return fileName;
 	}
 
-	public static Task getTaskInfo(int id)
-	{
-		// int id = Scan.readInt("Please enter task id:");
-		String name = Scan.readLine("Please enter name of task:");
-		int priorityNumber = Scan.readInt("Please enter priority number 1-5:");
-		int estimatedHours = Scan.readInt("Please enter estimated hours:");
-		String description = Scan.readLine("Please enter a description of the task:");
+    public static Task getTaskInfo(int id) throws Exception {
+       // int id = Scan.readInt("Please enter task id:");
+        String name = Scan.readLine("Please enter name of task:");
+        int priorityNumber = Scan.readInt("Please enter priority number 1-5:");
+        int estimatedHours = Scan.readInt("Please enter estimated hours:");
+        String description = Scan.readLine("Please enter a description of the task:");
 
 		return new Task(id, priorityNumber, estimatedHours, name, description);
 	}
@@ -156,8 +177,8 @@ public class ScrumMasterView
 
 	public static String getSprintBacklogByName()
 	{
-		name = Scan.readLine("Write the name of the sprint: ");
-		return name;
+		sprintName = Scan.readLine("Write the name of the sprint: ");
+		return sprintName;
 	}
 
 	public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks)

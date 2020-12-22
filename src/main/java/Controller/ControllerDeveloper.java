@@ -1,11 +1,10 @@
 package Controller;
 
 import Models.Developer;
+import Models.SprintBacklog;
 import Models.Task;
 import Utility.Scan;
 import Models.Project;
-import View.DevTeamView;
-import org.junit.TestCouldNotBeSkippedException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,6 +14,7 @@ import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.*;
 import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.getProjectName;
+import static View.ScrumMasterView.getSprintBacklogByName;
 
 
 public class ControllerDeveloper {
@@ -23,38 +23,45 @@ public class ControllerDeveloper {
         boolean running = true;
         do {
 
-            int option = menuTeamMember();
-            switch (option) {
-                case 1:
-                    viewMyTasks(controllerAll);
-                    break;
-                case 2:
-                    viewAllAssignedTasks(controllerAll);
-                    break;
-                case 3:
-                    taskMenu(controllerAll);
-                    break;
-                case 4:
-                    proCont.viewProBacklog(controllerAll);
-                    proCont.editUSStatus(getStoryNumber(),controllerAll);
-                    break;
-                case 5:
-                    proCont.viewProBacklog(controllerAll);//View product backlog
-                    break;
-                case 6:
-                    scrumMaster.viewSprintBacklog(controllerAll);//View sprint backlog
-                    break;
-                case 7:
-                    viewAllTasks(controllerAll, scrumMaster);//View all tasks
-                    break;
-                case 8:
-                    getProjectName();// Switch project.
-                    break;
-                case 9:
-                    running = false;
-                    break;
-                default:
-                    defaultMessage();
+            int option;
+
+            try {
+                option = menuTeamMember();
+
+                switch (option) {
+                    case 1:
+                        viewMyTasks(controllerAll);
+                        break;
+                    case 2:
+                        viewAllAssignedTasks(controllerAll,scrumMaster);
+                        break;
+                    case 3:
+                        taskMenu(controllerAll);
+                        break;
+                    case 4:
+                        proCont.viewProBacklog(controllerAll);
+                        proCont.editUSStatus(getStoryNumber(),controllerAll);
+                        break;
+                    case 5:
+                        proCont.viewProBacklog(controllerAll);//View product backlog
+                        break;
+                    case 6:
+                        scrumMaster.viewSprintBacklog(controllerAll);//View sprint backlog
+                        break;
+                    case 7:
+                        viewAllTasks(controllerAll, scrumMaster);//View all tasks
+                        break;
+                    case 8:
+                        getProjectName();// Switch project.
+                        break;
+                    case 9:
+                        running = false;
+                        break;
+                    default:
+                        defaultMessage();
+                }
+            } catch (Exception e) {
+                invalidInputPrint();
             }
         } while (running);
     }
@@ -91,7 +98,7 @@ public class ControllerDeveloper {
         Task task = null;
         Developer developer = controllerAll.findDeveloperByID();
         Project project = controllerAll.whichProject();
-        Iterator<Task> iterator = project.getAllTasks().iterator();
+        Iterator<Task> iterator = project.AllTasksInSprintBacklog().iterator();
         while (task == null && iterator.hasNext()) {
             Task foundTask = iterator.next();
             if (foundTask.getAssignedDevelopers().contains(developer)) {
@@ -101,20 +108,22 @@ public class ControllerDeveloper {
         return task;
     }
 
-    public void viewAllAssignedTasks(ControllerAll controllerAll) {
+    public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-        Project project = controllerAll.whichProject();
-
-        for (Task task : project.getProductBacklog().getTasksImport()) {
-            if (task.getStatus().equalsIgnoreCase("In progress")) {
+        //sprintName = getSprintBacklogByName();
+        SprintBacklog sprintBacklog = contScrum.findSprintBacklogByName(controllerAll);
+        for (Task task : sprintBacklog.getAllTasks()) {
+            if (task == null) {
+                noAssignedTasks();
+            }else if(task.getStatus().equalsIgnoreCase("In progress")) {
                 Scan.print(task.toString());
             }
         }
     }
 
     public void viewAllTasks(ControllerAll controllerAll, ControllerScrumMaster scrumMaster){
-        Project project = controllerAll.whichProject();
-        ArrayList<Task> allTasks = scrumMaster.collectAllTasks(project);
+        //Project project = controllerAll.whichProject();
+        ArrayList<Task> allTasks = scrumMaster.collectAllTasks(controllerAll);
         printAllTasks(allTasks);
     }
 
