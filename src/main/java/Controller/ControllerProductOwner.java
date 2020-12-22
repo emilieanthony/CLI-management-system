@@ -129,7 +129,7 @@ public class ControllerProductOwner
    public void addUserStory(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster)
     {
         Project project = controllerAll.whichProject();
-        int number = controllerScrumMaster.taskUSIdGenerator(project);
+        int number = controllerScrumMaster.taskUSIdGenerator(project,controllerAll);
         try {
             UserStory newUserStory = getUSInfo(number);
             project.getProductBacklog().getAllUserStories().add(newUserStory);

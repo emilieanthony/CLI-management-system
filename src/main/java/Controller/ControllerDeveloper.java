@@ -33,7 +33,7 @@ public class ControllerDeveloper {
                         viewMyTasks(controllerAll);
                         break;
                     case 2:
-                        viewAllAssignedTasks(controllerAll);
+                        viewAllAssignedTasks(controllerAll,scrumMaster);
                         break;
                     case 3:
                         taskMenu(controllerAll);
@@ -108,20 +108,20 @@ public class ControllerDeveloper {
         return task;
     }
 
-    public void viewAllAssignedTasks(ControllerAll controllerAll) {
+    public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-        Project project = controllerAll.whichProject();
-
-        for (Task task : project.getProductBacklog().getTasksImport()) {
-            if (task.getStatus().equalsIgnoreCase("In progress")) {
+        for (Task task : contScrum.collectAllTasks(controllerAll)) {
+            if (task == null) {
+                noAssignedTasks();
+            }else if(task.getStatus().equalsIgnoreCase("In progress")) {
                 Scan.print(task.toString());
             }
         }
     }
 
     public void viewAllTasks(ControllerAll controllerAll, ControllerScrumMaster scrumMaster){
-        Project project = controllerAll.whichProject();
-        ArrayList<Task> allTasks = scrumMaster.collectAllTasks(project);
+        //Project project = controllerAll.whichProject();
+        ArrayList<Task> allTasks = scrumMaster.collectAllTasks(controllerAll);
         printAllTasks(allTasks);
     }
 

@@ -158,7 +158,7 @@ public class ControllerScrumMaster
 		else
 		{
 
-			int id = taskUSIdGenerator(project);
+			int id = taskUSIdGenerator(project,controllerAll);
 
 			try {
 				Task newTask = getTaskInfo(id);
@@ -183,7 +183,7 @@ public class ControllerScrumMaster
 		else
 		{
 
-			int id = taskUSIdGenerator(project);
+			int id = taskUSIdGenerator(project,controllerAll);
 
 			try {
 				Task newTask = getTaskInfo(id);
@@ -197,12 +197,12 @@ public class ControllerScrumMaster
 		}
 	}
 
-	public int taskUSIdGenerator(Project project)
+	public int taskUSIdGenerator(Project project,ControllerAll controllerAll)
 	{
 		// initialize int variable for ID
 		int id = project.getId() * 1000 + 1;
 
-		ArrayList<Task> tasks = collectAllTasks(project);
+		ArrayList<Task> tasks = collectAllTasks(controllerAll);
 		ArrayList<UserStory> stories = collectAllStories(project);
 
 
@@ -233,9 +233,10 @@ public class ControllerScrumMaster
 	}
 
 
-	public ArrayList<Task> collectAllTasks(Project project)
+	public ArrayList<Task> collectAllTasks(ControllerAll controllerAll)
 	{
 
+		Project project = controllerAll.whichProject();
 		//put all tasks in one and the same arrayList
 		ArrayList<Task> allTasks = new ArrayList<>();
 
@@ -399,7 +400,7 @@ public class ControllerScrumMaster
 		}
 		else
 		{
-			ArrayList<Task> tasks = collectAllTasks(project);
+			ArrayList<Task> tasks = collectAllTasks(controllerAll);
 			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
 			for (Task task : tasks)
 			{
@@ -435,7 +436,7 @@ public class ControllerScrumMaster
 		else
 		{
 
-			ArrayList<Task> tasks = collectAllTasks(project);
+			ArrayList<Task> tasks = collectAllTasks(controllerAll);
 
 
 			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
