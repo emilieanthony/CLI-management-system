@@ -281,13 +281,8 @@ public class ControllerProductOwner
     {
         int newUSSPoints = getNewUSStoryPoints();
         UserStory userStory = findUStoryByNumber(number,controllerAll);
-        if (newUSSPoints >= 1 && newUSSPoints <= 5){
         userStory.setStoryPoints(newUSSPoints);
         userStoryEditConf();
-        }else{
-            changePriorityMessage();
-            editUSStoryPoints(newUSSPoints,controllerAll);
-        }
         Scan.print(userStory.toString());
     }
 
