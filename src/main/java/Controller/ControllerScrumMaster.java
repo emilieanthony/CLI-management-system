@@ -311,15 +311,26 @@ public class ControllerScrumMaster
 		{
 			if (input.equals("1"))
 			{
-				int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
-				name = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+				int idTask = specifyTask();
+				name = specifySprint();
 
-				project.getProductBacklog().getTask(idTask).setSprintName(name);
-				Task taskToMove = project.getProductBacklog().getTask(idTask);
-				findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
-				project.getProductBacklog().getTasksImport().remove(taskToMove);
-				controllerAll.saveData();
-				movedObject();
+				Task taskInBacklog = project.getProductBacklog().getTask(idTask);
+
+				if(taskInBacklog == null) {
+					invalidTaskPrint();
+				} else if (!project.getAllSprints().contains(name)){
+					invalidSprintBacklog();
+				}
+				else{
+					taskInBacklog.setSprintName(name);
+					Task taskToMove = taskInBacklog;
+					findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
+					project.getProductBacklog().getTasksImport().remove(taskToMove);
+					controllerAll.saveData();
+					movedObject();
+				}
+
+
 			}
 
 			if (input.equals("2"))
@@ -661,6 +672,10 @@ public class ControllerScrumMaster
 		{
 
 			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
+			if(sprint == null){
+				noSprintPrint();
+				menuScrumMaster();
+			}
 			Scan.print(sprint.toString());
 		}
 	}

@@ -73,6 +73,34 @@ public class ScrumMasterView
 		return project;
 	}
 
+	public static void invalidTaskPrint(){
+    	Scan.print("The ID of the task was not found. Please try again");
+    	menuScrumMaster();
+	}
+
+	public static void invalidSprintBacklog(){
+		Scan.print("The name of the sprint was not found. Please try again");
+		menuScrumMaster();
+	}
+
+	public static int specifyTask(){
+		int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+
+		return idTask;
+
+	}
+
+	public static String specifySprint(){
+		name = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+
+		return name;
+
+	}
+
+	public static void noSprintPrint(){
+    	Scan.print("No sprint exists with that name, please try again.");
+	}
+
 	public static void createProjectPrint(Project project){
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
