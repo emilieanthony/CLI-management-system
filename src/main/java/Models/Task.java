@@ -31,8 +31,8 @@ public class Task implements Comparable<Task>, Serializable
 		} else {
 			this.id = id;
 		}
-		if(priorityNumber < 0) {
-			negativeNumberPrint();
+		if(priorityNumber < 0 || priorityNumber > 5) {
+			invalidNumberPrint();
 		} else {
 			this.priorityNumber = priorityNumber;
 		}
