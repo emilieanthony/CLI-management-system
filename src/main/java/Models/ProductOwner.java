@@ -19,12 +19,7 @@ public class ProductOwner implements Serializable
 
     public ProductOwner(String name , int id) throws Exception
     {
-        if (name.isEmpty()) {
-            noNamePrint();
-        } else {
-            this.name = name;
-        }
-
+        this.name = name;
         if(id < 0) {
             negativeIDPrint();
         } else {

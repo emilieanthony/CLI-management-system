@@ -24,12 +24,7 @@ public class SprintBacklog implements Serializable
 	//constructor
 	public SprintBacklog(String name, String startDate, String endDate) throws Exception
 	{
-		if (name.isEmpty()) {
-			noNamePrint();
-		} else {
-			this.name = name;
-		}
-
+		this.name = name;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.allTasks = new ArrayList<>();

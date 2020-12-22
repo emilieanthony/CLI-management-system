@@ -311,15 +311,26 @@ public class ControllerScrumMaster
 		{
 			if (input.equals("1"))
 			{
-				int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
-				sprintName = Scan.readLine("Write the sprintName of the sprint you want to move your task to: ");
+				int idTask = specifyTask();
+				sprintName = specifySprint();
 
-				project.getProductBacklog().getTask(idTask).setSprintName(sprintName);
-				Task taskToMove = project.getProductBacklog().getTask(idTask);
-				findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
-				project.getProductBacklog().getTasks().remove(taskToMove);
-				controllerAll.saveData();
-				movedObject();
+				Task taskInBacklog = project.getProductBacklog().getTask(idTask);
+
+				if(taskInBacklog == null) {
+					invalidTaskPrint();
+				} else if (!project.getAllSprintBacklogs().contains(sprintName)){
+					invalidSprintBacklog();
+				}
+				else{
+					taskInBacklog.setSprintName(sprintName);
+					Task taskToMove = taskInBacklog;
+					findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
+					project.getProductBacklog().getTasks().remove(taskToMove);
+					controllerAll.saveData();
+					movedObject();
+				}
+
+
 			}
 
 			if (input.equals("2"))
@@ -585,30 +596,15 @@ public class ControllerScrumMaster
 
 	public void createProject(ControllerAll controllerAll) // Move all Prints to View class-
 	{
-		Scan.print("\nEnter the sprintName, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
-				"project:");
-		String name = Scan.readLine("Name: ");
-		int id = Scan.readInt("ID: ");
-		int startYear = Scan.readInt("Start date (YYYY): ");
-		int startMonth = Scan.readInt("Start date (MM): ");
-		int startDay = Scan.readInt("Start date (DD): ");
-		int endYear = Scan.readInt("End date (YYYY): ");
-		int endMonth = Scan.readInt("End date (MM): ");
-		int endDay = Scan.readInt("End date (DD): ");
-
-		String startDate = startYear + "-" + startMonth + "-" + startDay;
-		String endDate = endYear + "-" + endMonth + "-" + endDay;
-
-		//try {
-			Project project = new Project(id, name, startDate, endDate);
+		try {
+			Project project = projectInput();
 			controllerAll.getAllProjects().add(project);
-			proName = name;
+			proName = sprintName;
 			controllerAll.saveData();
-			Scan.print("You have successfully created the following project:\n\n" + project.toString());
-		//} catch (Exception e) {
-
-			registerProjectFail();
-		//}
+			createProjectPrint(project);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -676,6 +672,10 @@ public class ControllerScrumMaster
 		{
 
 			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
+			if(sprint == null){
+				noSprintPrint();
+				menuScrumMaster();
+			}
 			Scan.print(sprint.toString());
 		}
 	}
@@ -763,10 +763,14 @@ public class ControllerScrumMaster
 		}
 
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
-		task.getAssignedDevelopers().add(developer);
-		task.setStatus("In progress");
+		if(task == null){
+			nullTaskPrint();
+		}else{
+			task.getAssignedDevelopers().add(developer);
+			task.setStatus("In progress");
+			assignmentCompleted();
+		}
 
-		assignmentCompleted();
 	}
 
 	public void assignUserStory(ControllerAll controllerAll)
