@@ -116,7 +116,7 @@ public class DevTeamView {
 
     public static void viewSprints(Project project){
         Scan.print("Sprints: \n" );
-        for(SprintBacklog sprintBacklog : project.getAllSprints()){
+        for(SprintBacklog sprintBacklog : project.getAllSprintBacklogs()){
             Scan.print(sprintBacklog.getName());
         }
     }

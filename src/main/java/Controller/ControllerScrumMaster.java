@@ -17,7 +17,7 @@ public class ControllerScrumMaster
 {
 
 	//private Import importFile = new Import();
-	static String name;
+	public static String sprintName;
 
 	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll,
 								ControllerScrumMaster contScrum)
@@ -137,7 +137,7 @@ public class ControllerScrumMaster
 	{
 		Project project = controllerAll.whichProject();
 		membersView();
-		for (Developer developer : project.getAllDevelopmentMembers())
+		for (Developer developer : project.getAllTeamMembers())
 		{
 			Scan.print(developer.toString());
 		}
@@ -163,7 +163,7 @@ public class ControllerScrumMaster
 			try {
 				Task newTask = getTaskInfo(id);
 				createdTaskReceipt(newTask);
-				project.getProductBacklog().getTasksImport().add(newTask);
+				project.getProductBacklog().getTasks().add(newTask);
 				controllerAll.saveData();
 			} catch (Exception e) {
 				registerTaskFail();
@@ -188,7 +188,7 @@ public class ControllerScrumMaster
 			try {
 				Task newTask = getTaskInfo(id);
 				createdTaskReceipt(newTask);
-				name = getSprintBacklogName();
+				sprintName = getSprintBacklogName();
 				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
 				controllerAll.saveData();
 			} catch	(Exception e) {
@@ -241,7 +241,7 @@ public class ControllerScrumMaster
 		ArrayList<Task> allTasks = new ArrayList<>();
 
 		//fetch tasks from product backlog
-		ArrayList<Task> productBLTasks = project.getProductBacklog().getTasksImport();
+		ArrayList<Task> productBLTasks = project.getProductBacklog().getTasks();
 
 		for (Task task : productBLTasks)
 		{
@@ -337,9 +337,9 @@ public class ControllerScrumMaster
 			{
 				int usName = Scan.readInt("Write the the number of the user story you want to" +
 						" move: "); // Move to view class.
-				name = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
+				sprintName = Scan.readLine("Write the sprintName of the sprint you want to move your user story to: ");
 
-				project.getProductBacklog().getUserStory(usName).setSprintName(name);
+				project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
 				UserStory userStoryToMove = project.getProductBacklog().getUserStory(usName);
 				findSprintBacklogByName(controllerAll).getUserStories().add(userStoryToMove);
 				project.getProductBacklog().getAllUserStories().remove(userStoryToMove);
@@ -370,11 +370,11 @@ public class ControllerScrumMaster
 			if (input.equals("1"))
 			{
 				int idTask = IdTaskToMovePrint();
-				name = sprintNameToMovePrint();
+				sprintName = sprintNameToMovePrint();
 
 				findSprintBacklogByName(controllerAll).getTask(idTask).setSprintName("");
 				Task taskToMove = findSprintBacklogByName(controllerAll).getTask(idTask);
-				project.getProductBacklog().getTasksImport().add(taskToMove);
+				project.getProductBacklog().getTasks().add(taskToMove);
 				findSprintBacklogByName(controllerAll).getAllTasks().remove(taskToMove);
 				controllerAll.saveData();
 				movedObject();
@@ -383,7 +383,7 @@ public class ControllerScrumMaster
 			if (input.equals("2"))
 			{
 				int usNumber = numerUsToMove();
-				name = sprintNameToMove();
+				sprintName = sprintNameToMove();
 
 				findSprintBacklogByName(controllerAll).getUserStory(usNumber).setSprintName("");
 				UserStory userStoryToMove = findSprintBacklogByName(controllerAll).getUserStory(usNumber);
@@ -501,7 +501,7 @@ public class ControllerScrumMaster
 		{
 
 			int idTask = Scan.readInt("Write the ID of the task you want to remove: ");
-			project.getProductBacklog().getTasksImport().remove(project.getProductBacklog().getTask(idTask));
+			project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
 			controllerAll.saveData();
 			removeObject();
 
@@ -510,7 +510,7 @@ public class ControllerScrumMaster
 
 	public void removeTaskSprintBacklog(ControllerAll controllerAll, ControllerScrumMaster contScrum)
 	{
-		name = getSprintBacklogByName();
+		sprintName = getSprintBacklogByName();
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
 		Task task = findTaskByIdSprint(controllerAll, contScrum);
 		sprintBacklog.getAllTasks().remove(task);
@@ -613,7 +613,7 @@ public class ControllerScrumMaster
 
 	public void createSprintBacklog(ControllerAll controllerAll)
 	{
-		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
+		Scan.print("\nEnter the sprintName, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"sprintBacklog:");
 		String name = Scan.readLine("Name:");
 		int startYear = Scan.readInt("Start date (YYYY):");
@@ -663,7 +663,7 @@ public class ControllerScrumMaster
 		Project project = controllerAll.whichProject();
 		viewSprints(project);
 
-		name = getSprintBacklogByName();
+		sprintName = getSprintBacklogByName();
 		if (project == null)
 		{
 			projectNotFound();
@@ -688,7 +688,7 @@ public class ControllerScrumMaster
 		while (sprintBacklog == null && iterator.hasNext())
 		{
 			SprintBacklog foundBacklog = iterator.next();
-			if (foundBacklog.getName().equalsIgnoreCase(name))
+			if (foundBacklog.getName().equalsIgnoreCase(sprintName))
 			{
 				sprintBacklog = foundBacklog;
 			}
@@ -705,7 +705,7 @@ public class ControllerScrumMaster
 
 		Project project = controllerAll.whichProject();
 
-		Iterator<Task> iterator = project.getProductBacklog().getTasksImport().iterator();
+		Iterator<Task> iterator = project.getProductBacklog().getTasks().iterator();
 		while (task == null && iterator.hasNext())
 		{
 			Task foundTask = iterator.next();
@@ -753,13 +753,13 @@ public class ControllerScrumMaster
 	public void assignTask(ControllerAll controllerAll)
 	{
 		int idTask = assignTaskPrintIdTask();
-		String sprintName = assignTaskPrintSprintName();
+		sprintName = assignTaskPrintSprintName();
 		Developer developer = controllerAll.findDeveloperByID();
 
 		Project project = controllerAll.whichProject();
 		if (project == null)
 		{
-			projectNotFound();  
+			projectNotFound();
 		}
 
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
@@ -772,7 +772,7 @@ public class ControllerScrumMaster
 	public void assignUserStory(ControllerAll controllerAll)
 	{
 		int number = assignUsPrintIdUs();
-		String sprintName = assignUsPrintSprintName();
+		sprintName = assignUsPrintSprintName();
 		Developer developer = controllerAll.findDeveloperByID();
 
 		Project project = controllerAll.whichProject();

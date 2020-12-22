@@ -15,10 +15,10 @@ public class Project implements Serializable
     private String endDate;
 
     private ProductBacklog productBacklog;
-    private SprintBacklog sprintBacklog;
+    /*private SprintBacklog sprintBacklog;
     private ProductOwner productOwner;
     private Developer developer;
-    private Task task;
+    private Task task;*/
 
     private ArrayList<Developer> allTeamMembers;
     private ArrayList<ProductOwner> allProductOwners;
@@ -31,7 +31,7 @@ public class Project implements Serializable
     }
 
     //constructor
-    public Project(int id, String name,String startDate,String endDate) throws Exception
+    public Project(int id, String name,String startDate,String endDate) //throws Exception
     {
         if (name.isEmpty()) {
             noNamePrint();
@@ -48,10 +48,10 @@ public class Project implements Serializable
         this.endDate = endDate;
 
         productBacklog = new ProductBacklog(null,null,null);
-        sprintBacklog = new SprintBacklog(null,null,null);
+        /*sprintBacklog = new SprintBacklog(null,null,null);
         productOwner = new ProductOwner(null,0); // tas bort???
         developer = new Developer(null,0); // tas bort???
-        task = new Task(0,0,0,null,null);
+        task = new Task(0,0,0,null,null);*/
 
         allTeamMembers = new ArrayList<>();
         allProductOwners = new ArrayList<>();
@@ -97,7 +97,7 @@ public class Project implements Serializable
         this.endDate = endDate;
     }
 
-    public Task getTaskFromSprintBacklog(int id)
+    /*public Task getTaskFromSprintBacklog(int id)
     {
         for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
@@ -105,9 +105,9 @@ public class Project implements Serializable
         }
         return null;
 
-    }
+    }*/
 
-    public SprintBacklog getSprintBacklog() {
+    /*public SprintBacklog getSprintBacklog() {
         return sprintBacklog;
     }
 
@@ -131,18 +131,18 @@ public class Project implements Serializable
             return sprintBacklog.printPersonalTasks(member);
         }
         return null;
-    }
-    public Developer getDeveloper() {
+    }*/
+   /* public Developer getDeveloper() {
         return developer;
     }
 
     public Task getTask() {
         return task;
-    }
+    }*/
 
 
 
-    public Developer getTeamMember(int id)
+    /*public Developer getTeamMember(int id)
     {
         for (Developer member : allTeamMembers)
         {
@@ -152,24 +152,27 @@ public class Project implements Serializable
             }
         }
         return null;
-    }
+    }*/
 
-    public void assignTask(int memberID, int taskID)        //Used in method in ControllerScrumMaster - this one also is using method below
+    /*public void assignTask(int memberID, int taskID)        //Used in method in ControllerScrumMaster - this one also is using method below
     {
         for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
             assignTaskAdd(getTeamMember(memberID), sprintBacklog.getTask(taskID));
         }
-    }
+    }*/
     public ArrayList<Developer> getAllTeamMembers() {
 
         return allTeamMembers;
     }
 
-    public void assignTaskAdd(Developer member, Task task) { // method used in assign task method
+    /*public void assignTaskAdd(Developer member, Task task) { // method used in assign task method
         task.getAssignedDevelopers().add(member);
-    }
-
+    }*/
+    /*public ArrayList<Developer> getAllDevelopmentMembers()
+    {
+        return allTeamMembers;
+    }*/
     public ArrayList<ProductOwner> getAllProductOwners()
     {
         return allProductOwners;
@@ -179,15 +182,11 @@ public class Project implements Serializable
         this.productBacklog = productBacklog;
     }
 
-    public ArrayList<Developer> getAllDevelopmentMembers()
-    {
-        return allTeamMembers;
-    }
     public ArrayList<SprintBacklog> getAllSprintBacklogs() {
         return allSprintBacklogs;
     }
 
-    public ArrayList<Task> getAllTasks()
+    public ArrayList<Task> AllTasksInSprintBacklog()
     {
         for(SprintBacklog sprintBacklog : allSprintBacklogs)
         {
@@ -196,10 +195,10 @@ public class Project implements Serializable
         return null;
     }
 
-    public ArrayList<SprintBacklog> getAllSprints()
+    /*public ArrayList<SprintBacklog> getAllSprints()
     {
         return allSprintBacklogs;
-    }
+    }*/
 
     public ProductBacklog getProductBacklog()
     {
