@@ -9,6 +9,7 @@ import Models.Project;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static Controller.ControllerScrumMaster.sprintName;
 import static Utility.PrintUtility.defaultMessage;
 
 import static View.DevTeamView.*;
@@ -110,7 +111,7 @@ public class ControllerDeveloper {
 
     public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-        //sprintName = getSprintBacklogByName();
+        sprintName = getSprintBacklogByName();
         SprintBacklog sprintBacklog = contScrum.findSprintBacklogByName(controllerAll);
         for (Task task : sprintBacklog.getAllTasks()) {
             if (task == null) {
