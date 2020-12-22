@@ -1,5 +1,7 @@
 package Models;
 
+import View.ScrumMasterView;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,9 +47,13 @@ public class Project implements Serializable
         } else {
             this.id = id;
         }
-        this.startDate = startDate;
-        this.endDate = endDate;
 
+        if(startDate.isAfter(endDate)){
+            ScrumMasterView.wrongDatePrint();
+        } else {
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }
         productBacklog = new ProductBacklog(null,null,null);
         /*sprintBacklog = new SprintBacklog(null,null,null);
         productOwner = new ProductOwner(null,0); // tas bort???

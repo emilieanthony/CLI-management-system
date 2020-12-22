@@ -597,8 +597,8 @@ public class ControllerScrumMaster
 		int endMonth = Scan.readInt("End date (MM): ");
 		int endDay = Scan.readInt("End date (DD): ");
 
-		LocalDate startDate = startYear + "-" + startMonth + "-" + startDay;
-		LocalDate endDate = endYear + "-" + endMonth + "-" + endDay;
+		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
+		LocalDate endDate = LocalDate.of(endYear, endMonth , endDay);
 
 		//try {
 			Project project = new Project(id, name, startDate, endDate);
