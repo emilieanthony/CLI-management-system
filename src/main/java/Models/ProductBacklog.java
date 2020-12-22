@@ -1,8 +1,10 @@
 package Models;
 
 import Models.UserStory;
+import View.ScrumMasterView;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import static View.DevTeamView.noNamePrint;
@@ -11,8 +13,8 @@ public class ProductBacklog implements Serializable {
 
     //Attributes:-
     private String name;
-    private String startDate;
-    private String endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private ArrayList<UserStory> allUserStories;
     private ArrayList<Task> tasks;
 
@@ -22,16 +24,20 @@ public class ProductBacklog implements Serializable {
 
     }
     // Constructor:-
-    public ProductBacklog(String name, String startDate, String endDate) //throws Exception
+    public ProductBacklog(String name, LocalDate startDate, LocalDate endDate) //throws Exception
     {
         /*if (name.isEmpty()) {
             noNamePrint();
         } else {*/
             this.name = name;
         //}
+        if (startDate.isAfter(endDate)){
+            ScrumMasterView.wrongDatePrint();
+        } else {
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }
 
-        this.startDate = startDate;
-        this.endDate = endDate;
         this.allUserStories = new ArrayList<>();
         this.tasks = new ArrayList<>(); // No tasks in product backlog
     }
@@ -49,22 +55,22 @@ public class ProductBacklog implements Serializable {
         this.name = name;
     }
 
-    public String getStartDate()
+    public LocalDate getStartDate()
     {
         return startDate;
     }
 
-    public void setStartDate(String startDate)
+    public void setStartDate(LocalDate startDate)
     {
         this.startDate = startDate;
     }
 
-    public String getEndDate()
+    public LocalDate getEndDate()
     {
         return endDate;
     }
 
-    public void setEndDate(String endDate)
+    public void setEndDate(LocalDate endDate)
     {
         this.endDate = endDate;
     }

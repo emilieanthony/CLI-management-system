@@ -2,6 +2,8 @@ package Controller;
 
 import Models.*;
 import Utility.Scan;
+
+import java.time.LocalDate;
 import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
@@ -175,7 +177,7 @@ public class ControllerProductOwner
     {
 
         Project project = controllerAll.whichProject();
-        String startDate = getBacklogSDate();
+        LocalDate startDate = getBacklogSDate();
         project.getProductBacklog().setStartDate(startDate);
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());
@@ -183,7 +185,7 @@ public class ControllerProductOwner
     public void editBacklogEDate(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        String endDate = getBacklogEDate();
+        LocalDate endDate = getBacklogEDate();
         project.getProductBacklog().setEndDate(endDate);
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());

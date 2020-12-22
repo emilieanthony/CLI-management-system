@@ -1,6 +1,7 @@
 package Models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static View.DevTeamView.negativeIDPrint;
@@ -11,8 +12,8 @@ public class Project implements Serializable
     //attributes
     private int id;
     private String name;
-    private String startDate;
-    private String endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     private ProductBacklog productBacklog;
     /*private SprintBacklog sprintBacklog;
@@ -31,7 +32,7 @@ public class Project implements Serializable
     }
 
     //constructor
-    public Project(int id, String name,String startDate,String endDate) //throws Exception
+    public Project(int id, String name, LocalDate startDate, LocalDate endDate) //throws Exception
     {
         if (name.isEmpty()) {
             noNamePrint();
@@ -77,22 +78,22 @@ public class Project implements Serializable
         this.name = name;
     }
 
-    public String getStartDate()
+    public LocalDate getStartDate()
     {
         return startDate;
     }
 
-    public void setStartDate( String startDate)
+    public void setStartDate( LocalDate startDate)
     {
         this.startDate = startDate;
     }
 
-    public String getEndDate()
+    public LocalDate getEndDate()
     {
         return endDate;
     }
 
-    public void setEndDate(String endDate)
+    public void setEndDate(LocalDate endDate)
     {
         this.endDate = endDate;
     }

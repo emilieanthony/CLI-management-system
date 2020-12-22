@@ -4,6 +4,8 @@ import Models.ProductBacklog;
 import Models.UserStory;
 import Utility.Scan;
 
+import java.time.LocalDate;
+
 import static View.ScrumMasterView.proName;
 
 public class ProductOwnerView
@@ -42,8 +44,8 @@ public class ProductOwnerView
         int endMonth = Scan.readInt("End date (MM): ");
         int endDay = Scan.readInt("End date (DD): ");
 
-        String startDate = startYear + "-" + startMonth + "-" + startDay;
-        String endDate = endYear + "-" + endMonth + "-" + endDay;
+        LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
+        LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
         return new ProductBacklog(backlogName, startDate, endDate);
     }
 
@@ -76,23 +78,24 @@ public class ProductOwnerView
         return nameBacklog;
     }
 
-    public static String getBacklogSDate() {
-        String startDate;
+    public static LocalDate getBacklogSDate() {
+        LocalDate startDate;
         Scan.print("\nPlease enter a new start date for the product backlog");
         int startYear = Scan.readInt("Start date (YYYY): ");
         int startMonth = Scan.readInt("Start date (MM): ");
         int startDay = Scan.readInt("Start date (DD): ");
-        startDate = startYear + "-" + startMonth + "-" + startDay;
+        startDate = LocalDate.of(startYear, startMonth, startDay);
         return startDate;
     }
 
-    public static String getBacklogEDate() {
-        String endDate;
+    public static LocalDate getBacklogEDate() {
+        LocalDate endDate;
         Scan.print("\nPlease enter a new End date for the product backlog.");
         int endYear = Scan.readInt("End date (YYYY): ");
         int endMonth = Scan.readInt("End date (MM): ");
         int endDay = Scan.readInt("End date (DD): ");
-        endDate = endYear + "-" + endMonth + "-" + endDay;
+
+        endDate = LocalDate.of(endYear, endMonth, endDay);
         return endDate;
     }
 

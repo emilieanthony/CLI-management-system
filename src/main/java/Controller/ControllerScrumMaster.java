@@ -3,6 +3,7 @@ package Controller;
 import Models.*;
 import Utility.Scan;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -596,8 +597,8 @@ public class ControllerScrumMaster
 		int endMonth = Scan.readInt("End date (MM): ");
 		int endDay = Scan.readInt("End date (DD): ");
 
-		String startDate = startYear + "-" + startMonth + "-" + startDay;
-		String endDate = endYear + "-" + endMonth + "-" + endDay;
+		LocalDate startDate = startYear + "-" + startMonth + "-" + startDay;
+		LocalDate endDate = endYear + "-" + endMonth + "-" + endDay;
 
 		//try {
 			Project project = new Project(id, name, startDate, endDate);
