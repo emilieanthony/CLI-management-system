@@ -72,9 +72,11 @@ public class ControllerProductOwner
     public void createBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
         try {
             Project project = controllerAll.whichProject();
-            ProductBacklog backlog = getBacklogInfo();
-            project.setProductBacklog(backlog);
+            ProductBacklog ProBacklog = getBacklogInfo();
+            project.setProductBacklog(ProBacklog);
+            Scan.print(ProBacklog.toString());
             controllerAll.saveData();
+            proBacklogCreationConf();
         }
         catch(Exception e) {
             backlogFail();
@@ -133,6 +135,7 @@ public class ControllerProductOwner
             project.getProductBacklog().getAllUserStories().add(newUserStory);
             createdUStoryReceipt(newUserStory);
             controllerAll.saveData();
+            Scan.print(newUserStory.toString());
         } catch (Exception e) {
             userStoryFail();
         }
@@ -161,9 +164,10 @@ public class ControllerProductOwner
 
     public void editProductBacklogName(ControllerAll controllerAll){
 
-        String nameBacklog = getBacklogName();
+        String nameBacklog = getProBacklogName();
         Project project = controllerAll.whichProject();
         project.getProductBacklog().setName(nameBacklog);
+        proBacklogEditConf();
     }
     public void editBacklogSDate(ControllerAll controllerAll)
     {
@@ -171,12 +175,14 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         String startDate = getBacklogSDate();
         project.getProductBacklog().setStartDate(startDate);
+        proBacklogEditConf();
     }
     public void editBacklogEDate(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
         String endDate = getBacklogEDate();
         project.getProductBacklog().setEndDate(endDate);
+        proBacklogEditConf();
     }
 
     //**//*--------------------------------3rd Menu - menu for editing user stories---------------------------------------*//

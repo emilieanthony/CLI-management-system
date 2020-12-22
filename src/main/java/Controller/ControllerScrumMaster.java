@@ -137,11 +137,10 @@ public class ControllerScrumMaster
 	{
 		Project project = controllerAll.whichProject();
 		membersView();
-		for (Developer developer : project.getAllTeamMembers())
+		for (Developer developer : project.getAllDevelopmentMembers())
 		{
 			Scan.print(developer.toString());
 		}
-		projectNotFound();
 	}
 
 
@@ -759,7 +758,7 @@ public class ControllerScrumMaster
 		Project project = controllerAll.whichProject();
 		if (project == null)
 		{
-			projectNotFound();
+			projectNotFound();  
 		}
 
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
