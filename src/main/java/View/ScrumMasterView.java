@@ -74,6 +74,11 @@ public class ScrumMasterView
 		return project;
 	}
 
+	public static void nullTaskPrint(){
+    	Scan.print("This task does not exist, please try again.");
+		menuScrumMaster();
+	}
+
 	public static void invalidTaskPrint(){
     	Scan.print("The ID of the task was not found. Please try again");
     	menuScrumMaster();
@@ -92,10 +97,15 @@ public class ScrumMasterView
 	}
 
 	public static String specifySprint(){
-		name = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+		proName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
-		return name;
+		return proName;
 
+	}
+
+	public static void invalidNumberPrint(){
+    	Scan.print("Priority number must be between 1-5. Please try again.");
+    	menuScrumMaster();
 	}
 
 	public static void noSprintPrint(){

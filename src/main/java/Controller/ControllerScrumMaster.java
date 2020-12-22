@@ -312,20 +312,20 @@ public class ControllerScrumMaster
 			if (input.equals("1"))
 			{
 				int idTask = specifyTask();
-				name = specifySprint();
+				sprintName = specifySprint();
 
 				Task taskInBacklog = project.getProductBacklog().getTask(idTask);
 
 				if(taskInBacklog == null) {
 					invalidTaskPrint();
-				} else if (!project.getAllSprints().contains(name)){
+				} else if (!project.getAllSprintBacklogs().contains(sprintName)){
 					invalidSprintBacklog();
 				}
 				else{
-					taskInBacklog.setSprintName(name);
+					taskInBacklog.setSprintName(sprintName);
 					Task taskToMove = taskInBacklog;
 					findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
-					project.getProductBacklog().getTasksImport().remove(taskToMove);
+					project.getProductBacklog().getTasks().remove(taskToMove);
 					controllerAll.saveData();
 					movedObject();
 				}
@@ -599,7 +599,7 @@ public class ControllerScrumMaster
 		try {
 			Project project = projectInput();
 			controllerAll.getAllProjects().add(project);
-			proName = name;
+			proName = sprintName;
 			controllerAll.saveData();
 			createProjectPrint(project);
 		} catch (Exception e) {
@@ -763,10 +763,14 @@ public class ControllerScrumMaster
 		}
 
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
-		task.getAssignedDevelopers().add(developer);
-		task.setStatus("In progress");
+		if(task == null){
+			nullTaskPrint();
+		}else{
+			task.getAssignedDevelopers().add(developer);
+			task.setStatus("In progress");
+			assignmentCompleted();
+		}
 
-		assignmentCompleted();
 	}
 
 	public void assignUserStory(ControllerAll controllerAll)
