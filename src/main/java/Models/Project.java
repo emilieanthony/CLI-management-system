@@ -194,6 +194,7 @@ public class Project implements Serializable
         return productBacklog;
     }
 
+
     public void viewAllProductOwners()
     {
         for (ProductOwner productOwner : allProductOwners)
