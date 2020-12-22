@@ -5,6 +5,7 @@ import Models.*;
 import Models.Task;
 import Utility.Scan;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static Controller.ControllerScrumMaster.sprintName;
@@ -70,8 +71,8 @@ public class ScrumMasterView
 		int endDay = Scan.readInt("End date (DD): ");
 		proName = name;
 
-		String startDate = startYear + "-" + startMonth + "-" + startDay;
-		String endDate = endYear + "-" + endMonth + "-" + endDay;
+		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
+		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
 		Project project = new Project(id, name, startDate, endDate);
 		return project;
 	}
@@ -103,6 +104,31 @@ public class ScrumMasterView
 
 		return proName;
 
+	}
+
+	public static SprintBacklog createSprintInfo() throws Exception{
+
+		Scan.print("\nEnter the sprintName, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
+				"sprintBacklog:");
+		String name = Scan.readLine("Name:");
+		sprintName = name;
+		int startYear = Scan.readInt("Start date (YYYY):");
+		int startMonth = Scan.readInt("Start date (MM):");
+		int startDay = Scan.readInt("Start date (DD):");
+		int endYear = Scan.readInt("End date (YYYY):");
+		int endMonth = Scan.readInt("End date (MM):");
+		int endDay = Scan.readInt("End date (DD):");
+
+
+		LocalDate startDate = LocalDate.of(startYear, startMonth , startDay);
+		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
+		SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
+		return sprintBacklog;
+	}
+
+	public static void successfulSprintLog(SprintBacklog sprintBacklog){
+		Scan.print("You have successfully created the following sprintBacklog:\n\n"
+				+ sprintBacklog.toString());
 	}
 
 	public static void invalidNumberPrint(){

@@ -614,27 +614,12 @@ public class ControllerScrumMaster
 
 	public void createSprintBacklog(ControllerAll controllerAll)
 	{
-		Scan.print("\nEnter the sprintName, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
-				"sprintBacklog:");
-		String name = Scan.readLine("Name:");
-		int startYear = Scan.readInt("Start date (YYYY):");
-		int startMonth = Scan.readInt("Start date (MM):");
-		int startDay = Scan.readInt("Start date (DD):");
-		int endYear = Scan.readInt("End date (YYYY):");
-		int endMonth = Scan.readInt("End date (MM):");
-		int endDay = Scan.readInt("End date (DD):");
-
-
-		String startDate = startYear + "-" + startMonth + "-" + startDay;
-		String endDate = endYear + "-" + endMonth + "-" + endDay;
-
 		try {
-			SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
+			SprintBacklog sprintBacklog = createSprintInfo();
 			Project project = controllerAll.whichProject();
 			project.getAllSprintBacklogs().add(sprintBacklog); //project here gives null pointer.
 			controllerAll.saveData();
-			Scan.print("You have successfully created the following sprintBacklog:\n\n"
-					+ sprintBacklog.toString());
+			successfulSprintLog(sprintBacklog);
 		} catch (NumberFormatException e) {
 			numberFormatMessage();
 		} catch (Exception e) {

@@ -54,7 +54,7 @@ public class Project implements Serializable
             this.startDate = startDate;
             this.endDate = endDate;
         }
-        productBacklog = new ProductBacklog(null,null,null);
+        productBacklog = new ProductBacklog(name + " product backlog",startDate,endDate);
         /*sprintBacklog = new SprintBacklog(null,null,null);
         productOwner = new ProductOwner(null,0); // tas bort???
         developer = new Developer(null,0); // tas bort???

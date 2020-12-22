@@ -11,8 +11,8 @@ public class SprintBacklog implements Serializable
 {
 	//attributes
 	private String name;
-	private String startDate;
-	private String endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private ArrayList<Task> allTasks;
 	private ArrayList<UserStory> userStories;
 
@@ -22,7 +22,7 @@ public class SprintBacklog implements Serializable
 	}
 
 	//constructor
-	public SprintBacklog(String name, String startDate, String endDate) throws Exception
+	public SprintBacklog(String name, LocalDate startDate, LocalDate endDate) throws Exception
 	{
 		this.name = name;
 		this.startDate = startDate;
@@ -42,22 +42,22 @@ public class SprintBacklog implements Serializable
 		this.name = name;
 	}
 
-	public String getStartDate()
+	public LocalDate getStartDate()
 	{
 		return startDate;
 	}
 
-	public void setStartDate( String startDate)
+	public void setStartDate( LocalDate startDate)
 	{
 		this.startDate = startDate;
 	}
 
-	public String getEndDate()
+	public LocalDate getEndDate()
 	{
 		return endDate;
 	}
 
-	public void setEndDate(String endDate)
+	public void setEndDate(LocalDate endDate)
 	{
 		this.endDate = endDate;
 	}
