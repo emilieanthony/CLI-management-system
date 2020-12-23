@@ -14,15 +14,13 @@ import static View.DevTeamView.invalidInputPrint;
 import static View.DevTeamView.viewSprints;
 import static View.ScrumMasterView.*;
 
-public class ControllerScrumMaster
-{
+public class ControllerScrumMaster {
 
 	//private Import importFile = new Import();
 	public static String sprintName;
 
 	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll,
-								ControllerScrumMaster contScrum)
-	{
+								ControllerScrumMaster contScrum) {
 
 		boolean running = true;
 		do {
@@ -98,8 +96,7 @@ public class ControllerScrumMaster
 
 	//-----------------------------------------------------Second Switch----------------------------------------------
 
-	public void scrumMasterEditTaskMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum)
-	{
+	public void scrumMasterEditTaskMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
 
 		boolean running = true;
 		do {
@@ -134,12 +131,10 @@ public class ControllerScrumMaster
 
 
 	//-------------------------------------------------------------------------------------------------------------------
-	private void viewTeamMembers(ControllerAll controllerAll)
-	{
+	private void viewTeamMembers(ControllerAll controllerAll) {
 		Project project = controllerAll.whichProject();
 		membersView();
-		for (Developer developer : project.getAllTeamMembers())
-		{
+		for (Developer developer : project.getAllTeamMembers()) {
 			Scan.print(developer.toString());
 		}
 	}
@@ -148,18 +143,14 @@ public class ControllerScrumMaster
 	/*------------------------------------------Methods for tasks------------------------------------------------*/
 
 
-	private void createTaskToProductBacklog(ControllerAll controllerAll)
-	{
+	private void createTaskToProductBacklog(ControllerAll controllerAll) {
 		Project project = controllerAll.whichProject();
 
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else
-		{
+		} else {
 
-			int id = taskUSIdGenerator(project,controllerAll);
+			int id = taskUSIdGenerator(project, controllerAll);
 
 			try {
 				Task newTask = getTaskInfo(id);
@@ -172,19 +163,15 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private void createTaskToSprint(ControllerAll controllerAll)
-	{
+	private void createTaskToSprint(ControllerAll controllerAll) {
 
 		Project project = controllerAll.whichProject();
 
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else
-		{
+		} else {
 
-			int id = taskUSIdGenerator(project,controllerAll);
+			int id = taskUSIdGenerator(project, controllerAll);
 
 			try {
 				Task newTask = getTaskInfo(id);
@@ -192,14 +179,13 @@ public class ControllerScrumMaster
 				sprintName = getSprintBacklogName();
 				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
 				controllerAll.saveData();
-			} catch	(Exception e) {
+			} catch (Exception e) {
 				registerTaskFail();
 			}
 		}
 	}
 
-	public int taskUSIdGenerator(Project project,ControllerAll controllerAll)
-	{
+	public int taskUSIdGenerator(Project project, ControllerAll controllerAll) {
 		// initialize int variable for ID
 		int id = project.getId() * 1000 + 1;
 
@@ -207,23 +193,17 @@ public class ControllerScrumMaster
 		ArrayList<UserStory> stories = collectAllStories(project);
 
 
-		if (!tasks.isEmpty())
-		{
-			for (Task task : tasks)
-			{
-				if (task.getId() == id)
-				{
+		if (!tasks.isEmpty()) {
+			for (Task task : tasks) {
+				if (task.getId() == id) {
 					id++;
 				}
 			}
 		}
 
-		if (!stories.isEmpty())
-		{
-			for (UserStory userStory : stories)
-			{
-				if (userStory.getNumber() == id)
-				{
+		if (!stories.isEmpty()) {
+			for (UserStory userStory : stories) {
+				if (userStory.getNumber() == id) {
 					id++;
 				}
 			}
@@ -234,8 +214,7 @@ public class ControllerScrumMaster
 	}
 
 
-	public ArrayList<Task> collectAllTasks(ControllerAll controllerAll)
-	{
+	public ArrayList<Task> collectAllTasks(ControllerAll controllerAll) {
 
 		Project project = controllerAll.whichProject();
 		//put all tasks in one and the same arrayList
@@ -244,19 +223,16 @@ public class ControllerScrumMaster
 		//fetch tasks from product backlog
 		ArrayList<Task> productBLTasks = project.getProductBacklog().getTasks();
 
-		for (Task task : productBLTasks)
-		{
+		for (Task task : productBLTasks) {
 			allTasks.add(task);
 		}
 
 		//fetch tasks from sprint BL
 		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
 
-		for (SprintBacklog sprintBL : sprintBLs)
-		{
+		for (SprintBacklog sprintBL : sprintBLs) {
 			ArrayList<Task> sprintTasks = sprintBL.getAllTasks();
-			for (Task task : sprintTasks)
-			{
+			for (Task task : sprintTasks) {
 				allTasks.add(task);
 			}
 		}
@@ -264,8 +240,7 @@ public class ControllerScrumMaster
 		return allTasks;
 	}
 
-	private ArrayList<UserStory> collectAllStories(Project project)
-	{
+	private ArrayList<UserStory> collectAllStories(Project project) {
 
 		//put all user stories in one and the same ArrayList
 		ArrayList<UserStory> allStories = new ArrayList<>();
@@ -273,20 +248,17 @@ public class ControllerScrumMaster
 		// fetch all user stories from product backlog
 		ArrayList<UserStory> productBLStories = project.getProductBacklog().getAllUserStories();
 
-		for (UserStory story : productBLStories)
-		{
+		for (UserStory story : productBLStories) {
 			allStories.add(story);
 		}
 
 		//fetch user story from sprint BL
 		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
 
-		for (SprintBacklog sprintBL : sprintBLs)
-		{
+		for (SprintBacklog sprintBL : sprintBLs) {
 			//
 			ArrayList<UserStory> sprintBLStories = sprintBL.getUserStories();
-			for (UserStory story : sprintBLStories)
-			{
+			for (UserStory story : sprintBLStories) {
 				allStories.add(story);
 			}
 		}
@@ -294,8 +266,7 @@ public class ControllerScrumMaster
 		return allStories;
 	}
 
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
-	{
+	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll) {
 		contProOwner.viewProBacklog(controllerAll);
 
 		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
@@ -304,25 +275,20 @@ public class ControllerScrumMaster
 
 		Project project = controllerAll.whichProject();
 
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else
-		{
-			if (input.equals("1"))
-			{
+		} else {
+			if (input.equals("1")) {
 				int idTask = specifyTask();
 				sprintName = specifySprint();
 
 				Task taskInBacklog = project.getProductBacklog().getTask(idTask);
 
-				if(taskInBacklog == null) {
+				if (taskInBacklog == null) {
 					invalidTaskPrint();
-				} else if (!project.getAllSprintBacklogs().contains(sprintName)){
+				} else if (!project.getAllSprintBacklogs().contains(sprintName)) {
 					invalidSprintBacklog();
-				}
-				else{
+				} else {
 					taskInBacklog.setSprintName(sprintName);
 					Task taskToMove = taskInBacklog;
 					findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
@@ -334,8 +300,7 @@ public class ControllerScrumMaster
 
 			}
 
-			if (input.equals("2"))
-			{
+			if (input.equals("2")) {
 				int usName = Scan.readInt("Write the the number of the user story you want to" +
 						" move: "); // Move to view class.
 				sprintName = Scan.readLine("Write the sprintName of the sprint you want to move your user story to: ");
@@ -346,30 +311,23 @@ public class ControllerScrumMaster
 				project.getProductBacklog().getAllUserStories().remove(userStoryToMove);
 				controllerAll.saveData();
 				movedObject();
-			}
-			else
-			{
+			} else {
 				return;
 			}
 		}
 	}
 
-	private void moveTaskOrUSToProductBacklog(ControllerAll controllerAll)
-	{
+	private void moveTaskOrUSToProductBacklog(ControllerAll controllerAll) {
 		viewSprintBacklog(controllerAll);
 
 		String input = moveObjectToBacklogPrint();
 
 		Project project = controllerAll.whichProject();
 
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else
-		{
-			if (input.equals("1"))
-			{
+		} else {
+			if (input.equals("1")) {
 				int idTask = IdTaskToMovePrint();
 				sprintName = sprintNameToMovePrint();
 
@@ -381,8 +339,7 @@ public class ControllerScrumMaster
 				movedObject();
 			}
 
-			if (input.equals("2"))
-			{
+			if (input.equals("2")) {
 				int usNumber = numerUsToMove();
 				sprintName = sprintNameToMove();
 
@@ -392,40 +349,29 @@ public class ControllerScrumMaster
 				findSprintBacklogByName(controllerAll).getUserStories().remove(userStoryToMove);
 				controllerAll.saveData();
 				movedObject();
-			}
-			else
-			{
+			} else {
 				return;
 			}
 		}
 	}
 
 
-	private void editPriorityNumberTask(ControllerAll controllerAll)
-	{
+	private void editPriorityNumberTask(ControllerAll controllerAll) {
 		final int PRIORITY_LOWEST = 1;
 		final int PRIORITY_HIGHEST = 5;
 		Project project = controllerAll.whichProject();
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else
-		{
+		} else {
 			ArrayList<Task> tasks = collectAllTasks(controllerAll);
 			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
-			for (Task task : tasks)
-			{
-				if (task.getId() == idTask)
-				{
+			for (Task task : tasks) {
+				if (task.getId() == idTask) {
 					int newPriorityNumberTask = newPriorityNumberTask();
-					if ((newPriorityNumberTask >= PRIORITY_LOWEST) && (newPriorityNumberTask <= PRIORITY_HIGHEST))
-					{
+					if ((newPriorityNumberTask >= PRIORITY_LOWEST) && (newPriorityNumberTask <= PRIORITY_HIGHEST)) {
 						task.setPriorityNumber(newPriorityNumberTask);
 						objectEdited();
-					}
-					else
-					{
+					} else {
 						defaultMessage();
 					}
 
@@ -437,48 +383,35 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private void editStatusTask(ControllerAll controllerAll)
-	{
+	private void editStatusTask(ControllerAll controllerAll) {
 
 		Project project = controllerAll.whichProject();
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else
-		{
+		} else {
 
 			ArrayList<Task> tasks = collectAllTasks(controllerAll);
 
 
 			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
 
-			for (Task task : tasks)
-			{
-				if (task.getId() == idTask)
-				{
+			for (Task task : tasks) {
+				if (task.getId() == idTask) {
 					int newStatusTask = newStatusTask();
 
-					if (newStatusTask == 1)
-					{
+					if (newStatusTask == 1) {
 						task.setStatus("Open");
 						objectEdited();
 
-					}
-					else if (newStatusTask == 2)
-					{
+					} else if (newStatusTask == 2) {
 						task.setStatus("Work in Progress");
 						objectEdited();
 
-					}
-					else if (newStatusTask == 3)
-					{
+					} else if (newStatusTask == 3) {
 						task.setStatus("Complete");
 						objectEdited();
 
-					}
-					else
-					{
+					} else {
 						defaultMessage();
 					}
 
@@ -518,15 +451,24 @@ public class ControllerScrumMaster
 		}
 	}
 
-	public void removeTaskSprintBacklog(ControllerAll controllerAll, ControllerScrumMaster contScrum)
-	{
+	public void removeTaskSprintBacklog(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
+
 		sprintName = getSprintBacklogByName();
+
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
 		Task task = findTaskByIdSprint(controllerAll, contScrum);
-		sprintBacklog.getAllTasks().remove(task);
-		controllerAll.saveData();
-		removeObject();
-	}
+
+		if (task == null) {
+			taskNotFound();
+		} else  {
+			sprintBacklog.getAllTasks().remove(task);
+			controllerAll.saveData();
+			removeObject();
+		}
+
+		}
+
+
 	/*------------------------------------------Methods product owner------------------------------------------------*/
 
 	public void createProductOwner(ControllerAll controllerAll)
