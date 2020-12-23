@@ -490,22 +490,31 @@ public class ControllerScrumMaster
 	}
 
 
-	public void removeTaskProductBacklog(ControllerAll controllerAll)
-	{
+	public void removeTaskProductBacklog(ControllerAll controllerAll) {
 
 		Project project = controllerAll.whichProject();
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else
-		{
+		} else {
 
 			int idTask = Scan.readInt("Write the ID of the task you want to remove: ");
-			project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
-			controllerAll.saveData();
-			removeObject();
 
+			ArrayList<Task> tasks = collectAllTasks(controllerAll);
+
+			for (Task task : tasks) {
+				if (task.getId() == idTask) {
+
+					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
+					controllerAll.saveData();
+					removeObject();
+				} else {
+
+					defaultMessage();
+
+				}
+				return;
+			}
+			taskNotFound();
 		}
 	}
 
