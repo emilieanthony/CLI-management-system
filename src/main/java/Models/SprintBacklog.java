@@ -1,5 +1,8 @@
 package Models;
 
+import Utility.DataManagement;
+import View.ScrumMasterView;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,8 +14,8 @@ public class SprintBacklog implements Serializable
 {
 	//attributes
 	private String name;
-	private LocalDate startDate;
-	private LocalDate endDate;
+	private String startDate;
+	private String endDate;
 	private ArrayList<Task> allTasks;
 	private ArrayList<UserStory> userStories;
 
@@ -22,11 +25,15 @@ public class SprintBacklog implements Serializable
 	}
 
 	//constructor
-	public SprintBacklog(String name, LocalDate startDate, LocalDate endDate) throws Exception
+	public SprintBacklog(String name, String startDate, String endDate) throws Exception
 	{
 		this.name = name;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate))){
+			ScrumMasterView.wrongDatePrint();
+		} else {
+			this.startDate = startDate;
+			this.endDate = endDate;
+		}
 		this.allTasks = new ArrayList<>();
 		this.userStories = new ArrayList<>();
 	}
@@ -42,22 +49,22 @@ public class SprintBacklog implements Serializable
 		this.name = name;
 	}
 
-	public LocalDate getStartDate()
+	public String getStartDate()
 	{
 		return startDate;
 	}
 
-	public void setStartDate( LocalDate startDate)
+	public void setStartDate( String startDate)
 	{
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate()
+	public String getEndDate()
 	{
 		return endDate;
 	}
 
-	public void setEndDate(LocalDate endDate)
+	public void setEndDate(String endDate)
 	{
 		this.endDate = endDate;
 	}

@@ -1,5 +1,6 @@
 package Models;
 
+import Utility.DataManagement;
 import View.ScrumMasterView;
 
 import java.io.Serializable;
@@ -14,8 +15,8 @@ public class Project implements Serializable
     //attributes
     private int id;
     private String name;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
 
     private ProductBacklog productBacklog;
     /*private SprintBacklog sprintBacklog;
@@ -34,7 +35,7 @@ public class Project implements Serializable
     }
 
     //constructor
-    public Project(int id, String name, LocalDate startDate, LocalDate endDate) //throws Exception
+    public Project(int id, String name, String startDate, String endDate) //throws Exception
     {
         if (name.isEmpty()) {
             noNamePrint();
@@ -48,13 +49,13 @@ public class Project implements Serializable
             this.id = id;
         }
 
-        if(startDate.isAfter(endDate)){
+        if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate))){
             ScrumMasterView.wrongDatePrint();
         } else {
             this.startDate = startDate;
             this.endDate = endDate;
         }
-        productBacklog = new ProductBacklog(name + " product backlog",startDate,endDate);
+        productBacklog = new ProductBacklog(name + " product backlog", startDate, endDate);
         /*sprintBacklog = new SprintBacklog(null,null,null);
         productOwner = new ProductOwner(null,0); // tas bort???
         developer = new Developer(null,0); // tas bort???
@@ -84,22 +85,22 @@ public class Project implements Serializable
         this.name = name;
     }
 
-    public LocalDate getStartDate()
+    public String getStartDate()
     {
         return startDate;
     }
 
-    public void setStartDate( LocalDate startDate)
+    public void setStartDate( String startDate)
     {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate()
+    public String getEndDate()
     {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate)
+    public void setEndDate(String endDate)
     {
         this.endDate = endDate;
     }

@@ -37,15 +37,11 @@ public class ProductOwnerView
     public static ProductBacklog getBacklogInfo() throws Exception
     {
         String backlogName = Scan.readLine("Please enter product backlog Name:");
-        int startYear = Scan.readInt("Start date (YYYY): ");
-        int startMonth = Scan.readInt("Start date (MM): ");
-        int startDay = Scan.readInt("Start date (DD): ");
-        int endYear = Scan.readInt("End date (YYYY): ");
-        int endMonth = Scan.readInt("End date (MM): ");
-        int endDay = Scan.readInt("End date (DD): ");
 
-        LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
-        LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
+        String startDate = ScrumMasterView.getStartDate();
+        String endDate = ScrumMasterView.getEndDate();
+
+
         return new ProductBacklog(backlogName, startDate, endDate);
     }
 
@@ -88,14 +84,9 @@ public class ProductOwnerView
         return startDate;
     }
 
-    public static LocalDate getBacklogEDate() {
-        LocalDate endDate;
-        Scan.print("\nPlease enter a new End date for the product backlog.");
-        int endYear = Scan.readInt("End date (YYYY): ");
-        int endMonth = Scan.readInt("End date (MM): ");
-        int endDay = Scan.readInt("End date (DD): ");
+    public static String getBacklogEDate() {
 
-        endDate = LocalDate.of(endYear, endMonth, endDay);
+        String endDate = ScrumMasterView.getEndDate();
         return endDate;
     }
 

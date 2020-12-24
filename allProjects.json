@@ -1,68 +1,28 @@
 [ {
-  "id" : 2020,
-  "name" : "2020",
-  "startDate" : {
-    "year" : 2020,
-    "month" : "DECEMBER",
-    "dayOfWeek" : "TUESDAY",
-    "leapYear" : true,
-    "dayOfYear" : 357,
-    "era" : "CE",
-    "monthValue" : 12,
-    "dayOfMonth" : 22,
-    "chronology" : {
-      "id" : "ISO",
-      "calendarType" : "iso8601"
-    }
-  },
-  "endDate" : {
-    "year" : 2021,
-    "month" : "APRIL",
-    "dayOfWeek" : "SUNDAY",
-    "leapYear" : false,
-    "dayOfYear" : 94,
-    "era" : "CE",
-    "monthValue" : 4,
-    "dayOfMonth" : 4,
-    "chronology" : {
-      "id" : "ISO",
-      "calendarType" : "iso8601"
-    }
-  },
+  "id" : 1,
+  "name" : "Po",
+  "startDate" : "2020-12-21",
+  "endDate" : "2021-4-4",
   "productBacklog" : {
-    "name" : "2020 product backlog",
-    "startDate" : {
-      "year" : 2020,
-      "month" : "DECEMBER",
-      "dayOfWeek" : "TUESDAY",
-      "leapYear" : true,
-      "dayOfYear" : 357,
-      "era" : "CE",
-      "monthValue" : 12,
-      "dayOfMonth" : 22,
-      "chronology" : {
-        "id" : "ISO",
-        "calendarType" : "iso8601"
-      }
-    },
-    "endDate" : {
-      "year" : 2021,
-      "month" : "APRIL",
-      "dayOfWeek" : "SUNDAY",
-      "leapYear" : false,
-      "dayOfYear" : 94,
-      "era" : "CE",
-      "monthValue" : 4,
-      "dayOfMonth" : 4,
-      "chronology" : {
-        "id" : "ISO",
-        "calendarType" : "iso8601"
-      }
-    },
+    "name" : "Po product backlog",
+    "startDate" : "2020-12-21",
+    "endDate" : "2021-4-4",
     "allUserStories" : [ ],
     "tasks" : [ ]
   },
   "allTeamMembers" : [ ],
   "allProductOwners" : [ ],
-  "allSprintBacklogs" : [ ]
+  "allSprintBacklogs" : [ {
+    "name" : "2021",
+    "startDate" : "2021-4-4",
+    "endDate" : "2020-12-21",
+    "allTasks" : [ ],
+    "userStories" : [ ]
+  }, {
+    "name" : "sprint 1",
+    "startDate" : null,
+    "endDate" : null,
+    "allTasks" : [ ],
+    "userStories" : [ ]
+  } ]
 } ]

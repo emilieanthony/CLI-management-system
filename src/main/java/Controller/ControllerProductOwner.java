@@ -2,6 +2,7 @@ package Controller;
 
 import Models.*;
 import Utility.Scan;
+import View.ScrumMasterView;
 
 import java.time.LocalDate;
 import java.util.Iterator;
@@ -177,7 +178,7 @@ public class ControllerProductOwner
     {
 
         Project project = controllerAll.whichProject();
-        LocalDate startDate = getBacklogSDate();
+        String startDate = ScrumMasterView.getStartDate();
         project.getProductBacklog().setStartDate(startDate);
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());
@@ -185,7 +186,7 @@ public class ControllerProductOwner
     public void editBacklogEDate(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        LocalDate endDate = getBacklogEDate();
+        String endDate = getBacklogEDate();
         project.getProductBacklog().setEndDate(endDate);
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());

@@ -27,7 +27,7 @@ public class DevTeamView {
                 "6. View sprint backlog\n" +
                 "7. View all tasks\n" +
                 "8. Switch projects\n" +
-                "6. Go back to main menu\n");
+                "9. Go back to main menu\n");
         return option;
     }
 

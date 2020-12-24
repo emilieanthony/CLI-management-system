@@ -63,18 +63,30 @@ public class ScrumMasterView
 				"project:");
 		String name = Scan.readLine("Name: ");
 		int id = Scan.readInt("ID: ");
+
+		proName = name;
+
+		String startDate = getStartDate();
+		String endDate = getEndDate();
+
+		Project project = new Project(id, name, startDate, endDate);
+		return project;
+	}
+
+	public static String getStartDate(){
 		int startYear = Scan.readInt("Start date (YYYY): ");
 		int startMonth = Scan.readInt("Start date (MM): ");
 		int startDay = Scan.readInt("Start date (DD): ");
+		String startDate = String.valueOf(startYear + "-" + startMonth + "-" + startDay);
+		return startDate;
+	}
+
+	public static String getEndDate(){
 		int endYear = Scan.readInt("End date (YYYY): ");
 		int endMonth = Scan.readInt("End date (MM): ");
 		int endDay = Scan.readInt("End date (DD): ");
-		proName = name;
-
-		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
-		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
-		Project project = new Project(id, name, startDate, endDate);
-		return project;
+		String endDate = String.valueOf(endYear + "-" + endMonth + "-" + endDay);
+		return endDate;
 	}
 
 	public static void nullTaskPrint(){
@@ -96,14 +108,12 @@ public class ScrumMasterView
 		int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
 
 		return idTask;
-
 	}
 
 	public static String specifySprint(){
 		proName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
 		return proName;
-
 	}
 
 	public static SprintBacklog createSprintInfo() throws Exception{
@@ -112,16 +122,10 @@ public class ScrumMasterView
 				"sprintBacklog:");
 		String name = Scan.readLine("Name:");
 		sprintName = name;
-		int startYear = Scan.readInt("Start date (YYYY):");
-		int startMonth = Scan.readInt("Start date (MM):");
-		int startDay = Scan.readInt("Start date (DD):");
-		int endYear = Scan.readInt("End date (YYYY):");
-		int endMonth = Scan.readInt("End date (MM):");
-		int endDay = Scan.readInt("End date (DD):");
 
+		String startDate = ScrumMasterView.getStartDate();
+		String endDate = ScrumMasterView.getEndDate();
 
-		LocalDate startDate = LocalDate.of(startYear, startMonth , startDay);
-		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
 		SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
 		return sprintBacklog;
 	}
