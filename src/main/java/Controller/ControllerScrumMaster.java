@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
-import static View.DevTeamView.getTaskId;
 
-import static View.DevTeamView.invalidInputPrint;
-import static View.DevTeamView.viewSprints;
+import static View.DevTeamView.*;
+import static View.DevTeamView.getUserStoryNumber;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster
@@ -158,7 +157,7 @@ public class ControllerScrumMaster
 		else
 		{
 
-			int id = taskUSIdGenerator(project,controllerAll);
+			int id = taskUSIdGenerator(controllerAll);
 
 			try {
 				Task newTask = getTaskInfo(id);
@@ -183,7 +182,7 @@ public class ControllerScrumMaster
 		else
 		{
 
-			int id = taskUSIdGenerator(project,controllerAll);
+			int id = taskUSIdGenerator(controllerAll);
 
 			try {
 				Task newTask = getTaskInfo(id);
@@ -197,9 +196,10 @@ public class ControllerScrumMaster
 		}
 	}
 
-	public int taskUSIdGenerator(Project project,ControllerAll controllerAll)
+	public int taskUSIdGenerator(ControllerAll controllerAll)
 	{
 		// initialize int variable for ID
+		Project project = controllerAll.whichProject();
 		int id = project.getId() * 1000 + 1;
 
 		ArrayList<Task> tasks = collectAllTasks(controllerAll);
@@ -777,7 +777,145 @@ public class ControllerScrumMaster
 		assignmentCompleted();
 
 	}
+	//-------------------------------------------TASK USER STORY -------------------------------//
+	public UserStory findUStoryByNumberSBL(int number, ControllerAll controllerAll)
+	{
+		UserStory userStory = null;
+		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
+		Iterator<UserStory> iterator = sprintBacklog.getUserStories().iterator();
+		while (userStory == null && iterator.hasNext())
+		{
+			UserStory foundUserStory = iterator.next();
+			if (foundUserStory.getNumber() == number)
+			{
+				userStory = foundUserStory;
+				Scan.print(userStory.toString());
+			}
+		}
+		return userStory;
+	}
+	private void viewSprintBacklogT(ControllerAll controllerAll) {
+		Project project = controllerAll.whichProject();
+		if (project == null) {
+			projectNotFound();
+		} else {
+
+			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
+			Scan.print(sprint.toString());
+		}
+	}
+
+	public void createTaskOfUsInPBL(ControllerProductOwner contProOwner,ControllerAll controllerAll){
+		contProOwner.viewProBacklog(controllerAll);
+		int UsNumber = getUserStoryNumber();
+		Task task = null;
+		int id = taskUSIdGenerator(controllerAll);
+		try {
+			task = getTaskInfo(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		UserStory userStory = contProOwner.findUStoryByNumberPBL(UsNumber,controllerAll);
+		userStory.getUserStoryTasks().add(task);
+		controllerAll.saveData();
+
+	}
+	public void createTaskOfUsInSBL(ControllerAll controllerAll){
+		sprintName = getSprintBacklogByName();
+		viewSprintBacklogT(controllerAll);
+		int UsNumber = getUserStoryNumber();
+		int id = taskUSIdGenerator(controllerAll);
+		Task task = null;
+		try {
+			task = getTaskInfo(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		userStory.getUserStoryTasks().add(task);
+		controllerAll.saveData();
+
+	}
+	public void completeUStoryPBLTask(ControllerAll controllerAll,
+									  ControllerProductOwner contProOwner){
+
+		int UsNumber = getUserStoryNumber();
+		UserStory userStory = contProOwner.findUStoryByNumberPBL(UsNumber,controllerAll);
+		Task task = findTaskInUserSPBL(UsNumber,controllerAll,contProOwner);
+		task.setDone();
+
+		for (Task foundTasks: userStory.getUserStoryTasks()) {
+			if (foundTasks.getStatus().equalsIgnoreCase("Done")) {
+				userStory.getBinary().add(true);
+			}else {
+				userStory.getBinary().add(false);
+			}
+			if (userStory.getBinary().contains(false)){
+
+			}else {
+				userStory.setStatus("Done");
+			}
+		}//controllerAll.saveData();
+	}
+	public void completeUStorySBLTask(ControllerAll controllerAll){
+		sprintName = getSprintBacklogByName();
+		int UsNumber = getUserStoryNumber();
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		task.setDone();
+
+		for (Task foundTasks: userStory.getUserStoryTasks()) {
+			if (foundTasks.getStatus().equalsIgnoreCase("Done")) {
+				userStory.getBinary().add(true);
+			}else {
+				userStory.getBinary().add(false);
+			}
+			if (!(userStory.getBinary().contains(false))){
+				userStory.setStatus("Done");
+			}
+		}controllerAll.saveData();
+
+	}
+	public Task findTaskInUserSPBL(int UsNumber, ControllerAll controllerAll,
+								   ControllerProductOwner contProOwner)
+	{
+		Task task = null;
+		int taskId = getTaskId();
+		UserStory userStory = contProOwner.findUStoryByNumberPBL(UsNumber,controllerAll);
+		Iterator<Task> iterator = userStory.getUserStoryTasks().iterator();
+		while (task == null && iterator.hasNext())
+		{
+			Task foundTask = iterator.next();
+			if (foundTask.getId() == taskId)
+			{
+				task = foundTask;
+				Scan.print(task.toString());
+			}
+		}
+		return task;
+	}
+	public Task findTaskInUserSSBL(int UsNumber, ControllerAll controllerAll)
+	{
+		Task task = null;
+		int taskId = getTaskId();
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Iterator<Task> iterator = userStory.getUserStoryTasks().iterator();
+		while (task == null && iterator.hasNext())
+		{
+			Task foundTask = iterator.next();
+			if (foundTask.getId() == taskId)
+			{
+				task = foundTask;
+				Scan.print(task.toString());
+			}
+		}
+		return task;
+	}
+
 }
+
+
+
 
 
 
