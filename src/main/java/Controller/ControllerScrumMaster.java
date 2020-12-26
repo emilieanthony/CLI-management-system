@@ -886,16 +886,6 @@ public class ControllerScrumMaster
 		}controllerAll.saveData();
 	}
 
-	/*public void editUStorySBLTaskStatusToDone(ControllerAll controllerAll){
-		sprintName = getSprintBacklogByName();
-		int UsNumber = getUserStoryNumber();
-		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
-		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
-		task.setDone();
-		checkUStoryStatus(userStory,controllerAll);
-		controllerAll.saveData();
-
-	}*/
 
 	public Task findTaskInUserSSBL(int UsNumber, ControllerAll controllerAll)
 	{
@@ -919,13 +909,11 @@ public class ControllerScrumMaster
 
 		sprintName = getSprintBacklogByName();
 		int UsNumber = getUserStoryNumber();
-		//UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
 		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
 		int newPriorityNumber = newPriorityNumberTask();
 		task.setPriorityNumber(newPriorityNumber);
 		Scan.print(task.toString());
 		objectEdited();
-		//Confirmation
 	}
 
 	public void editUStorySBLTaskStatus(ControllerAll controllerAll){
