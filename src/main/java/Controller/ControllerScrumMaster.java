@@ -801,12 +801,15 @@ public class ControllerScrumMaster
 				switch (option) {
 					case 1:
 						editUStorySBLTaskPriority(controllerAll);
+						controllerAll.saveData();
 						break;
 					case 2:
 						editUStorySBLTaskStatus(controllerAll);
+						controllerAll.saveData();
 						break;
 					case 3:
 						removeUserStorySBLTask(controllerAll);
+						controllerAll.saveData();
 						break;
 					case 4:
 						running = false;
@@ -929,9 +932,9 @@ public class ControllerScrumMaster
 
 		sprintName = getSprintBacklogByName();
 		int UsNumber = getUserStoryNumber();
-		int option = newStatusTask();
 		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
 		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		int option = newStatusTask();
 		if (option == 1){
 			task.setOpen();
 			Scan.print(task.toString());
