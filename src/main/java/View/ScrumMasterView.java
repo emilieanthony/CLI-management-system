@@ -36,8 +36,11 @@ public class ScrumMasterView
 				"14. View sprint backlog\n" +
 				"15. Calculate average velocity\n" +
 				"16. Switch project\n" +
-				//"17. Import file\n" +
-				"17. Go back to main menu\n");
+				"17. create a task of a user story located in sprint backlog.\n" +
+				"18. Complete us tasks\n" +
+				"19. Show implemented story points in sprint backlogs.\n" +
+				"20. Show average Velocity.\n" +
+				"21. Go back to main menu\n");
 
 
 		return option;
@@ -105,15 +108,15 @@ public class ScrumMasterView
 	}
 
 	public static int specifyTask(){
-		int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+		int idTask = Scan.readInt("Write the ID of the task you want to move: ");
 
 		return idTask;
 	}
 
 	public static String specifySprint(){
-		proName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+		sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
-		return proName;
+		return sprintName;
 	}
 
 	public static SprintBacklog createSprintInfo() throws Exception{
@@ -232,8 +235,10 @@ public class ScrumMasterView
 				"to access? Enter the name of the project or press enter to ignore: ");
 	}
 
-	public static void getProjectName()
+	public static void getProjectName(ControllerAll controllerAll)
+
 	{
+		viewProjectMenu(controllerAll);
 		proName = Scan.readLine("\nWhich project you want to access: Please enter the project " +
 				"name:\n");
 	}
@@ -365,6 +370,30 @@ public class ScrumMasterView
 	{
 		String input = Scan.readLine("Please enter the velocity for each sprint separated by a comma without spaces (e.g. 19,27,23):");
 		return input;
+	}
+
+	public static void showImplementedStoryPoints(ControllerAll controllerAll){
+		Project project = controllerAll.whichProject();
+		Scan.print("Total implemented story points till now for each Sprint backlog: ");
+
+		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs()) {
+
+			Scan.print("\nName: " + sprintBacklog.getName()+ "\nTotal story points: " +
+					sprintBacklog.calcTotalStoryPoints());
+		}
+	}
+
+	public static void showAverageVelocity(ControllerAll controllerAll){
+
+		Project project = controllerAll.whichProject();
+
+		int averageVelocity = 0;
+		int numberOfSprints = project.getAllSprintBacklogs().size();
+		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs()) {
+			averageVelocity = averageVelocity + sprintBacklog.getTotalStoryPoints()/numberOfSprints;
+
+		}
+		Scan.print("The average velocity for all sprints until now is: " + averageVelocity);
 	}
 }
 

@@ -53,7 +53,7 @@ public class ControllerDeveloper {
                         viewAllTasks(controllerAll, scrumMaster);//View all tasks
                         break;
                     case 8:
-                        getProjectName();// Switch project.
+                        getProjectName(controllerAll);// Switch project.
                         break;
                     case 9:
                         running = false;

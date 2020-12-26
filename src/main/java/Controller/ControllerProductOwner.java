@@ -56,7 +56,7 @@ public class ControllerProductOwner
                         editBacklog(controllerAll, controllerScrumMaster);
                         break;
                     case 4:
-                        getProjectName();
+                        getProjectName(controllerAll);
                         break;
                     case 5:
                         running = false; //go back to main menu
@@ -169,6 +169,7 @@ public class ControllerProductOwner
         String nameBacklog = getProBacklogName();
         Project project = controllerAll.whichProject();
         project.getProductBacklog().setName(nameBacklog);
+        controllerAll.saveData();
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());
 
@@ -179,6 +180,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         String startDate = ScrumMasterView.getStartDate();
         project.getProductBacklog().setStartDate(startDate);
+        controllerAll.saveData();
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());
     }
@@ -187,6 +189,7 @@ public class ControllerProductOwner
         Project project = controllerAll.whichProject();
         String endDate = getBacklogEDate();
         project.getProductBacklog().setEndDate(endDate);
+        controllerAll.saveData();
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());
     }
@@ -244,6 +247,7 @@ public class ControllerProductOwner
         int newUSNumber = getNewUSNumber();
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setNumber(newUSNumber);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
 
@@ -255,6 +259,7 @@ public class ControllerProductOwner
         String newUSName = getNewUSName();
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setName(newUSName);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
 
@@ -265,6 +270,7 @@ public class ControllerProductOwner
         String newUSSprint = getNewUSSprint();
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setSprint(newUSSprint);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
 
@@ -275,6 +281,7 @@ public class ControllerProductOwner
         int newUSPriority = getNewUSPriority();
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setPriorityNumber(newUSPriority);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
     }
@@ -284,6 +291,7 @@ public class ControllerProductOwner
         int newUSSPoints = getNewUSStoryPoints();
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setStoryPoints(newUSSPoints);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
     }
@@ -293,6 +301,7 @@ public class ControllerProductOwner
         String newUSContent = getNewUSContent();
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setContent(newUSContent);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
     }
@@ -302,6 +311,7 @@ public class ControllerProductOwner
         String newUSAcceptanceC = getNewUSAcceptanceC();
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
 
@@ -314,14 +324,17 @@ public class ControllerProductOwner
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         if (newUSStatus == 1){
             userStory.setOpen();
+            controllerAll.saveData();
             userStoryEditConf();
         }
         else if (newUSStatus == 2){
             userStory.setInProgress();
+            controllerAll.saveData();
             userStoryEditConf();
         }
         else if (newUSStatus == 3){
             userStory.setDone();
+            controllerAll.saveData();
             userStoryEditConf();
         } else {
             changeStatusMessage();

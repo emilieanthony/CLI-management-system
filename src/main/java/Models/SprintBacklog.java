@@ -4,11 +4,7 @@ import Utility.DataManagement;
 import View.ScrumMasterView;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
-
-import static View.DevTeamView.negativeIDPrint;
-import static View.DevTeamView.noNamePrint;
 
 public class SprintBacklog implements Serializable
 {
@@ -18,6 +14,7 @@ public class SprintBacklog implements Serializable
 	private String endDate;
 	private ArrayList<Task> allTasks;
 	private ArrayList<UserStory> userStories;
+	private int totalStoryPoints;
 
 	//Empty constructor for data exporting and importing.
 	public SprintBacklog(){
@@ -36,6 +33,18 @@ public class SprintBacklog implements Serializable
 		}
 		this.allTasks = new ArrayList<>();
 		this.userStories = new ArrayList<>();
+	}
+
+	public int calcTotalStoryPoints(){
+		this.totalStoryPoints = 0;
+
+		for (UserStory userStory:userStories) {
+			if (userStory.getStatus().equalsIgnoreCase("Done")){
+				totalStoryPoints = totalStoryPoints + userStory.getStoryPoints();
+			}
+		}
+
+		return totalStoryPoints;
 	}
 
 	//all getters & setters
@@ -67,6 +76,10 @@ public class SprintBacklog implements Serializable
 	public void setEndDate(String endDate)
 	{
 		this.endDate = endDate;
+	}
+
+	public int getTotalStoryPoints() {
+		return totalStoryPoints;
 	}
 
 	//--------------------------------
@@ -154,6 +167,7 @@ public class SprintBacklog implements Serializable
 		return "SprintBacklog Name: " + name +
 				"\nStart Date: " + startDate +
 				"\nEnd Date: " + endDate +
+				"\nImplemented story points: " + totalStoryPoints +
 				"\nUser Stories:" + userStories +
 				"\nTasks:" + allTasks;
 	}

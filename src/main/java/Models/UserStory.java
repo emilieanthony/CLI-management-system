@@ -60,6 +60,8 @@ public class UserStory implements Comparable<UserStory>, Serializable
         this.status = "open";
         this.sprintName = "";
         this.assignedDevelopers = new ArrayList<>();
+        this.userStoryTasks = new ArrayList<>();
+        this.binary = new ArrayList<>();
     }
 
     // Setters and Getters. Make sure at the end of the project that not used methods are deleted.
@@ -231,6 +233,7 @@ public class UserStory implements Comparable<UserStory>, Serializable
                         "\nContent = " + content +
                         "\nAcceptance Criteria = " + acceptanceCriteria +
                         "\nStatus = " + status +
+                        "\nTasks: " + userStoryTasks +
                         "\nAssigned Team Members:" ;
 
         if(assignedDevelopers.isEmpty())

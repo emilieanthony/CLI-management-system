@@ -14,8 +14,6 @@ import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster
 {
-
-	//private Import importFile = new Import();
 	public static String sprintName;
 
 	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll,
@@ -77,12 +75,21 @@ public class ControllerScrumMaster
 						velocity();
 						break;
 					case 16:
-						getProjectName();
+						getProjectName(controllerAll);
 						break;
-					/*case 17:
-						importFile.importProjects(controllerAll);
-						break;*/
 					case 17:
+						createTaskOfUsInSBL(controllerAll);
+						break;
+					case 18:
+						completeUStorySBLTask(controllerAll);
+						break;
+					case 19:
+						showImplementedStoryPoints(controllerAll);
+						 break;
+					case 20:
+						showAverageVelocity(controllerAll);
+						break;
+					case 21:
 						running = false;
 						break;
 					default:
@@ -753,6 +760,7 @@ public class ControllerScrumMaster
 		}else{
 			task.getAssignedDevelopers().add(developer);
 			task.setStatus("In progress");
+			controllerAll.saveData();
 			assignmentCompleted();
 		}
 
@@ -773,11 +781,13 @@ public class ControllerScrumMaster
 		UserStory userStory = findSprintBacklogByName(controllerAll).getUserStory(number);
 		userStory.getAssignedDevelopers().add(developer);
 		userStory.setInProgress();
+		controllerAll.saveData();
 
 		assignmentCompleted();
 
 	}
 	//-------------------------------------------TASK USER STORY -------------------------------//
+
 	public UserStory findUStoryByNumberSBL(int number, ControllerAll controllerAll)
 	{
 		UserStory userStory = null;
@@ -805,21 +815,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	public void createTaskOfUsInPBL(ControllerProductOwner contProOwner,ControllerAll controllerAll){
-		contProOwner.viewProBacklog(controllerAll);
-		int UsNumber = getUserStoryNumber();
-		Task task = null;
-		int id = taskUSIdGenerator(controllerAll);
-		try {
-			task = getTaskInfo(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		UserStory userStory = contProOwner.findUStoryByNumberPBL(UsNumber,controllerAll);
-		userStory.getUserStoryTasks().add(task);
-		controllerAll.saveData();
 
-	}
 	public void createTaskOfUsInSBL(ControllerAll controllerAll){
 		sprintName = getSprintBacklogByName();
 		viewSprintBacklogT(controllerAll);
@@ -833,37 +829,14 @@ public class ControllerScrumMaster
 		}
 		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
 		userStory.getUserStoryTasks().add(task);
+		checkUStoryStatus(userStory,controllerAll);
 		controllerAll.saveData();
 
 	}
-	public void completeUStoryPBLTask(ControllerAll controllerAll,
-									  ControllerProductOwner contProOwner){
 
-		int UsNumber = getUserStoryNumber();
-		UserStory userStory = contProOwner.findUStoryByNumberPBL(UsNumber,controllerAll);
-		Task task = findTaskInUserSPBL(UsNumber,controllerAll,contProOwner);
-		task.setDone();
 
-		for (Task foundTasks: userStory.getUserStoryTasks()) {
-			if (foundTasks.getStatus().equalsIgnoreCase("Done")) {
-				userStory.getBinary().add(true);
-			}else {
-				userStory.getBinary().add(false);
-			}
-			if (userStory.getBinary().contains(false)){
-
-			}else {
-				userStory.setStatus("Done");
-			}
-		}//controllerAll.saveData();
-	}
-	public void completeUStorySBLTask(ControllerAll controllerAll){
-		sprintName = getSprintBacklogByName();
-		int UsNumber = getUserStoryNumber();
-		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
-		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
-		task.setDone();
-
+	public void checkUStoryStatus(UserStory userStory, ControllerAll controllerAll){
+		userStory.getBinary().clear();
 		for (Task foundTasks: userStory.getUserStoryTasks()) {
 			if (foundTasks.getStatus().equalsIgnoreCase("Done")) {
 				userStory.getBinary().add(true);
@@ -871,29 +844,24 @@ public class ControllerScrumMaster
 				userStory.getBinary().add(false);
 			}
 			if (!(userStory.getBinary().contains(false))){
-				userStory.setStatus("Done");
+				userStory.setDone();
+			}else {
+				userStory.setOpen();
 			}
 		}controllerAll.saveData();
+	}
+
+	public void completeUStorySBLTask(ControllerAll controllerAll){
+		sprintName = getSprintBacklogByName();
+		int UsNumber = getUserStoryNumber();
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		task.setDone();
+		checkUStoryStatus(userStory,controllerAll);
+		controllerAll.saveData();
 
 	}
-	public Task findTaskInUserSPBL(int UsNumber, ControllerAll controllerAll,
-								   ControllerProductOwner contProOwner)
-	{
-		Task task = null;
-		int taskId = getTaskId();
-		UserStory userStory = contProOwner.findUStoryByNumberPBL(UsNumber,controllerAll);
-		Iterator<Task> iterator = userStory.getUserStoryTasks().iterator();
-		while (task == null && iterator.hasNext())
-		{
-			Task foundTask = iterator.next();
-			if (foundTask.getId() == taskId)
-			{
-				task = foundTask;
-				Scan.print(task.toString());
-			}
-		}
-		return task;
-	}
+
 	public Task findTaskInUserSSBL(int UsNumber, ControllerAll controllerAll)
 	{
 		Task task = null;
@@ -911,6 +879,7 @@ public class ControllerScrumMaster
 		}
 		return task;
 	}
+
 
 }
 
