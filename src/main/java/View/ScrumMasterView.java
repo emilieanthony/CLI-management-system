@@ -37,7 +37,7 @@ public class ScrumMasterView
 				"15. Calculate average velocity\n" +
 				"16. Switch project\n" +
 				"17. create a task of a user story located in sprint backlog.\n" +
-				"18. Complete us tasks\n" +
+				"18. Menu for edit tasks in User Story\n" +
 				"19. Show implemented story points in sprint backlogs.\n" +
 				"20. Show average Velocity.\n" +
 				"21. Go back to main menu\n");
@@ -394,6 +394,25 @@ public class ScrumMasterView
 
 		}
 		Scan.print("The average velocity for all sprints until now is: " + averageVelocity);
+	}
+
+	public static void invalidOption(){
+    	Scan.print("\nYou have entered an invalid option, choose between 1-5.");
+	}
+	public static void removedTaskInUserStory(){
+		Scan.print("\nYou have successfully removed the task.");
+	}
+
+	public static int menuEditTaskInUserStory() throws Exception
+	{
+		int option = Scan.readInt
+				("\n\nEdit Task Menu. \n " +
+						"Which part of the task do you want to edit, enter a number:\n\n" +
+						"1- Edit Task Priority Number.\n" +
+						"2- Edit Task Status.\n" +
+						"3- Remove Task from Sprint Backlog.\n" +
+						"4- Back to your menu.\n");
+		return option;
 	}
 }
 

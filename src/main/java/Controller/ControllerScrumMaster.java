@@ -73,7 +73,6 @@ public class ControllerScrumMaster
 						break;
 					case 15:
 						velocity();
-
 						break;
 					case 16:
 						getProjectName(controllerAll);
@@ -82,7 +81,7 @@ public class ControllerScrumMaster
 						createTaskOfUsInSBL(controllerAll);
 						break;
 					case 18:
-						completeUStorySBLTask(controllerAll);
+						editTaskInUserStoryMenu(controllerAll);
 						break;
 					case 19:
 						showImplementedStoryPoints(controllerAll);
@@ -789,6 +788,38 @@ public class ControllerScrumMaster
 	}
 	//-------------------------------------------TASK USER STORY -------------------------------//
 
+	public void editTaskInUserStoryMenu(ControllerAll controllerAll)
+	{
+
+		boolean running = true;
+		do {
+
+			int option;
+
+			try {
+				option = menuEditTaskInUserStory();
+				switch (option) {
+					case 1:
+						editUStorySBLTaskPriority(controllerAll);
+						break;
+					case 2:
+						editUStorySBLTaskStatus(controllerAll);
+						break;
+					case 3:
+						removeUserStorySBLTask(controllerAll);
+						break;
+					case 4:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e) {
+				invalidInputPrint();
+			}
+		} while (running);
+	}
+
 	public UserStory findUStoryByNumberSBL(int number, ControllerAll controllerAll)
 	{
 		UserStory userStory = null;
@@ -852,7 +883,7 @@ public class ControllerScrumMaster
 		}controllerAll.saveData();
 	}
 
-	public void completeUStorySBLTask(ControllerAll controllerAll){
+	/*public void editUStorySBLTaskStatusToDone(ControllerAll controllerAll){
 		sprintName = getSprintBacklogByName();
 		int UsNumber = getUserStoryNumber();
 		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
@@ -861,7 +892,7 @@ public class ControllerScrumMaster
 		checkUStoryStatus(userStory,controllerAll);
 		controllerAll.saveData();
 
-	}
+	}*/
 
 	public Task findTaskInUserSSBL(int UsNumber, ControllerAll controllerAll)
 	{
@@ -879,6 +910,58 @@ public class ControllerScrumMaster
 			}
 		}
 		return task;
+	}
+
+	public void editUStorySBLTaskPriority(ControllerAll controllerAll){
+
+		sprintName = getSprintBacklogByName();
+		int UsNumber = getUserStoryNumber();
+		//UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		int newPriorityNumber = newPriorityNumberTask();
+		task.setPriorityNumber(newPriorityNumber);
+		Scan.print(task.toString());
+		objectEdited();
+		//Confirmation
+	}
+
+	public void editUStorySBLTaskStatus(ControllerAll controllerAll){
+
+		sprintName = getSprintBacklogByName();
+		int UsNumber = getUserStoryNumber();
+		int option = newStatusTask();
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		if (option == 1){
+			task.setOpen();
+			Scan.print(task.toString());
+			objectEdited();
+		}else if (option ==2){
+			task.setInProgress();
+			Scan.print(task.toString());
+			objectEdited();
+		}else if (option == 3){
+			task.setDone();
+			checkUStoryStatus(userStory,controllerAll);
+			Scan.print(task.toString());
+			objectEdited();
+			controllerAll.saveData();
+		}else{
+			invalidOption();
+		}
+
+	}
+
+	public void removeUserStorySBLTask(ControllerAll controllerAll){
+
+		sprintName = getSprintBacklogByName();
+		int UsNumber = getUserStoryNumber();
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		userStory.getUserStoryTasks().remove(task);
+		Scan.print(userStory.toString());
+		removedTaskInUserStory();
+
 	}
 
 
