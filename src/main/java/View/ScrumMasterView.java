@@ -36,8 +36,11 @@ public class ScrumMasterView
 				"14. View sprint backlog\n" +
 				"15. Calculate average velocity\n" +
 				"16. Switch project\n" +
-				//"17. Import file\n" +
-				"17. Go back to main menu\n");
+				"17. create a task of a user story located in sprint backlog.\n" +
+				"18. Menu for edit tasks in User Story\n" +
+				"19. Show implemented story points in sprint backlogs.\n" +
+				"20. Show average Velocity.\n" +
+				"21. Go back to main menu\n");
 
 
 		return option;
@@ -63,18 +66,30 @@ public class ScrumMasterView
 				"project:");
 		String name = Scan.readLine("Name: ");
 		int id = Scan.readInt("ID: ");
+
+		proName = name;
+
+		String startDate = getStartDate();
+		String endDate = getEndDate();
+
+		Project project = new Project(id, name, startDate, endDate);
+		return project;
+	}
+
+	public static String getStartDate(){
 		int startYear = Scan.readInt("Start date (YYYY): ");
 		int startMonth = Scan.readInt("Start date (MM): ");
 		int startDay = Scan.readInt("Start date (DD): ");
+		String startDate = String.valueOf(startYear + "-" + startMonth + "-" + startDay);
+		return startDate;
+	}
+
+	public static String getEndDate(){
 		int endYear = Scan.readInt("End date (YYYY): ");
 		int endMonth = Scan.readInt("End date (MM): ");
 		int endDay = Scan.readInt("End date (DD): ");
-		proName = name;
-
-		LocalDate startDate = LocalDate.of(startYear, startMonth, startDay);
-		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
-		Project project = new Project(id, name, startDate, endDate);
-		return project;
+		String endDate = String.valueOf(endYear + "-" + endMonth + "-" + endDay);
+		return endDate;
 	}
 
 	public static void nullTaskPrint(){
@@ -93,17 +108,15 @@ public class ScrumMasterView
 	}
 
 	public static int specifyTask(){
-		int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+		int idTask = Scan.readInt("Write the ID of the task you want to move: ");
 
 		return idTask;
-
 	}
 
 	public static String specifySprint(){
-		proName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
+		sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
-		return proName;
-
+		return sprintName;
 	}
 
 	public static SprintBacklog createSprintInfo() throws Exception{
@@ -112,16 +125,10 @@ public class ScrumMasterView
 				"sprintBacklog:");
 		String name = Scan.readLine("Name:");
 		sprintName = name;
-		int startYear = Scan.readInt("Start date (YYYY):");
-		int startMonth = Scan.readInt("Start date (MM):");
-		int startDay = Scan.readInt("Start date (DD):");
-		int endYear = Scan.readInt("End date (YYYY):");
-		int endMonth = Scan.readInt("End date (MM):");
-		int endDay = Scan.readInt("End date (DD):");
 
+		String startDate = ScrumMasterView.getStartDate();
+		String endDate = ScrumMasterView.getEndDate();
 
-		LocalDate startDate = LocalDate.of(startYear, startMonth , startDay);
-		LocalDate endDate = LocalDate.of(endYear, endMonth, endDay);
 		SprintBacklog sprintBacklog = new SprintBacklog(name, startDate, endDate);
 		return sprintBacklog;
 	}
@@ -228,8 +235,10 @@ public class ScrumMasterView
 				"to access? Enter the name of the project or press enter to ignore: ");
 	}
 
-	public static void getProjectName()
+	public static void getProjectName(ControllerAll controllerAll)
+
 	{
+		viewProjectMenu(controllerAll);
 		proName = Scan.readLine("\nWhich project you want to access: Please enter the project " +
 				"name:\n");
 	}
@@ -361,6 +370,49 @@ public class ScrumMasterView
 	{
 		String input = Scan.readLine("Please enter the velocity for each sprint separated by a comma without spaces (e.g. 19,27,23):");
 		return input;
+	}
+
+	public static void showImplementedStoryPoints(ControllerAll controllerAll){
+		Project project = controllerAll.whichProject();
+		Scan.print("Total implemented story points till now for each Sprint backlog: ");
+
+		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs()) {
+
+			Scan.print("\nName: " + sprintBacklog.getName()+ "\nTotal story points: " +
+					sprintBacklog.calcTotalStoryPoints());
+		}
+	}
+
+	public static void showAverageVelocity(ControllerAll controllerAll){
+
+		Project project = controllerAll.whichProject();
+
+		int averageVelocity = 0;
+		int numberOfSprints = project.getAllSprintBacklogs().size();
+		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs()) {
+			averageVelocity = averageVelocity + sprintBacklog.getTotalStoryPoints()/numberOfSprints;
+
+		}
+		Scan.print("The average velocity for all sprints until now is: " + averageVelocity);
+	}
+
+	public static void invalidOption(){
+    	Scan.print("\nYou have entered an invalid option, choose between 1-5.");
+	}
+	public static void removedTaskInUserStory(){
+		Scan.print("\nYou have successfully removed the task.");
+	}
+
+	public static int menuEditTaskInUserStory() throws Exception
+	{
+		int option = Scan.readInt
+				("\n\nEdit Task Menu. \n " +
+						"Which part of the task do you want to edit, enter a number:\n\n" +
+						"1- Edit Task Priority Number.\n" +
+						"2- Edit Task Status.\n" +
+						"3- Remove Task from a user story.\n" +
+						"4- Back to your menu.\n");
+		return option;
 	}
 }
 

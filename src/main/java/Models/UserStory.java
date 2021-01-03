@@ -22,6 +22,8 @@ public class UserStory implements Comparable<UserStory>, Serializable
     private String status;
     private String sprintName;
     private ArrayList<Developer> assignedDevelopers;
+    private ArrayList<Task> userStoryTasks;
+    private ArrayList<Boolean> binary;
 
     //Empty constructor for data exporting and importing.
     public UserStory(){
@@ -58,6 +60,8 @@ public class UserStory implements Comparable<UserStory>, Serializable
         this.status = "open";
         this.sprintName = "";
         this.assignedDevelopers = new ArrayList<>();
+        this.userStoryTasks = new ArrayList<>();
+        this.binary = new ArrayList<>();
     }
 
     // Setters and Getters. Make sure at the end of the project that not used methods are deleted.
@@ -147,6 +151,26 @@ public class UserStory implements Comparable<UserStory>, Serializable
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public ArrayList<Task> getUserStoryTasks() {
+        return userStoryTasks;
+    }
+
+    public void setUserStoryTasks(ArrayList<Task> userStoryTasks) {
+        this.userStoryTasks = userStoryTasks;
+    }
+
+    public ArrayList<Boolean> getBinary() {
+        return binary;
+    }
+
+    public void setBinary(ArrayList<Boolean> binary) {
+        this.binary = binary;
+    }
+
     //public void setStatus(String status)
     /*{
         this.status = status;
@@ -209,6 +233,7 @@ public class UserStory implements Comparable<UserStory>, Serializable
                         "\nContent = " + content +
                         "\nAcceptance Criteria = " + acceptanceCriteria +
                         "\nStatus = " + status +
+                        "\nTasks: " + userStoryTasks +
                         "\nAssigned Team Members:" ;
 
         if(assignedDevelopers.isEmpty())

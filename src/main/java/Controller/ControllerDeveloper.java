@@ -1,10 +1,7 @@
 package Controller;
 
-import Models.Developer;
-import Models.SprintBacklog;
-import Models.Task;
+import Models.*;
 import Utility.Scan;
-import Models.Project;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,7 +28,7 @@ public class ControllerDeveloper {
 
                 switch (option) {
                     case 1:
-                        viewMyTasks(controllerAll);
+                        viewMyTasks(controllerAll,scrumMaster);
                         break;
                     case 2:
                         viewAllAssignedTasks(controllerAll,scrumMaster);
@@ -53,7 +50,7 @@ public class ControllerDeveloper {
                         viewAllTasks(controllerAll, scrumMaster);//View all tasks
                         break;
                     case 8:
-                        getProjectName();// Switch project.
+                        getProjectName(controllerAll);// Switch project.
                         break;
                     case 9:
                         running = false;
@@ -90,16 +87,15 @@ public class ControllerDeveloper {
         } while (running);
     }
 
-    public void viewMyTasks(ControllerAll controllerAll) {
-        Task task = findTaskByDeveloper(controllerAll);
+    public void viewMyTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
+        Task task = findTaskByDeveloper(controllerAll,contScrum);
         Scan.print(task.toString());
     }
 
-    public Task findTaskByDeveloper(ControllerAll controllerAll) {
+    public Task findTaskByDeveloper(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
         Task task = null;
         Developer developer = controllerAll.findDeveloperByID();
-        Project project = controllerAll.whichProject();
-        Iterator<Task> iterator = project.AllTasksInSprintBacklog().iterator();
+        Iterator<Task> iterator = contScrum.collectAllTasks(controllerAll).iterator();
         while (task == null && iterator.hasNext()) {
             Task foundTask = iterator.next();
             if (foundTask.getAssignedDevelopers().contains(developer)) {
@@ -111,9 +107,8 @@ public class ControllerDeveloper {
 
     public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-        sprintName = getSprintBacklogByName();
-        SprintBacklog sprintBacklog = contScrum.findSprintBacklogByName(controllerAll);
-        for (Task task : sprintBacklog.getAllTasks()) {
+        ArrayList<Task> allTasks = contScrum.collectAllTasks(controllerAll);
+        for (Task task:allTasks) {
             if (task == null) {
                 noAssignedTasks();
             }else if(task.getStatus().equalsIgnoreCase("In progress")) {
@@ -123,7 +118,6 @@ public class ControllerDeveloper {
     }
 
     public void viewAllTasks(ControllerAll controllerAll, ControllerScrumMaster scrumMaster){
-        //Project project = controllerAll.whichProject();
         ArrayList<Task> allTasks = scrumMaster.collectAllTasks(controllerAll);
         printAllTasks(allTasks);
     }

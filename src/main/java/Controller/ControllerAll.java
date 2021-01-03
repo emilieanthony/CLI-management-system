@@ -83,7 +83,7 @@ public class ControllerAll
                         viewProjects();
                         break;
                     case 5:
-                        getProjectName();
+                        getProjectName(controllerAll);
                         break;
                     case 6:
                         saveData();

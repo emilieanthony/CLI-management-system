@@ -3,20 +3,17 @@ package Controller;
 import Models.*;
 import Utility.Scan;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
-import static View.DevTeamView.getTaskId;
 
-import static View.DevTeamView.invalidInputPrint;
-import static View.DevTeamView.viewSprints;
+import static View.DevTeamView.*;
+import static View.DevTeamView.getUserStoryNumber;
 import static View.ScrumMasterView.*;
 
-public class ControllerScrumMaster {
-
-	//private Import importFile = new Import();
+public class ControllerScrumMaster
+{
 	public static String sprintName;
 
 	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll,
@@ -77,12 +74,21 @@ public class ControllerScrumMaster {
 						velocity();
 						break;
 					case 16:
-						getProjectName();
+						getProjectName(controllerAll);
 						break;
-					/*case 17:
-						importFile.importProjects(controllerAll);
-						break;*/
 					case 17:
+						createTaskOfUsInSBL(controllerAll);
+						break;
+					case 18:
+						editTaskInUserStoryMenu(controllerAll);
+						break;
+					case 19:
+						showImplementedStoryPoints(controllerAll);
+						 break;
+					case 20:
+						showAverageVelocity(controllerAll);
+						break;
+					case 21:
 						running = false;
 						break;
 					default:
@@ -150,7 +156,7 @@ public class ControllerScrumMaster {
 			projectNotFound();
 		} else {
 
-			int id = taskUSIdGenerator(project, controllerAll);
+			int id = taskUSIdGenerator(controllerAll);
 
 			try {
 				Task newTask = getTaskInfo(id);
@@ -171,7 +177,7 @@ public class ControllerScrumMaster {
 			projectNotFound();
 		} else {
 
-			int id = taskUSIdGenerator(project, controllerAll);
+			int id = taskUSIdGenerator(controllerAll);
 
 			try {
 				Task newTask = getTaskInfo(id);
@@ -185,8 +191,10 @@ public class ControllerScrumMaster {
 		}
 	}
 
-	public int taskUSIdGenerator(Project project, ControllerAll controllerAll) {
+	public int taskUSIdGenerator(ControllerAll controllerAll)
+	{
 		// initialize int variable for ID
+		Project project = controllerAll.whichProject();
 		int id = project.getId() * 1000 + 1;
 
 		ArrayList<Task> tasks = collectAllTasks(controllerAll);
@@ -234,6 +242,17 @@ public class ControllerScrumMaster {
 			ArrayList<Task> sprintTasks = sprintBL.getAllTasks();
 			for (Task task : sprintTasks) {
 				allTasks.add(task);
+			}
+		}
+		//fetch tasks from user stories in sprint BL
+		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs())
+		{
+			for (UserStory userStory: sprintBacklog.getUserStories()) {
+				ArrayList<Task> UserStoryTasks = userStory.getUserStoryTasks();
+				for (Task task : UserStoryTasks)
+				{
+					allTasks.add(task);
+				}
 			}
 		}
 
@@ -705,6 +724,7 @@ public class ControllerScrumMaster {
 		}else{
 			task.getAssignedDevelopers().add(developer);
 			task.setStatus("In progress");
+			controllerAll.saveData();
 			assignmentCompleted();
 		}
 
@@ -725,11 +745,185 @@ public class ControllerScrumMaster {
 		UserStory userStory = findSprintBacklogByName(controllerAll).getUserStory(number);
 		userStory.getAssignedDevelopers().add(developer);
 		userStory.setInProgress();
+		controllerAll.saveData();
 
 		assignmentCompleted();
 
 	}
+	//-------------------------------------------TASK USER STORY -------------------------------//
+
+	public void editTaskInUserStoryMenu(ControllerAll controllerAll)
+	{
+
+		boolean running = true;
+		do {
+
+			int option;
+
+			try {
+				option = menuEditTaskInUserStory();
+				switch (option) {
+					case 1:
+						editUStorySBLTaskPriority(controllerAll);
+						controllerAll.saveData();
+						break;
+					case 2:
+						editUStorySBLTaskStatus(controllerAll);
+						controllerAll.saveData();
+						break;
+					case 3:
+						removeUserStorySBLTask(controllerAll);
+						controllerAll.saveData();
+						break;
+					case 4:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e) {
+				invalidInputPrint();
+			}
+		} while (running);
+	}
+
+	public UserStory findUStoryByNumberSBL(int number, ControllerAll controllerAll)
+	{
+		UserStory userStory = null;
+		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
+		Iterator<UserStory> iterator = sprintBacklog.getUserStories().iterator();
+		while (userStory == null && iterator.hasNext())
+		{
+			UserStory foundUserStory = iterator.next();
+			if (foundUserStory.getNumber() == number)
+			{
+				userStory = foundUserStory;
+				Scan.print(userStory.toString());
+			}
+		}
+		return userStory;
+	}
+	private void viewSprintBacklogT(ControllerAll controllerAll) {
+		Project project = controllerAll.whichProject();
+		if (project == null) {
+			projectNotFound();
+		} else {
+
+			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
+			Scan.print(sprint.toString());
+		}
+	}
+
+
+	public void createTaskOfUsInSBL(ControllerAll controllerAll){
+		sprintName = getSprintBacklogByName();
+		viewSprintBacklogT(controllerAll);
+		int UsNumber = getUserStoryNumber();
+		int id = taskUSIdGenerator(controllerAll);
+		Task task = null;
+		try {
+			task = getTaskInfo(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		userStory.getUserStoryTasks().add(task);
+		checkUStoryStatus(userStory,controllerAll);
+		controllerAll.saveData();
+
+	}
+
+
+	public void checkUStoryStatus(UserStory userStory, ControllerAll controllerAll){
+		userStory.getBinary().clear();
+		for (Task foundTasks: userStory.getUserStoryTasks()) {
+			if (foundTasks.getStatus().equalsIgnoreCase("Done")) {
+				userStory.getBinary().add(true);
+			}else {
+				userStory.getBinary().add(false);
+			}
+			if (!(userStory.getBinary().contains(false))){
+				userStory.setDone();
+			}else {
+				userStory.setOpen();
+			}
+		}controllerAll.saveData();
+	}
+
+
+	public Task findTaskInUserSSBL(int UsNumber, ControllerAll controllerAll)
+	{
+		Task task = null;
+		int taskId = getTaskId();
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Iterator<Task> iterator = userStory.getUserStoryTasks().iterator();
+		while (task == null && iterator.hasNext())
+		{
+			Task foundTask = iterator.next();
+			if (foundTask.getId() == taskId)
+			{
+				task = foundTask;
+				Scan.print(task.toString());
+			}
+		}
+		return task;
+	}
+
+	public void editUStorySBLTaskPriority(ControllerAll controllerAll){
+
+		sprintName = getSprintBacklogByName();
+		int UsNumber = getUserStoryNumber();
+		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		int newPriorityNumber = newPriorityNumberTask();
+		task.setPriorityNumber(newPriorityNumber);
+		Scan.print(task.toString());
+		objectEdited();
+	}
+
+	public void editUStorySBLTaskStatus(ControllerAll controllerAll){
+
+		sprintName = getSprintBacklogByName();
+		int UsNumber = getUserStoryNumber();
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		int option = newStatusTask();
+		if (option == 1){
+			task.setOpen();
+			Scan.print(task.toString());
+			objectEdited();
+		}else if (option ==2){
+			task.setInProgress();
+			Scan.print(task.toString());
+			objectEdited();
+		}else if (option == 3){
+			task.setDone();
+			checkUStoryStatus(userStory,controllerAll);
+			Scan.print(task.toString());
+			objectEdited();
+			controllerAll.saveData();
+		}else{
+			invalidOption();
+		}
+
+	}
+
+	public void removeUserStorySBLTask(ControllerAll controllerAll){
+
+		sprintName = getSprintBacklogByName();
+		int UsNumber = getUserStoryNumber();
+		UserStory userStory = findUStoryByNumberSBL(UsNumber,controllerAll);
+		Task task = findTaskInUserSSBL(UsNumber,controllerAll);
+		userStory.getUserStoryTasks().remove(task);
+		Scan.print(userStory.toString());
+		removedTaskInUserStory();
+
+	}
+
+
 }
+
+
+
 
 
 

@@ -2,8 +2,8 @@ package Controller;
 
 import Models.*;
 import Utility.Scan;
+import View.ScrumMasterView;
 
-import java.time.LocalDate;
 import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
@@ -17,7 +17,7 @@ public class ControllerProductOwner
 
     //methods
     //*-----------------------------------Code to reuse--------------------------------------------*//
-    public UserStory findUStoryByNumber(int number, ControllerAll controllerAll)
+    public UserStory findUStoryByNumberPBL(int number, ControllerAll controllerAll)
     {
         UserStory userStory = null;
         Project project = controllerAll.whichProject();
@@ -56,7 +56,7 @@ public class ControllerProductOwner
                         editBacklog(controllerAll, controllerScrumMaster);
                         break;
                     case 4:
-                        getProjectName();
+                        getProjectName(controllerAll);
                         break;
                     case 5:
                         running = false; //go back to main menu
@@ -131,7 +131,7 @@ public class ControllerProductOwner
    public void addUserStory(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster)
     {
         Project project = controllerAll.whichProject();
-        int number = controllerScrumMaster.taskUSIdGenerator(project,controllerAll);
+        int number = controllerScrumMaster.taskUSIdGenerator(controllerAll);
         try {
             UserStory newUserStory = getUSInfo(number);
             project.getProductBacklog().getAllUserStories().add(newUserStory);
@@ -147,7 +147,7 @@ public class ControllerProductOwner
     {
         Project project = controllerAll.whichProject();
         int number = getUSNumber();
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         project.getProductBacklog().getAllUserStories().remove(userStory);
         controllerAll.saveData();
         printRemoved();
@@ -169,6 +169,7 @@ public class ControllerProductOwner
         String nameBacklog = getProBacklogName();
         Project project = controllerAll.whichProject();
         project.getProductBacklog().setName(nameBacklog);
+        controllerAll.saveData();
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());
 
@@ -177,16 +178,18 @@ public class ControllerProductOwner
     {
 
         Project project = controllerAll.whichProject();
-        LocalDate startDate = getBacklogSDate();
+        String startDate = ScrumMasterView.getStartDate();
         project.getProductBacklog().setStartDate(startDate);
+        controllerAll.saveData();
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());
     }
     public void editBacklogEDate(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
-        LocalDate endDate = getBacklogEDate();
+        String endDate = getBacklogEDate();
         project.getProductBacklog().setEndDate(endDate);
+        controllerAll.saveData();
         proBacklogEditConf();
         Scan.print(project.getProductBacklog().toString());
     }
@@ -242,8 +245,9 @@ public class ControllerProductOwner
     {
 
         int newUSNumber = getNewUSNumber();
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setNumber(newUSNumber);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
 
@@ -253,8 +257,9 @@ public class ControllerProductOwner
     {
 
         String newUSName = getNewUSName();
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setName(newUSName);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
 
@@ -263,8 +268,9 @@ public class ControllerProductOwner
     public void editUSSprint(int number,ControllerAll controllerAll)
     {
         String newUSSprint = getNewUSSprint();
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setSprint(newUSSprint);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
 
@@ -273,8 +279,9 @@ public class ControllerProductOwner
     public void editUSPriority(int number,ControllerAll controllerAll)
     {
         int newUSPriority = getNewUSPriority();
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setPriorityNumber(newUSPriority);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
     }
@@ -282,8 +289,9 @@ public class ControllerProductOwner
     public void editUSStoryPoints(int number,ControllerAll controllerAll)
     {
         int newUSSPoints = getNewUSStoryPoints();
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setStoryPoints(newUSSPoints);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
     }
@@ -291,8 +299,9 @@ public class ControllerProductOwner
     public void editUSContent(int number, ControllerAll controllerAll)
     {
         String newUSContent = getNewUSContent();
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setContent(newUSContent);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
     }
@@ -300,8 +309,9 @@ public class ControllerProductOwner
     public void editUSAcceptanceC(int number,ControllerAll controllerAll)
     {
         String newUSAcceptanceC = getNewUSAcceptanceC();
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
+        controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
 
@@ -311,17 +321,20 @@ public class ControllerProductOwner
     {
         int newUSStatus = getNewUSStatus();
 
-        UserStory userStory = findUStoryByNumber(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
         if (newUSStatus == 1){
             userStory.setOpen();
+            controllerAll.saveData();
             userStoryEditConf();
         }
         else if (newUSStatus == 2){
             userStory.setInProgress();
+            controllerAll.saveData();
             userStoryEditConf();
         }
         else if (newUSStatus == 3){
             userStory.setDone();
+            controllerAll.saveData();
             userStoryEditConf();
         } else {
             changeStatusMessage();
