@@ -266,6 +266,17 @@ public class ControllerScrumMaster
 				allTasks.add(task);
 			}
 		}
+		//fetch tasks from user stories in sprint BL
+		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs())
+		{
+			for (UserStory userStory: sprintBacklog.getUserStories()) {
+				ArrayList<Task> UserStoryTasks = userStory.getUserStoryTasks();
+				for (Task task : UserStoryTasks)
+				{
+					allTasks.add(task);
+				}
+			}
+		}
 
 		return allTasks;
 	}

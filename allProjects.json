@@ -37,15 +37,6 @@
         "description" : "2",
         "assignedDevelopers" : [ ]
       }, {
-        "id" : 1003,
-        "priorityNumber" : 3,
-        "estimatedHours" : 4,
-        "actualHours" : 0,
-        "status" : "Done",
-        "name" : "task 2 ",
-        "description" : "5",
-        "assignedDevelopers" : [ ]
-      }, {
         "id" : 1005,
         "priorityNumber" : 3,
         "estimatedHours" : 3,
