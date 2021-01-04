@@ -13,11 +13,10 @@ import static Controller.ControllerScrumMaster.sprintName;
 
 public class ScrumMasterView
 {
+	public static String proName;
 
-    public static String proName;
-
-    public static int menuScrumMaster() throws NumberFormatException{
-
+	public static int menuScrumMaster() throws NumberFormatException
+	{
 		int option = Scan.readInt("\n\nWelcome Scrum Master!\n" +
 				"You're working on Project " + proName + "." + "\n\n" +
 				"Please enter an option below\n\n" +
@@ -45,26 +44,28 @@ public class ScrumMasterView
 				"22. Show average Velocity.\n" +
 				"23. Go back to main menu\n");
 
-
 		return option;
 	}
 
+	//----------------------------------------------------------Edit task menu---------------------------------------------
 
-    //----------------------------------------------------------Edit task menu---------------------------------------------
-    public static int menuEditTask() throws Exception
-    {
-        int option = Scan.readInt
-                ("\n\nEdit Task Menu. \n " +
-                        "Which part of the task do you want to edit, enter a number:\n\n" +
-                        "1- Edit Task Priority Number.\n" +
-                        "2- Edit Task Status.\n" +
-                        "3- Remove Task from Sprint Backlog.\n" +
-                        "4- Remove Task from Product Backlog.\n" +
-                        "5- Back to your menu.\n");
-        return option;
-    }
+	public static int menuEditTask() throws Exception
+	{
+		int option = Scan.readInt
+				("\n\nEdit Task Menu. \n " +
+						"Which part of the task do you want to edit, enter a number:\n\n" +
+						"1- Edit Task Priority Number.\n" +
+						"2- Edit Task Status.\n" +
+						"3- Remove Task from Sprint Backlog.\n" +
+						"4- Remove Task from Product Backlog.\n" +
+						"5- Back to your menu.\n");
+		return option;
+	}
 
-    public static Project projectInput()throws Exception{
+	//-----------------------------------------------------------------------------------------------------------
+
+	public static Project projectInput() throws Exception
+	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"project:");
 		String name = Scan.readLine("Name: ");
@@ -75,7 +76,8 @@ public class ScrumMasterView
 		String startDate = getStartDate();
 		String endDate = getEndDate();
 
-		while (!DataManagement.stringToLocalDate(endDate).isAfter(DataManagement.stringToLocalDate(startDate))){
+		while (!DataManagement.stringToLocalDate(endDate).isAfter(DataManagement.stringToLocalDate(startDate)))
+		{
 			Scan.print("The start date you entered is after the end date you entered. Try again: ");
 			startDate = getStartDate();
 			endDate = getEndDate();
@@ -86,7 +88,8 @@ public class ScrumMasterView
 		return project;
 	}
 
-	public static String getStartDate(){
+	public static String getStartDate()
+	{
 		int startYear = Scan.readInt("Start date (YYYY): ");
 		int startMonth = Scan.readInt("Start date (MM): ");
 		int startDay = Scan.readInt("Start date (DD): ");
@@ -94,7 +97,8 @@ public class ScrumMasterView
 		return startDate;
 	}
 
-	public static String getEndDate(){
+	public static String getEndDate()
+	{
 		int endYear = Scan.readInt("End date (YYYY): ");
 		int endMonth = Scan.readInt("End date (MM): ");
 		int endDay = Scan.readInt("End date (DD): ");
@@ -102,34 +106,40 @@ public class ScrumMasterView
 		return endDate;
 	}
 
-	public static void nullTaskPrint(){
-    	Scan.print("This task does not exist, please try again.");
+	public static void nullTaskPrint()
+	{
+		Scan.print("This task does not exist, please try again.");
 		menuScrumMaster();
 	}
 
-	public static void invalidTaskPrint(){
-    	Scan.print("The ID of the task was not found. Please try again");
-    	menuScrumMaster();
+	public static void invalidTaskPrint()
+	{
+		Scan.print("The ID of the task was not found. Please try again");
+		menuScrumMaster();
 	}
 
-	public static void invalidSprintBacklog(){
+	public static void invalidSprintBacklog()
+	{
 		Scan.print("The name of the sprint was not found. Please try again");
 		menuScrumMaster();
 	}
 
-	public static int specifyTask(){
+	public static int specifyTask()
+	{
 		int idTask = Scan.readInt("Write the ID of the task you want to move: ");
 
 		return idTask;
 	}
 
-	public static String specifySprint(){
+	public static String specifySprint()
+	{
 		sprintName = Scan.readLine("Write the name of the sprint you want to move your task to: ");
 
 		return sprintName;
 	}
 
-	public static SprintBacklog createSprintInfo() throws Exception{
+	public static SprintBacklog createSprintInfo() throws Exception
+	{
 
 		Scan.print("\nEnter the sprintName, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"sprintBacklog:");
@@ -143,56 +153,63 @@ public class ScrumMasterView
 		return sprintBacklog;
 	}
 
-	public static void successfulSprintLog(SprintBacklog sprintBacklog){
+	public static void successfulSprintLog(SprintBacklog sprintBacklog)
+	{
 		Scan.print("You have successfully created the following sprintBacklog:\n\n"
 				+ sprintBacklog.toString());
 	}
 
-	public static void invalidNumberPrint(){
-    	Scan.print("Priority number must be between 1-5. Please try again.");
-    	menuScrumMaster();
+	public static void invalidNumberPrint()
+	{
+		Scan.print("Priority number must be between 1-5. Please try again.");
+		menuScrumMaster();
 	}
 
-	public static void noSprintPrint(){
-    	Scan.print("No sprint exists with that name, please try again.");
+	public static void noSprintPrint()
+	{
+		Scan.print("No sprint exists with that name, please try again.");
 	}
 
-	public static void createProjectPrint(Project project){
+	public static void createProjectPrint(Project project)
+	{
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
 	}
 
-    public static void numberFormatMessage() {
-        Scan.print("There was a problem entering input data.");
-    }
+	public static void numberFormatMessage()
+	{
+		Scan.print("There was a problem entering input data.");
+	}
 
-    public static void registerProjectFail() {
-        Scan.print("There was a problem trying to register a new project, please try again.");
-    }
+	public static void registerTaskFail()
+	{
+		Scan.print("There was a problem trying to register a new task, please try again.");
+	}
 
-    public static void registerTaskFail() {
-        Scan.print("There was a problem trying to register a new task, please try again.");
-    }
+	public static void registerProOwnerFail()
+	{
+		Scan.print("There was a problem trying to register a new product owner, please try again.");
+	}
 
-    public static void registerProOwnerFail(){
-        Scan.print("There was a problem trying to register a new product owner, please try again.");
-    }
+	public static void registerDeveloperFail()
+	{
+		Scan.print("There was a problem registering a new developer, please try again.");
+	}
 
-    public static void registerDeveloperFail() {
-        Scan.print("There was a problem registering a new developer, please try again.");
-    }
+	public static void backlogFail()
+	{
+		Scan.print("There was a problem trying to register a backlog, please try again.");
+	}
 
-    public static void backlogFail(){
-        Scan.print("There was a problem trying to register a backlog, please try again.");
-    }
-
-    public static int newPriorityNumberTask (){
-        int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
+	public static int newPriorityNumberTask()
+	{
+		int newPriorityNumberTask = Scan.readInt("\nEnter the new priority number between 1 - 5:\n");
 
 		return newPriorityNumberTask;
 	}
 
-	public static void wrongDatePrint(){
-    	Scan.print("Error. You entered a start date that is after the end date.\n");
+	public static void wrongDatePrint()
+	{
+		Scan.print("Error. You entered a start date that is after the end date.\n");
 	}
 
 	public static int newStatusTask()
@@ -206,31 +223,20 @@ public class ScrumMasterView
 
 	}
 
-
 	//-------------------------------------------------------------------------------------------------------------------
 
-	public static String getFileName()
+	public static Task getTaskInfo(int id) throws Exception
 	{
-
-		String fileName = Scan.readLine("Please enter the file path: ex " +
-				"\"C:\\\\User\\\\user\\\\OneDrive\\\\desktop\\\\file name.txt\". \"remember the " +
-				"double \\\\\"");
-		return fileName;
-	}
-
-    public static Task getTaskInfo(int id) throws Exception {
-       // int id = Scan.readInt("Please enter task id:");
-        String name = Scan.readLine("Please enter name of task:");
-        int priorityNumber = Scan.readInt("Please enter priority number 1-5:");
-        int estimatedHours = Scan.readInt("Please enter estimated hours:");
-        String description = Scan.readLine("Please enter a description of the task:");
+		String name = Scan.readLine("Please enter name of task:");
+		int priorityNumber = Scan.readInt("Please enter priority number 1-5:");
+		int estimatedHours = Scan.readInt("Please enter estimated hours:");
+		String description = Scan.readLine("Please enter a description of the task:");
 
 		return new Task(id, priorityNumber, estimatedHours, name, description);
 	}
 
 	public static void viewProjectMenu(ControllerAll contAll)
 	{
-
 		int order = 1;
 		Scan.print("\n\nWelcome to Codelicode: \n\nProject List:\n");
 		for (Project project : contAll.getAllProjects())
@@ -292,7 +298,7 @@ public class ScrumMasterView
 		return sprintName;
 	}
 
-	public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks)
+	/*public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks)
 	{
 		if (allUserStories.isEmpty() && allTasks.isEmpty())
 		{ //what happens if one of them is not
@@ -307,7 +313,7 @@ public class ScrumMasterView
 		{
 			Scan.print(task.toString());
 		}
-	}
+	}*/
 
 	public static void assignmentCompleted()
 	{
@@ -352,12 +358,14 @@ public class ScrumMasterView
 		return idTask;
 	}
 
-	public static int IdTaskEdit(){
-    	int idTaskEdit = Scan.readInt("Write the ID of the task you want to edit: ");
-    	return idTaskEdit;
+	public static int IdTaskEdit()
+	{
+		int idTaskEdit = Scan.readInt("Write the ID of the task you want to edit: ");
+		return idTaskEdit;
 	}
 
-	public static int IdTaskRemove(){
+	public static int IdTaskRemove()
+	{
 		int idTaskRemove = Scan.readInt("Write the ID of the task you want to remove: ");
 		return idTaskRemove;
 	}
@@ -374,9 +382,10 @@ public class ScrumMasterView
 		return usNumber;
 	}
 
-	public static String sprintNameToMovePrintUS(){
-    	 String sprintNameInput = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
-    	 return sprintNameInput;
+	public static String sprintNameToMovePrintUS()
+	{
+		String sprintNameInput = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
+		return sprintNameInput;
 	}
 
 	public static String sprintNameToMove()
@@ -393,46 +402,55 @@ public class ScrumMasterView
 
 	public static String getVelocity()
 	{
-		String input = Scan.readLine("Please enter the velocity for each sprint separated by a comma without spaces (e.g. 19,27,23):");
+		String input = Scan.readLine("Please enter the velocity for each sprint separated by " +
+				"a comma without spaces (e.g. 19,27,23):");
 		return input;
 	}
 
-	public static void printVelocity(int averageVelocity){
-    	Scan.print("The average velocity is: " + averageVelocity);
+	public static void printVelocity(int averageVelocity)
+	{
+		Scan.print("The average velocity is: " + averageVelocity);
 	}
 
-	public static void showImplementedStoryPoints(ControllerAll controllerAll){
+	public static void showImplementedStoryPoints(ControllerAll controllerAll)
+	{
 		Project project = controllerAll.whichProject();
 		Scan.print("Total implemented story points till now for each Sprint backlog: ");
 
-		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs()) {
+		for (SprintBacklog sprintBacklog : project.getAllSprintBacklogs())
+		{
 
-			Scan.print("\nName: " + sprintBacklog.getName()+ "\nTotal story points: " +
+			Scan.print("\nName: " + sprintBacklog.getName() + "\nTotal story points: " +
 					sprintBacklog.calcTotalStoryPoints());
 		}
 	}
 
-	public static void showAverageVelocity(ControllerAll controllerAll){
-
+	public static void showAverageVelocity(ControllerAll controllerAll)
+	{
 		Project project = controllerAll.whichProject();
 
 		int averageVelocity = 0;
 		int numberOfSprints = project.getAllSprintBacklogs().size();
-		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs()) {
-			averageVelocity = averageVelocity + sprintBacklog.getTotalStoryPoints()/numberOfSprints;
+
+		for (SprintBacklog sprintBacklog : project.getAllSprintBacklogs())
+		{
+			averageVelocity = averageVelocity + sprintBacklog.getTotalStoryPoints() / numberOfSprints;
 
 		}
 		Scan.print("The average velocity for all sprints until now is: " + averageVelocity);
 	}
 
-	public static void invalidOption(){
-    	Scan.print("\nYou have entered an invalid option, choose between 1-5.");
+	public static void invalidOption()
+	{
+		Scan.print("\nYou have entered an invalid option, choose between 1-5.");
 	}
-	public static void removedTaskInUserStory(){
+
+	public static void removedTaskInUserStory()
+	{
 		Scan.print("\nYou have successfully removed the task.");
 	}
 
-	public static int menuEditTaskInUserStory() throws Exception
+	public static int menuEditTaskInUserStory() throws IllegalArgumentException
 	{
 		int option = Scan.readInt
 				("\n\nEdit Task Menu. \n " +
@@ -444,27 +462,41 @@ public class ScrumMasterView
 		return option;
 	}
 
-	public static void printCompleteTasks(ArrayList<Task> completedTasks){
-
-    	if (completedTasks.isEmpty()){
-    		Scan.print("There are no completed tasks yet");
-		}else{
-    	Scan.print("Completed tasks");
-    	for (Task task : completedTasks){
-    		Scan.print(task.toString());
+	public static void printCompleteTasks(ArrayList<Task> completedTasks)
+	{
+		if (completedTasks.isEmpty())
+		{
+			Scan.print("There are no completed tasks yet");
 		}
-    	}
+		else
+		{
+			Scan.print("Completed tasks");
+			for (Task task : completedTasks)
+			{
+				Scan.print(task.toString());
+			}
+		}
 	}
 
-	public static void printCompleteUStories(ArrayList<UserStory> completedStories){
-		if (completedStories.isEmpty()){
+	public static void printCompleteUStories(ArrayList<UserStory> completedStories)
+	{
+		if (completedStories.isEmpty())
+		{
 			Scan.print("There are no completed user stories yet");
-		}else{
+		}
+		else
+		{
 			Scan.print("Completed user stories");
-			for (UserStory userStory : completedStories){
+			for (UserStory userStory : completedStories)
+			{
 				Scan.print(userStory.toString());
 			}
 		}
+	}
+
+	public static void objectCreated()
+	{
+		Scan.print("Object successfully created");
 	}
 }
 
