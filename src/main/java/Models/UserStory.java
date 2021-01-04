@@ -46,7 +46,6 @@ public class UserStory implements Comparable<UserStory> {
         this.content = content;
         this.acceptanceCriteria = acceptanceCriteria;
         this.status = "Open";
-        //this.sprintName = "";
         this.assignedDevelopers = new ArrayList<>();
         this.userStoryTasks = new ArrayList<>();
         this.binary = new ArrayList<>();
