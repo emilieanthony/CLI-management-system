@@ -256,9 +256,7 @@ public class ControllerScrumMaster
 	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll) {
 		contProOwner.viewProBacklog(controllerAll);
 
-		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
-				"Do you want to move a USER STORY from product backlog to sprint backlog, type: " +
-				"2\n"); // Move to view class.
+		String input = moveObjectToBacklogPrint();
 
 		Project project = controllerAll.whichProject();
 
@@ -351,9 +349,9 @@ public class ControllerScrumMaster
 			projectNotFound();
 		} else {
 			ArrayList<Task> tasks = controllerAll.collectAllTasks();
-			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
+			int idTaskEdit = IdTaskEdit();
 			for (Task task : tasks) {
-				if (task.getId() == idTask) {
+				if (task.getId() == idTaskEdit) {
 					int newPriorityNumberTask = newPriorityNumberTask();
 					if ((newPriorityNumberTask >= PRIORITY_LOWEST) && (newPriorityNumberTask <= PRIORITY_HIGHEST)) {
 						task.setPriorityNumber(newPriorityNumberTask);
@@ -380,10 +378,10 @@ public class ControllerScrumMaster
 			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 
 
-			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
+			int idTaskEdit = IdTaskEdit();
 
 			for (Task task : tasks) {
-				if (task.getId() == idTask) {
+				if (task.getId() == idTaskEdit) {
 					int newStatusTask = newStatusTask();
 
 					if (newStatusTask == 1) {
@@ -417,14 +415,14 @@ public class ControllerScrumMaster
 			projectNotFound();
 		} else {
 
-			int idTask = Scan.readInt("Write the ID of the task you want to remove: ");
+			int idTaskRemove = IdTaskRemove();
 
 			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 
 			for (Task task : tasks) {
-				if (task.getId() == idTask) {
+				if (task.getId() == idTaskRemove) {
 
-					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
+					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTaskRemove));
 					controllerAll.saveData();
 					removeObject();
 				} else {
@@ -665,12 +663,11 @@ public class ControllerScrumMaster
 		return (sum / numbers.length);
 	}
 
-	public void velocity()
-	{   //Call this one in menu
+	public void velocity() {
 		String input = getVelocity();
 		int[] numbers = arrayOfVelocity(input);
 		int averageVelocity = getAverageVelocity(numbers);
-		Scan.print("The average velocity is: " + averageVelocity);
+		printVelocity(averageVelocity);
 	}
 
 	/*------------------------------------Methods for Assigning object-------------------------------------------*/

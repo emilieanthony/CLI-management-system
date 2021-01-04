@@ -347,8 +347,18 @@ public class ScrumMasterView
 
 	public static int IdTaskToMovePrint()
 	{
-		int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+		int idTask = Scan.readInt("Write the ID of the task you want to move: ");
 		return idTask;
+	}
+
+	public static int IdTaskEdit(){
+    	int idTaskEdit = Scan.readInt("Write the ID of the task you want to edit: ");
+    	return idTaskEdit;
+	}
+
+	public static int IdTaskRemove(){
+		int idTaskRemove = Scan.readInt("Write the ID of the task you want to remove: ");
+		return idTaskRemove;
 	}
 
 	public static String sprintNameToMovePrint()
@@ -379,6 +389,10 @@ public class ScrumMasterView
 	{
 		String input = Scan.readLine("Please enter the velocity for each sprint separated by a comma without spaces (e.g. 19,27,23):");
 		return input;
+	}
+
+	public static void printVelocity(int averageVelocity){
+    	Scan.print("The average velocity is: " + averageVelocity);
 	}
 
 	public static void showImplementedStoryPoints(ControllerAll controllerAll){
