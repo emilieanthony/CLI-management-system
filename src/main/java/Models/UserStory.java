@@ -9,7 +9,6 @@ public class UserStory implements Comparable<UserStory> {
     // Attributes:-
     private String name;
     private int number;
-    private String sprint;
     private int priorityNumber;
     private int storyPoints;
     private String content;
@@ -20,7 +19,7 @@ public class UserStory implements Comparable<UserStory> {
     private ArrayList<Boolean> binary;
 
     // Constructors:-
-    public UserStory(String name, int number, String sprint, int priority,
+    public UserStory(String name, int number, int priority,
                      String content, String acceptanceCriteria) throws Exception {
 
         if (name.isEmpty()) {
@@ -41,7 +40,7 @@ public class UserStory implements Comparable<UserStory> {
             this.priorityNumber = priority;
         }
 
-        this.sprint = sprint;
+
         this.storyPoints = 0;
         this.content = content;
         this.acceptanceCriteria = acceptanceCriteria;
@@ -66,9 +65,7 @@ public class UserStory implements Comparable<UserStory> {
         return number;
     }
 
-    public String getSprint() {
-        return sprint;
-    }
+
 
     public int getStoryPoints() {
         return storyPoints;
@@ -99,9 +96,7 @@ public class UserStory implements Comparable<UserStory> {
         this.number = number;
     }
 
-    public void setSprint(String sprint) {
-        this.sprint = sprint;
-    }
+
 
     public void setPriorityNumber(int priorityNumber) {
         /*do
@@ -136,6 +131,10 @@ public class UserStory implements Comparable<UserStory> {
         status = "Complete";
     }
 
+    public void setAssigned() {
+        status = "Assigned";
+    }
+
     //-----------------------------------------Methods------------------------------------------------------------------
 
     public int compareTo(UserStory userStory) {
@@ -163,7 +162,6 @@ public class UserStory implements Comparable<UserStory> {
                 "\nUser Story: " +
                         "\nUser story ID: " + number +
                         "\nName: " + name +
-                        "\nSprintBacklog: " + sprint +
                         "\nPriority: " + priorityNumber +
                         "\nStory Points: " + storyPoints +
                         "\nContent = " + content +

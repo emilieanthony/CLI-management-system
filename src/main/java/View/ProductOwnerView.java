@@ -16,12 +16,12 @@ public class ProductOwnerView {
         int option = Scan.readInt("\n\nWelcome Product Owner!\n\n" +
                 "You are working on project " + proName + "." + "\n\n" +
                 "Please enter an option below\n" +
-                "1. Delete existing product backlog a create a new empty product backlog\n" +
-                "2. View product backlog\n" +
-                "3. Edit product backlog\n" +
-                "4. Create user story to product backlog\n" +
-                "5. Delete user story\n" +
-                "6. View all completed user stories\n" +
+                "1. View product backlog\n" +
+                "2. Edit product backlog\n" +
+                "3. Create user story to product backlog\n" +
+                "4. Delete user story\n" +
+                "5  View all completed user stories\n" +
+                "6. Delete existing product backlog a create a new empty product backlog\n" +
                 "7. Choose project\n" +
                 "8. Go back to main menu\n");
         return option;
@@ -91,12 +91,10 @@ public class ProductOwnerView {
         Scan.print("Create new user story");
         String name = Scan.readLine("Name: ");
         //int number = Scan.readInt("User story number: ");
-        String sprint = Scan.readLine("SprintBacklog: "); //vill ta bort denna, påverkas det på något sätt?
         int priority = Scan.readInt("Priority: ");
         String content = Scan.readLine("Content: ");
         String acceptanceCriteria = Scan.readLine("Acceptance criteria: ");
-        //Scan.print("You have now created a new user story!");
-        return new UserStory(name, number, sprint, priority, content, acceptanceCriteria);
+        return new UserStory(name, number, priority, content, acceptanceCriteria);
 
     }
 
@@ -105,8 +103,8 @@ public class ProductOwnerView {
     }
 
     public static int getUSNumber() {
-        Scan.print("\nRemove a user story");
-        int number = Scan.readInt("\nEnter the number of the user story you want to remove from the product backlog:");
+        Scan.print("\nDelete a user story");
+        int number = Scan.readInt("\nEnter the number of the user story you want to delete from the product backlog:");
         return number;
     }
 
@@ -117,13 +115,12 @@ public class ProductOwnerView {
                 ("\n\nPlease enter the number of which part of the user story you want to edit:\n\n" +
                         "1. Edit user story number.\n" +
                         "2. Edit user story name.\n" +
-                        "3. Edit user story sprint.\n" +
-                        "4. Edit user story priority.\n" +
-                        "5. Edit user story story points.\n" +
-                        "6. Edit user story content.\n" +
-                        "7. Edit user story acceptance criteria\n" +
-                        "8. Edit user story status.\n" +
-                        "9. Back to your menu.\n");
+                        "3. Edit user story priority.\n" +
+                        "4. Edit user story story points.\n" +
+                        "5. Edit user story content.\n" +
+                        "6. Edit user story acceptance criteria\n" +
+                        "7. Edit user story status.\n" +
+                        "8. Back to your menu.\n");
         return option;
     }
 
@@ -141,11 +138,6 @@ public class ProductOwnerView {
     public static String getNewUSName() {
         String newUSName = Scan.readLine("\nEnter a new name for the user story.");
         return newUSName;
-    }
-
-    public static String getNewUSSprint() {
-        String newUSSprint = Scan.readLine("\nEnter a new sprint for the user story.");
-        return newUSSprint;
     }
 
     public static int getNewUSPriority() {
@@ -179,7 +171,7 @@ public class ProductOwnerView {
     }
 
     public static void printRemoved() {
-        Scan.print("\nThis User Story has been removed");
+        Scan.print("\n\nThis User Story has been removed");
     }
 
     public static void proBacklogEditConf() {
@@ -191,12 +183,12 @@ public class ProductOwnerView {
     }
 
     public static void changeStatusMessage() {
-        Scan.print("\nthe user story has not been edited, You have to enter a number between 1 - " +
+        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - " +
                 "3 .");
     }
 
     public static void changePriorityMessage() {
-        Scan.print("\nthe user story has not been edited, You have to enter a number between 1 - 5");
+        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 5");
     }
 
 

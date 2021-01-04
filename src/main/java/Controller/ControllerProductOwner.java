@@ -27,22 +27,22 @@ public class ControllerProductOwner {
 
                 switch (option) {
                     case 1:
-                        deleteAndCreateNewBacklog(controllerAll);
-                        break;
-                    case 2:
                         viewProBacklog(controllerAll);
                         break;
-                    case 3:
+                    case 2:
                         editProductBacklog(controllerAll, controllerScrumMaster);
                         break;
-                    case 4:
+                    case 3:
                         createUserStory(controllerAll, controllerScrumMaster);
                         break;
+                    case 4:
+                        deleteUserStory(controllerAll);
+                        break;
                     case 5:
-                        removeUserStory(controllerAll);
+                        controllerAll.viewCompleteUStories();
                         break;
                     case 6:
-                        controllerAll.viewCompleteUStories();
+                        deleteExistingAndCreateNewBacklog(controllerAll);
                         break;
                     case 7:
                         getProjectName(controllerAll);
@@ -61,7 +61,39 @@ public class ControllerProductOwner {
 
     //---------------------------------------Methods for 1st Menu ------------------------------------------------------
 
-    public void deleteAndCreateNewBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
+    public void viewProBacklog(ControllerAll controllerAll) {
+        Project project = controllerAll.whichProject();
+        if (project == null) {
+            projectNotFound();
+        } else {
+            Scan.print(project.getProductBacklog().toString());
+        }
+
+    }
+
+    public void createUserStory(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster) {
+        Project project = controllerAll.whichProject();
+        int number = controllerScrumMaster.taskUSIdGenerator(controllerAll);
+        try {
+            UserStory newUserStory = getUSInfo(number);
+            project.getProductBacklog().getAllUserStories().add(newUserStory);
+            createdUStoryReceipt(newUserStory);
+            controllerAll.saveData();
+        } catch (Exception e) {
+            userStoryFail();
+        }
+    }
+
+    public void deleteUserStory(ControllerAll controllerAll) {
+        Project project = controllerAll.whichProject();
+        int number = getUSNumber();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        project.getProductBacklog().getAllUserStories().remove(userStory);
+        controllerAll.saveData();
+        printRemoved();
+    }
+
+    public void deleteExistingAndCreateNewBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
         try {
             Project project = controllerAll.whichProject();
             ProductBacklog ProBacklog = getBacklogInfo();
@@ -72,16 +104,6 @@ public class ControllerProductOwner {
         } catch (Exception e) {
             backlogFail();
         }
-    }
-
-    public void viewProBacklog(ControllerAll controllerAll) {
-        Project project = controllerAll.whichProject();
-        if (project == null) {
-            projectNotFound();
-        } else {
-            Scan.print(project.getProductBacklog().toString());
-        }
-
     }
 
     //*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*//
@@ -150,28 +172,7 @@ public class ControllerProductOwner {
         Scan.print(project.getProductBacklog().toString());
     }
 
-    public void createUserStory(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster) {
-        Project project = controllerAll.whichProject();
-        int number = controllerScrumMaster.taskUSIdGenerator(controllerAll);
-        try {
-            UserStory newUserStory = getUSInfo(number);
-            project.getProductBacklog().getAllUserStories().add(newUserStory);
-            createdUStoryReceipt(newUserStory); // dubbla printar?
-            controllerAll.saveData();
-            //Scan.print(newUserStory.toString()); // dubbla printar?
-        } catch (Exception e) {
-            userStoryFail();
-        }
-    }
 
-    public void removeUserStory(ControllerAll controllerAll) {
-        Project project = controllerAll.whichProject();
-        int number = getUSNumber();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
-        project.getProductBacklog().getAllUserStories().remove(userStory);
-        controllerAll.saveData();
-        printRemoved();
-    }
 
     //--------------------------------3rd Menu - menu for editing user stories---------------------------------------
     public void editUserStory(ControllerAll controllerAll) {
@@ -191,24 +192,21 @@ public class ControllerProductOwner {
                     editUSName(number, controllerAll);
                     break;
                 case 3:
-                    editUSSprint(number, controllerAll);
-                    break;
-                case 4:
                     editUSPriority(number, controllerAll);
                     break;
-                case 5:
+                case 4:
                     editUSStoryPoints(number, controllerAll);
                     break;
-                case 6:
+                case 5:
                     editUSContent(number, controllerAll);
                     break;
-                case 7:
+                case 6:
                     editUSAcceptanceC(number, controllerAll);
                     break;
-                case 8:
+                case 7:
                     editUSStatus(number, controllerAll);
                     break;
-                case 9:
+                case 8:
                     running = false;
                     break;
                 default:
@@ -235,16 +233,6 @@ public class ControllerProductOwner {
         String newUSName = getNewUSName();
         UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
         userStory.setName(newUSName);
-        controllerAll.saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
-
-    }
-
-    public void editUSSprint(int number, ControllerAll controllerAll) {
-        String newUSSprint = getNewUSSprint();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
-        userStory.setSprint(newUSSprint);
         controllerAll.saveData();
         userStoryEditConf();
         Scan.print(userStory.toString());
@@ -307,6 +295,11 @@ public class ControllerProductOwner {
             controllerAll.saveData();
             userStoryEditConf();
 
+
+        } else if (newUSStatus == 4) {
+            userStory.setAssigned();
+            controllerAll.saveData();
+            userStoryEditConf();
         } else {
             changeStatusMessage();
         }
