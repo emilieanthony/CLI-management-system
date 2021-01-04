@@ -306,7 +306,6 @@ public class ControllerScrumMaster
 				} else if (!project.getAllSprintBacklogs().contains(sprintName)) {
 					invalidSprintBacklog();
 				} else {
-					taskInBacklog.setSprintName(sprintName);
 					Task taskToMove = taskInBacklog;
 					findSprintBacklogByName(controllerAll).getAllTasks().add(taskToMove);
 					project.getProductBacklog().getTasks().remove(taskToMove);
@@ -322,7 +321,6 @@ public class ControllerScrumMaster
 						" move: "); // Move to view class.
 				sprintName = Scan.readLine("Write the sprintName of the sprint you want to move your user story to: ");
 
-				project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
 				UserStory userStoryToMove = project.getProductBacklog().getUserStory(usName);
 				findSprintBacklogByName(controllerAll).getUserStories().add(userStoryToMove);
 				project.getProductBacklog().getAllUserStories().remove(userStoryToMove);
@@ -348,7 +346,7 @@ public class ControllerScrumMaster
 				int idTask = IdTaskToMovePrint();
 				sprintName = sprintNameToMovePrint();
 
-				findSprintBacklogByName(controllerAll).getTask(idTask).setSprintName("");
+
 				Task taskToMove = findSprintBacklogByName(controllerAll).getTask(idTask);
 				project.getProductBacklog().getTasks().add(taskToMove);
 				findSprintBacklogByName(controllerAll).getAllTasks().remove(taskToMove);
@@ -360,7 +358,7 @@ public class ControllerScrumMaster
 				int usNumber = numerUsToMove();
 				sprintName = sprintNameToMove();
 
-				findSprintBacklogByName(controllerAll).getUserStory(usNumber).setSprintName("");
+
 				UserStory userStoryToMove = findSprintBacklogByName(controllerAll).getUserStory(usNumber);
 				project.getProductBacklog().getAllUserStories().add(userStoryToMove);
 				findSprintBacklogByName(controllerAll).getUserStories().remove(userStoryToMove);
@@ -840,7 +838,7 @@ public class ControllerScrumMaster
 				userStory.getBinary().add(false);
 			}
 			if (!(userStory.getBinary().contains(false))){
-				userStory.setDone();
+				userStory.setComplete();
 			}else {
 				userStory.setOpen();
 			}
@@ -893,7 +891,7 @@ public class ControllerScrumMaster
 			Scan.print(task.toString());
 			objectEdited();
 		}else if (option == 3){
-			task.setDone();
+			task.setComplete();
 			checkUStoryStatus(userStory,controllerAll);
 			Scan.print(task.toString());
 			objectEdited();

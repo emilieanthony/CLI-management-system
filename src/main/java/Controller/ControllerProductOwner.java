@@ -333,7 +333,7 @@ public class ControllerProductOwner
             userStoryEditConf();
         }
         else if (newUSStatus == 3){
-            userStory.setDone();
+            userStory.setComplete();
             controllerAll.saveData();
             userStoryEditConf();
         } else {

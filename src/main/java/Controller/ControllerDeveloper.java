@@ -6,13 +6,11 @@ import Utility.Scan;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static Controller.ControllerScrumMaster.sprintName;
 import static Utility.PrintUtility.defaultMessage;
 
 import static View.DevTeamView.*;
 import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.getProjectName;
-import static View.ScrumMasterView.getSprintBacklogByName;
 
 
 public class ControllerDeveloper {
@@ -135,7 +133,7 @@ public class ControllerDeveloper {
         Task task = openTask(controllerAll);
         int actualHrs = getActualHrs();
         task.setActualHours( actualHrs );
-        task.setDone();
+        task.setComplete();
 
     }
 }
