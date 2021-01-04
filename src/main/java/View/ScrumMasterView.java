@@ -49,7 +49,7 @@ public class ScrumMasterView
 
 	//----------------------------------------------------------Edit task menu---------------------------------------------
 
-	public static int menuEditTask() throws Exception
+	public static int menuEditTask() throws NumberFormatException
 	{
 		int option = Scan.readInt
 				("\n\nEdit Task Menu. \n " +
@@ -64,7 +64,7 @@ public class ScrumMasterView
 
 	//-----------------------------------------------------------------------------------------------------------
 
-	public static Project projectInput() throws Exception
+	public static Project projectInput() throws NumberFormatException
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"project:");
@@ -297,23 +297,6 @@ public class ScrumMasterView
 		sprintName = Scan.readLine("Write the name of the sprint: ");
 		return sprintName;
 	}
-
-	/*public static void printSprintBacklog(ArrayList<UserStory> allUserStories, ArrayList<Task> allTasks)
-	{
-		if (allUserStories.isEmpty() && allTasks.isEmpty())
-		{ //what happens if one of them is not
-			// empty!
-			Scan.print("The sprint backlog is empty.");
-		}
-		for (UserStory story : allUserStories)
-		{
-			Scan.print(story.toString());
-		}
-		for (Task task : allTasks)
-		{
-			Scan.print(task.toString());
-		}
-	}*/
 
 	public static void assignmentCompleted()
 	{
