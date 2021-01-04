@@ -59,36 +59,42 @@ public class ControllerScrumMaster
 						scrumMasterEditTaskMenu(controllerAll, contScrum);
 						break;
 					case 11:
-						viewTeamMembers(controllerAll);
+						controllerAll.viewCompleteTasks();
 						break;
 					case 12:
-						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+						controllerAll.viewCompleteUStories();
 						break;
 					case 13:
-						moveTaskOrUSToProductBacklog(controllerAll);
+						viewTeamMembers(controllerAll);
 						break;
 					case 14:
-						viewSprintBacklog(controllerAll);
+						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 						break;
 					case 15:
-						velocity();
+						moveTaskOrUSToProductBacklog(controllerAll);
 						break;
 					case 16:
-						getProjectName(controllerAll);
+						viewSprintBacklog(controllerAll);
 						break;
 					case 17:
-						createTaskOfUsInSBL(controllerAll);
+						velocity();
 						break;
 					case 18:
-						editTaskInUserStoryMenu(controllerAll);
+						getProjectName(controllerAll);
 						break;
 					case 19:
-						showImplementedStoryPoints(controllerAll);
-						 break;
+						createTaskOfUsInSBL(controllerAll);
+						break;
 					case 20:
-						showAverageVelocity(controllerAll);
+						editTaskInUserStoryMenu(controllerAll);
 						break;
 					case 21:
+						showImplementedStoryPoints(controllerAll);
+						 break;
+					case 22:
+						showAverageVelocity(controllerAll);
+						break;
+					case 23:
 						running = false;
 						break;
 					default:
@@ -197,8 +203,8 @@ public class ControllerScrumMaster
 		Project project = controllerAll.whichProject();
 		int id = project.getId() * 1000 + 1;
 
-		ArrayList<Task> tasks = collectAllTasks(controllerAll);
-		ArrayList<UserStory> stories = collectAllStories(project);
+		ArrayList<Task> tasks = controllerAll.collectAllTasks();
+		ArrayList<UserStory> stories = controllerAll.collectAllStories();
 
 
 		if (!tasks.isEmpty()) {
@@ -222,68 +228,9 @@ public class ControllerScrumMaster
 	}
 
 
-	public ArrayList<Task> collectAllTasks(ControllerAll controllerAll) {
 
-		Project project = controllerAll.whichProject();
-		//put all tasks in one and the same arrayList
-		ArrayList<Task> allTasks = new ArrayList<>();
 
-		//fetch tasks from product backlog
-		ArrayList<Task> productBLTasks = project.getProductBacklog().getTasks();
 
-		for (Task task : productBLTasks) {
-			allTasks.add(task);
-		}
-
-		//fetch tasks from sprint BL
-		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
-
-		for (SprintBacklog sprintBL : sprintBLs) {
-			ArrayList<Task> sprintTasks = sprintBL.getAllTasks();
-			for (Task task : sprintTasks) {
-				allTasks.add(task);
-			}
-		}
-		//fetch tasks from user stories in sprint BL
-		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs())
-		{
-			for (UserStory userStory: sprintBacklog.getUserStories()) {
-				ArrayList<Task> UserStoryTasks = userStory.getUserStoryTasks();
-				for (Task task : UserStoryTasks)
-				{
-					allTasks.add(task);
-				}
-			}
-		}
-
-		return allTasks;
-	}
-
-	private ArrayList<UserStory> collectAllStories(Project project) {
-
-		//put all user stories in one and the same ArrayList
-		ArrayList<UserStory> allStories = new ArrayList<>();
-
-		// fetch all user stories from product backlog
-		ArrayList<UserStory> productBLStories = project.getProductBacklog().getAllUserStories();
-
-		for (UserStory story : productBLStories) {
-			allStories.add(story);
-		}
-
-		//fetch user story from sprint BL
-		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
-
-		for (SprintBacklog sprintBL : sprintBLs) {
-			//
-			ArrayList<UserStory> sprintBLStories = sprintBL.getUserStories();
-			for (UserStory story : sprintBLStories) {
-				allStories.add(story);
-			}
-		}
-
-		return allStories;
-	}
 
 	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll) {
 		contProOwner.viewProBacklog(controllerAll);
@@ -317,9 +264,8 @@ public class ControllerScrumMaster
 			}
 
 			if (input.equals("2")) {
-				int usName = Scan.readInt("Write the the number of the user story you want to" +
-						" move: "); // Move to view class.
-				sprintName = Scan.readLine("Write the sprintName of the sprint you want to move your user story to: ");
+				int usName = numberUsToMove();
+				sprintName = sprintNameToMovePrintUS();
 
 				UserStory userStoryToMove = project.getProductBacklog().getUserStory(usName);
 				findSprintBacklogByName(controllerAll).getUserStories().add(userStoryToMove);
@@ -355,7 +301,7 @@ public class ControllerScrumMaster
 			}
 
 			if (input.equals("2")) {
-				int usNumber = numerUsToMove();
+				int usNumber = numberUsToMove();
 				sprintName = sprintNameToMove();
 
 
@@ -378,7 +324,7 @@ public class ControllerScrumMaster
 		if (project == null) {
 			projectNotFound();
 		} else {
-			ArrayList<Task> tasks = collectAllTasks(controllerAll);
+			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 			int idTaskEdit = IdTaskEdit();
 			for (Task task : tasks) {
 				if (task.getId() == idTaskEdit) {
@@ -405,7 +351,7 @@ public class ControllerScrumMaster
 			projectNotFound();
 		} else {
 
-			ArrayList<Task> tasks = collectAllTasks(controllerAll);
+			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 
 
 			int idTaskEdit = IdTaskEdit();
@@ -447,7 +393,7 @@ public class ControllerScrumMaster
 
 			int idTaskRemove = IdTaskRemove();
 
-			ArrayList<Task> tasks = collectAllTasks(controllerAll);
+			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 
 			for (Task task : tasks) {
 				if (task.getId() == idTaskRemove) {

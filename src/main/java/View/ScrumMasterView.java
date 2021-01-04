@@ -3,6 +3,7 @@ package View;
 import Controller.ControllerAll;
 import Models.*;
 import Models.Task;
+import Utility.DataManagement;
 import Utility.Scan;
 
 import java.time.LocalDate;
@@ -30,17 +31,19 @@ public class ScrumMasterView
 				"8. Assign a user story to Development Team Member\n" +
 				"9. View product backlog\n" +
 				"10. Edit Task Menu\n" +
-				"11. View all development Team Members\n" +
-				"12. Move task or user story to sprint backlog\n" +
-				"13. Move task or user story to product backlog\n" +
-				"14. View sprint backlog\n" +
-				"15. Calculate average velocity\n" +
-				"16. Switch project\n" +
-				"17. create a task of a user story located in sprint backlog.\n" +
-				"18. Menu for edit tasks in User Story\n" +
-				"19. Show implemented story points in sprint backlogs.\n" +
-				"20. Show average Velocity.\n" +
-				"21. Go back to main menu\n");
+				"11. View completed tasks\n" +
+				"12. View completed user stories\n" +
+				"13. View all development Team Members\n" +
+				"14. Move task or user story to sprint backlog\n" +
+				"15. Move task or user story to product backlog\n" +
+				"16. View sprint backlog\n" +
+				"17. Calculate average velocity\n" +
+				"18. Switch project\n" +
+				"19. create a task of a user story located in sprint backlog.\n" +
+				"20. Menu for edit tasks in User Story\n" +
+				"21. Show implemented story points in sprint backlogs.\n" +
+				"22. Show average Velocity.\n" +
+				"23. Go back to main menu\n");
 
 
 		return option;
@@ -71,6 +74,13 @@ public class ScrumMasterView
 
 		String startDate = getStartDate();
 		String endDate = getEndDate();
+
+		while (!DataManagement.stringToLocalDate(endDate).isAfter(DataManagement.stringToLocalDate(startDate))){
+			Scan.print("The start date you entered is after the end date you entered. Try again: ");
+			startDate = getStartDate();
+			endDate = getEndDate();
+
+		}
 
 		Project project = new Project(id, name, startDate, endDate);
 		return project;
@@ -358,10 +368,15 @@ public class ScrumMasterView
 		return sprintName;
 	}
 
-	public static int numerUsToMove()
+	public static int numberUsToMove()
 	{
 		int usNumber = Scan.readInt("Write the the number of the user story you want to move: ");
 		return usNumber;
+	}
+
+	public static String sprintNameToMovePrintUS(){
+    	 String sprintNameInput = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
+    	 return sprintNameInput;
 	}
 
 	public static String sprintNameToMove()
@@ -427,6 +442,29 @@ public class ScrumMasterView
 						"3- Remove Task from a user story.\n" +
 						"4- Back to your menu.\n");
 		return option;
+	}
+
+	public static void printCompleteTasks(ArrayList<Task> completedTasks){
+
+    	if (completedTasks.isEmpty()){
+    		Scan.print("There are no completed tasks yet");
+		}else{
+    	Scan.print("Completed tasks");
+    	for (Task task : completedTasks){
+    		Scan.print(task.toString());
+		}
+    	}
+	}
+
+	public static void printCompleteUStories(ArrayList<UserStory> completedStories){
+		if (completedStories.isEmpty()){
+			Scan.print("There are no completed user stories yet");
+		}else{
+			Scan.print("Completed user stories");
+			for (UserStory userStory : completedStories){
+				Scan.print(userStory.toString());
+			}
+		}
 	}
 }
 

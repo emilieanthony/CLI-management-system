@@ -26,8 +26,10 @@ public class DevTeamView {
                 "5. View product backlog\n" +
                 "6. View sprint backlog\n" +
                 "7. View all tasks\n" +
-                "8. Switch projects\n" +
-                "9. Go back to main menu\n");
+                "8. View all complete tasks\n" +
+                "9. View all complete user stories\n" +
+                "10. Switch projects\n" +
+                "11. Go back to main menu\n");
         return option;
     }
 

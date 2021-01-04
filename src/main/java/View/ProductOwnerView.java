@@ -21,8 +21,9 @@ public class ProductOwnerView
                 "1. Create a new product backlog\n" +
                 "2. View product backlog\n" +
                 "3. Edit product backlog\n" +
-                "4. Choose project\n" +
-                "5. Go back to main menu\n");
+                "4. View all completed user stories\n" +
+                "5. Choose project\n" +
+                "6. Go back to main menu\n");
         return option;
 
     }
