@@ -51,6 +51,7 @@ public class Project implements Serializable
 
         if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate))){
             ScrumMasterView.wrongDatePrint();
+
         } else {
             this.startDate = startDate;
             this.endDate = endDate;
