@@ -347,6 +347,11 @@ public class ScrumMasterView
     	return idTaskEdit;
 	}
 
+	public static int IdTaskRemove(){
+		int idTaskRemove = Scan.readInt("Write the ID of the task you want to remove: ");
+		return idTaskRemove;
+	}
+
 	public static String sprintNameToMovePrint()
 	{
 		String sprintName = Scan.readLine("Write the name of the sprint you want to move your task from: ");

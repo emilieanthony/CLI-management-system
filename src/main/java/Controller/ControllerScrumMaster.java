@@ -447,14 +447,14 @@ public class ControllerScrumMaster
 			projectNotFound();
 		} else {
 
-			int idTask = Scan.readInt("Write the ID of the task you want to remove: ");
+			int idTaskRemove = IdTaskRemove();
 
 			ArrayList<Task> tasks = collectAllTasks(controllerAll);
 
 			for (Task task : tasks) {
-				if (task.getId() == idTask) {
+				if (task.getId() == idTaskRemove) {
 
-					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTask));
+					project.getProductBacklog().getTasks().remove(project.getProductBacklog().getTask(idTaskRemove));
 					controllerAll.saveData();
 					removeObject();
 				} else {
