@@ -12,44 +12,37 @@ import static View.DevTeamView.noNamePrint;
 
 public class Project implements Serializable
 {
-    //attributes
     private int id;
     private String name;
     private String startDate;
     private String endDate;
-
     private ProductBacklog productBacklog;
-    /*private SprintBacklog sprintBacklog;
-    private ProductOwner productOwner;
-    private Developer developer;
-    private Task task;*/
-
     private ArrayList<Developer> allTeamMembers;
     private ArrayList<ProductOwner> allProductOwners;
     private ArrayList<SprintBacklog> allSprintBacklogs;
 
-
     //Empty constructor for data exporting and importing.
-    public Project(){
-
-    }
+    public Project(){}
 
     //constructor
     public Project(int id, String name, String startDate, String endDate) //throws Exception
     {
-        if (name.isEmpty()) {
+        if (name.isEmpty())
+        {
             noNamePrint();
         } else {
             this.name = name;
         }
 
-        if(id < 0) {
+        if(id < 0)
+        {
             negativeIDPrint();
         } else {
             this.id = id;
         }
 
-        if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate))){
+        if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate)))
+        {
             ScrumMasterView.wrongDatePrint();
 
         } else {
@@ -57,18 +50,10 @@ public class Project implements Serializable
             this.endDate = endDate;
         }
         productBacklog = new ProductBacklog(name + " product backlog", startDate, endDate);
-        /*sprintBacklog = new SprintBacklog(null,null,null);
-        productOwner = new ProductOwner(null,0); // tas bort???
-        developer = new Developer(null,0); // tas bort???
-        task = new Task(0,0,0,null,null);*/
-
         allTeamMembers = new ArrayList<>();
         allProductOwners = new ArrayList<>();
         allSprintBacklogs = new ArrayList<>();
-
     }
-
-    //all getters & setters
 
     public int getId() {
         return id;
@@ -106,82 +91,8 @@ public class Project implements Serializable
         this.endDate = endDate;
     }
 
-    /*public Task getTaskFromSprintBacklog(int id)
-    {
-        for(SprintBacklog sprintBacklog : allSprintBacklogs)
-        {
-            return sprintBacklog.getTask(id);
-        }
-        return null;
+    public ArrayList<Developer> getAllTeamMembers() { return allTeamMembers; }
 
-    }*/
-
-    /*public SprintBacklog getSprintBacklog() {
-        return sprintBacklog;
-    }
-
-    public ProductOwner getProductOwner() {
-        return productOwner;
-    }
-
-    public String printTasksFromSprintBacklog()
-    {
-        for(SprintBacklog sprintBacklog : allSprintBacklogs)
-        {
-            return sprintBacklog.printTasks();
-        }
-        return null;
-    }
-
-    public String printPersonalTasks(Developer member)
-    {
-        for(SprintBacklog sprintBacklog : allSprintBacklogs)
-        {
-            return sprintBacklog.printPersonalTasks(member);
-        }
-        return null;
-    }*/
-   /* public Developer getDeveloper() {
-        return developer;
-    }
-
-    public Task getTask() {
-        return task;
-    }*/
-
-
-
-    /*public Developer getTeamMember(int id)
-    {
-        for (Developer member : allTeamMembers)
-        {
-            if (member.getId() == id)
-            {
-                return member;
-            }
-        }
-        return null;
-    }*/
-
-    /*public void assignTask(int memberID, int taskID)        //Used in method in ControllerScrumMaster - this one also is using method below
-    {
-        for(SprintBacklog sprintBacklog : allSprintBacklogs)
-        {
-            assignTaskAdd(getTeamMember(memberID), sprintBacklog.getTask(taskID));
-        }
-    }*/
-    public ArrayList<Developer> getAllTeamMembers() {
-
-        return allTeamMembers;
-    }
-
-    /*public void assignTaskAdd(Developer member, Task task) { // method used in assign task method
-        task.getAssignedDevelopers().add(member);
-    }*/
-    /*public ArrayList<Developer> getAllDevelopmentMembers()
-    {
-        return allTeamMembers;
-    }*/
     public ArrayList<ProductOwner> getAllProductOwners()
     {
         return allProductOwners;
@@ -204,16 +115,10 @@ public class Project implements Serializable
         return null;
     }
 
-    /*public ArrayList<SprintBacklog> getAllSprints()
-    {
-        return allSprintBacklogs;
-    }*/
-
     public ProductBacklog getProductBacklog()
     {
         return productBacklog;
     }
-
 
     public void viewAllProductOwners()
     {
@@ -230,7 +135,6 @@ public class Project implements Serializable
             System.out.println(developer.toString());
         }
     }
-    //toString
 
     @Override
     public String toString() {
@@ -239,9 +143,6 @@ public class Project implements Serializable
                 "\nStart Date: " + startDate +
                 "\nEnd Date: " + endDate +
                 "\nProduct Backlog: " + productBacklog +
-                //"\nSprint Backlog: " + sprintBacklog +
-                //"\nProduct Owner: " + productOwner +
-                //"\nDeveloper: " + developer +
                 "\nTeam Members: " + allTeamMembers +
                 "\nProduct Owners: " + allProductOwners +
                 "\nSprintBacklog Backlogs: " + allSprintBacklogs;

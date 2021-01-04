@@ -21,8 +21,8 @@ public class DevTeamView {
                 "Please enter an option below\n" +
                 "1. View my own tasks\n" +
                 "2. View assigned tasks\n" +
-                "3. Change Task status\n" +
-                "4. Change User Story status\n" +
+                "3. Change task status\n" +
+                "4. Change user story status\n" +
                 "5. View product backlog\n" +
                 "6. View sprint backlog\n" +
                 "7. View all tasks\n" +
@@ -45,7 +45,6 @@ public class DevTeamView {
     }
 
     public static int getDeveloperId(){
-
         int id = Scan.readInt("Please enter the developer's id");
         return id;
     }
@@ -55,7 +54,6 @@ public class DevTeamView {
     }
 
     public static int getTaskId(){
-
         int id = Scan.readInt("Please enter the task's id");
         return id;
     }
@@ -63,7 +61,6 @@ public class DevTeamView {
     public static void noNamePrint(){
         Scan.print("Names cannot be empty. Please try again");
         menuScrumMaster();
-
     }
 
     public static void negativeIDPrint() {
@@ -75,7 +72,6 @@ public class DevTeamView {
     }
 
     public static int getUserStoryNumber(){
-
         int id = Scan.readInt("Please enter the User Story's number");
         return id;
     }
@@ -94,7 +90,6 @@ public class DevTeamView {
         int actualVelocity = Scan.readInt("Enter actual velocity: ");
         return actualVelocity;
     }
-
 
     public int getUserId(){
         int id = Scan.readInt("Enter your user ID: ");

@@ -2,12 +2,9 @@ package Controller;
 
 import Models.*;
 import Utility.Scan;
-
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import static Utility.PrintUtility.defaultMessage;
-
 import static View.DevTeamView.*;
 import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.getProjectName;
@@ -70,15 +67,13 @@ public class ControllerDeveloper {
 
     //---------------------------------Method----------------------------------------------//
 
-    public void taskMenu(ControllerAll controllerAll)
-    {
-
+    public void taskMenu(ControllerAll controllerAll) {
         boolean running = true;
-        do
-        {
+
+        do {
+
             int option = getTaskMenu();
-            switch (option)
-            {
+            switch (option) {
                 case 1:
                     completeTask(controllerAll);
                     break;
@@ -110,7 +105,6 @@ public class ControllerDeveloper {
     }
 
     public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
-
         ArrayList<Task> allTasks = controllerAll.collectAllTasks();
         for (Task task:allTasks) {
             if (task == null) {
@@ -126,21 +120,17 @@ public class ControllerDeveloper {
         printAllTasks(allTasks);
     }
 
-
     public Task openTask(ControllerAll controllerAll) {
-
         Task task = controllerAll.findTaskById(controllerAll);
         Scan.print(task.toString());
-
         return task;
     }
-    public void completeTask(ControllerAll controllerAll){
 
+    public void completeTask(ControllerAll controllerAll){
         Task task = openTask(controllerAll);
         int actualHrs = getActualHrs();
         task.setActualHours( actualHrs );
         task.setComplete();
-
     }
 }
 
