@@ -56,9 +56,12 @@ public class ControllerProductOwner
                         editBacklog(controllerAll, controllerScrumMaster);
                         break;
                     case 4:
-                        getProjectName(controllerAll);
+                        controllerAll.viewCompleteUStories();
                         break;
                     case 5:
+                        getProjectName(controllerAll);
+                        break;
+                    case 6:
                         running = false; //go back to main menu
                         break;
                     default:

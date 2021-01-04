@@ -62,36 +62,39 @@ public class ControllerScrumMaster
 						controllerAll.viewCompleteTasks();
 						break;
 					case 12:
-						viewTeamMembers(controllerAll);
+						controllerAll.viewCompleteUStories();
 						break;
 					case 13:
-						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+						viewTeamMembers(controllerAll);
 						break;
 					case 14:
-						moveTaskOrUSToProductBacklog(controllerAll);
+						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 						break;
 					case 15:
-						viewSprintBacklog(controllerAll);
+						moveTaskOrUSToProductBacklog(controllerAll);
 						break;
 					case 16:
-						velocity();
+						viewSprintBacklog(controllerAll);
 						break;
 					case 17:
-						getProjectName(controllerAll);
+						velocity();
 						break;
 					case 18:
-						createTaskOfUsInSBL(controllerAll);
+						getProjectName(controllerAll);
 						break;
 					case 19:
-						editTaskInUserStoryMenu(controllerAll);
+						createTaskOfUsInSBL(controllerAll);
 						break;
 					case 20:
+						editTaskInUserStoryMenu(controllerAll);
+						break;
+					case 21:
 						showImplementedStoryPoints(controllerAll);
 						 break;
-					case 21:
+					case 22:
 						showAverageVelocity(controllerAll);
 						break;
-					case 22:
+					case 23:
 						running = false;
 						break;
 					default:
@@ -201,7 +204,7 @@ public class ControllerScrumMaster
 		int id = project.getId() * 1000 + 1;
 
 		ArrayList<Task> tasks = controllerAll.collectAllTasks();
-		ArrayList<UserStory> stories = collectAllStories(project);
+		ArrayList<UserStory> stories = controllerAll.collectAllStories();
 
 
 		if (!tasks.isEmpty()) {
@@ -227,31 +230,7 @@ public class ControllerScrumMaster
 
 
 
-	private ArrayList<UserStory> collectAllStories(Project project) {
 
-		//put all user stories in one and the same ArrayList
-		ArrayList<UserStory> allStories = new ArrayList<>();
-
-		// fetch all user stories from product backlog
-		ArrayList<UserStory> productBLStories = project.getProductBacklog().getAllUserStories();
-
-		for (UserStory story : productBLStories) {
-			allStories.add(story);
-		}
-
-		//fetch user story from sprint BL
-		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
-
-		for (SprintBacklog sprintBL : sprintBLs) {
-			//
-			ArrayList<UserStory> sprintBLStories = sprintBL.getUserStories();
-			for (UserStory story : sprintBLStories) {
-				allStories.add(story);
-			}
-		}
-
-		return allStories;
-	}
 
 	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll) {
 		contProOwner.viewProBacklog(controllerAll);

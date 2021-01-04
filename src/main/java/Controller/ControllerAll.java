@@ -228,6 +228,33 @@ public class ControllerAll
         return allTasks;
     }
 
+    public ArrayList<UserStory> collectAllStories() {
+
+        Project project = whichProject();
+        //put all user stories in one and the same ArrayList
+        ArrayList<UserStory> allStories = new ArrayList<>();
+
+        // fetch all user stories from product backlog
+        ArrayList<UserStory> productBLStories = project.getProductBacklog().getAllUserStories();
+
+        for (UserStory story : productBLStories) {
+            allStories.add(story);
+        }
+
+        //fetch user story from sprint BL
+        ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
+
+        for (SprintBacklog sprintBL : sprintBLs) {
+            //
+            ArrayList<UserStory> sprintBLStories = sprintBL.getUserStories();
+            for (UserStory story : sprintBLStories) {
+                allStories.add(story);
+            }
+        }
+
+        return allStories;
+    }
+
     public void loadData(){
         setAllProjects(Data.importProData(allProjects));
     }
@@ -248,5 +275,19 @@ public class ControllerAll
         printCompleteTasks(completedTasks);
 
     }
+
+    public void viewCompleteUStories() {
+        ArrayList<UserStory> allStories = collectAllStories();
+        ArrayList<UserStory> completedStories = new ArrayList<>();
+        for (UserStory userStory : allStories){
+            if(userStory.getStatus() == "Done"){
+                completedStories.add(userStory);
+            }
+        }
+
+        printCompleteUStories(completedStories);
+
+    }
+
 
 }

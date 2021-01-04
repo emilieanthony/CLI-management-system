@@ -53,9 +53,12 @@ public class ControllerDeveloper {
                         controllerAll.viewCompleteTasks();
                         break;
                     case 9:
-                        getProjectName(controllerAll);// Switch project.
+                        controllerAll.viewCompleteUStories();
                         break;
                     case 10:
+                        getProjectName(controllerAll);// Switch project.
+                        break;
+                    case 11:
                         running = false;
                         break;
                     default:

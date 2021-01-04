@@ -32,17 +32,18 @@ public class ScrumMasterView
 				"9. View product backlog\n" +
 				"10. Edit Task Menu\n" +
 				"11. View completed tasks\n" +
-				"12. View all development Team Members\n" +
-				"13. Move task or user story to sprint backlog\n" +
-				"14. Move task or user story to product backlog\n" +
-				"15. View sprint backlog\n" +
-				"16. Calculate average velocity\n" +
-				"17. Switch project\n" +
-				"18. create a task of a user story located in sprint backlog.\n" +
-				"19. Menu for edit tasks in User Story\n" +
-				"20. Show implemented story points in sprint backlogs.\n" +
-				"21. Show average Velocity.\n" +
-				"22. Go back to main menu\n");
+				"12. View completed user stories\n" +
+				"13. View all development Team Members\n" +
+				"14. Move task or user story to sprint backlog\n" +
+				"15. Move task or user story to product backlog\n" +
+				"16. View sprint backlog\n" +
+				"17. Calculate average velocity\n" +
+				"18. Switch project\n" +
+				"19. create a task of a user story located in sprint backlog.\n" +
+				"20. Menu for edit tasks in User Story\n" +
+				"21. Show implemented story points in sprint backlogs.\n" +
+				"22. Show average Velocity.\n" +
+				"23. Go back to main menu\n");
 
 
 		return option;
@@ -453,6 +454,17 @@ public class ScrumMasterView
     		Scan.print(task.toString());
 		}
     	}
+	}
+
+	public static void printCompleteUStories(ArrayList<UserStory> completedStories){
+		if (completedStories.isEmpty()){
+			Scan.print("There are no completed user stories yet");
+		}else{
+			Scan.print("Completed user stories");
+			for (UserStory userStory : completedStories){
+				Scan.print(userStory.toString());
+			}
+		}
 	}
 }
 
