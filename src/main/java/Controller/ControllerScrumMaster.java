@@ -855,18 +855,18 @@ public class ControllerScrumMaster
 
 	private void checkUStoryStatus(UserStory userStory, ControllerAll controllerAll)
 	{
-		userStory.getBinary().clear();
+		userStory.getIsCompleted().clear();
 		for (Task foundTasks : userStory.getUserStoryTasks())
 		{
 			if (foundTasks.getStatus().equalsIgnoreCase("Done"))
 			{
-				userStory.getBinary().add(true);
+				userStory.getIsCompleted().add(true);
 			}
 			else
 			{
-				userStory.getBinary().add(false);
+				userStory.getIsCompleted().add(false);
 			}
-			if (!(userStory.getBinary().contains(false)))
+			if (!(userStory.getIsCompleted().contains(false)))
 			{
 				userStory.setComplete();
 			}
