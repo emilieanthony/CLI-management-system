@@ -4,9 +4,10 @@ import Models.*;
 import Utility.Scan;
 import View.ScrumMasterView;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-
-import static Utility.PrintUtility.*;
+import static Utility.PrintUtility.defaultMessage;
+import static Utility.PrintUtility.projectNotFound;
 import static View.DevTeamView.invalidInputPrint;
 import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;
@@ -38,7 +39,7 @@ public class ControllerProductOwner {
                         deleteUserStory(controllerAll);
                         break;
                     case 5:
-                        controllerAll.viewCompleteUStories();
+                        controllerAll.viewCompletedUStories();
                         break;
                     case 6:
                         deleteExistingAndCreateNewBacklog(controllerAll);
@@ -83,14 +84,40 @@ public class ControllerProductOwner {
         }
     }
 
-    public void deleteUserStory(ControllerAll controllerAll) {
+/*    public void deleteUserStory(ControllerAll controllerAll) {
         Project project = controllerAll.whichProject();
         int number = getUSNumber();
         UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
         project.getProductBacklog().getAllUserStories().remove(userStory);
         controllerAll.saveData();
         printDeleted();
+    }*/
+
+    public void deleteUserStory(ControllerAll controllerAll)
+    {
+        Project project = controllerAll.whichProject();
+
+        int number = getUSNumber();
+
+        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
+
+        ArrayList<UserStory> userStories = project.getProductBacklog().getAllUserStories();
+
+        if (userStories.contains(userStory)){
+
+            userStories.remove(userStory);
+
+            controllerAll.saveData();
+
+            printDeleted();
+
+        } else if (userStory == null || !userStories.contains(userStory)){
+
+            nonExistentUStory();
+
+        }
     }
+
 
     public void deleteExistingAndCreateNewBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
         try {
@@ -294,11 +321,11 @@ public class ControllerProductOwner {
             controllerAll.saveData();
             userStoryEditConf();
 
-
         } else if (newUSStatus == 4) {
             userStory.setAssigned();
             controllerAll.saveData();
             userStoryEditConf();
+
         } else {
             changeStatusMessage();
         }
