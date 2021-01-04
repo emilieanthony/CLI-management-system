@@ -4,16 +4,8 @@
   "startDate" : "2020-2-2",
   "endDate" : "2021-2-2",
   "productBacklog" : {
-    "name" : "hej product backlog",
-    "allUserStories" : [ {
-      "name" : "ja",
-      "number" : 1001,
-      "storyPoints" : 0,
-      "status" : "Open",
-      "assignedDevelopers" : [ ],
-      "userStoryTasks" : [ ],
-      "binary" : [ ]
-    } ],
+    "name" : "nytt",
+    "allUserStories" : [ ],
     "tasks" : [ ]
   },
   "allTeamMembers" : [ ],

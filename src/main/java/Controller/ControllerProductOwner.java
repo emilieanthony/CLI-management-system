@@ -97,9 +97,9 @@ public class ControllerProductOwner {
             Project project = controllerAll.whichProject();
             ProductBacklog ProBacklog = getBacklogInfo();
             project.setProductBacklog(ProBacklog);
+            proBacklogCreationConf();
             Scan.print(ProBacklog.toString());
             controllerAll.saveData();
-            proBacklogCreationConf();
         } catch (Exception e) {
             backlogFail();
         }
