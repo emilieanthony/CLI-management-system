@@ -8,31 +8,25 @@ public class Scan {
 
     // Methods for reading input without printing
     public static String scan() {
-        return scan.next();
+        return scan.next().trim().toLowerCase();
     }
 
     // Methods for output and scanning input
     public static String readLine(String output) {
         System.out.println(output);
         String line = scan.nextLine();
-        return line;
+        return line.trim().toLowerCase();
     }
 
     public static int readInt(String output) {
         System.out.println(output);
-        int anInt = Integer.parseInt(scan.nextLine()); // to avoid error with new line
+        int anInt = Integer.parseInt(scan.nextLine().trim().toLowerCase()); // to avoid error with new line
         return anInt;
-    }
-
-    public static double readDouble(String output) {
-        System.out.println(output);
-        double aDouble = scan.nextDouble();
-        return aDouble;
     }
 
     //system.out.println method
     public static void print(String output){
-        System.out.println(output);
+        System.out.println(output.trim().toLowerCase());
     }
 
     public static void closeScanner() {
