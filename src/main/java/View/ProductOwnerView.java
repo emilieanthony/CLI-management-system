@@ -201,7 +201,7 @@ public class ProductOwnerView
     }
 
     public static void nonExistentUStory(){
-        Scan.print("The ID you entered does not match with any user story in the product backlog");
+        Scan.print("The number you entered does not match with any user story in the product backlog");
     }
 
 
