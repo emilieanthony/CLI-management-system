@@ -872,7 +872,7 @@ public class ControllerScrumMaster
 			}
 			else
 			{
-				userStory.setOpen();
+				//userStory.setOpen();
 			}
 		}
 		controllerAll.saveData();
