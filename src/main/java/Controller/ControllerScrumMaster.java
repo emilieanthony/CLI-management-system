@@ -410,10 +410,10 @@ public class ControllerScrumMaster
 			ArrayList<Task> tasks = collectAllTasks(controllerAll);
 
 
-			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
+			int idTaskEdit = IdTaskEdit();
 
 			for (Task task : tasks) {
-				if (task.getId() == idTask) {
+				if (task.getId() == idTaskEdit) {
 					int newStatusTask = newStatusTask();
 
 					if (newStatusTask == 1) {
