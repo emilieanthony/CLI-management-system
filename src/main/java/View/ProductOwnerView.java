@@ -200,6 +200,10 @@ public class ProductOwnerView
         Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 5");
     }
 
+    public static void nonExistentUStory(){
+        Scan.print("The ID you entered does not match with any user story in the product backlog");
+    }
+
 
 }
 

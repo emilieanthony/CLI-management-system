@@ -4,6 +4,7 @@ import Models.*;
 import Utility.Scan;
 import View.ScrumMasterView;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
@@ -131,7 +132,7 @@ public class ControllerProductOwner
         } while (running);
     }
 
-   public void addUserStory(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster)
+    public void addUserStory(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster)
     {
         Project project = controllerAll.whichProject();
         int number = controllerScrumMaster.taskUSIdGenerator(controllerAll);
@@ -149,11 +150,26 @@ public class ControllerProductOwner
     public void removeUserStory(ControllerAll controllerAll)
     {
         Project project = controllerAll.whichProject();
+
         int number = getUSNumber();
+
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
-        project.getProductBacklog().getAllUserStories().remove(userStory);
-        controllerAll.saveData();
-        printRemoved();
+
+        ArrayList<UserStory> userStories = project.getProductBacklog().getAllUserStories();
+
+        if (userStories.contains(userStory)){
+
+            userStories.remove(userStory);
+
+            controllerAll.saveData();
+
+            printRemoved();
+
+        } else if (userStory == null || !userStories.contains(userStory)){
+
+            nonExistentUStory();
+
+        }
     }
 
     public void viewProBacklog(ControllerAll controllerAll)
