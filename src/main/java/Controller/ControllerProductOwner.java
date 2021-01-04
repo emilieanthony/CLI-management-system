@@ -56,7 +56,7 @@ public class ControllerProductOwner
                         editBacklog(controllerAll, controllerScrumMaster);
                         break;
                     case 4:
-                        controllerAll.viewCompleteUStories();
+                        controllerAll.viewCompletedUStories();
                         break;
                     case 5:
                         getProjectName(controllerAll);
@@ -320,11 +320,11 @@ public class ControllerProductOwner
 
     }
 
-    public void editUSStatus(int number,ControllerAll controllerAll)
+    public void editUSStatus(int number, ControllerAll controllerAll)
     {
         int newUSStatus = getNewUSStatus();
 
-        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
+        UserStory userStory = findUStoryByNumberPBL( number, controllerAll );
         if (newUSStatus == 1){
             userStory.setOpen();
             controllerAll.saveData();

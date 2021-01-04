@@ -117,6 +117,11 @@ public class DevTeamView {
             Scan.print(sprintBacklog.getName());
         }
     }
+
+    public static void taskCompletedReceipt(Task task){
+        Scan.print("Task " + task.getName() + " with the ID " + task.getId() + " is now set as completed"
+        + "\nEstimated hours: " + task.getEstimatedHours() + " Actual hours: " + task.getActualHours());
+    }
 }
 
 

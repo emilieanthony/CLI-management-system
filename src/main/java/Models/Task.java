@@ -97,6 +97,14 @@ public class Task implements Comparable<Task> {
 		return id;
 	}
 
+	public int getEstimatedHours() {
+		return estimatedHours;
+	}
+
+	public int getActualHours() {
+		return actualHours;
+	}
+
 	public ArrayList<Developer> getAssignedDevelopers() {
 		return assignedDevelopers;
 	}

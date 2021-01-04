@@ -2,7 +2,6 @@ package Controller;
 
 import Models.*;
 import Utility.Scan;
-import View.ScrumMasterView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -63,10 +62,10 @@ public class ControllerScrumMaster
 						scrumMasterEditTaskMenu(controllerAll, contScrum);
 						break;
 					case 11:
-						controllerAll.viewCompleteTasks();
+						controllerAll.viewCompletedTasks();
 						break;
 					case 12:
-						controllerAll.viewCompleteUStories();
+						controllerAll.viewCompletedUStories();
 						break;
 					case 13:
 						viewTeamMembers(controllerAll);

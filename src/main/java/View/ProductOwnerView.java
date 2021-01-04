@@ -193,11 +193,11 @@ public class ProductOwnerView
         Scan.print("\nYou hav e successfully edited the user story.");
     }
     public static void changeStatusMessage(){
-        Scan.print("\nthe user story has not been edited, You have to enter a number between 1 - " +
+        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - " +
                 "3 .");
     }
     public static void changePriorityMessage(){
-        Scan.print("\nthe user story has not been edited, You have to enter a number between 1 - 5");
+        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 5");
     }
 
 

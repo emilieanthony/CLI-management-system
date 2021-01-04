@@ -115,9 +115,8 @@ public class ControllerAll
     {
         int id = getTaskId();
         Task task = null;
-        Project project = controllerAll.whichProject();
 
-        Iterator<Task> iterator = project.getProductBacklog().getTasks().iterator();
+        Iterator<Task> iterator = collectAllTasks().iterator();
         while (task == null && iterator.hasNext())
         {
             Task foundTask = iterator.next();
@@ -222,7 +221,7 @@ public class ControllerAll
         data.exportProject(allProjects);
     }
 
-    public void viewCompleteTasks()
+    public void viewCompletedTasks()
     {
         ArrayList<Task> allTasks = collectAllTasks();
         ArrayList<Task> completedTasks = new ArrayList<>();
@@ -236,7 +235,7 @@ public class ControllerAll
         printCompleteTasks(completedTasks);
     }
 
-    public void viewCompleteUStories()
+    public void viewCompletedUStories()
     {
         ArrayList<UserStory> allStories = collectAllStories();
         ArrayList<UserStory> completedStories = new ArrayList<>();

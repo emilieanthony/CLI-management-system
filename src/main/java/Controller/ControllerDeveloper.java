@@ -29,7 +29,7 @@ public class ControllerDeveloper {
                         viewAllAssignedTasks(controllerAll,scrumMaster);
                         break;
                     case 3:
-                        taskMenu(controllerAll);
+                        completeTask(controllerAll);
                         break;
                     case 4:
                         proCont.viewProBacklog(controllerAll);
@@ -45,10 +45,10 @@ public class ControllerDeveloper {
                         viewAllTasks(controllerAll, scrumMaster);//View all tasks
                         break;
                     case 8:
-                        controllerAll.viewCompleteTasks();
+                        controllerAll.viewCompletedTasks();
                         break;
                     case 9:
-                        controllerAll.viewCompleteUStories();
+                        controllerAll.viewCompletedUStories();
                         break;
                     case 10:
                         getProjectName(controllerAll);// Switch project.
@@ -67,7 +67,7 @@ public class ControllerDeveloper {
 
     //---------------------------------Method----------------------------------------------//
 
-    public void taskMenu(ControllerAll controllerAll) {
+  /*  public void taskMenu(ControllerAll controllerAll) {
         boolean running = true;
 
         do {
@@ -84,7 +84,7 @@ public class ControllerDeveloper {
                     defaultMessage();
             }
         } while (running);
-    }
+    }*/
 
     public void viewMyTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
         Task task = findTaskByDeveloper(controllerAll,contScrum);
@@ -131,6 +131,7 @@ public class ControllerDeveloper {
         int actualHrs = getActualHrs();
         task.setActualHours( actualHrs );
         task.setComplete();
+        taskCompletedReceipt(task);
     }
 }
 

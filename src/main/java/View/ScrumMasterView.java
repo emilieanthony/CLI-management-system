@@ -38,7 +38,7 @@ public class ScrumMasterView
 				"16. View sprint backlog\n" +
 				"17. Calculate average velocity\n" +
 				"18. Switch project\n" +
-				"19. create a task of a user story located in sprint backlog.\n" +
+				"19. Create a task of a user story located in sprint backlog.\n" + //or name this "Break down a user story in sprint backlog into tasks"
 				"20. Menu for edit tasks in User Story\n" +
 				"21. Show implemented story points in sprint backlogs.\n" +
 				"22. Show average Velocity.\n" +
@@ -480,7 +480,7 @@ public class ScrumMasterView
 	public static void objectCreated()
 	{
 		Scan.print("Object successfully created");
-	}
+	} //isnt object too vague?
 }
 
 
