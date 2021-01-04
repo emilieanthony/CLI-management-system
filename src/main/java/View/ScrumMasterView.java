@@ -338,8 +338,13 @@ public class ScrumMasterView
 
 	public static int IdTaskToMovePrint()
 	{
-		int idTask = Scan.readInt("Write the ID of the task you want to move: ");// Move to view class.
+		int idTask = Scan.readInt("Write the ID of the task you want to move: ");
 		return idTask;
+	}
+
+	public static int IdTaskEdit(){
+    	int idTaskEdit = Scan.readInt("Write the ID of the task you want to edit: ");
+    	return idTaskEdit;
 	}
 
 	public static String sprintNameToMovePrint()
