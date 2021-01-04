@@ -382,6 +382,10 @@ public class ScrumMasterView
 		return input;
 	}
 
+	public static void printVelocity(int averageVelocity){
+    	Scan.print("The average velocity is: " + averageVelocity);
+	}
+
 	public static void showImplementedStoryPoints(ControllerAll controllerAll){
 		Project project = controllerAll.whichProject();
 		Scan.print("Total implemented story points till now for each Sprint backlog: ");

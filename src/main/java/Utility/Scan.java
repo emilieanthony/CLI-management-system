@@ -26,7 +26,7 @@ public class Scan {
 
     //system.out.println method
     public static void print(String output){
-        System.out.println(output.trim().toLowerCase());
+        System.out.println(output.trim());
     }
 
     public static void closeScanner() {

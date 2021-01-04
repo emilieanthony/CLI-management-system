@@ -695,12 +695,11 @@ public class ControllerScrumMaster
 		return (sum / numbers.length);
 	}
 
-	public void velocity()
-	{   //Call this one in menu
+	public void velocity() {
 		String input = getVelocity();
 		int[] numbers = arrayOfVelocity(input);
 		int averageVelocity = getAverageVelocity(numbers);
-		Scan.print("The average velocity is: " + averageVelocity);
+		printVelocity(averageVelocity);
 	}
 
 	/*------------------------------------Methods for Assigning object-------------------------------------------*/
