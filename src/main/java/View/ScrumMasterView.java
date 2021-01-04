@@ -358,10 +358,15 @@ public class ScrumMasterView
 		return sprintName;
 	}
 
-	public static int numerUsToMove()
+	public static int numberUsToMove()
 	{
 		int usNumber = Scan.readInt("Write the the number of the user story you want to move: ");
 		return usNumber;
+	}
+
+	public static String sprintNameToMovePrintUS(){
+    	 String sprintNameInput = Scan.readLine("Write the name of the sprint you want to move your user story to: ");
+    	 return sprintNameInput;
 	}
 
 	public static String sprintNameToMove()

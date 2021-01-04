@@ -318,9 +318,8 @@ public class ControllerScrumMaster
 			}
 
 			if (input.equals("2")) {
-				int usName = Scan.readInt("Write the the number of the user story you want to" +
-						" move: "); // Move to view class.
-				sprintName = Scan.readLine("Write the sprintName of the sprint you want to move your user story to: ");
+				int usName = numberUsToMove();
+				sprintName = sprintNameToMovePrintUS();
 
 				project.getProductBacklog().getUserStory(usName).setSprintName(sprintName);
 				UserStory userStoryToMove = project.getProductBacklog().getUserStory(usName);
@@ -357,7 +356,7 @@ public class ControllerScrumMaster
 			}
 
 			if (input.equals("2")) {
-				int usNumber = numerUsToMove();
+				int usNumber = numberUsToMove();
 				sprintName = sprintNameToMove();
 
 				findSprintBacklogByName(controllerAll).getUserStory(usNumber).setSprintName("");
