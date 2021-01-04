@@ -59,36 +59,39 @@ public class ControllerScrumMaster
 						scrumMasterEditTaskMenu(controllerAll, contScrum);
 						break;
 					case 11:
-						viewTeamMembers(controllerAll);
+						controllerAll.viewCompleteTasks();
 						break;
 					case 12:
-						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+						viewTeamMembers(controllerAll);
 						break;
 					case 13:
-						moveTaskOrUSToProductBacklog(controllerAll);
+						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 						break;
 					case 14:
-						viewSprintBacklog(controllerAll);
+						moveTaskOrUSToProductBacklog(controllerAll);
 						break;
 					case 15:
-						velocity();
+						viewSprintBacklog(controllerAll);
 						break;
 					case 16:
-						getProjectName(controllerAll);
+						velocity();
 						break;
 					case 17:
-						createTaskOfUsInSBL(controllerAll);
+						getProjectName(controllerAll);
 						break;
 					case 18:
-						editTaskInUserStoryMenu(controllerAll);
+						createTaskOfUsInSBL(controllerAll);
 						break;
 					case 19:
+						editTaskInUserStoryMenu(controllerAll);
+						break;
+					case 20:
 						showImplementedStoryPoints(controllerAll);
 						 break;
-					case 20:
+					case 21:
 						showAverageVelocity(controllerAll);
 						break;
-					case 21:
+					case 22:
 						running = false;
 						break;
 					default:
@@ -197,7 +200,7 @@ public class ControllerScrumMaster
 		Project project = controllerAll.whichProject();
 		int id = project.getId() * 1000 + 1;
 
-		ArrayList<Task> tasks = collectAllTasks(controllerAll);
+		ArrayList<Task> tasks = controllerAll.collectAllTasks();
 		ArrayList<UserStory> stories = collectAllStories(project);
 
 
@@ -222,42 +225,7 @@ public class ControllerScrumMaster
 	}
 
 
-	public ArrayList<Task> collectAllTasks(ControllerAll controllerAll) {
 
-		Project project = controllerAll.whichProject();
-		//put all tasks in one and the same arrayList
-		ArrayList<Task> allTasks = new ArrayList<>();
-
-		//fetch tasks from product backlog
-		ArrayList<Task> productBLTasks = project.getProductBacklog().getTasks();
-
-		for (Task task : productBLTasks) {
-			allTasks.add(task);
-		}
-
-		//fetch tasks from sprint BL
-		ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
-
-		for (SprintBacklog sprintBL : sprintBLs) {
-			ArrayList<Task> sprintTasks = sprintBL.getAllTasks();
-			for (Task task : sprintTasks) {
-				allTasks.add(task);
-			}
-		}
-		//fetch tasks from user stories in sprint BL
-		for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs())
-		{
-			for (UserStory userStory: sprintBacklog.getUserStories()) {
-				ArrayList<Task> UserStoryTasks = userStory.getUserStoryTasks();
-				for (Task task : UserStoryTasks)
-				{
-					allTasks.add(task);
-				}
-			}
-		}
-
-		return allTasks;
-	}
 
 	private ArrayList<UserStory> collectAllStories(Project project) {
 
@@ -382,7 +350,7 @@ public class ControllerScrumMaster
 		if (project == null) {
 			projectNotFound();
 		} else {
-			ArrayList<Task> tasks = collectAllTasks(controllerAll);
+			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
 			for (Task task : tasks) {
 				if (task.getId() == idTask) {
@@ -409,7 +377,7 @@ public class ControllerScrumMaster
 			projectNotFound();
 		} else {
 
-			ArrayList<Task> tasks = collectAllTasks(controllerAll);
+			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 
 
 			int idTask = Scan.readInt("Write the ID of the task you want to edit: ");
@@ -451,7 +419,7 @@ public class ControllerScrumMaster
 
 			int idTask = Scan.readInt("Write the ID of the task you want to remove: ");
 
-			ArrayList<Task> tasks = collectAllTasks(controllerAll);
+			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 
 			for (Task task : tasks) {
 				if (task.getId() == idTask) {

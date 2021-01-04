@@ -50,9 +50,12 @@ public class ControllerDeveloper {
                         viewAllTasks(controllerAll, scrumMaster);//View all tasks
                         break;
                     case 8:
-                        getProjectName(controllerAll);// Switch project.
+                        controllerAll.viewCompleteTasks();
                         break;
                     case 9:
+                        getProjectName(controllerAll);// Switch project.
+                        break;
+                    case 10:
                         running = false;
                         break;
                     default:
@@ -95,7 +98,7 @@ public class ControllerDeveloper {
     public Task findTaskByDeveloper(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
         Task task = null;
         Developer developer = controllerAll.findDeveloperByID();
-        Iterator<Task> iterator = contScrum.collectAllTasks(controllerAll).iterator();
+        Iterator<Task> iterator = controllerAll.collectAllTasks().iterator();
         while (task == null && iterator.hasNext()) {
             Task foundTask = iterator.next();
             if (foundTask.getAssignedDevelopers().contains(developer)) {
@@ -107,7 +110,7 @@ public class ControllerDeveloper {
 
     public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-        ArrayList<Task> allTasks = contScrum.collectAllTasks(controllerAll);
+        ArrayList<Task> allTasks = controllerAll.collectAllTasks();
         for (Task task:allTasks) {
             if (task == null) {
                 noAssignedTasks();
@@ -118,7 +121,7 @@ public class ControllerDeveloper {
     }
 
     public void viewAllTasks(ControllerAll controllerAll, ControllerScrumMaster scrumMaster){
-        ArrayList<Task> allTasks = scrumMaster.collectAllTasks(controllerAll);
+        ArrayList<Task> allTasks = controllerAll.collectAllTasks();
         printAllTasks(allTasks);
     }
 

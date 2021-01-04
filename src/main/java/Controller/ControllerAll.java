@@ -3,7 +3,9 @@ package Controller;
 import Models.*;
 import Utility.DataManagement;
 import Utility.Scan;
+import View.ScrumMasterView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -189,13 +191,62 @@ public class ControllerAll
         return developer;
     }
 
-    public void loadData(){
+    public ArrayList<Task> collectAllTasks( ) {
 
+        Project project = whichProject();
+        //put all tasks in one and the same arrayList
+        ArrayList<Task> allTasks = new ArrayList<>();
+
+        //fetch tasks from product backlog
+        ArrayList<Task> productBLTasks = project.getProductBacklog().getTasks();
+
+        for (Task task : productBLTasks) {
+            allTasks.add(task);
+        }
+
+        //fetch tasks from sprint BL
+        ArrayList<SprintBacklog> sprintBLs = project.getAllSprintBacklogs();
+
+        for (SprintBacklog sprintBL : sprintBLs) {
+            ArrayList<Task> sprintTasks = sprintBL.getAllTasks();
+            for (Task task : sprintTasks) {
+                allTasks.add(task);
+            }
+        }
+        //fetch tasks from user stories in sprint BL
+        for (SprintBacklog sprintBacklog: project.getAllSprintBacklogs())
+        {
+            for (UserStory userStory: sprintBacklog.getUserStories()) {
+                ArrayList<Task> UserStoryTasks = userStory.getUserStoryTasks();
+                for (Task task : UserStoryTasks)
+                {
+                    allTasks.add(task);
+                }
+            }
+        }
+
+        return allTasks;
+    }
+
+    public void loadData(){
         setAllProjects(Data.importProData(allProjects));
     }
 
     public void saveData(){
         Data.exportProData(allProjects);
+    }
+
+    public void viewCompleteTasks() {
+        ArrayList<Task> allTasks = collectAllTasks();
+        ArrayList<Task> completedTasks = new ArrayList<>();
+        for (Task task : allTasks){
+            if(task.getStatus() == "Done"){
+                completedTasks.add(task);
+            }
+        }
+
+        printCompleteTasks(completedTasks);
+
     }
 
 }
