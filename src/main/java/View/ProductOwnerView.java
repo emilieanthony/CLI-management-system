@@ -66,12 +66,7 @@ public class ProductOwnerView {
         return nameBacklog;
     }
 
-   /* public static String getBacklogName() {
-        String nameBacklog = Scan.readLine("\nPlease enter a new sprintName for the backlog:");
-        return nameBacklog;
-    }*/
-
-    public static LocalDate getBacklogSDate() {
+   /* public static LocalDate getBacklogSDate() {
         LocalDate startDate;
         Scan.print("\nPlease enter a new start date for the product backlog");
         int startYear = Scan.readInt("Start date (YYYY): ");
@@ -79,7 +74,7 @@ public class ProductOwnerView {
         int startDay = Scan.readInt("Start date (DD): ");
         startDate = LocalDate.of(startYear, startMonth, startDay);
         return startDate;
-    }
+    }*/ //-- uses getStartDate in scrum master view
 
     public static String getBacklogEDate() {
 
@@ -166,12 +161,14 @@ public class ProductOwnerView {
                 "story.\n" +
                 "1. Open.\n" +
                 "2. In progress.\n" +
-                "3. Complete. \n");
+                "3. Complete. \n" +
+                "4. Assigned.\n");
+
         return newUSStatus;
     }
 
-    public static void printRemoved() {
-        Scan.print("\n\nThis User Story has been removed");
+    public static void printDeleted() {
+        Scan.print("\nThis user story has been deleted");
     }
 
     public static void proBacklogEditConf() {

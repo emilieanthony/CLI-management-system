@@ -6,8 +6,7 @@ import View.ScrumMasterView;
 
 import java.util.Iterator;
 
-import static Utility.PrintUtility.defaultMessage;
-import static Utility.PrintUtility.projectNotFound;
+import static Utility.PrintUtility.*;
 import static View.DevTeamView.invalidInputPrint;
 import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;
@@ -90,7 +89,7 @@ public class ControllerProductOwner {
         UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
         project.getProductBacklog().getAllUserStories().remove(userStory);
         controllerAll.saveData();
-        printRemoved();
+        printDeleted();
     }
 
     public void deleteExistingAndCreateNewBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
