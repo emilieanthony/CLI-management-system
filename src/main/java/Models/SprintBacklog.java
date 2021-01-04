@@ -2,11 +2,9 @@ package Models;
 
 import Utility.DataManagement;
 import View.ScrumMasterView;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SprintBacklog implements Serializable
+public class SprintBacklog
 {
 	//attributes
 	private String name;
@@ -17,15 +15,14 @@ public class SprintBacklog implements Serializable
 	private int totalStoryPoints;
 
 	//Empty constructor for data exporting and importing.
-	public SprintBacklog(){
-
-	}
+	public SprintBacklog(){}
 
 	//constructor
 	public SprintBacklog(String name, String startDate, String endDate) throws Exception
 	{
 		this.name = name;
-		if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate))){
+		if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate)))
+		{
 			ScrumMasterView.wrongDatePrint();
 		} else {
 			this.startDate = startDate;
@@ -35,15 +32,17 @@ public class SprintBacklog implements Serializable
 		this.userStories = new ArrayList<>();
 	}
 
-	public int calcTotalStoryPoints(){
+	public int calcTotalStoryPoints()
+	{
 		this.totalStoryPoints = 0;
 
-		for (UserStory userStory:userStories) {
-			if (userStory.getStatus().equalsIgnoreCase("Done")){
+		for (UserStory userStory:userStories)
+		{
+			if (userStory.getStatus().equalsIgnoreCase("Done"))
+			{
 				totalStoryPoints = totalStoryPoints + userStory.getStoryPoints();
 			}
 		}
-
 		return totalStoryPoints;
 	}
 
@@ -58,31 +57,12 @@ public class SprintBacklog implements Serializable
 		this.name = name;
 	}
 
-	public String getStartDate()
-	{
-		return startDate;
-	}
-
-	public void setStartDate( String startDate)
-	{
-		this.startDate = startDate;
-	}
-
-	public String getEndDate()
-	{
-		return endDate;
-	}
-
-	public void setEndDate(String endDate)
-	{
-		this.endDate = endDate;
-	}
-
 	public int getTotalStoryPoints() {
 		return totalStoryPoints;
 	}
 
 	//--------------------------------
+
 	public Task getTask(int id)
 	{
 		for (Task task : allTasks)
@@ -107,49 +87,9 @@ public class SprintBacklog implements Serializable
 		return null;
 	}
 
-	public String printTasks()
-	{
-		String output = "";
-
-		for (Task task : allTasks)
-		{
-			output = output + task.toString();
-		}
-		return output;
-	}
-
-	public String printPersonalTasks(Developer member)
-	{
-		String output = "";
-
-		if (allTasks == null)
-		{
-			output = "You have no tasks assigned.";
-		}
-		else
-		{
-			for (Task task : allTasks)
-			{
-				if (task.isAssigned(member))
-				{
-					output = output + task.toString() + "\n";
-				}
-			}
-		}
-		return output;
-	}
-
 	public ArrayList<Task> getAllTasks()
 	{
 		return allTasks;
-	}
-
-	public void setAllTasks(ArrayList<Task> allTasks) {
-		this.allTasks = allTasks;
-	}
-
-	public void setUserStories(ArrayList<UserStory> userStories) {
-		this.userStories = userStories;
 	}
 
 	public ArrayList<UserStory> getUserStories()

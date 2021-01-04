@@ -1,17 +1,12 @@
 package Models;
 
-import Models.UserStory;
 import Utility.DataManagement;
 import View.ScrumMasterView;
-
-import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import static View.DevTeamView.noNamePrint;
 
-public class ProductBacklog implements Serializable {
-
+public class ProductBacklog
+{
     //Attributes:-
     private String name;
     private String startDate;
@@ -19,27 +14,23 @@ public class ProductBacklog implements Serializable {
     private ArrayList<UserStory> allUserStories;
     private ArrayList<Task> tasks;
 
-
     //Empty constructor for data exporting and importing.
-    public ProductBacklog(){
+    public ProductBacklog(){}
 
-    }
     // Constructor:-
-    public ProductBacklog(String name, String startDate, String endDate) //throws Exception
+    public ProductBacklog(String name, String startDate, String endDate)
     {
-
         this.name = name;
-        if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate))){
+        if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate)))
+        {
             ScrumMasterView.wrongDatePrint();
         } else {
             this.startDate = startDate;
             this.endDate = endDate;
         }
-
         this.allUserStories = new ArrayList<>();
         this.tasks = new ArrayList<>(); // No tasks in product backlog
     }
-
 
     //Setters and Getters:-Make sure at the end of the project that not used methods are deleted.
 
@@ -53,19 +44,9 @@ public class ProductBacklog implements Serializable {
         this.name = name;
     }
 
-    public String getStartDate()
-    {
-        return startDate;
-    }
-
     public void setStartDate(String startDate)
     {
         this.startDate = startDate;
-    }
-
-    public String getEndDate()
-    {
-        return endDate;
     }
 
     public void setEndDate(String endDate)
@@ -97,22 +78,20 @@ public class ProductBacklog implements Serializable {
         return null;
     }
 
-
     public ArrayList<UserStory> getAllUserStories()
     {
         return allUserStories;
     }
 
-    /*public ArrayList<Task> getTasksImport() {
+    public ArrayList<Task> getTasks()
+    {
         return tasks;
-    }*/
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
     }
 
+    public void setTasks(ArrayList<Task> tasks)
+    {
+        this.tasks = tasks;
+    }
 
     public String printAssignedUStories(Developer member)
     {
@@ -135,10 +114,7 @@ public class ProductBacklog implements Serializable {
         return output;
     }
 
-
-
     //ToString:-
-
     @Override
     public String toString()
     {
