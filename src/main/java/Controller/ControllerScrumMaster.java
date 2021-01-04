@@ -288,9 +288,7 @@ public class ControllerScrumMaster
 	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll) {
 		contProOwner.viewProBacklog(controllerAll);
 
-		String input = Scan.readLine("Do you want to move a TASK from product backlog to sprint backlog, type: 1\n" +
-				"Do you want to move a USER STORY from product backlog to sprint backlog, type: " +
-				"2\n"); // Move to view class.
+		String input = moveObjectToBacklogPrint();
 
 		Project project = controllerAll.whichProject();
 
