@@ -28,8 +28,10 @@ public class DevTeamView {
                 "7. View all tasks\n" +
                 "8. View all complete tasks\n" +
                 "9. View all complete user stories\n" +
-                "10. Switch projects\n" +
-                "11. Go back to main menu\n");
+                "10. View task deadlines\n" +
+                "11. View user story deadlines\n" +
+                "12. Switch projects\n" +
+                "13. Go back to main menu\n");
         return option;
     }
 

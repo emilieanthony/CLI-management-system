@@ -1,6 +1,10 @@
 package Models;
 
+import Utility.DataManagement;
 import View.ScrumMasterView;
+
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import static View.DevTeamView.*;
 
@@ -15,6 +19,7 @@ public class Task implements Comparable<Task> {
 	private String name;
 	private String description;
 	private ArrayList<Developer> assignedDevelopers;
+	private String deadline;
 
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception {
 
@@ -109,6 +114,14 @@ public class Task implements Comparable<Task> {
 		return actualHours;
 	}
 
+	public String getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
+
 	public ArrayList<Developer> getAssignedDevelopers() {
 		return assignedDevelopers;
 	}
@@ -128,6 +141,21 @@ public class Task implements Comparable<Task> {
 			return 0;
 		}
 	}
+
+	public int compareByDeadline(Task anotherTask){
+		LocalDate deadline = DataManagement.stringToLocalDate(this.deadline);
+		LocalDate anotherDeadline = DataManagement.stringToLocalDate(anotherTask.getDeadline());
+
+		if (deadline.isBefore(anotherDeadline)){
+			return -1;
+		} else if ( deadline == anotherDeadline) {
+			return 0;
+		} else {
+			return 1;
+		}
+
+	}
+
 
 	//--------------------------------------ToString--------------------------------------------------------------------
 

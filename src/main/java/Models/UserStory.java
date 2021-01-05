@@ -1,5 +1,8 @@
 package Models;
 
+import Utility.DataManagement;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import static View.DevTeamView.*;
 
@@ -17,6 +20,7 @@ public class UserStory implements Comparable<UserStory> {
     private ArrayList<Developer> assignedDevelopers;
     private ArrayList<Task> userStoryTasks;
     private ArrayList<Boolean> binary;
+    private String deadline;
 
     // Constructors:-
     public UserStory(String name, int number, int priority,
@@ -86,6 +90,13 @@ public class UserStory implements Comparable<UserStory> {
         return binary;
     }
 
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -142,6 +153,20 @@ public class UserStory implements Comparable<UserStory> {
         } else {
             return 0;
         }
+    }
+
+    public int compareByDeadline(UserStory anotherStory){
+        LocalDate deadline = DataManagement.stringToLocalDate(this.deadline);
+        LocalDate anotherDeadline = DataManagement.stringToLocalDate(anotherStory.getDeadline());
+
+        if (deadline.isBefore(anotherDeadline)){
+            return -1;
+        } else if ( deadline == anotherDeadline) {
+            return 0;
+        } else {
+            return 1;
+        }
+
     }
 
     public boolean isAssigned(Developer member) {

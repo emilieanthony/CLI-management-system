@@ -51,9 +51,15 @@ public class ControllerDeveloper {
                         controllerAll.viewCompletedUStories();
                         break;
                     case 10:
-                        getProjectName(controllerAll);// Switch project.
+                        controllerAll.viewTaskDeadlines();
                         break;
                     case 11:
+                        controllerAll.viewUStoryDeadlines();
+                        break;
+                    case 12:
+                        getProjectName(controllerAll);// Switch project.
+                        break;
+                    case 13:
                         running = false;
                         break;
                     default:
@@ -121,7 +127,7 @@ public class ControllerDeveloper {
     }
 
     public Task openTask(ControllerAll controllerAll) {
-        Task task = controllerAll.findTaskById(controllerAll);
+        Task task = controllerAll.findTaskById();
         Scan.print(task.toString());
         return task;
     }
