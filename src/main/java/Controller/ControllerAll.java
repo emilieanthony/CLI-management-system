@@ -1,10 +1,7 @@
 package Controller;
 
-import java.lang.reflect.Array;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import Models.*;
 import Utility.DataManagement;
@@ -115,7 +112,7 @@ public class ControllerAll
         return project;
     }
 
-    public Task findTaskById(ControllerAll controllerAll)
+    public Task findTaskById()
     {
         int id = getTaskId();
         Task task = null;
@@ -132,6 +129,23 @@ public class ControllerAll
         return task;
     }
 
+    public UserStory findUStoryByNumber(){
+
+        int number = getUserStoryNumber();
+        UserStory userStory = null;
+
+        Iterator<UserStory> iterator = collectAllStories().iterator();
+        while (userStory == null && iterator.hasNext())
+        {
+            UserStory foundStory = iterator.next();
+            if (foundStory.getNumber() == number)
+            {
+                userStory = foundStory;
+            }
+        }
+        return userStory;
+
+    }
     public Developer findDeveloperByID()
     {
         int id = getDeveloperId();
@@ -256,7 +270,7 @@ public class ControllerAll
     }
 
 
-    public void viewDeadlines(){
+    public void viewSprintDeadlines(){
 
         Project project = whichProject();
 
@@ -268,5 +282,47 @@ public class ControllerAll
         printDeadlines(allSprintBLs);
 
     }
+
+    public void viewTaskDeadlines(){
+        ArrayList<Task> allTasks = collectAllTasks();
+
+        ArrayList<Task> tasksWDeadlines = new ArrayList<>();
+        ArrayList<Task> tasksWODeadlines = new ArrayList<>();
+
+        for (Task task : allTasks){
+            if (!(task.getDeadline()==null)){
+                tasksWDeadlines.add(task);
+            } else {
+                tasksWODeadlines.add(task);
+            }
+        }
+
+        Collections.sort(tasksWDeadlines, Task::compareByDeadline );
+
+        printTaskDeadlines(tasksWDeadlines, tasksWODeadlines);
+
+    }
+
+
+    public void viewUStoryDeadlines(){
+        ArrayList<UserStory> allStories = collectAllStories();
+
+        ArrayList<UserStory> storiesWDeadlines = new ArrayList<>();
+        ArrayList<UserStory> storiesWODeadlines = new ArrayList<>();
+
+        for (UserStory userStory : allStories){
+            if (!(userStory.getDeadline()==null)){
+                storiesWDeadlines.add(userStory);
+            } else {
+                storiesWODeadlines.add(userStory);
+            }
+        }
+
+        Collections.sort(storiesWDeadlines, UserStory::compareByDeadline );
+
+        printUStoryDeadlines(storiesWDeadlines, storiesWODeadlines);
+
+    }
+
 
 }

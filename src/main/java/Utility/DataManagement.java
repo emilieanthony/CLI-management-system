@@ -57,4 +57,17 @@ public class DataManagement
 
         return returnDate;
     }
+
+    public static int compareDeadlines(String date, String anotherDate){
+        LocalDate deadline = DataManagement.stringToLocalDate(date);
+        LocalDate anotherDeadline = DataManagement.stringToLocalDate(anotherDate);
+
+        if (deadline.isBefore(anotherDeadline)){
+            return -1;
+        } else if ( deadline == anotherDeadline) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 }

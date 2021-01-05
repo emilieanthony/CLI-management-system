@@ -56,51 +56,60 @@ public class ControllerScrumMaster
 						assignUserStory(controllerAll);
 						break;
 					case 9:
-						controllerAll.viewDeadlines();
+						setUserStoryDeadline(controllerAll);
 						break;
 					case 10:
-						contProOwner.viewProBacklog(controllerAll);
+						controllerAll.viewSprintDeadlines();
 						break;
 					case 11:
-						scrumMasterEditTaskMenu(controllerAll, contScrum);
+						controllerAll.viewTaskDeadlines();
 						break;
 					case 12:
-						controllerAll.viewCompletedTasks();
+						controllerAll.viewUStoryDeadlines();
 						break;
 					case 13:
-						controllerAll.viewCompletedUStories();
+						contProOwner.viewProBacklog(controllerAll);
 						break;
 					case 14:
-						viewTeamMembers(controllerAll);
+						scrumMasterEditTaskMenu(controllerAll, contScrum);
 						break;
 					case 15:
-						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+						controllerAll.viewCompletedTasks();
 						break;
 					case 16:
-						moveTaskOrUSToProductBacklog(controllerAll);
+						controllerAll.viewCompletedUStories();
 						break;
 					case 17:
-						viewSprintBacklog(controllerAll);
+						viewTeamMembers(controllerAll);
 						break;
 					case 18:
-						velocity();
+						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 						break;
 					case 19:
-						getProjectName(controllerAll);
+						moveTaskOrUSToProductBacklog(controllerAll);
 						break;
 					case 20:
-						createTaskOfUsInSBL(controllerAll);
+						viewSprintBacklog(controllerAll);
 						break;
 					case 21:
-						editTaskInUserStoryMenu(controllerAll);
+						velocity();
 						break;
 					case 22:
-						showImplementedStoryPoints(controllerAll);
+						getProjectName(controllerAll);
 						break;
 					case 23:
-						showAverageVelocity(controllerAll);
+						createTaskOfUsInSBL(controllerAll);
 						break;
 					case 24:
+						editTaskInUserStoryMenu(controllerAll);
+						break;
+					case 25:
+						showImplementedStoryPoints(controllerAll);
+						break;
+					case 26:
+						showAverageVelocity(controllerAll);
+						break;
+					case 27:
 						running = false;
 						break;
 					default:
@@ -135,11 +144,14 @@ public class ControllerScrumMaster
 						editStatusTask(controllerAll);
 						break;
 					case 3:
-						removeTaskSprintBacklog(controllerAll, contScrum);
+						setTaskDeadline(controllerAll);
 						break;
 					case 4:
-						removeTaskProductBacklog(controllerAll);
+						removeTaskSprintBacklog(controllerAll, contScrum);
+						break;
 					case 5:
+						removeTaskProductBacklog(controllerAll);
+					case 6:
 						running = false;
 						break;
 					default:
@@ -167,6 +179,17 @@ public class ControllerScrumMaster
 
 	//------------------------------------------Methods for tasks------------------------------------------------//
 
+	private void setTaskDeadline(ControllerAll controllerAll){
+		Task task = controllerAll.findTaskById();
+		String deadline = getEndDate();
+
+		task.setDeadline(deadline);
+
+		setTaskDeadlineReceipt(task);
+
+	}
+
+
 	private void createTaskToProductBacklog(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
@@ -185,7 +208,7 @@ public class ControllerScrumMaster
 				createdTaskReceipt(newTask);
 				project.getProductBacklog().getTasks().add(newTask);
 				controllerAll.saveData();
-				taskCreatedToPbacklog();
+				taskCreatedToPBacklog();
 
 			} catch (Exception e)
 			{
@@ -213,7 +236,7 @@ public class ControllerScrumMaster
 				sprintName = getSprintBacklogName();
 				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
 				controllerAll.saveData();
-				taskCreatedToSbacklog();
+				taskCreatedToSBacklog();
 
 			} catch (Exception e)
 			{
@@ -973,5 +996,17 @@ public class ControllerScrumMaster
 		Scan.print(userStory.toString());
 
 		removedTaskInUserStory();
+	}
+
+	private void setUserStoryDeadline(ControllerAll controllerAll){
+
+		UserStory userStory = controllerAll.findUStoryByNumber();
+
+		String deadline = getEndDate();
+
+		userStory.setDeadline(deadline);
+
+		setUStoryDeadlineReceipt(userStory);
+
 	}
 }

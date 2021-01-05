@@ -309,6 +309,8 @@ public class ControllerProductOwner {
             userStoryEditConf();
 
         } else if (newUSStatus == 3) {
+            Developer developer = controllerAll.findDeveloperByID();
+            userStory.setCompletedBy(developer);
             userStory.setComplete();
             controllerAll.saveData();
             userStoryEditConf();

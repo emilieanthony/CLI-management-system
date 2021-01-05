@@ -1,5 +1,8 @@
 package Models;
 
+import Utility.DataManagement;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import static View.DevTeamView.*;
 
@@ -17,6 +20,8 @@ public class UserStory implements Comparable<UserStory> {
     private ArrayList<Developer> assignedDevelopers;
     private ArrayList<Task> userStoryTasks;
     private ArrayList<Boolean> binary;
+    private String deadline;
+    private Developer completedBy;
 
     // Constructors:-
     public UserStory(String name, int number, int priority,
@@ -86,6 +91,13 @@ public class UserStory implements Comparable<UserStory> {
         return binary;
     }
 
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -132,6 +144,14 @@ public class UserStory implements Comparable<UserStory> {
         status = "Assigned";
     }
 
+    public Developer getCompletedBy() {
+        return completedBy;
+    }
+
+    public void setCompletedBy(Developer completedBy) {
+        this.completedBy = completedBy;
+    }
+
     //-----------------------------------------Methods------------------------------------------------------------------
 
     public int compareTo(UserStory userStory) {
@@ -142,6 +162,10 @@ public class UserStory implements Comparable<UserStory> {
         } else {
             return 0;
         }
+    }
+
+    public int compareByDeadline(UserStory anotherStory){
+        return DataManagement.compareDeadlines(this.deadline, anotherStory.getDeadline());
     }
 
     public boolean isAssigned(Developer member) {
@@ -173,6 +197,14 @@ public class UserStory implements Comparable<UserStory> {
             for (Developer member : assignedDevelopers) {
                 output = output + "\n" + member.toString() + "\n";
             }
+        }
+
+        if (!(completedBy==null)){
+            output = output + "\nSet as complete by: " + completedBy.getId() + " " + completedBy.getName();
+        }
+
+        if(!(deadline==null)){
+            output = output + "\nDeadline: " + deadline;
         }
 
         return output;
