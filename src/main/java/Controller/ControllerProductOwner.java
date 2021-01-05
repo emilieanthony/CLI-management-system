@@ -84,14 +84,6 @@ public class ControllerProductOwner {
         }
     }
 
-/*    public void deleteUserStory(ControllerAll controllerAll) {
-        Project project = controllerAll.whichProject();
-        int number = getUSNumber();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
-        project.getProductBacklog().getAllUserStories().remove(userStory);
-        controllerAll.saveData();
-        printDeleted();
-    }*/
 
     public void deleteUserStory(ControllerAll controllerAll)
     {
