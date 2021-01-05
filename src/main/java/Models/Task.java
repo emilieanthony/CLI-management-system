@@ -1,5 +1,6 @@
 package Models;
 
+import Exceptions.*;
 import Utility.DataManagement;
 import View.ScrumMasterView;
 
@@ -24,24 +25,38 @@ public class Task implements Comparable<Task> {
 
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception {
 
-		if (id < 0) {
-			negativeIDPrint();
+		if(id < 0)
+		{
+			throw new NegativeId();
 		} else {
 			this.id = id;
 		}
+
 		if (priorityNumber < 0 || priorityNumber > 5) {
-			ScrumMasterView.invalidNumberPrint();
+			throw new InvalidPriorityNumber();
 		} else {
 			this.priorityNumber = priorityNumber;
 		}
-		if (estimatedHours < 0) {
-			negativeNumberPrint();
+
+		if (estimatedTime < 0) {
+			throw new EstimatedHours();
 		} else {
 			this.estimatedHours = estimatedTime;
 		}
 
-		this.name = name;
-		this.description = description;
+		if (name.isEmpty())
+		{
+			throw new EmptyName();
+		} else {
+			this.name = name;
+		}
+
+		if (description.isEmpty())
+		{
+			throw new EmptyDescription();
+		} else {
+			this.description = description;
+		}
 		this.actualHours = 0;
 		this.status = "Open";
 		this.assignedDevelopers = new ArrayList<>();

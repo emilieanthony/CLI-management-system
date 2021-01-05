@@ -47,7 +47,7 @@ public class DevTeamView {
     }
 
     public static int getDeveloperId(){
-        int id = Scan.readInt("Please enter the developer's id");
+        int id = Scan.readInt("Please enter the developer's id you want to assign the task to.");
         return id;
     }
 
@@ -60,10 +60,6 @@ public class DevTeamView {
         return id;
     }
 
-    public static void noNamePrint(){
-        Scan.print("Names cannot be empty. Please try again");
-        menuScrumMaster();
-    }
 
     public static void negativeIDPrint() {
         Scan.print("ID cannot be negative.");

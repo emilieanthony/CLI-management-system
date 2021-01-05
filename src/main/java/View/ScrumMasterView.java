@@ -83,12 +83,17 @@ public class ScrumMasterView
 
 	//-----------------------------------------------------------------------------------------------------------
 
-	public static Project projectInput() throws NumberFormatException
+	public static Project projectInput(ControllerAll controllerAll) throws Exception
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"project:");
 		String name = Scan.readLine("Name: ");
 		int id = Scan.readInt("ID: ");
+
+
+		while (!controllerAll.checkLegalId(id)){
+			id = Scan.readInt("You entered an ID that is already taken. Please enter a new one: ");
+		}
 
 		proName = name;
 
@@ -128,19 +133,19 @@ public class ScrumMasterView
 	public static void nullTaskPrint()
 	{
 		Scan.print("This task does not exist, please try again.");
-		menuScrumMaster();
+
 	}
 
 	public static void invalidTaskPrint()
 	{
 		Scan.print("The ID of the task was not found. Please try again");
-		menuScrumMaster();
+
 	}
 
 	public static void invalidSprintBacklog()
 	{
 		Scan.print("The name of the sprint was not found. Please try again");
-		menuScrumMaster();
+
 	}
 
 	public static int specifyTask()
@@ -181,7 +186,7 @@ public class ScrumMasterView
 	public static void invalidNumberPrint()
 	{
 		Scan.print("Priority number must be between 1-5. Please try again.");
-		menuScrumMaster();
+
 	}
 
 	public static void noSprintPrint()
@@ -226,9 +231,9 @@ public class ScrumMasterView
 		return newPriorityNumberTask;
 	}
 
-	public static void wrongDatePrint()
-	{
-		Scan.print("Error. You entered a start date that is after the end date.\n");
+	public static void wrongDatePrint() {
+		Scan.print("Error. You entered a start date that is after the end date. Please try again\n");
+
 	}
 
 	public static int newStatusTask()
@@ -326,6 +331,16 @@ public class ScrumMasterView
 	{
 		int idTask = Scan.readInt("Write the ID of the task you want to assign: ");
 		return idTask;
+	}
+
+	public static void showAllTasks(Project project){
+		Scan.print("Below you find all your tasks. \n\n");
+		System.out.println(project.getProductBacklog().getTasks());
+	}
+
+	public static void showAllSprintBacklogs(Project project){
+		Scan.print("Below you find all your sprint backlogs.");
+		System.out.println("\n\n"+project.getAllSprintBacklogs());
 	}
 
 	public static String assignTaskPrintSprintName()
@@ -563,6 +578,30 @@ public class ScrumMasterView
 			confirmation = true;
 		}
 		return confirmation;
+	}
+
+	public static void emptyName(){
+		Scan.print("Error: Name cannot be empty, Please " +
+				"try again");
+	}
+	public static void negativeId(){
+		Scan.print("Error: Id cannot be negative, Please " +
+				"try again");
+	}
+
+	public static void noSprintBacklogYet(){
+		Scan.print("There isn't yet any sprint backlog for you to add any tasks to, please create one first.\n\n");
+	}
+
+	public static void noDeveloperYet(){
+		Scan.print("There is not any development team members in the system." +
+				" Please register a new development team member first below.\n\n");
+	}
+
+	public static void showAllTeamMembers(Project project){
+		String name = project.getName();
+		Scan.print("Below you find all development team members working on project " + name);
+		System.out.println("\n" + project.getAllTeamMembers());
 	}
 
 }

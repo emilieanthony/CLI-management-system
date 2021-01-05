@@ -1,15 +1,17 @@
 package Controller;
 
+import Exceptions.*;
 import Models.*;
 import Utility.Scan;
 import View.ProductOwnerView;
 import jdk.jshell.spi.ExecutionControl;
+import View.AllView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
-
+import static Controller.ControllerAll.*;
 import static View.DevTeamView.*;
 import static View.DevTeamView.getUserStoryNumber;
 import static View.ProductOwnerView.changeStatusMessage;
@@ -218,8 +220,23 @@ public class ControllerScrumMaster
 				controllerAll.saveData();
 				taskCreatedToPBacklog();
 
-			} catch (Exception e)
-			{
+
+			} catch (NegativeId n){
+				negativeIDPrint();
+
+			} catch (InvalidPriorityNumber i){
+				invalidNumberPrint();
+
+			} catch (EstimatedHours e) {
+				negativeNumberPrint();
+
+			} catch (EmptyName e){
+				emptyName();
+
+			} catch (EmptyDescription e){
+				AllView.errorEmptyDescription();
+
+			} catch (Exception e) {
 				registerTaskFail();
 			}
 		}
@@ -239,17 +256,47 @@ public class ControllerScrumMaster
 
 			try
 			{
-				Task newTask = getTaskInfo(id);
-				createdTaskReceipt(newTask);
-				sprintName = getSprintBacklogName();
-				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
-				controllerAll.saveData();
-				taskCreatedToSBacklog();
+				boolean thereIsASprintBacklog = checkForSprintBacklog(project);
 
-			} catch (Exception e)
-			{
+				if (thereIsASprintBacklog){
+					Task newTask = getTaskInfo(id);
+					createdTaskReceipt(newTask);
+					sprintName = getSprintBacklogName();
+					findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
+					controllerAll.saveData();
+					taskCreatedToSBacklog();
+				} else {
+					noSprintBacklogYet();
+					createSprintBacklog(controllerAll);
+				}
+
+
+			} catch (NegativeId n){
+				negativeIDPrint();
+
+			} catch (InvalidPriorityNumber i){
+				invalidNumberPrint();
+
+			} catch (EstimatedHours e) {
+				negativeNumberPrint();
+
+			} catch (EmptyName e){
+				emptyName();
+
+			} catch (EmptyDescription e){
+				AllView.errorEmptyDescription();
+
+			} catch (Exception e) {
 				registerTaskFail();
 			}
+		}
+	}
+
+	public boolean checkForSprintBacklog(Project project){
+		if(project.getAllSprintBacklogs().isEmpty()){
+			return false;
+		} else {
+			return true;
 		}
 	}
 
@@ -533,9 +580,14 @@ public class ControllerScrumMaster
 			controllerAll.saveData();
 			createdProOwner();
 
-		} catch (Exception e)
+		}catch (EmptyName e){
+			emptyName();
+		}catch (NegativeId n){
+			negativeId();
+		}
+		catch (Exception e)
 		{
-			registerProOwnerFail();
+			AllView.errorPrint();
 		}
 	}
 
@@ -579,7 +631,12 @@ public class ControllerScrumMaster
 				controllerAll.saveData();
 				createdDeveloper();
 
-			} catch (Exception e)
+			}
+			catch (EmptyName e){
+				emptyName();
+			}
+
+			catch (Exception e)
 			{
 				registerDeveloperFail();
 			}
@@ -608,17 +665,26 @@ public class ControllerScrumMaster
 	{
 		try
 		{
-			Project project = projectInput();
+			Project project = projectInput(controllerAll);
 			controllerAll.getAllProjects().add(project);
-
 			controllerAll.saveData();
 			createProjectPrint(project);
 
-		} catch (Exception e)
-		{
-			e.printStackTrace();
+		} catch (EmptyName e) {
+			emptyName();
+
+		} catch (NegativeId n){
+			negativeId();
+
+		} catch (WrongDate w){
+			wrongDatePrint();
+
+		} catch (Exception e){
+			AllView.errorPrint();
 		}
 	}
+
+
 
 	//------------------------------------Methods etc for sprints-------------------------------------------//
 
@@ -633,12 +699,14 @@ public class ControllerScrumMaster
 
 			successfulSprintLog(sprintBacklog);
 
-		} catch (NumberFormatException e)
-		{
-			numberFormatMessage();
-		} catch (Exception e)
-		{
-			backlogFail();
+		} catch (EmptyName e) {
+			emptyName();
+
+		} catch (WrongDate w){
+			wrongDatePrint();
+
+		} catch (Exception e) {
+			AllView.errorPrint();
 		}
 	}
 
@@ -808,14 +876,25 @@ public class ControllerScrumMaster
 
 	private void assignTask(ControllerAll controllerAll)
 	{
-		int idTask = assignTaskPrintIdTask();
-		sprintName = assignTaskPrintSprintName();
-		Developer developer = controllerAll.findDeveloperByID();
-
 		Project project = controllerAll.whichProject();
+
 		if (project == null)
 		{
 			projectNotFound();
+		}
+
+		showAllTasks(project);
+		int idTask = assignTaskPrintIdTask();
+		showAllSprintBacklogs(project);
+		sprintName = assignTaskPrintSprintName();
+		showAllTeamMembers(project);
+		Developer developer = controllerAll.findDeveloperByID();
+
+
+
+		if (developer == null){
+			noDeveloperYet();
+			createDevelopmentMember(controllerAll);
 		}
 
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
@@ -973,7 +1052,7 @@ public class ControllerScrumMaster
 			}
 			else
 			{
-				userStory.setOpen();
+				//userStory.setOpen();
 			}
 		}
 		controllerAll.saveData();

@@ -1,14 +1,15 @@
 package Models;
 
+import Controller.ControllerAll;
+import Exceptions.EmptyName;
+import Exceptions.NegativeId;
+import Exceptions.WrongDate;
 import Utility.DataManagement;
 import View.ScrumMasterView;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static View.DevTeamView.negativeIDPrint;
-import static View.DevTeamView.noNamePrint;
 
 public class Project implements Serializable
 {
@@ -25,25 +26,26 @@ public class Project implements Serializable
     public Project(){}
 
     //constructor
-    public Project(int id, String name, String startDate, String endDate) //throws Exception
+    public Project(int id, String name, String startDate, String endDate) throws Exception
     {
         if (name.isEmpty())
         {
-            noNamePrint();
+            throw new EmptyName();
         } else {
             this.name = name;
         }
 
+
         if(id < 0)
         {
-            negativeIDPrint();
+            throw new NegativeId();
         } else {
             this.id = id;
         }
 
         if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate)))
         {
-            ScrumMasterView.wrongDatePrint();
+            throw new WrongDate();
 
         } else {
             this.startDate = startDate;
