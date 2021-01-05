@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
-import static View.DevTeamView.getNameCompleteTask;
 import static View.DevTeamView.invalidInputPrint;
 import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;

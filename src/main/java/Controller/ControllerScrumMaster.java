@@ -3,34 +3,27 @@ package Controller;
 import Exceptions.*;
 import Models.*;
 import Utility.Scan;
-import View.ProductOwnerView;
-import jdk.jshell.spi.ExecutionControl;
 import View.AllView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
-import static Controller.ControllerAll.*;
 import static View.DevTeamView.*;
 import static View.DevTeamView.getUserStoryNumber;
-import static View.ProductOwnerView.changeStatusMessage;
-import static View.ProductOwnerView.userStoryEditConf;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster
 {
 	public static String sprintName;
+	public static int option;
 
-	public void scrumMasterMenu(ControllerProductOwner contProOwner, ControllerAll controllerAll,
-								ControllerScrumMaster contScrum)
+	public void scrumMasterMenu(ControllerAll controllerAll,ControllerProductOwner contProOwner,ControllerScrumMaster contScrum)
 	{
 
 		boolean running = true;
 		do
 		{
-			int option;
-
 			try
 			{
 				option = menuScrumMaster();
@@ -44,82 +37,36 @@ public class ControllerScrumMaster
 						createSprintBacklog(controllerAll);
 						break;
 					case 3:
-						createTaskToProductBacklog(controllerAll);
-						break;
-					case 4:
-						createTaskToSprint(controllerAll);
-						break;
-					case 5:
-						createDevelopmentMember(controllerAll);
-						break;
-					case 6:
 						createProductOwner(controllerAll);
 						break;
+					case 4:
+						createDevelopmentMember(controllerAll);
+						break;
+					case 5:
+						USOptionsMenu(controllerAll);
+						break;
+					case 6:
+						TasksOptionsMenu(controllerAll,contScrum);
+						break;
 					case 7:
-						assignTask(controllerAll);
+						deadlinesOptionsMenu(controllerAll);
 						break;
 					case 8:
-						assignUserStory(controllerAll);
+						viewProjectPartsMenu(controllerAll,contProOwner);
 						break;
 					case 9:
-						UserStory userStory = controllerAll.findUStoryByNumber();
-						setUserStoryDeadline(controllerAll, userStory);
+						moveOptionsScrumMenu(controllerAll,contProOwner);
 						break;
 					case 10:
-						controllerAll.viewSprintDeadlines();
-						break;
-					case 11:
-						controllerAll.viewTaskDeadlines();
-						break;
-					case 12:
-						controllerAll.viewUStoryDeadlines();
-						break;
-					case 13:
-						contProOwner.viewProBacklog(controllerAll);
-						break;
-					case 14:
-						scrumMasterEditTaskMenu(controllerAll, contScrum);
-						break;
-					case 15:
-						editUSInSprintBLMenu(controllerAll);
-						break;
-					case 16:
-						controllerAll.viewCompletedTasks();
-						break;
-					case 17:
-						controllerAll.viewCompletedUStories();
-						break;
-					case 18:
-						viewTeamMembers(controllerAll);
-						break;
-					case 19:
-						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
-						break;
-					case 20:
-						moveTaskOrUSToProductBacklog(controllerAll);
-						break;
-					case 21:
-						viewSprintBacklog(controllerAll);
-						break;
-					case 22:
-						velocity();
-						break;
-					case 23:
-						getProjectName(controllerAll);
-						break;
-					case 24:
-						createTaskOfUsInSBL(controllerAll);
-						break;
-					case 25:
-						editTaskInUserStoryMenu(controllerAll);
-						break;
-					case 26:
 						showImplementedStoryPoints(controllerAll);
 						break;
-					case 27:
+					case 11:
 						showAverageVelocity(controllerAll);
 						break;
-					case 28:
+					case 12:
+						getProjectName(controllerAll);
+						break;
+					case 13:
 						running = false;
 						break;
 					default:
@@ -132,6 +79,188 @@ public class ControllerScrumMaster
 		} while (running);
 	}
 
+	private void USOptionsMenu(ControllerAll controllerAll)
+	{
+		boolean running = true;
+
+		do
+		{
+			try
+			{
+				option = userStoryOptionsMenu();
+				switch (option)
+				{
+					case 1:
+						assignUserStory(controllerAll);
+						break;
+					case 2:
+						editUSInSprintBLMenu(controllerAll);
+						break;
+					case 3:
+						createTaskOfUsInSBL(controllerAll);
+						break;
+					case 4:
+						editTaskInUserStoryMenu(controllerAll);
+						break;
+					case 5:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e)
+			{
+				invalidInputPrint();
+			}
+		} while (running);
+	}
+
+	private void TasksOptionsMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum)
+	{
+		boolean running = true;
+
+		do
+		{
+
+			try
+			{
+				option = taskOptionsMenu();
+				switch (option)
+				{
+					case 1:
+						createTaskToProductBacklog(controllerAll);
+						break;
+					case 2:
+						createTaskToSprint(controllerAll);
+						break;
+					case 3:
+						assignTask(controllerAll);
+						break;
+					case 4:
+						scrumMasterEditTaskMenu(controllerAll,contScrum);
+						break;
+					case 5:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e)
+			{
+				invalidInputPrint();
+			}
+		} while (running);
+	}
+
+	private void deadlinesOptionsMenu(ControllerAll controllerAll)
+	{
+		boolean running = true;
+
+		do
+		{
+			try
+			{
+				option = deadlinesMenu();
+				switch (option)
+				{
+					case 1:
+						setUserStoryDeadline(controllerAll);
+						break;
+					case 2:
+						setTaskDeadline(controllerAll);
+						break;
+					case 3:
+						controllerAll.viewSprintDeadlines();
+						break;
+					case 4:
+						controllerAll.viewTaskDeadlines();
+						break;
+					case 5:
+						controllerAll.viewUStoryDeadlines();
+						break;
+					case 6:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e)
+			{
+				invalidInputPrint();
+			}
+		} while (running);
+	}
+
+	private void viewProjectPartsMenu(ControllerAll controllerAll, ControllerProductOwner contProOwner)
+	{
+		boolean running = true;
+
+		do
+		{
+			try
+			{
+				option = viewProPartsMenu();
+				switch (option)
+				{
+
+					case 1:
+						contProOwner.viewProBacklog(controllerAll);
+						break;
+					case 2:
+						viewSprintBacklog(controllerAll);
+						break;
+					case 3:
+						viewTeamMembers(controllerAll);
+						break;
+					case 4:
+						controllerAll.viewCompletedTasks();
+						break;
+					case 5:
+						controllerAll.viewCompletedUStories();
+						break;
+					case 6:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e)
+			{
+				invalidInputPrint();
+			}
+		} while (running);
+	}
+	private void moveOptionsScrumMenu(ControllerAll controllerAll,
+									ControllerProductOwner contProOwner)
+	{
+		boolean running = true;
+
+		do
+		{
+			try
+			{
+				option = moveOptionsMenu();
+				switch (option)
+				{
+					case 1:
+						moveTaskOrUSToSprintBacklog(contProOwner,controllerAll);
+						break;
+					case 2:
+						moveTaskOrUSToProductBacklog(controllerAll);
+						break;
+					case 3:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e)
+			{
+				invalidInputPrint();
+			}
+		} while (running);
+	}
+
 	//-----------------------------------------------------Second Switch----------------------------------------------
 
 	private void scrumMasterEditTaskMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum)
@@ -140,8 +269,6 @@ public class ControllerScrumMaster
 
 		do
 		{
-			int option;
-
 			try
 			{
 				option = menuEditTask();
@@ -791,8 +918,6 @@ public class ControllerScrumMaster
 
 		do
 		{
-			int option;
-
 			try
 			{
 				option = menuEditUStoryInSBL();
@@ -802,13 +927,13 @@ public class ControllerScrumMaster
 						controllerAll.editUSStoryPoints(userStory);//Edit user story point
 						break;
 					case 2:
-						controllerAll.editUSStoryPoints(userStory);//edit priority number
+						controllerAll.editUSPriority(userStory);//edit priority number
 						break;
 					case 3:
 						controllerAll.changeUSStatus(userStory);//change user story status
 						break;
 					case 4:
-						setUserStoryDeadline(controllerAll, userStory);//set user story deadline
+						setUserStoryDeadline(controllerAll);//set user story deadline
 						break;
 					case 5:
 						removeUSFromSBL(userStory, findSprintBacklogByName(controllerAll));//remove user story from sprint backlog
@@ -848,7 +973,8 @@ public class ControllerScrumMaster
 
 	//------------------------------------Methods for velocity-------------------------------------------//
 
-	private int[] arrayOfVelocity(String input)
+	// Shall we remove it.
+	/*private int[] arrayOfVelocity(String input)
 	{
 		String[] strArray = input.split(",");
 		int[] intArray = new int[strArray.length];
@@ -878,7 +1004,7 @@ public class ControllerScrumMaster
 		int averageVelocity = getAverageVelocity(numbers);
 
 		printVelocity(averageVelocity);
-	}
+	}*/
 
 	//------------------------------------Methods for Assigning object-------------------------------------------//
 
@@ -913,7 +1039,7 @@ public class ControllerScrumMaster
 		else
 		{
 			task.getAssignedDevelopers().add(developer);
-			task.setStatus("In progress");
+			task.setAssigned();
 			controllerAll.saveData();
 
 			assignmentCompleted();
@@ -948,8 +1074,6 @@ public class ControllerScrumMaster
 
 		do
 		{
-			int option;
-
 			try
 			{
 				option = menuEditTaskInUserStory();
@@ -1044,24 +1168,16 @@ public class ControllerScrumMaster
 	private void checkUStoryStatus(UserStory userStory, ControllerAll controllerAll)
 	{
 		userStory.getBinary().clear();
-		for (Task foundTasks : userStory.getUserStoryTasks())
-		{
-			if (foundTasks.getStatus().equalsIgnoreCase("Done"))
-			{
+		for (Task foundTasks : userStory.getUserStoryTasks()) {
+
+			if (foundTasks.getStatus().equalsIgnoreCase("Done")) {
 				userStory.getBinary().add(true);
 			}
-			else
-			{
+			else {
 				userStory.getBinary().add(false);
 			}
-			if (!(userStory.getBinary().contains(false)))
-			{
-				userStory.setComplete();
-			}
-			else
-			{
-				//userStory.setOpen();
-			}
+			if (!(userStory.getBinary().contains(false))) {
+				userStory.setComplete(); }
 		}
 		controllerAll.saveData();
 	}
@@ -1152,7 +1268,9 @@ public class ControllerScrumMaster
 		removedTaskInUserStory();
 	}
 
-	private void setUserStoryDeadline(ControllerAll controllerAll, UserStory userStory){
+	private void setUserStoryDeadline(ControllerAll controllerAll){
+
+		UserStory userStory = controllerAll.findUStoryByNumber();
 
 		String deadline = getEndDate();
 

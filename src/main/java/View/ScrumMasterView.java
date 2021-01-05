@@ -19,36 +19,84 @@ public class ScrumMasterView
 	{
 		int option = Scan.readInt("\n\nWelcome Scrum Master!\n" +
 				"You're working on Project " + proName + "." + "\n\n" +
-				"Please enter an option below\n\n" +
-				"1. Create a new project\n" +
-				"2. Create a new sprint backlog\n" +
-				"3. Create a new task for product backlog\n" +
-				"4. Create a new task for sprint backlog\n" +
-				"5. Create a new Development Team Member\n" +
-				"6. Create a new Product owner\n" +
-				"7. Assign a task to Development Team Member\n" +
-				"8. Assign a user story to Development Team Member\n" +
-				"9. Set deadline for user story\n" +
-				"10. View sprint end dates\n" +
-				"11. View task deadlines\n" +
-				"12. View user story deadlines\n" +
-				"13. View product backlog\n" +
-				"14. Edit task menu\n" +
-				"15. Edit user story in sprint backlog menu\n" +
-				"16. View completed tasks\n" +
-				"17. View completed user stories\n" +
-				"18. View all development Team Members\n" +
-				"19. Move task or user story to sprint backlog\n" +
-				"20. Move task or user story to product backlog\n" +
-				"21. View sprint backlog\n" +
-				"22. Calculate average velocity\n" +
-				"23. Switch project\n" +
-				"24. Create a task of a user story located in sprint backlog.\n" + //or name this "Break down a user story in sprint backlog into tasks"
-				"25. Menu for edit tasks in User Story\n" +
-				"26. Show implemented story points in sprint backlogs.\n" +
-				"27. Show average Velocity.\n" +
-				"28. Go back to main menu\n");
+				"Please enter an option below.\n\n" +
+				"1. Create a new Project.\n" +
+				"2. Create a new Sprint backlog.\n" +
+				"3. Create a new Product Owner account.\n" +
+				"4. Create a new Developer account.\n" +
+				"5. User Story Options Menu.\n" +
+				"6. Task Options Menu.\n" +
+				"7. Deadlines.\n" +
+				"8. View Backlogs, Members or completed User Stories/Tasks Menu.\n" +
+				"9. Move a User Story or Task between Product and Sprint Backlogs.\n" +
+				"10. Show Implemented Story Points.\n" +
+				"11. Show average Velocity.\n" +
+				"12. Switch Project.\n" +
+				"13. Go back to Main Menu.\n");
 
+		return option;
+	}
+
+	public static int userStoryOptionsMenu() throws NumberFormatException
+	{
+		int option = Scan.readInt
+				("\n\nUser Story options Menu. \n" +
+
+						"1. Assign a user story to a Developer.\n" +
+						"2. Edit User Story in Sprint Backlog Menu\n" +
+						"3. Break down a User Story in Sprint Backlog into tasks.\n" +
+						"4. Edit User Story's tasks Menu\n" +
+						"5. Back to your menu.\n");
+		return option;
+	}
+	public static int taskOptionsMenu() throws NumberFormatException
+	{
+		int option = Scan.readInt
+				("\n\nTask options Menu.\n" +
+
+						"1. Create a new task for product backlog\n" +
+						"2. Create a new task for sprint backlog\n" +
+						"3. Assign a task to a Developer\n" +
+						"4. Edit task menu\n" +
+						"5. Back to your menu.\n");
+		return option;
+	}
+	public static int deadlinesMenu() throws NumberFormatException
+	{
+		int option = Scan.readInt
+				("\n\nDeadlines options Menu. \n" +
+
+						"1. Set User Story deadline\n" +
+						"2. Set Task deadline\n" +
+						"3. View Sprint end dates\n" +
+						"4. View Task deadlines\n" +
+						"5. View User Story deadlines\n" +
+						"6. Back to your menu.\n");
+		return option;
+	}
+
+	public static int viewProPartsMenu() throws NumberFormatException
+	{
+		int option = Scan.readInt
+				("\n\nView options Menu. \n" +
+
+						"1. View product backlog\n" +
+						"2. View sprint backlog\n" +
+						"3. View all Developers\n" +
+						"4. View completed tasks\n" +
+						"5. View completed user stories\n" +
+						"6. Back to your menu.\n");
+		return option;
+	}
+
+	public static int moveOptionsMenu() throws NumberFormatException
+	{
+		int option = Scan.readInt
+				("\n\nMove options Menu. \n" +
+
+						"1. Move task or user story to sprint backlog\n" +
+						"2. Move task or user story to product backlog\n" +
+						"3. Back to your menu.\n");
 		return option;
 	}
 
