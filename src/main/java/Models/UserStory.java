@@ -161,7 +161,7 @@ public class UserStory implements Comparable<UserStory> {
                         "\nName: " + name +
                         "\nPriority: " + priorityNumber +
                         "\nStory Points: " + storyPoints +
-                        "\nContent. " + content +
+                        "\nContent: " + content +
                         "\nAcceptance Criteria: " + acceptanceCriteria +
                         "\nStatus: " + status +
                         "\nTasks: " + userStoryTasks +
