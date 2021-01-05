@@ -56,48 +56,51 @@ public class ControllerScrumMaster
 						assignUserStory(controllerAll);
 						break;
 					case 9:
-						contProOwner.viewProBacklog(controllerAll);
+						controllerAll.viewDeadlines();
 						break;
 					case 10:
-						scrumMasterEditTaskMenu(controllerAll, contScrum);
+						contProOwner.viewProBacklog(controllerAll);
 						break;
 					case 11:
-						controllerAll.viewCompletedTasks();
+						scrumMasterEditTaskMenu(controllerAll, contScrum);
 						break;
 					case 12:
-						controllerAll.viewCompletedUStories();
+						controllerAll.viewCompletedTasks();
 						break;
 					case 13:
-						viewTeamMembers(controllerAll);
+						controllerAll.viewCompletedUStories();
 						break;
 					case 14:
-						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+						viewTeamMembers(controllerAll);
 						break;
 					case 15:
-						moveTaskOrUSToProductBacklog(controllerAll);
+						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 						break;
 					case 16:
-						viewSprintBacklog(controllerAll);
+						moveTaskOrUSToProductBacklog(controllerAll);
 						break;
 					case 17:
-						velocity();
+						viewSprintBacklog(controllerAll);
 						break;
 					case 18:
-						getProjectName(controllerAll);
+						velocity();
 						break;
 					case 19:
-						createTaskOfUsInSBL(controllerAll);
+						getProjectName(controllerAll);
 						break;
 					case 20:
-						editTaskInUserStoryMenu(controllerAll);
+						createTaskOfUsInSBL(controllerAll);
 						break;
 					case 21:
-						showImplementedStoryPoints(controllerAll);
+						editTaskInUserStoryMenu(controllerAll);
 						break;
 					case 22:
-						showAverageVelocity(controllerAll);
+						showImplementedStoryPoints(controllerAll);
 						break;
 					case 23:
+						showAverageVelocity(controllerAll);
+						break;
+					case 24:
 						running = false;
 						break;
 					default:

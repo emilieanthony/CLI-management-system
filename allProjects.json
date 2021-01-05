@@ -1,52 +1,26 @@
 [ {
-  "id" : 1,
-  "name" : "pro",
-  "startDate" : "2020-2-2",
-  "endDate" : "2020-4-4",
+  "id" : 2,
+  "name" : "hej",
+  "startDate" : "2020-1-1",
+  "endDate" : "2021-1-1",
   "productBacklog" : {
-    "name" : "pro product backlog",
-    "startDate" : "2020-2-2",
-    "endDate" : "2020-4-4",
+    "name" : "hej product backlog",
     "allUserStories" : [ ],
     "tasks" : [ ]
   },
   "allTeamMembers" : [ ],
   "allProductOwners" : [ ],
   "allSprintBacklogs" : [ {
-    "name" : "s",
-    "startDate" : "2020-2-2",
-    "endDate" : "2020-5-5",
+    "name" : "sprint",
     "allTasks" : [ ],
     "userStories" : [ {
       "name" : "us",
-      "number" : 1001,
-      "sprint" : "s",
-      "priorityNumber" : 2,
+      "number" : 2001,
       "storyPoints" : 0,
-      "content" : "3",
-      "acceptanceCriteria" : "4",
-      "status" : "open",
+      "status" : "Open",
       "assignedDevelopers" : [ ],
-      "userStoryTasks" : [ {
-        "id" : 1002,
-        "priorityNumber" : 3,
-        "estimatedHours" : 3,
-        "actualHours" : 0,
-        "status" : "Open",
-        "name" : "task",
-        "description" : "4",
-        "assignedDevelopers" : [ ]
-      }, {
-        "id" : 1002,
-        "priorityNumber" : 3,
-        "estimatedHours" : 4,
-        "actualHours" : 0,
-        "status" : "Open",
-        "name" : "task2",
-        "description" : "3",
-        "assignedDevelopers" : [ ]
-      } ],
-      "binary" : [ false, false ]
+      "userStoryTasks" : [ ],
+      "isCompleted" : [ ]
     } ],
     "totalStoryPoints" : 0
   } ]

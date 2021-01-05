@@ -28,21 +28,22 @@ public class ScrumMasterView
 				"6. Create a new Product owner\n" +
 				"7. Assign a task to Development Team Member\n" +
 				"8. Assign a user story to Development Team Member\n" +
-				"9. View product backlog\n" +
-				"10. Edit Task Menu\n" +
-				"11. View completed tasks\n" +
-				"12. View completed user stories\n" +
-				"13. View all development Team Members\n" +
-				"14. Move task or user story to sprint backlog\n" +
-				"15. Move task or user story to product backlog\n" +
-				"16. View sprint backlog\n" +
-				"17. Calculate average velocity\n" +
-				"18. Switch project\n" +
-				"19. Create a task of a user story located in sprint backlog.\n" + //or name this "Break down a user story in sprint backlog into tasks"
-				"20. Menu for edit tasks in User Story\n" +
-				"21. Show implemented story points in sprint backlogs.\n" +
-				"22. Show average Velocity.\n" +
-				"23. Go back to main menu\n");
+				"9. View sprint end dates\n" +
+				"10. View product backlog\n" +
+				"11. Edit Task Menu\n" +
+				"12. View completed tasks\n" +
+				"13. View completed user stories\n" +
+				"14. View all development Team Members\n" +
+				"15. Move task or user story to sprint backlog\n" +
+				"16. Move task or user story to product backlog\n" +
+				"17. View sprint backlog\n" +
+				"18. Calculate average velocity\n" +
+				"19. Switch project\n" +
+				"20. Create a task of a user story located in sprint backlog.\n" + //or name this "Break down a user story in sprint backlog into tasks"
+				"21. Menu for edit tasks in User Story\n" +
+				"22. Show implemented story points in sprint backlogs.\n" +
+				"23. Show average Velocity.\n" +
+				"24. Go back to main menu\n");
 
 		return option;
 	}
@@ -474,6 +475,12 @@ public class ScrumMasterView
 			{
 				Scan.print(userStory.toString());
 			}
+		}
+	}
+
+	public static void printDeadlines(ArrayList<SprintBacklog> sortedSprints){
+		for (SprintBacklog sprint : sortedSprints){
+			Scan.print("Sprint name: " + sprint.getName() + " end date: " + sprint.getEndDate() + "\n");
 		}
 	}
 

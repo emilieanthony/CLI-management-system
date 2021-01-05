@@ -80,6 +80,10 @@ public class Task implements Comparable<Task> {
 		status = "Complete";
 	}
 
+	public void setAssigned() {
+		status = "Assigned";
+	}
+
 	public void setAssignedTeamMembers(ArrayList<Developer> assignedTeamMembers) {
 		this.assignedDevelopers = assignedTeamMembers;
 	}

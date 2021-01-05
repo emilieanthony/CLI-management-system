@@ -8,40 +8,39 @@ import java.time.LocalDate;
 
 import static View.ScrumMasterView.proName;
 
-public class ProductOwnerView
-{
+public class ProductOwnerView {
 
     /*-----------------------------------1st Menu - menu for Product owner--------------------------------------------*/
 
-    public static int menuProductOwner() throws NumberFormatException
-    {
-        int option = Scan.readInt("\n\nWelcome product owner!\n\n" +
-                "You're working on Project " + proName +"." + "\n\n" +
+    public static int menuProductOwner() throws NumberFormatException {
+        int option = Scan.readInt("\n\nWelcome Product Owner!\n\n" +
+                "You are working on project " + proName + "." + "\n\n" +
                 "Please enter an option below\n" +
-                "1. Create a new product backlog\n" +
-                "2. View product backlog\n" +
-                "3. Edit product backlog\n" +
-                "4. View all completed user stories\n" +
-                "5. Choose project\n" +
-                "6. Go back to main menu\n");
+                "1. View product backlog\n" +
+                "2. Edit product backlog\n" +
+                "3. Create user story to product backlog\n" +
+                "4. Delete user story\n" +
+                "5  View all completed user stories\n" +
+                "6. Delete existing product backlog a create a new empty product backlog\n" +
+                "7. Choose project\n" +
+                "8. Go back to main menu\n");
         return option;
 
     }
 
-    public static void userStoryFail(){
+    public static void userStoryFail() {
         Scan.print("There was a problem in creating the user story, please try again.");
     }
-    public static void proBacklogCreationConf(){
-        Scan.print("You have successfully created a new Product Backlog .");
+
+    public static void proBacklogCreationConf() {
+        Scan.print("You have successfully created a new product backlog.");
     }
 
-    public static ProductBacklog getBacklogInfo() throws Exception
-    {
-        String backlogName = Scan.readLine("Please enter product backlog Name:");
+    public static ProductBacklog getBacklogInfo() throws Exception {
+        String backlogName = Scan.readLine("Please enter product backlog name:");
 
         String startDate = ScrumMasterView.getStartDate();
         String endDate = ScrumMasterView.getEndDate();
-
 
         return new ProductBacklog(backlogName, startDate, endDate);
     }
@@ -49,33 +48,25 @@ public class ProductOwnerView
 
     /*----------------------------------------------2nd Menu---------------------------------------------------------*/
 
-    public static int menuEditBacklog() throws Exception
-    {
+    public static int menuEditBacklog() throws Exception {
         int option;
         option =
-                Scan.readInt("\n\nNow you're accessing " + proName + " project!" +
-                        "\n\nPlease enter the number of which part of the backlog you want to edit:\n\n" +
-                "1- Edit Product Backlog Name\n" +
-                "2- Edit Product Backlog start date\n" +
-                "3- Edit Product Backlog end date\n" +
-                "4- Edit Product Backlog user stories\n" +
-                "5- Add User Story\n" +
-                "6- Remove User Story \n" +
-                "7- Back to your menu");
+                Scan.readInt("\n\n You are working on project " + proName + "." +
+                        "\n\nPlease enter the number of which part of the product backlog you want to edit:\n\n" +
+                        "1. Edit product backlog name\n" +
+                        "2. Edit product backlog start date\n" +
+                        "3. Edit product backlog end date\n" +
+                        "4. Edit product backlog user stories\n" +
+                        "5. Back to your menu");
         return option;
     }
-    public static String getProBacklogName()
-    {
+
+    public static String getProBacklogName() {
         String nameBacklog = Scan.readLine("\nPlease enter a new name for the product backlog:");
         return nameBacklog;
     }
-    public static String getBacklogName()
-    {
-        String nameBacklog = Scan.readLine("\nPlease enter a new sprintName for the backlog:");
-        return nameBacklog;
-    }
 
-    public static LocalDate getBacklogSDate() {
+   /* public static LocalDate getBacklogSDate() {
         LocalDate startDate;
         Scan.print("\nPlease enter a new start date for the product backlog");
         int startYear = Scan.readInt("Start date (YYYY): ");
@@ -83,7 +74,7 @@ public class ProductOwnerView
         int startDay = Scan.readInt("Start date (DD): ");
         startDate = LocalDate.of(startYear, startMonth, startDay);
         return startDate;
-    }
+    }*/ //-- uses getStartDate in scrum master view
 
     public static String getBacklogEDate() {
 
@@ -91,50 +82,45 @@ public class ProductOwnerView
         return endDate;
     }
 
-    public static UserStory getUSInfo(int number ) throws Exception{
-        Scan.print("Add new user story");
+    public static UserStory getUSInfo(int number) throws Exception {
+        Scan.print("Create new user story");
         String name = Scan.readLine("Name: ");
         //int number = Scan.readInt("User story number: ");
-        String sprint = Scan.readLine("SprintBacklog: ");
         int priority = Scan.readInt("Priority: ");
         String content = Scan.readLine("Content: ");
         String acceptanceCriteria = Scan.readLine("Acceptance criteria: ");
-        Scan.print("You have now added a new user story!");
-        return new UserStory(name, number, sprint, priority,content, acceptanceCriteria);
+        return new UserStory(name, number, priority, content, acceptanceCriteria);
 
     }
 
-    public static void createdUStoryReceipt(UserStory userStory){
-        Scan.print("\nYou have added the following user story: \n" + userStory.toString());
+    public static void createdUStoryReceipt(UserStory userStory) {
+        Scan.print("\nYou have now created the following user story to your product backlog: \n" + userStory.toString());
     }
 
-    public static int getUSNumber()
-    {
-        Scan.print("\nRemove a user story");
-        int number = Scan.readInt("\nEnter the number of the user story you want to remove:");
+    public static int getUSNumber() {
+        Scan.print("\nDelete a user story");
+        int number = Scan.readInt("\nEnter the number of the user story you want to delete from the product backlog:");
         return number;
     }
 
 
     /*----------------------------------------------3rd Menu---------------------------------------------------------*/
-    public static int menuEditUserStory()
-    {
+    public static int menuEditUserStory() {
         int option = Scan.readInt
-                ("\n\nWhich part of the user story you want to edit, enter a number:\n\n" +
-                        "1- Edit user story number.\n" +
-                        "2- Edit user story sprintName.\n" +
-                        "3- Edit user story sprint.\n" +
-                        "4- Edit user story priority.\n" +
-                        "5- Edit user story story points.\n" +
-                        "6- Edit user story content.\n" +
-                        "7- Edit user story acceptance criteria\n" +
-                        "8- Edit user story status.\n" +
-                        "9- Back to your menu.\n");
+                ("\n\nPlease enter the number of which part of the user story you want to edit:\n\n" +
+                        "1. Edit user story number.\n" +
+                        "2. Edit user story name.\n" +
+                        "3. Edit user story priority.\n" +
+                        "4. Edit user story story points.\n" +
+                        "5. Edit user story content.\n" +
+                        "6. Edit user story acceptance criteria\n" +
+                        "7. Edit user story status.\n" +
+                        "8. Back to your menu.\n");
         return option;
     }
 
     public static int getStoryNumber() {
-        int number = Scan.readInt("\nPlease enter the user story number you want to edit.");
+        int number = Scan.readInt("\nPlease enter the number of the user story you want to edit.");
         return number;
 
     }
@@ -145,13 +131,8 @@ public class ProductOwnerView
     }
 
     public static String getNewUSName() {
-        String newUSName = Scan.readLine("\nEnter a new sprintName for the user story.");
+        String newUSName = Scan.readLine("\nEnter a new name for the user story.");
         return newUSName;
-    }
-
-    public static String getNewUSSprint() {
-        String newUSSprint = Scan.readLine("\nEnter a new sprint for the user story.");
-        return newUSSprint;
     }
 
     public static int getNewUSPriority() {
@@ -176,28 +157,38 @@ public class ProductOwnerView
     }
 
     public static int getNewUSStatus() {
-        int newUSStatus = Scan.readInt("\nChoose the number of the status's option for the user " +
+        int newUSStatus = Scan.readInt("\nChoose the number of the status you want to change for the user " +
                 "story.\n" +
                 "1. Open.\n" +
                 "2. In progress.\n" +
-                "3. Done\n");
+                "3. Complete. \n" +
+                "4. Assigned.\n");
+
         return newUSStatus;
     }
-    public static void printRemoved(){
-        Scan.print("\nThis User Story has been removed");
+
+    public static void printDeleted() {
+        Scan.print("\nThis user story has been deleted");
     }
-    public static void proBacklogEditConf(){
-        Scan.print("\nYou hav e successfully edited the product backlog.");
+
+    public static void proBacklogEditConf() {
+        Scan.print("\nYou have successfully edited the product backlog.");
     }
-    public static void userStoryEditConf(){
-        Scan.print("\nYou hav e successfully edited the user story.");
+
+    public static void userStoryEditConf() {
+        Scan.print("\nYou have successfully edited the user story.");
     }
-    public static void changeStatusMessage(){
+
+    public static void changeStatusMessage() {
         Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - " +
                 "3 .");
     }
-    public static void changePriorityMessage(){
+
+    public static void changePriorityMessage() {
         Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 5");
+    }
+    public static void nonExistentUStory(){
+        Scan.print("The number you entered does not match with any user story in the product backlog");
     }
 
 

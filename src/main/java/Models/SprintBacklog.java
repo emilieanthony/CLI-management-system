@@ -2,9 +2,11 @@ package Models;
 
 import Utility.DataManagement;
 import View.ScrumMasterView;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class SprintBacklog
+public class SprintBacklog implements Comparable<SprintBacklog>
 {
 	//attributes
 	private String name;
@@ -87,6 +89,14 @@ public class SprintBacklog
 		return null;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
 	public ArrayList<Task> getAllTasks()
 	{
 		return allTasks;
@@ -110,5 +120,27 @@ public class SprintBacklog
 				"\nImplemented story points: " + totalStoryPoints +
 				"\nUser Stories:" + userStories +
 				"\nTasks:" + allTasks;
+	}
+
+	@Override
+	public int compareTo(SprintBacklog anotherSprint) {
+
+
+
+		LocalDate endDate = DataManagement.stringToLocalDate(this.endDate);
+		LocalDate anotherEndDate = DataManagement.stringToLocalDate(anotherSprint.getEndDate());
+
+
+
+		if( endDate.isBefore(anotherEndDate) ) {
+			return -1;
+
+		}else if( endDate == anotherEndDate ) {
+			return 0;
+
+		} else {
+			return 1;
+		}
+
 	}
 }
