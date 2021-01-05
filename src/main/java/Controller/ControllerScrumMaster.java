@@ -1,5 +1,7 @@
 package Controller;
 
+import Exceptions.EmptyNameException;
+import Exceptions.NegativeId;
 import Models.*;
 import Utility.Scan;
 
@@ -606,8 +608,12 @@ public class ControllerScrumMaster
 			controllerAll.saveData();
 			createProjectPrint(project);
 
-		} catch (Exception e)
+		} catch (EmptyNameException e)
 		{
+			emptyName();
+		}catch (NegativeId n){
+			negativeId();
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}

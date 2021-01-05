@@ -69,7 +69,7 @@ public class ScrumMasterView
 
 	//-----------------------------------------------------------------------------------------------------------
 
-	public static Project projectInput() throws NumberFormatException
+	public static Project projectInput() throws Exception
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"project:");
@@ -534,6 +534,15 @@ public class ScrumMasterView
 	public static void setUStoryDeadlineReceipt(UserStory userStory){
 		Scan.print("The following deadline: " + userStory.getDeadline() + " for user story with the number: " +
 				userStory.getNumber() + " with the name: " + userStory.getName());
+	}
+
+	public static void emptyName(){
+		Scan.print("Error: Name cannot be empty, Please " +
+				"try again");
+	}
+	public static void negativeId(){
+		Scan.print("Error: Id cannot be negative, Please " +
+				"try again");
 	}
 
 }

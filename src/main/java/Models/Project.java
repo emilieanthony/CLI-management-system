@@ -1,5 +1,7 @@
 package Models;
 
+import Exceptions.EmptyNameException;
+import Exceptions.NegativeId;
 import Utility.DataManagement;
 import View.ScrumMasterView;
 
@@ -25,18 +27,18 @@ public class Project implements Serializable
     public Project(){}
 
     //constructor
-    public Project(int id, String name, String startDate, String endDate) //throws Exception
+    public Project(int id, String name, String startDate, String endDate) throws Exception
     {
         if (name.isEmpty())
         {
-            noNamePrint();
+            throw new EmptyNameException();
         } else {
             this.name = name;
         }
 
         if(id < 0)
         {
-            negativeIDPrint();
+            throw new NegativeId();
         } else {
             this.id = id;
         }
