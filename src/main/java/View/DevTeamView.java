@@ -47,7 +47,7 @@ public class DevTeamView {
     }
 
     public static int getDeveloperId(){
-        int id = Scan.readInt("Please enter the developer's id");
+        int id = Scan.readInt("Please enter the developer's id you want to assign the task to.");
         return id;
     }
 
@@ -66,7 +66,7 @@ public class DevTeamView {
     }
 
     public static void negativeNumberPrint() {
-        Scan.print("Estimated hours cannot be negative.");
+        Scan.print("Number cannot be negative.");
     }
 
     public static int getUserStoryNumber(){

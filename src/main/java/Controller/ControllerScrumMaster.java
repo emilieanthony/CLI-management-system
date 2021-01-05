@@ -809,14 +809,25 @@ public class ControllerScrumMaster
 
 	private void assignTask(ControllerAll controllerAll)
 	{
-		int idTask = assignTaskPrintIdTask();
-		sprintName = assignTaskPrintSprintName();
-		Developer developer = controllerAll.findDeveloperByID();
-
 		Project project = controllerAll.whichProject();
+
 		if (project == null)
 		{
 			projectNotFound();
+		}
+
+		showAllTasks(project);
+		int idTask = assignTaskPrintIdTask();
+		showAllSprintBacklogs(project);
+		sprintName = assignTaskPrintSprintName();
+		showAllTeamMembers(project);
+		Developer developer = controllerAll.findDeveloperByID();
+
+
+
+		if (developer == null){
+			noDeveloperYet();
+			createDevelopmentMember(controllerAll);
 		}
 
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
