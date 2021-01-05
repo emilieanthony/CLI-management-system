@@ -19,7 +19,7 @@ public class ProductOwnerView {
                 "1. View product backlog\n" +
                 "2. Edit product backlog\n" +
                 "3. Create user story to product backlog\n" +
-                "4. Delete user story\n" +
+                "4. Delete user story from product backlog\n" +
                 "5  View all completed user stories\n" +
                 "6. Delete existing product backlog a create a new empty product backlog\n" +
                 "7. Choose project\n" +
@@ -180,15 +180,14 @@ public class ProductOwnerView {
     }
 
     public static void changeStatusMessage() {
-        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - " +
-                "3 .");
+        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 3.");
     }
 
     public static void changePriorityMessage() {
-        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 5");
+        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 5.");
     }
     public static void nonExistentUStory(){
-        Scan.print("The number you entered does not match with any user story in the product backlog");
+        Scan.print("The number you entered does not match with any user story in the product backlog.");
     }
 
 

@@ -1,28 +1,14 @@
 [ {
   "id" : 1,
-  "name" : "lol",
-  "startDate" : "2021-2-2",
-  "endDate" : "2021-5-5",
+  "name" : "hej",
+  "startDate" : "2020-1-1",
+  "endDate" : "2020-2-2",
   "productBacklog" : {
-    "name" : "lol product backlog",
+    "name" : "hej product backlog",
     "allUserStories" : [ ],
-    "tasks" : [ {
-      "id" : 1001,
-      "estimatedHours" : 3,
-      "actualHours" : 0,
-      "status" : "Open",
-      "name" : "hej",
-      "assignedDevelopers" : [ ]
-    } ]
+    "tasks" : [ ]
   },
   "allTeamMembers" : [ ],
   "allProductOwners" : [ ],
-  "allSprintBacklogs" : [ {
-    "name" : "lal",
-    "startDate" : "2021-2-2",
-    "endDate" : "2021-3-3",
-    "allTasks" : [ ],
-    "userStories" : [ ],
-    "totalStoryPoints" : 0
-  } ]
+  "allSprintBacklogs" : [ ]
 } ]
