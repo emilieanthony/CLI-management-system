@@ -1,6 +1,7 @@
 package Models;
 
 import Exceptions.EmptyName;
+import Exceptions.WrongDate;
 import Utility.DataManagement;
 import View.ScrumMasterView;
 
@@ -32,7 +33,7 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 
 		if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate)))
 		{
-			ScrumMasterView.wrongDatePrint();
+			throw new WrongDate();
 		} else {
 			this.startDate = startDate;
 			this.endDate = endDate;

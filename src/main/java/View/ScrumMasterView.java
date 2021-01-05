@@ -217,9 +217,9 @@ public class ScrumMasterView
 		return newPriorityNumberTask;
 	}
 
-	public static void wrongDatePrint()
-	{
-		Scan.print("Error. You entered a start date that is after the end date.\n");
+	public static void wrongDatePrint() {
+		Scan.print("Error. You entered a start date that is after the end date. Please try again\n");
+
 	}
 
 	public static int newStatusTask()

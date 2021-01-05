@@ -647,12 +647,16 @@ public class ControllerScrumMaster
 			controllerAll.saveData();
 			createProjectPrint(project);
 
-		} catch (EmptyName e)
-		{
+		} catch (EmptyName e) {
 			emptyName();
-		}catch (NegativeId n){
+
+		} catch (NegativeId n){
 			negativeId();
-		}catch (Exception e){
+
+		} catch (WrongDate w){
+			wrongDatePrint();
+
+		} catch (Exception e){
 			AllView.errorPrint();
 		}
 	}
@@ -674,6 +678,10 @@ public class ControllerScrumMaster
 
 		} catch (EmptyName e) {
 			emptyName();
+
+		} catch (WrongDate w){
+			wrongDatePrint();
+
 		} catch (Exception e) {
 			AllView.errorPrint();
 		}

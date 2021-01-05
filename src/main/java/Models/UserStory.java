@@ -42,10 +42,10 @@ public class UserStory implements Comparable<UserStory> {
             this.number = number;
         }
 
-        if (priorityNumber < 0 || priorityNumber > 5) {
+        if (priority < 0 || priority > 5) {
             throw new InvalidPriorityNumber();
         } else {
-            this.priorityNumber = priorityNumber;
+            this.priorityNumber = priority;
         }
 
         this.storyPoints = 0;

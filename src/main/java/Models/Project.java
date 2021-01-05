@@ -3,6 +3,7 @@ package Models;
 import Controller.ControllerAll;
 import Exceptions.EmptyName;
 import Exceptions.NegativeId;
+import Exceptions.WrongDate;
 import Utility.DataManagement;
 import View.ScrumMasterView;
 
@@ -44,7 +45,7 @@ public class Project implements Serializable
 
         if(DataManagement.stringToLocalDate(startDate).isAfter(DataManagement.stringToLocalDate(endDate)))
         {
-            ScrumMasterView.wrongDatePrint();
+            throw new WrongDate();
 
         } else {
             this.startDate = startDate;

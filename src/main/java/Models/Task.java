@@ -38,7 +38,7 @@ public class Task implements Comparable<Task> {
 			this.priorityNumber = priorityNumber;
 		}
 
-		if (estimatedHours < 0) {
+		if (estimatedTime < 0) {
 			throw new EstimatedHours();
 		} else {
 			this.estimatedHours = estimatedTime;
