@@ -33,7 +33,7 @@ public class ControllerDeveloper {
                         break;
                     case 4:
                         proCont.viewProBacklog(controllerAll);
-                        proCont.editUSStatus(getStoryNumber(),controllerAll);
+                        proCont.changeUSStatusInPBL(getStoryNumber(),controllerAll);
                         break;
                     case 5:
                         proCont.viewProBacklog(controllerAll);//View product backlog
@@ -134,12 +134,18 @@ public class ControllerDeveloper {
 
     public void completeTask(ControllerAll controllerAll){
 
-        Developer developer = controllerAll.findDeveloperByID();
+        String name = getNameCompleteTask();
+
         Task task = openTask(controllerAll);
+
         int actualHrs = getActualHrs();
+
         task.setActualHours( actualHrs );
+
         task.setComplete();
-        task.setCompletedBy(developer);
+
+        task.setCompletedBy(name);
+
         taskCompletedReceipt(task);
     }
 }

@@ -2,6 +2,8 @@ package Controller;
 
 import Models.*;
 import Utility.Scan;
+import View.ProductOwnerView;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,6 +12,8 @@ import static Utility.PrintUtility.*;
 
 import static View.DevTeamView.*;
 import static View.DevTeamView.getUserStoryNumber;
+import static View.ProductOwnerView.changeStatusMessage;
+import static View.ProductOwnerView.userStoryEditConf;
 import static View.ScrumMasterView.*;
 
 public class ControllerScrumMaster
@@ -56,7 +60,8 @@ public class ControllerScrumMaster
 						assignUserStory(controllerAll);
 						break;
 					case 9:
-						setUserStoryDeadline(controllerAll);
+						UserStory userStory = controllerAll.findUStoryByNumber();
+						setUserStoryDeadline(controllerAll, userStory);
 						break;
 					case 10:
 						controllerAll.viewSprintDeadlines();
@@ -74,42 +79,45 @@ public class ControllerScrumMaster
 						scrumMasterEditTaskMenu(controllerAll, contScrum);
 						break;
 					case 15:
-						controllerAll.viewCompletedTasks();
+						editUSInSprintBLMenu(controllerAll);
 						break;
 					case 16:
-						controllerAll.viewCompletedUStories();
+						controllerAll.viewCompletedTasks();
 						break;
 					case 17:
-						viewTeamMembers(controllerAll);
+						controllerAll.viewCompletedUStories();
 						break;
 					case 18:
-						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
+						viewTeamMembers(controllerAll);
 						break;
 					case 19:
-						moveTaskOrUSToProductBacklog(controllerAll);
+						moveTaskOrUSToSprintBacklog(contProOwner, controllerAll);
 						break;
 					case 20:
-						viewSprintBacklog(controllerAll);
+						moveTaskOrUSToProductBacklog(controllerAll);
 						break;
 					case 21:
-						velocity();
+						viewSprintBacklog(controllerAll);
 						break;
 					case 22:
-						getProjectName(controllerAll);
+						velocity();
 						break;
 					case 23:
-						createTaskOfUsInSBL(controllerAll);
+						getProjectName(controllerAll);
 						break;
 					case 24:
-						editTaskInUserStoryMenu(controllerAll);
+						createTaskOfUsInSBL(controllerAll);
 						break;
 					case 25:
-						showImplementedStoryPoints(controllerAll);
+						editTaskInUserStoryMenu(controllerAll);
 						break;
 					case 26:
-						showAverageVelocity(controllerAll);
+						showImplementedStoryPoints(controllerAll);
 						break;
 					case 27:
+						showAverageVelocity(controllerAll);
+						break;
+					case 28:
 						running = false;
 						break;
 					default:
@@ -703,6 +711,73 @@ public class ControllerScrumMaster
 		return sprintBacklog;
 	}
 
+	public void editUSInSprintBLMenu(ControllerAll controllerAll){
+
+		sprintName = getSprintBacklogByName();
+
+		int USNumber = getUserStoryNumber();
+
+		UserStory userStory = findUStoryByNumberSBL(USNumber, controllerAll);
+
+		boolean running = true;
+
+		do
+		{
+			int option;
+
+			try
+			{
+				option = menuEditUStoryInSBL();
+				switch (option)
+				{
+					case 1:
+						controllerAll.editUSStoryPoints(userStory);//Edit user story point
+						break;
+					case 2:
+						controllerAll.editUSStoryPoints(userStory);//edit priority number
+						break;
+					case 3:
+						controllerAll.changeUSStatus(userStory);//change user story status
+						break;
+					case 4:
+						setUserStoryDeadline(controllerAll, userStory);//set user story deadline
+						break;
+					case 5:
+						removeUSFromSBL(userStory, findSprintBacklogByName(controllerAll));//remove user story from sprint backlog
+					case 6:
+						running = false;
+						break;
+					default:
+						defaultMessage();
+				}
+			} catch (Exception e)
+			{
+				invalidInputPrint();
+			}
+		} while (running);
+
+
+	}
+
+	public UserStory findSBLUStory(ControllerAll controllerAll){
+		sprintName = getSprintBacklogByName();
+
+		int USNumber = getUserStoryNumber();
+
+		UserStory userStory = findUStoryByNumberSBL(USNumber, controllerAll);
+
+		return userStory;
+	}
+
+	public void removeUSFromSBL(UserStory userStory, SprintBacklog sprintBacklog){
+		boolean confirmRemoval = removingUSMsg(userStory);
+		if (confirmRemoval){
+			sprintBacklog.getUserStories().remove(userStory);
+		}
+
+	}
+
+
 	//------------------------------------Methods for velocity-------------------------------------------//
 
 	private int[] arrayOfVelocity(String input)
@@ -998,9 +1073,7 @@ public class ControllerScrumMaster
 		removedTaskInUserStory();
 	}
 
-	private void setUserStoryDeadline(ControllerAll controllerAll){
-
-		UserStory userStory = controllerAll.findUStoryByNumber();
+	private void setUserStoryDeadline(ControllerAll controllerAll, UserStory userStory){
 
 		String deadline = getEndDate();
 

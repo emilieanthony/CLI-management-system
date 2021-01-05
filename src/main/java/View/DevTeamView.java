@@ -124,6 +124,11 @@ public class DevTeamView {
         Scan.print("Task " + task.getName() + " with the ID " + task.getId() + " is now set as completed"
         + "\nEstimated hours: " + task.getEstimatedHours() + " Actual hours: " + task.getActualHours());
     }
+
+    public static String getNameCompleteTask(){
+        return Scan.readLine("Enter name of whoever completed the task: ");
+    }
+
 }
 
 
