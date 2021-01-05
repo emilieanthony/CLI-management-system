@@ -39,7 +39,7 @@ public class DataManagement
             projects = mapper.reader().forType(new TypeReference<ArrayList<Project>>() {})
                     .readValue(new File("allProjects.json"));
 
-            Scan.print(projects.toString());
+
         } catch (IOException e)
         {
             e.printStackTrace();
