@@ -1,6 +1,10 @@
 package Controller;
 
+import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import Models.*;
 import Utility.DataManagement;
@@ -223,6 +227,8 @@ public class ControllerAll
 
     public void viewCompletedTasks()
     {
+
+
         ArrayList<Task> allTasks = collectAllTasks();
         ArrayList<Task> completedTasks = new ArrayList<>();
         for (Task task : allTasks)
@@ -248,4 +254,19 @@ public class ControllerAll
         }
         printCompleteUStories(completedStories);
     }
+
+
+    public void viewDeadlines(){
+
+        Project project = whichProject();
+
+        ArrayList<SprintBacklog> allSprintBLs = project.getAllSprintBacklogs();
+
+        Collections.sort(allSprintBLs, SprintBacklog::compareTo);
+
+
+        printDeadlines(allSprintBLs);
+
+    }
+
 }

@@ -16,7 +16,7 @@ public class UserStory implements Comparable<UserStory> {
     private String status;
     private ArrayList<Developer> assignedDevelopers;
     private ArrayList<Task> userStoryTasks;
-    private ArrayList<Boolean> isCompleted;
+    private ArrayList<Boolean> binary;
 
     // Constructors:-
     public UserStory(String name, int number, int priority,
@@ -46,7 +46,7 @@ public class UserStory implements Comparable<UserStory> {
         this.status = "Open";
         this.assignedDevelopers = new ArrayList<>();
         this.userStoryTasks = new ArrayList<>();
-        this.isCompleted = new ArrayList<>();
+        this.binary = new ArrayList<>();
     }
 
     //Empty constructor for data exporting and importing.
@@ -82,8 +82,8 @@ public class UserStory implements Comparable<UserStory> {
         return assignedDevelopers;
     }
 
-    public ArrayList<Boolean> getIsCompleted() {
-        return isCompleted;
+    public ArrayList<Boolean> getBinary() {
+        return binary;
     }
 
 
