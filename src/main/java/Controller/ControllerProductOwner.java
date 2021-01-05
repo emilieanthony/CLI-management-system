@@ -336,7 +336,6 @@ public class ControllerProductOwner {
 
             if (foundUserStory.getNumber() == number) {
                 userStory = foundUserStory;
-                Scan.print(userStory.toString());
             }
         }
         return userStory;
