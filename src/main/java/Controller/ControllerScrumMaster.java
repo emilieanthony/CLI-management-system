@@ -18,7 +18,8 @@ public class ControllerScrumMaster
 	public static String sprintName;
 	public static int option;
 
-	public void scrumMasterMenu(ControllerAll controllerAll,ControllerProductOwner contProOwner,ControllerScrumMaster contScrum)
+	public void scrumMasterMenu(ControllerAll controllerAll,ControllerProductOwner contProOwner,
+								ControllerScrumMaster contScrum)
 	{
 
 		boolean running = true;
@@ -121,7 +122,6 @@ public class ControllerScrumMaster
 
 		do
 		{
-
 			try
 			{
 				option = taskOptionsMenu();
