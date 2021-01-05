@@ -1,7 +1,8 @@
 package Models;
 
+import Exceptions.EmptyName;
+
 import java.io.Serializable;
-import static View.DevTeamView.negativeIDPrint;
 
 
 public class Developer implements Serializable
@@ -15,14 +16,16 @@ public class Developer implements Serializable
     //Constructor
     public Developer(String name, int id) throws Exception
     {
-        this.name = name;
-        if(id < 0)
+
+        if (name.isEmpty())
         {
-            negativeIDPrint();
+            throw new EmptyName();
         } else {
-            this.id = id;
+            this.name = name;
         }
+        this.id = id;
     }
+
 
     public void setName(String name) {
         this.name = name;

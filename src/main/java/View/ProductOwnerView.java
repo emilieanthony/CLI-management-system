@@ -66,16 +66,6 @@ public class ProductOwnerView {
         return nameBacklog;
     }
 
-   /* public static LocalDate getBacklogSDate() {
-        LocalDate startDate;
-        Scan.print("\nPlease enter a new start date for the product backlog");
-        int startYear = Scan.readInt("Start date (YYYY): ");
-        int startMonth = Scan.readInt("Start date (MM): ");
-        int startDay = Scan.readInt("Start date (DD): ");
-        startDate = LocalDate.of(startYear, startMonth, startDay);
-        return startDate;
-    }*/ //-- uses getStartDate in scrum master view
-
     public static String getBacklogEDate() {
 
         String endDate = ScrumMasterView.getEndDate();

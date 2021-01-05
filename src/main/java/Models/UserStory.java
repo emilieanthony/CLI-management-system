@@ -1,10 +1,11 @@
 package Models;
 
+import Exceptions.EmptyName;
+import Exceptions.InvalidPriorityNumber;
+import Exceptions.NegativeId;
 import Utility.DataManagement;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import static View.DevTeamView.*;
 
 
 public class UserStory implements Comparable<UserStory> {
@@ -27,20 +28,22 @@ public class UserStory implements Comparable<UserStory> {
     public UserStory(String name, int number, int priority,
                      String content, String acceptanceCriteria) throws Exception {
 
-        if (name.isEmpty()) {
-            noNamePrint();
+        if (name.isEmpty())
+        {
+            throw new EmptyName();
         } else {
             this.name = name;
         }
 
-        if (number < 0) {
-            negativeNumberPrint();
+        if(number < 0)
+        {
+            throw new NegativeId();
         } else {
             this.number = number;
         }
 
-        if (priority < 0) {
-            negativeNumberPrint();
+        if (priority < 0 || priority > 5) {
+            throw new InvalidPriorityNumber();
         } else {
             this.priorityNumber = priority;
         }

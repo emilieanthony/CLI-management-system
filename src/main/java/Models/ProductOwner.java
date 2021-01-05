@@ -1,7 +1,9 @@
 package Models;
 
+import Exceptions.EmptyName;
+import Exceptions.NegativeId;
+
 import java.io.Serializable;
-import static View.DevTeamView.negativeIDPrint;
 
 
 public class ProductOwner implements Serializable
@@ -15,14 +17,21 @@ public class ProductOwner implements Serializable
     //Constructor
     public ProductOwner(String name , int id) throws Exception
     {
-        this.name = name;
+        if (name.isEmpty())
+        {
+            throw new EmptyName();
+        } else {
+            this.name = name;
+        }
+
         if(id < 0)
         {
-            negativeIDPrint();
+            throw new NegativeId();
         } else {
             this.id = id;
         }
     }
+
 
     public void setName(String name)
     {
