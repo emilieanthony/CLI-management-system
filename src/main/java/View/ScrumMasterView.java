@@ -33,20 +33,21 @@ public class ScrumMasterView
 				"11. View task deadlines\n" +
 				"12. View user story deadlines\n" +
 				"13. View product backlog\n" +
-				"14. Edit Task Menu\n" +
-				"15. View completed tasks\n" +
-				"16. View completed user stories\n" +
-				"17. View all development Team Members\n" +
-				"18. Move task or user story to sprint backlog\n" +
-				"19. Move task or user story to product backlog\n" +
-				"20. View sprint backlog\n" +
-				"21. Calculate average velocity\n" +
-				"22. Switch project\n" +
-				"23. Create a task of a user story located in sprint backlog.\n" + //or name this "Break down a user story in sprint backlog into tasks"
-				"24. Menu for edit tasks in User Story\n" +
-				"25. Show implemented story points in sprint backlogs.\n" +
-				"26. Show average Velocity.\n" +
-				"27. Go back to main menu\n");
+				"14. Edit task menu\n" +
+				"15. Edit user story in sprint backlog menu\n" +
+				"16. View completed tasks\n" +
+				"17. View completed user stories\n" +
+				"18. View all development Team Members\n" +
+				"19. Move task or user story to sprint backlog\n" +
+				"20. Move task or user story to product backlog\n" +
+				"21. View sprint backlog\n" +
+				"22. Calculate average velocity\n" +
+				"23. Switch project\n" +
+				"24. Create a task of a user story located in sprint backlog.\n" + //or name this "Break down a user story in sprint backlog into tasks"
+				"25. Menu for edit tasks in User Story\n" +
+				"26. Show implemented story points in sprint backlogs.\n" +
+				"27. Show average Velocity.\n" +
+				"28. Go back to main menu\n");
 
 		return option;
 	}
@@ -64,6 +65,19 @@ public class ScrumMasterView
 						"4- Remove Task from Sprint Backlog.\n" +
 						"5- Remove Task from Product Backlog.\n" +
 						"6- Back to your menu.\n");
+		return option;
+	}
+
+	public static int menuEditUStoryInSBL() throws NumberFormatException{
+		int option = Scan.readInt
+				("\n\nEdit User story in sprint backlog menu. \n " +
+						"Enter a number:\n\n" +
+						"1. Edit user story points\n" +
+						"2. Edit priority number of user story\n" +
+						"3. Change user story status\n" +
+						"4. Set user story deadline\n" +
+						"5. Remove user story from Sprint Backlog\n" +
+						"6. Back to your menu.\n");
 		return option;
 	}
 
@@ -534,6 +548,21 @@ public class ScrumMasterView
 	public static void setUStoryDeadlineReceipt(UserStory userStory){
 		Scan.print("The following deadline: " + userStory.getDeadline() + " for user story with the number: " +
 				userStory.getNumber() + " with the name: " + userStory.getName());
+	}
+
+	public static int getUSPoints(){
+		int points = Scan.readInt("Enter the amount of user story points this user story shall have: ");
+		return points;
+	}
+
+	public static boolean removingUSMsg(UserStory userStory) {
+		boolean confirmation = false;
+		int option = Scan.readInt("Removing the following user story: \n" + userStory.toString()
+				+ "\nEnter 1 to proceed, or enter 2 to cancel");
+		if (option == 1) {
+			confirmation = true;
+		}
+		return confirmation;
 	}
 
 }
