@@ -484,10 +484,15 @@ public class ScrumMasterView
 		}
 	}
 
-	public static void objectCreated()
+	public static void taskCreatedToPbacklog()
 	{
-		Scan.print("Object successfully created");
-	} //isnt object too vague?
+		Scan.print("Task successfully created to product backlog!");
+	}
+
+	public static void taskCreatedToSbacklog()
+	{
+		Scan.print("Task successfully created to sprint backlog!");
+	}
 }
 
 

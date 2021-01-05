@@ -185,7 +185,7 @@ public class ControllerScrumMaster
 				createdTaskReceipt(newTask);
 				project.getProductBacklog().getTasks().add(newTask);
 				controllerAll.saveData();
-				objectCreated();
+				taskCreatedToPbacklog();
 
 			} catch (Exception e)
 			{
@@ -213,7 +213,7 @@ public class ControllerScrumMaster
 				sprintName = getSprintBacklogName();
 				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
 				controllerAll.saveData();
-				objectCreated();
+				taskCreatedToSbacklog();
 
 			} catch (Exception e)
 			{

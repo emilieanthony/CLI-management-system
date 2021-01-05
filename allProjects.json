@@ -1,8 +1,8 @@
 [ {
-  "id" : 2,
+  "id" : 1,
   "name" : "hej",
   "startDate" : "2020-1-1",
-  "endDate" : "2021-1-1",
+  "endDate" : "2020-2-2",
   "productBacklog" : {
     "name" : "hej product backlog",
     "allUserStories" : [ ],
@@ -10,18 +10,5 @@
   },
   "allTeamMembers" : [ ],
   "allProductOwners" : [ ],
-  "allSprintBacklogs" : [ {
-    "name" : "sprint",
-    "allTasks" : [ ],
-    "userStories" : [ {
-      "name" : "us",
-      "number" : 2001,
-      "storyPoints" : 0,
-      "status" : "Open",
-      "assignedDevelopers" : [ ],
-      "userStoryTasks" : [ ],
-      "isCompleted" : [ ]
-    } ],
-    "totalStoryPoints" : 0
-  } ]
+  "allSprintBacklogs" : [ ]
 } ]
