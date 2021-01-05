@@ -28,22 +28,25 @@ public class ScrumMasterView
 				"6. Create a new Product owner\n" +
 				"7. Assign a task to Development Team Member\n" +
 				"8. Assign a user story to Development Team Member\n" +
-				"9. View sprint end dates\n" +
-				"10. View product backlog\n" +
-				"11. Edit Task Menu\n" +
-				"12. View completed tasks\n" +
-				"13. View completed user stories\n" +
-				"14. View all development Team Members\n" +
-				"15. Move task or user story to sprint backlog\n" +
-				"16. Move task or user story to product backlog\n" +
-				"17. View sprint backlog\n" +
-				"18. Calculate average velocity\n" +
-				"19. Switch project\n" +
-				"20. Create a task of a user story located in sprint backlog.\n" + //or name this "Break down a user story in sprint backlog into tasks"
-				"21. Menu for edit tasks in User Story\n" +
-				"22. Show implemented story points in sprint backlogs.\n" +
-				"23. Show average Velocity.\n" +
-				"24. Go back to main menu\n");
+				"9. Set deadline for user story\n" +
+				"10. View sprint end dates\n" +
+				"11. View task deadlines\n" +
+				"12. View user story deadlines\n" +
+				"13. View product backlog\n" +
+				"14. Edit Task Menu\n" +
+				"15. View completed tasks\n" +
+				"16. View completed user stories\n" +
+				"17. View all development Team Members\n" +
+				"18. Move task or user story to sprint backlog\n" +
+				"19. Move task or user story to product backlog\n" +
+				"20. View sprint backlog\n" +
+				"21. Calculate average velocity\n" +
+				"22. Switch project\n" +
+				"23. Create a task of a user story located in sprint backlog.\n" + //or name this "Break down a user story in sprint backlog into tasks"
+				"24. Menu for edit tasks in User Story\n" +
+				"25. Show implemented story points in sprint backlogs.\n" +
+				"26. Show average Velocity.\n" +
+				"27. Go back to main menu\n");
 
 		return option;
 	}
@@ -57,9 +60,10 @@ public class ScrumMasterView
 						"Which part of the task do you want to edit, enter a number:\n\n" +
 						"1- Edit Task Priority Number.\n" +
 						"2- Edit Task Status.\n" +
-						"3- Remove Task from Sprint Backlog.\n" +
-						"4- Remove Task from Product Backlog.\n" +
-						"5- Back to your menu.\n");
+						"3- Set task deadline\n" +
+						"4- Remove Task from Sprint Backlog.\n" +
+						"5- Remove Task from Product Backlog.\n" +
+						"6- Back to your menu.\n");
 		return option;
 	}
 
@@ -484,15 +488,54 @@ public class ScrumMasterView
 		}
 	}
 
-	public static void taskCreatedToPbacklog()
+	public static void taskCreatedToPBacklog()
 	{
 		Scan.print("Task successfully created to product backlog!");
 	}
 
-	public static void taskCreatedToSbacklog()
+	public static void taskCreatedToSBacklog()
 	{
 		Scan.print("Task successfully created to sprint backlog!");
 	}
+
+	public static void printTaskDeadlines(ArrayList<Task> wDeadlines, ArrayList<Task> wODeadlines){
+		for (Task task : wDeadlines){
+			Scan.print(task.getDeadline() + " Task ID: " + task.getId() + " Name: " + task.getName());
+		}
+
+		if (!wODeadlines.isEmpty()){
+			Scan.print("\n\nThe following tasks do not have any deadlines");
+			for (Task task : wODeadlines){
+				Scan.print("ID: " + task.getId() + " Name: " + task.getName());
+			}
+		}
+
+	}
+
+	public static void printUStoryDeadlines(ArrayList<UserStory> wDeadlines, ArrayList<UserStory> wODeadlines){
+		for (UserStory userStory : wDeadlines){
+			Scan.print(userStory.getDeadline() + " Number: " + userStory.getNumber() + " Name: " + userStory.getName());
+		}
+
+		if (!wODeadlines.isEmpty()){
+			Scan.print("\n\nThe following user stories do not have any deadlines");
+			for (UserStory userStory : wODeadlines){
+				Scan.print("Number: " + userStory.getNumber() + " Name: " + userStory.getName());
+			}
+		}
+
+	}
+
+	public static void setTaskDeadlineReceipt(Task task){
+		Scan.print("The following deadline: " + task.getDeadline() + " for task with the ID: " + task.getId() + " with " +
+				" the name: " + task.getName());
+	}
+
+	public static void setUStoryDeadlineReceipt(UserStory userStory){
+		Scan.print("The following deadline: " + userStory.getDeadline() + " for user story with the number: " +
+				userStory.getNumber() + " with the name: " + userStory.getName());
+	}
+
 }
 
 

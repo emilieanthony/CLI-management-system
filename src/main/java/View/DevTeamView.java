@@ -21,24 +21,26 @@ public class DevTeamView {
                 "Please enter an option below\n" +
                 "1. View my own tasks\n" +
                 "2. View assigned tasks\n" +
-                "3. Change task status\n" +
+                "3. Set task as completed\n" +
                 "4. Change user story status\n" +
                 "5. View product backlog\n" +
                 "6. View sprint backlog\n" +
                 "7. View all tasks\n" +
                 "8. View all complete tasks\n" +
                 "9. View all complete user stories\n" +
-                "10. Switch projects\n" +
-                "11. Go back to main menu\n");
+                "10. View task deadlines\n" +
+                "11. View user story deadlines\n" +
+                "12. Switch projects\n" +
+                "13. Go back to main menu\n");
         return option;
     }
 
-    public static int getTaskMenu() {
+    /*public static int getTaskMenu() {
         int option = Scan.readInt("\n\nPlease enter an option below\n" +
                 "1. Set Task as complete and enter actual hrs\n" +
                 "2. Go back to previous menu\n");
         return option;
-    }
+    }*/
 
     public static void invalidInputPrint(){
         Scan.print("There was a problem entering input data.");
