@@ -279,10 +279,6 @@ public class ControllerScrumMaster
 				{
 					invalidTaskPrint();
 				}
-				else if (!project.getAllSprintBacklogs().contains(sprintName))
-				{
-					invalidSprintBacklog();
-				}
 				else
 				{
 					Task taskToMove = taskInBacklog;
@@ -660,6 +656,7 @@ public class ControllerScrumMaster
 		SprintBacklog sprintBacklog = null;
 		Project project = controllerAll.whichProject();
 		Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
+		boolean foundIt = false;
 
 		while (sprintBacklog == null && iterator.hasNext())
 		{
@@ -667,7 +664,13 @@ public class ControllerScrumMaster
 			if (foundBacklog.getName().equalsIgnoreCase(sprintName))
 			{
 				sprintBacklog = foundBacklog;
+				foundIt = true;
 			}
+		}
+
+		if(!foundIt)
+		{
+			invalidSprintBacklog();
 		}
 		return sprintBacklog;
 	}
