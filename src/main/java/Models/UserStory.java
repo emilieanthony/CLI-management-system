@@ -156,17 +156,7 @@ public class UserStory implements Comparable<UserStory> {
     }
 
     public int compareByDeadline(UserStory anotherStory){
-        LocalDate deadline = DataManagement.stringToLocalDate(this.deadline);
-        LocalDate anotherDeadline = DataManagement.stringToLocalDate(anotherStory.getDeadline());
-
-        if (deadline.isBefore(anotherDeadline)){
-            return -1;
-        } else if ( deadline == anotherDeadline) {
-            return 0;
-        } else {
-            return 1;
-        }
-
+        return DataManagement.compareDeadlines(this.deadline, anotherStory.getDeadline());
     }
 
     public boolean isAssigned(Developer member) {
@@ -198,6 +188,10 @@ public class UserStory implements Comparable<UserStory> {
             for (Developer member : assignedDevelopers) {
                 output = output + "\n" + member.toString() + "\n";
             }
+        }
+
+        if(!(deadline==null)){
+            output = output + "\nDeadline: " + deadline;
         }
 
         return output;

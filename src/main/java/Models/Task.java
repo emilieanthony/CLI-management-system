@@ -143,17 +143,7 @@ public class Task implements Comparable<Task> {
 	}
 
 	public int compareByDeadline(Task anotherTask){
-		LocalDate deadline = DataManagement.stringToLocalDate(this.deadline);
-		LocalDate anotherDeadline = DataManagement.stringToLocalDate(anotherTask.getDeadline());
-
-		if (deadline.isBefore(anotherDeadline)){
-			return -1;
-		} else if ( deadline == anotherDeadline) {
-			return 0;
-		} else {
-			return 1;
-		}
-
+		return DataManagement.compareDeadlines(this.deadline, anotherTask.getDeadline());
 	}
 
 
@@ -179,6 +169,10 @@ public class Task implements Comparable<Task> {
 			for (Developer member : assignedDevelopers) {
 				output = output + "\n" + member.toString() + "\n";
 			}
+		}
+
+		if(!(deadline==null)){
+			output = output + "\nDeadline: " + deadline;
 		}
 
 		return output;
