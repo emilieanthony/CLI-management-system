@@ -304,10 +304,6 @@ public class ControllerScrumMaster
 				{
 					invalidTaskPrint();
 				}
-				else if (!project.getAllSprintBacklogs().contains(sprintName))
-				{
-					invalidSprintBacklog();
-				}
 				else
 				{
 					Task taskToMove = taskInBacklog;
@@ -442,12 +438,17 @@ public class ControllerScrumMaster
 						task.setStatus("Open");
 						objectEdited();
 					}
-					else if (newStatusTask == 2)
+					else if(newStatusTask == 2)
+					{
+						task.setStatus("Assigned");
+						objectEdited();
+					}
+					else if (newStatusTask == 3)
 					{
 						task.setStatus("Work in Progress");
 						objectEdited();
 					}
-					else if (newStatusTask == 3)
+					else if (newStatusTask == 4)
 					{
 						task.setStatus("Complete");
 						objectEdited();
@@ -689,6 +690,7 @@ public class ControllerScrumMaster
 		SprintBacklog sprintBacklog = null;
 		Project project = controllerAll.whichProject();
 		Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
+		boolean foundIt = false;
 
 		while (sprintBacklog == null && iterator.hasNext())
 		{
@@ -696,7 +698,13 @@ public class ControllerScrumMaster
 			if (foundBacklog.getName().equalsIgnoreCase(sprintName))
 			{
 				sprintBacklog = foundBacklog;
+				foundIt = true;
 			}
+		}
+
+		if(!foundIt)
+		{
+			invalidSprintBacklog();
 		}
 		return sprintBacklog;
 	}
@@ -959,11 +967,17 @@ public class ControllerScrumMaster
 		}
 		else if (option == 2)
 		{
-			task.setInProgress();
+			task.setAssigned();
 			Scan.print(task.toString());
 			objectEdited();
 		}
 		else if (option == 3)
+		{
+			task.setInProgress();
+			Scan.print(task.toString());
+			objectEdited();
+		}
+		else if (option == 4)
 		{
 			task.setComplete();
 			checkUStoryStatus(userStory, controllerAll);

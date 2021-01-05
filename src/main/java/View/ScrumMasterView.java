@@ -222,10 +222,10 @@ public class ScrumMasterView
 
 		int newStatusTask = Scan.readInt("\nEnter the number for the new status; \n" +
 				"1 = Open\n " +
-				"2 = Work in progress\n " +
-				"3 = Complete.");
+				"2 = Assigned\n" +
+				"3 = Work in progress\n " +
+				"4 = Complete.");
 		return newStatusTask;
-
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------
