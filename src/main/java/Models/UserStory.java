@@ -40,7 +40,6 @@ public class UserStory implements Comparable<UserStory> {
             this.priorityNumber = priority;
         }
 
-
         this.storyPoints = 0;
         this.content = content;
         this.acceptanceCriteria = acceptanceCriteria;
@@ -95,8 +94,6 @@ public class UserStory implements Comparable<UserStory> {
     public void setNumber(int number) {
         this.number = number;
     }
-
-
 
     public void setPriorityNumber(int priorityNumber) {
         /*do
@@ -164,7 +161,7 @@ public class UserStory implements Comparable<UserStory> {
                         "\nName: " + name +
                         "\nPriority: " + priorityNumber +
                         "\nStory Points: " + storyPoints +
-                        "\nContent = " + content +
+                        "\nContent. " + content +
                         "\nAcceptance Criteria: " + acceptanceCriteria +
                         "\nStatus: " + status +
                         "\nTasks: " + userStoryTasks +
