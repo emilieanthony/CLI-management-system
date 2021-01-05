@@ -25,4 +25,18 @@ public class AllView {
 
         return option;
     }
+
+    public static void errorPrint(){
+        Scan.print("There was an error, please try again");
+    }
+
+    public static void errorEstimatedHours(){
+        Scan.print("Error: Estimated hours cannot be negative, Please " +
+                "try again");
+    }
+
+    public static void errorEmptyDescription(){
+        Scan.print("Error: Description cannot be empty, Please " +
+                "try again");
+    }
 }

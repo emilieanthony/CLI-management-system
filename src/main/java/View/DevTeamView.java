@@ -60,17 +60,13 @@ public class DevTeamView {
         return id;
     }
 
-    public static void noNamePrint(){
-        Scan.print("Names cannot be empty. Please try again");
-        menuScrumMaster();
-    }
 
     public static void negativeIDPrint() {
         Scan.print("ID cannot be negative.");
     }
 
     public static void negativeNumberPrint() {
-        Scan.print("Number cannot be negative.");
+        Scan.print("Estimated hours cannot be negative.");
     }
 
     public static int getUserStoryNumber(){

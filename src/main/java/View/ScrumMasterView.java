@@ -69,12 +69,17 @@ public class ScrumMasterView
 
 	//-----------------------------------------------------------------------------------------------------------
 
-	public static Project projectInput() throws Exception
+	public static Project projectInput(ControllerAll controllerAll) throws Exception
 	{
 		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"project:");
 		String name = Scan.readLine("Name: ");
 		int id = Scan.readInt("ID: ");
+
+
+		while (!controllerAll.checkLegalId(id)){
+			id = Scan.readInt("You entered an ID that is already taken. Please enter a new one: ");
+		}
 
 		proName = name;
 
@@ -114,19 +119,19 @@ public class ScrumMasterView
 	public static void nullTaskPrint()
 	{
 		Scan.print("This task does not exist, please try again.");
-		menuScrumMaster();
+
 	}
 
 	public static void invalidTaskPrint()
 	{
 		Scan.print("The ID of the task was not found. Please try again");
-		menuScrumMaster();
+
 	}
 
 	public static void invalidSprintBacklog()
 	{
 		Scan.print("The name of the sprint was not found. Please try again");
-		menuScrumMaster();
+
 	}
 
 	public static int specifyTask()
@@ -167,7 +172,7 @@ public class ScrumMasterView
 	public static void invalidNumberPrint()
 	{
 		Scan.print("Priority number must be between 1-5. Please try again.");
-		menuScrumMaster();
+
 	}
 
 	public static void noSprintPrint()
@@ -544,6 +549,8 @@ public class ScrumMasterView
 		Scan.print("Error: Id cannot be negative, Please " +
 				"try again");
 	}
+
+
 
 }
 

@@ -1,15 +1,15 @@
 package Controller;
 
-import Exceptions.EmptyNameException;
-import Exceptions.NegativeId;
+import Exceptions.*;
 import Models.*;
 import Utility.Scan;
+import View.AllView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
-
+import static Controller.ControllerAll.*;
 import static View.DevTeamView.*;
 import static View.DevTeamView.getUserStoryNumber;
 import static View.ScrumMasterView.*;
@@ -212,8 +212,23 @@ public class ControllerScrumMaster
 				controllerAll.saveData();
 				taskCreatedToPBacklog();
 
-			} catch (Exception e)
-			{
+
+			} catch (NegativeId n){
+				negativeIDPrint();
+
+			} catch (InvalidPriorityNumber i){
+				invalidNumberPrint();
+
+			} catch (EstimatedHours e) {
+				negativeNumberPrint();
+
+			} catch (EmptyName e){
+				emptyName();
+
+			} catch (EmptyDescription e){
+				AllView.errorEmptyDescription();
+
+			} catch (Exception e) {
 				registerTaskFail();
 			}
 		}
@@ -240,8 +255,22 @@ public class ControllerScrumMaster
 				controllerAll.saveData();
 				taskCreatedToSBacklog();
 
-			} catch (Exception e)
-			{
+			} catch (NegativeId n){
+				negativeIDPrint();
+
+			} catch (InvalidPriorityNumber i){
+				invalidNumberPrint();
+
+			} catch (EstimatedHours e) {
+				negativeNumberPrint();
+
+			} catch (EmptyName e){
+				emptyName();
+
+			} catch (EmptyDescription e){
+				AllView.errorEmptyDescription();
+
+			} catch (Exception e) {
 				registerTaskFail();
 			}
 		}
@@ -528,9 +557,14 @@ public class ControllerScrumMaster
 			controllerAll.saveData();
 			createdProOwner();
 
-		} catch (Exception e)
+		}catch (EmptyName e){
+			emptyName();
+		}catch (NegativeId n){
+			negativeId();
+		}
+		catch (Exception e)
 		{
-			registerProOwnerFail();
+			AllView.errorPrint();
 		}
 	}
 
@@ -574,7 +608,12 @@ public class ControllerScrumMaster
 				controllerAll.saveData();
 				createdDeveloper();
 
-			} catch (Exception e)
+			}
+			catch (EmptyName e){
+				emptyName();
+			}
+
+			catch (Exception e)
 			{
 				registerDeveloperFail();
 			}
@@ -603,21 +642,22 @@ public class ControllerScrumMaster
 	{
 		try
 		{
-			Project project = projectInput();
+			Project project = projectInput(controllerAll);
 			controllerAll.getAllProjects().add(project);
-
 			controllerAll.saveData();
 			createProjectPrint(project);
 
-		} catch (EmptyNameException e)
+		} catch (EmptyName e)
 		{
 			emptyName();
 		}catch (NegativeId n){
 			negativeId();
 		}catch (Exception e){
-			e.printStackTrace();
+			AllView.errorPrint();
 		}
 	}
+
+
 
 	//------------------------------------Methods etc for sprints-------------------------------------------//
 
@@ -632,12 +672,10 @@ public class ControllerScrumMaster
 
 			successfulSprintLog(sprintBacklog);
 
-		} catch (NumberFormatException e)
-		{
-			numberFormatMessage();
-		} catch (Exception e)
-		{
-			backlogFail();
+		} catch (EmptyName e) {
+			emptyName();
+		} catch (Exception e) {
+			AllView.errorPrint();
 		}
 	}
 

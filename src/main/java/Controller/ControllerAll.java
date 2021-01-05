@@ -91,6 +91,23 @@ public class ControllerAll
         }
     }
 
+    public boolean checkLegalId(int id) {
+        boolean legal = true;
+
+        Iterator<Project> iterator = allProjects.iterator();
+        while (legal == true && iterator.hasNext()) {
+            Project foundProject = iterator.next();
+            if (foundProject.getId() == id) {
+                legal = false;
+            }
+        }
+        return legal;
+    }
+
+    public DataManagement getData() {
+        return data;
+    }
+
     public Project whichProject()
     {
         Project project = findProjectByName();

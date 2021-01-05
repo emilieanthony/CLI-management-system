@@ -1,16 +1,14 @@
 package Models;
 
-import Exceptions.EmptyNameException;
+import Controller.ControllerAll;
+import Exceptions.EmptyName;
 import Exceptions.NegativeId;
 import Utility.DataManagement;
 import View.ScrumMasterView;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static View.DevTeamView.negativeIDPrint;
-import static View.DevTeamView.noNamePrint;
 
 public class Project implements Serializable
 {
@@ -31,10 +29,11 @@ public class Project implements Serializable
     {
         if (name.isEmpty())
         {
-            throw new EmptyNameException();
+            throw new EmptyName();
         } else {
             this.name = name;
         }
+
 
         if(id < 0)
         {
