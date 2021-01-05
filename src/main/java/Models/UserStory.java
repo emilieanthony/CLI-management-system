@@ -21,6 +21,7 @@ public class UserStory implements Comparable<UserStory> {
     private ArrayList<Task> userStoryTasks;
     private ArrayList<Boolean> binary;
     private String deadline;
+    private Developer completedBy;
 
     // Constructors:-
     public UserStory(String name, int number, int priority,
@@ -143,6 +144,14 @@ public class UserStory implements Comparable<UserStory> {
         status = "Assigned";
     }
 
+    public Developer getCompletedBy() {
+        return completedBy;
+    }
+
+    public void setCompletedBy(Developer completedBy) {
+        this.completedBy = completedBy;
+    }
+
     //-----------------------------------------Methods------------------------------------------------------------------
 
     public int compareTo(UserStory userStory) {
@@ -188,6 +197,10 @@ public class UserStory implements Comparable<UserStory> {
             for (Developer member : assignedDevelopers) {
                 output = output + "\n" + member.toString() + "\n";
             }
+        }
+
+        if (!(completedBy==null)){
+            output = output + "\nSet as complete by: " + completedBy.getId() + " " + completedBy.getName();
         }
 
         if(!(deadline==null)){

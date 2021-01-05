@@ -133,10 +133,13 @@ public class ControllerDeveloper {
     }
 
     public void completeTask(ControllerAll controllerAll){
+
+        Developer developer = controllerAll.findDeveloperByID();
         Task task = openTask(controllerAll);
         int actualHrs = getActualHrs();
         task.setActualHours( actualHrs );
         task.setComplete();
+        task.setCompletedBy(developer);
         taskCompletedReceipt(task);
     }
 }

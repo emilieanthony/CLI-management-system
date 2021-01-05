@@ -20,6 +20,7 @@ public class Task implements Comparable<Task> {
 	private String description;
 	private ArrayList<Developer> assignedDevelopers;
 	private String deadline;
+	private Developer completedBy;
 
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception {
 
@@ -130,6 +131,14 @@ public class Task implements Comparable<Task> {
 		return assignedDevelopers.contains(member);
 	}
 
+	public Developer getCompletedBy() {
+		return completedBy;
+	}
+
+	public void setCompletedBy(Developer completedBy) {
+		this.completedBy = completedBy;
+	}
+
 	//---------------------------------Methods--------------------------------------------------------------------------
 
 	public int compareTo(Task task) {
@@ -169,6 +178,10 @@ public class Task implements Comparable<Task> {
 			for (Developer member : assignedDevelopers) {
 				output = output + "\n" + member.toString() + "\n";
 			}
+		}
+
+		if (!(completedBy==null)){
+			output = output + "\nSet as complete by: " + completedBy.getId() + " " + completedBy.getName();
 		}
 
 		if(!(deadline==null)){
