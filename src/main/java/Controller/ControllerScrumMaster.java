@@ -248,12 +248,20 @@ public class ControllerScrumMaster
 
 			try
 			{
-				Task newTask = getTaskInfo(id);
-				createdTaskReceipt(newTask);
-				sprintName = getSprintBacklogName();
-				findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
-				controllerAll.saveData();
-				taskCreatedToSBacklog();
+				boolean thereIsASprintBacklog = checkForSprintBacklog(project);
+
+				if (thereIsASprintBacklog){
+					Task newTask = getTaskInfo(id);
+					createdTaskReceipt(newTask);
+					sprintName = getSprintBacklogName();
+					findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
+					controllerAll.saveData();
+					taskCreatedToSBacklog();
+				} else {
+					noSprintBacklogYet();
+					createSprintBacklog(controllerAll);
+				}
+
 
 			} catch (NegativeId n){
 				negativeIDPrint();
@@ -273,6 +281,14 @@ public class ControllerScrumMaster
 			} catch (Exception e) {
 				registerTaskFail();
 			}
+		}
+	}
+
+	public boolean checkForSprintBacklog(Project project){
+		if(project.getAllSprintBacklogs().isEmpty()){
+			return false;
+		} else {
+			return true;
 		}
 	}
 

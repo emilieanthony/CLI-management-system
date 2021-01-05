@@ -550,7 +550,9 @@ public class ScrumMasterView
 				"try again");
 	}
 
-
+	public static void noSprintBacklogYet(){
+		Scan.print("There isn't yet any sprint backlog for you to add any tasks to, please create one first.\n\n");
+	}
 
 }
 
