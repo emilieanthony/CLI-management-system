@@ -301,20 +301,22 @@ public class ControllerAll
             userStoryEditConf();
 
         } else if (newUSStatus == 2) {
-            userStory.setInProgress();
+            userStory.setAssigned();
             saveData();
             userStoryEditConf();
 
         } else if (newUSStatus == 3) {
+            userStory.setInProgress();
+            saveData();
+            userStoryEditConf();
+
+
+        } else if (newUSStatus == 4) {
             userStory.setCompletedBy(getNameCompleteTask());
             userStory.setComplete();
             saveData();
             userStoryEditConf();
 
-        } else if (newUSStatus == 4) {
-            userStory.setAssigned();
-            saveData();
-            userStoryEditConf();
 
         } else {
             changeStatusMessage();
