@@ -323,6 +323,9 @@ public class ControllerScrumMaster
 	//------------------------------------------Methods for tasks------------------------------------------------//
 
 	private void setTaskDeadline(ControllerAll controllerAll){
+
+		controllerAll.viewTaskDeadlines();
+
 		Task task = controllerAll.findTaskById();
 		String deadline = getEndDate();
 
@@ -1488,6 +1491,7 @@ public class ControllerScrumMaster
 
 	private void setUserStoryDeadline(UserStory userStory, ControllerAll controllerAll){
 
+			controllerAll.viewUStoryDeadlines();
 
 			String deadline = getEndDate();
 			userStory.setDeadline(deadline);

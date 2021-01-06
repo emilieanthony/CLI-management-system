@@ -175,7 +175,7 @@ public class ScrumMasterView
 		int endYear = Scan.readInt("End date (YYYY): ");
 		int endMonth = Scan.readInt("End date (MM): ");
 		int endDay = Scan.readInt("End date (DD): ");
-		String endDate = String.valueOf(endYear + "-" + endMonth + "-" + endDay);
+		String endDate = endYear + "-" + endMonth + "-" + endDay;
 		return endDate;
 	}
 
@@ -393,16 +393,16 @@ public class ScrumMasterView
 
 	public static void showAllTasks(ControllerAll controllerAll){
 		Scan.print("Below you find all your tasks. \n\n");
-		System.out.println(controllerAll.collectAllTasks().toString());
+		Scan.print(controllerAll.collectAllTasks().toString());
 	}
 	public static void showAllUserStories(ControllerAll controllerAll){
 		Scan.print("Below you find all user stories. \n\n");
-		System.out.println(controllerAll.collectAllStories().toString());
+		Scan.print(controllerAll.collectAllStories().toString());
 	}
 
 	public static void showAllSprintBacklogs(Project project){
 		Scan.print("Below you find all your sprint backlogs.");
-		System.out.println("\n\n"+project.getAllSprintBacklogs());
+		Scan.print("\n\n"+project.getAllSprintBacklogs());
 	}
 
 	public static String assignTaskPrintSprintName()
