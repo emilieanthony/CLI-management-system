@@ -806,7 +806,7 @@ public class ControllerScrumMaster
 
 	//------------------------------------Methods for projects-------------------------------------------//
 
-	private void createProject(ControllerAll controllerAll)
+	public void createProject(ControllerAll controllerAll)
 	{
 		try
 		{

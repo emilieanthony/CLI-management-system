@@ -134,7 +134,7 @@ public class ScrumMasterView
 
 	public static Project projectInput(ControllerAll controllerAll) throws Exception
 	{
-		Scan.print("\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
+		Scan.print("Creating a new project\nEnter the name, start date (YYYY-MM-DD), and end date (YYYY-MM-DD) of the new " +
 				"project:");
 		String name = Scan.readLine("Name: ");
 		int id = Scan.readInt("ID: ");
@@ -325,18 +325,22 @@ public class ScrumMasterView
 
 	public static void Start()
 	{
-		proName = Scan.readLine("\nWhich project you want " +
-				"to access? Enter the name of the project or press enter to ignore: ");
+		proName = Scan.readLine("\nWhich project do you want " +
+				"to access? Enter the name of the project or press enter to create a new project: ");
+
 	}
 
 	public static void getProjectName(ControllerAll controllerAll)
 
 	{
 		viewProjectMenu(controllerAll);
-		proName = Scan.readLine("\nWhich project you want to access: Please enter the project " +
+		proName = Scan.readLine("\nWhich project do you want to access: Please enter the project " +
 				"name:\n");
 	}
 
+	public static void wrongProjectNameInput(){
+		Scan.print("The project you entered does not exist. Try again.");
+	}
 	public static void membersView()
 	{
 		Scan.print("These are the team developers for this project: \n");

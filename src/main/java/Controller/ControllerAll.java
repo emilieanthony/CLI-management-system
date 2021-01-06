@@ -50,6 +50,18 @@ public class ControllerAll
         loadData();
         viewProjectMenu(controllerAll);
         Start();
+
+
+        if (proName.isBlank() ) {
+            contScrum.createProject(controllerAll);
+        }else if (!legalProject()){
+            while (!legalProject()){
+                wrongProjectNameInput();
+                Start();
+            }
+
+        }
+
         do
         {
             int option;
@@ -476,5 +488,14 @@ public class ControllerAll
 
     }
 
+    public boolean legalProject(){
+        boolean existingProject;
+        if (findProjectByName()==null){
+            existingProject = false;
+        } else {
+            existingProject = true;
+        }
+        return existingProject;
+    }
 
 }
