@@ -2,12 +2,14 @@ package Models;
 
 import Exceptions.*;
 import Utility.DataManagement;
+import Utility.Scan;
 import View.ScrumMasterView;
 
 import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import static View.DevTeamView.*;
+import static View.ScrumMasterView.getEndDate;
 
 
 public class Task implements Comparable<Task> {
@@ -135,6 +137,7 @@ public class Task implements Comparable<Task> {
 	}
 
 	public void setDeadline(String deadline) {
+
 		this.deadline = deadline;
 	}
 
