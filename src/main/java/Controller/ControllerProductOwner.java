@@ -244,8 +244,6 @@ public class ControllerProductOwner {
 
     }
 
-
-
     public void editUSContent(UserStory userStory, ControllerAll controllerAll) {
         String newUSContent = getNewUSContent();
         userStory.setContent(newUSContent);

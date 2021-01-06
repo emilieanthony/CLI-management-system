@@ -441,27 +441,34 @@ public class ControllerScrumMaster
 		ArrayList<Task> tasks = controllerAll.collectAllTasks();
 		ArrayList<UserStory> stories = controllerAll.collectAllStories();
 
+		ArrayList<Integer> ids = new ArrayList<>();
+
 		if (!tasks.isEmpty())
 		{
 			for (Task task : tasks)
 			{
-				if (task.getId() == id)
-				{
-					id++;
-				}
+				ids.add(task.getId());
+
 			}
 		}
 
 		if (!stories.isEmpty())
 		{
-			for (UserStory userStory : stories)
-			{
-				if (userStory.getNumber() == id)
-				{
-					id++;
-				}
+			for (UserStory userStory : stories) {
+
+				ids.add(userStory.getNumber());
+
 			}
 		}
+
+		if (!ids.isEmpty()) {
+			id = ids.get(ids.size() - 1) + 1;
+		}
+
+		while (ids.contains(id)){
+			id++;
+		}
+
 		return id;
 	}
 

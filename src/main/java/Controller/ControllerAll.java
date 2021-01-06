@@ -231,8 +231,8 @@ public class ControllerAll
         // fetch all user stories from product backlog
         ArrayList<UserStory> productBLStories = project.getProductBacklog().getAllUserStories();
 
-        for (UserStory story : productBLStories)
-        {
+        for (UserStory story : productBLStories) {
+
             allStories.add(story);
         }
 
@@ -248,6 +248,8 @@ public class ControllerAll
                 allStories.add(story);
             }
         }
+
+
         return allStories;
     }
 
