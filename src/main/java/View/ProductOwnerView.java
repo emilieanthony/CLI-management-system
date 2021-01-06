@@ -146,10 +146,10 @@ public class ProductOwnerView {
     public static int getNewUSStatus() {
         int newUSStatus = Scan.readInt("\nChoose the number of the status you want to change for the user " +
                 "story.\n" +
-                "1. Open.\n" +
-                "2. In progress.\n" +
-                "3. Complete. \n" +
-                "4. Assigned.\n");
+                "1. Open\n" +
+                "2. Assigned\n" +
+                "3. In progress \n" +
+                "4. Complete\n");
 
         return newUSStatus;
     }
@@ -162,8 +162,8 @@ public class ProductOwnerView {
         Scan.print("\nYou have successfully edited the product backlog.");
     }
 
-    public static void userStoryEditConf() {
-        Scan.print("\nYou have successfully edited the user story.");
+    public static void userStoryEditConf(UserStory userStory) {
+        Scan.print("\nYou have successfully edited the following user story: + \n" + userStory.toString());
     }
 
     public static void changeStatusMessage() {

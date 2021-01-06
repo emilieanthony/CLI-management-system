@@ -231,8 +231,8 @@ public class ControllerAll
         // fetch all user stories from product backlog
         ArrayList<UserStory> productBLStories = project.getProductBacklog().getAllUserStories();
 
-        for (UserStory story : productBLStories)
-        {
+        for (UserStory story : productBLStories) {
+
             allStories.add(story);
         }
 
@@ -248,39 +248,11 @@ public class ControllerAll
                 allStories.add(story);
             }
         }
+
+
         return allStories;
     }
-    public void editUSStoryPointsSBL(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-        Project project = controllerAll.whichProject();
-        if (project == null)
-        {
-            projectNotFound();
-        }
-
-        showAllSprintBacklogs(project);
-        sprintName = getSprintBacklogByName();
-
-        int USNumber = getUserStoryNumber();
-
-        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
-        if (userStory == null)
-        {
-            nullUserStoryPrint();
-        }
-
-        else
-        {
-
-            int newUSSPoints = getNewUSStoryPoints();
-            userStory.setStoryPoints(newUSSPoints);
-            saveData();
-            userStoryEditConf();
-            Scan.print(userStory.toString());
-
-        }
-
-    }
 
     /*public void editUSAcceptanceCSBL(ControllerAll controllerAll,ControllerScrumMaster  contScrum){
 
@@ -405,91 +377,9 @@ public class ControllerAll
         }
     }
     */
-    public void editUSPrioritySBL(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
 
-        Project project = controllerAll.whichProject();
-        if (project == null)
-        {
-            projectNotFound();
-        }
 
-        showAllSprintBacklogs(project);
-        sprintName = getSprintBacklogByName();
 
-        int USNumber = getUserStoryNumber();
-
-        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
-        if (userStory == null)
-        {
-            nullUserStoryPrint();
-        }
-
-        else
-        {
-
-            int newUSPriority = getNewUSPriority();
-            userStory.setPriorityNumber(newUSPriority);
-            saveData();
-            userStoryEditConf();
-            Scan.print(userStory.toString());
-
-        }
-    }
-
-    public void changeUSStatusSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum){
-
-        Project project = controllerAll.whichProject();
-        if (project == null)
-        {
-            projectNotFound();
-        }
-
-        showAllSprintBacklogs(project);
-        sprintName = getSprintBacklogByName();
-
-        int USNumber = getUserStoryNumber();
-
-        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
-        if (userStory == null)
-        {
-            nullUserStoryPrint();
-        }
-
-        else
-        {
-
-            int newUSStatus = ProductOwnerView.getNewUSStatus();
-
-            if (newUSStatus == 1) {
-                userStory.setOpen();
-                saveData();
-                userStoryEditConf();
-
-            } else if (newUSStatus == 2) {
-                userStory.setInProgress();
-                saveData();
-                userStoryEditConf();
-
-            } else if (newUSStatus == 3) {
-                userStory.setCompletedBy(getNameCompleteTask());
-                userStory.setComplete();
-                saveData();
-                userStoryEditConf();
-
-            } else if (newUSStatus == 4) {
-                userStory.setAssigned();
-                saveData();
-                userStoryEditConf();
-
-            } else {
-                changeStatusMessage();
-            }
-
-            Scan.print(userStory.toString());
-
-        }
-
-    }
 
     public void loadData()
     {
@@ -507,7 +397,7 @@ public class ControllerAll
         ArrayList<Task> completedTasks = new ArrayList<>();
         for (Task task : allTasks)
         {
-            if(task.getStatus().equals("Complete"))
+            if(task.getStatus() == "Complete")
             {
                 completedTasks.add(task);
             }
@@ -521,7 +411,7 @@ public class ControllerAll
         ArrayList<UserStory> completedStories = new ArrayList<>();
         for (UserStory userStory : allStories)
         {
-            if(userStory.getStatus().equals("Complete"))
+            if(userStory.getStatus() == "Complete")
             {
                 completedStories.add(userStory);
             }

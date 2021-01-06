@@ -198,23 +198,23 @@ public class ControllerProductOwner {
         boolean running = true;
         viewProBacklog(controllerAll);
         int number = getStoryNumber();
-        //UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
 
         do {
             int option = menuEditUserStory();
 
             switch (option) {
                 case 1:
-                    editUSNumber(number,controllerAll);
+                    editUSNumber(userStory,controllerAll);
                     break;
                 case 2:
-                    editUSName(number,controllerAll);
+                    editUSName(userStory,controllerAll);
                     break;
                 case 3:
-                    editUSContent(number,controllerAll);
+                    editUSContent(userStory,controllerAll);
                     break;
                 case 4:
-                    editUSAcceptanceC(number,controllerAll);
+                    editUSAcceptanceC(userStory,controllerAll);
                     break;
                 case 5:
                     running = false;
@@ -226,46 +226,36 @@ public class ControllerProductOwner {
     }
 
     //---------------------------------------Methods for 3rd Menu - editing User Stories--------------------------------
-    public void editUSNumber(int number, ControllerAll controllerAll) {
+    public void editUSNumber(UserStory userStory, ControllerAll controllerAll) {
 
         int newUSNumber = getNewUSNumber();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
         userStory.setNumber(newUSNumber);
         controllerAll.saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
+        userStoryEditConf(userStory);
 
     }
 
-    public void editUSName(int number, ControllerAll controllerAll) {
+    public void editUSName(UserStory userStory, ControllerAll controllerAll) {
 
         String newUSName = getNewUSName();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
         userStory.setName(newUSName);
         controllerAll.saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
+        userStoryEditConf(userStory);
 
     }
 
-
-
-    public void editUSContent(int number, ControllerAll controllerAll) {
+    public void editUSContent(UserStory userStory, ControllerAll controllerAll) {
         String newUSContent = getNewUSContent();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
         userStory.setContent(newUSContent);
         controllerAll.saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
+        userStoryEditConf(userStory);
     }
 
-    public void editUSAcceptanceC(int number, ControllerAll controllerAll) {
+    public void editUSAcceptanceC(UserStory userStory, ControllerAll controllerAll) {
         String newUSAcceptanceC = getNewUSAcceptanceC();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
         controllerAll.saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
+        userStoryEditConf(userStory);
 
     }
 
@@ -282,6 +272,7 @@ public class ControllerProductOwner {
 
             if (foundUserStory.getNumber() == number) {
                 userStory = foundUserStory;
+                Scan.print(userStory.toString());
             }
         }
         return userStory;

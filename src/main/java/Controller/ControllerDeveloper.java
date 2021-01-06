@@ -32,8 +32,8 @@ public class ControllerDeveloper {
                         completeTask(controllerAll);
                         break;
                     case 4:
-                        proCont.viewProBacklog(controllerAll);
-                        controllerAll.changeUSStatusSBL(controllerAll,scrumMaster);;
+                        UserStory userStory = controllerAll.findUStoryByNumber();
+                        scrumMaster.changeUSStatus(userStory, controllerAll);;
                         break;
                     case 5:
                         proCont.viewProBacklog(controllerAll);//View product backlog
