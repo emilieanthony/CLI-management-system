@@ -462,7 +462,7 @@ public class ScrumMasterView
 
 	public static int numberUsToMove()
 	{
-		int usNumber = Scan.readInt("Write the the number of the user story you want to move: ");
+		int usNumber = Scan.readInt("Write the number of the user story you want to move: ");
 		return usNumber;
 	}
 

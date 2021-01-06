@@ -249,10 +249,10 @@ public class ControllerScrumMaster
 				switch (option)
 				{
 					case 1:
-						moveTaskOrUSToSprintBacklog(contProOwner,controllerAll);
+						moveTaskOrUstoryToSBL(contProOwner,controllerAll);
 						break;
 					case 2:
-						moveTaskOrUSToProductBacklog(controllerAll);
+						moveTaskOrUstoryToPBL(controllerAll);
 						break;
 					case 3:
 						running = false;
@@ -335,7 +335,6 @@ public class ControllerScrumMaster
 
 	}
 
-
 	private void createTaskToProductBacklog(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
@@ -381,6 +380,7 @@ public class ControllerScrumMaster
 	private void createTaskToSprint(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
+		viewSprints(project);
 
 		if (project == null)
 		{
@@ -397,6 +397,7 @@ public class ControllerScrumMaster
 				if (thereIsASprintBacklog){
 					Task newTask = getTaskInfo(id);
 					createdTaskReceipt(newTask);
+					viewSprints(project);
 					sprintName = getSprintBacklogName();
 					findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
 					controllerAll.saveData();
@@ -428,7 +429,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	public boolean checkForSprintBacklog(Project project){
+	private boolean checkForSprintBacklog(Project project){
 		if(project.getAllSprintBacklogs().isEmpty()){
 			return false;
 		} else {
@@ -476,7 +477,7 @@ public class ControllerScrumMaster
 		return id;
 	}
 
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	private void moveTaskOrUstoryToSBL(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		contProOwner.viewProBacklog(controllerAll);
 
@@ -493,6 +494,7 @@ public class ControllerScrumMaster
 			if (input.equals("1"))
 			{
 				int idTask = specifyTask();
+				viewSprints(project);
 				sprintName = specifySprint();
 
 				Task taskInBacklog = project.getProductBacklog().getTask(idTask);
@@ -514,6 +516,7 @@ public class ControllerScrumMaster
 			if (input.equals("2"))
 			{
 				int usName = numberUsToMove();
+				viewSprints(project);
 				sprintName = sprintNameToMovePrintUS();
 
 				UserStory userStoryToMove = project.getProductBacklog().getUserStory(usName);
@@ -529,7 +532,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private void moveTaskOrUSToProductBacklog(ControllerAll controllerAll)
+	private void moveTaskOrUstoryToPBL(ControllerAll controllerAll)
 	{
 		viewSprintBacklog(controllerAll);
 
@@ -671,6 +674,7 @@ public class ControllerScrumMaster
 		}
 		else
 		{
+			Scan.print(project.getProductBacklog().toString());
 			int idTaskRemove = IdTaskRemove();
 			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 
@@ -694,6 +698,9 @@ public class ControllerScrumMaster
 
 	private void removeTaskSprintBacklog(ControllerAll controllerAll, ControllerScrumMaster contScrum)
 	{
+		Project project = controllerAll.whichProject();
+
+		showAllSprintBacklogs(project);
 		sprintName = getSprintBacklogByName();
 
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
@@ -711,7 +718,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	//------------------------------------------Methods product owner------------------------------------------------//
+	//------------------------------------------Methods to create product owner------------------------------------------------//
 
 	private void createProductOwner(ControllerAll controllerAll)
 	{
@@ -755,7 +762,7 @@ public class ControllerScrumMaster
 		return FIRST_ID;
 	}
 
-	//------------------------------------Methods create development member-----------------------------------------//
+	//------------------------------------Methods to create development member-----------------------------------------//
 
 	private void createDevelopmentMember(ControllerAll controllerAll)
 	{
@@ -829,8 +836,6 @@ public class ControllerScrumMaster
 		}
 	}
 
-
-
 	//------------------------------------Methods etc for sprints-------------------------------------------//
 
 	private void createSprintBacklog(ControllerAll controllerAll)
@@ -878,8 +883,8 @@ public class ControllerScrumMaster
 	public void viewSprintBacklog(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
-		viewSprints(project);
 
+		viewSprints(project);
 		sprintName = getSprintBacklogByName();
 
 		if (project == null)
@@ -941,6 +946,7 @@ public class ControllerScrumMaster
 	}
 
 	public void editUSInSprintBLMenu(ControllerAll controllerAll,ControllerScrumMaster contScrum){
+
 		boolean running = true;
 
 		UserStory userStory = getUSFromSBL(controllerAll);
@@ -1142,9 +1148,9 @@ public class ControllerScrumMaster
 		}
 
 		showAllTasks(controllerAll);
-
 		int idTask = assignTaskPrintIdTask();
-		showAllSprintBacklogs(project);
+
+		viewSprints(project);
 		sprintName = assignTaskPrintSprintName();
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
 
@@ -1169,7 +1175,7 @@ public class ControllerScrumMaster
 				assignmentCompleted();
 			}
 
-		}
+			}
 	}
 
 	private void assignUserStory(ControllerAll controllerAll)
