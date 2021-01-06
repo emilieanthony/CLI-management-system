@@ -362,6 +362,10 @@ public class ScrumMasterView
 	{
 		Scan.print("You have successfully created a new developer.\n");
 	}
+	public static void taskCreation()
+	{
+		Scan.print("Creating a task of a User Story.\n");
+	}
 
 	public static String getSprintBacklogName()
 	{
