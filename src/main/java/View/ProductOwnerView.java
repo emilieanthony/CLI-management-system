@@ -100,12 +100,9 @@ public class ProductOwnerView {
                 ("\n\nPlease enter the number of which part of the user story you want to edit:\n\n" +
                         "1. Edit user story number.\n" +
                         "2. Edit user story name.\n" +
-                        "3. Edit user story priority.\n" +
-                        "4. Edit user story story points.\n" +
-                        "5. Edit user story content.\n" +
-                        "6. Edit user story acceptance criteria\n" +
-                        "7. Edit user story status.\n" +
-                        "8. Back to your menu.\n");
+                        "3. Edit user story content.\n" +
+                        "4. Edit user story acceptance criteria\n" +
+                        "5. Back to your menu.\n");
         return option;
     }
 
