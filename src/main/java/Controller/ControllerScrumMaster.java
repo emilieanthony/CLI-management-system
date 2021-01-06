@@ -67,9 +67,12 @@ public class ControllerScrumMaster
 						showAverageVelocity(controllerAll);
 						break;
 					case 12:
-						getProjectName(controllerAll);
+						velocityCalculator();
 						break;
 					case 13:
+						getProjectName(controllerAll);
+						break;
+					case 14:
 						running = false;
 						break;
 					default:
@@ -989,8 +992,8 @@ public class ControllerScrumMaster
 	}
 	//------------------------------------Methods for velocity-------------------------------------------//
 
-	// Shall we remove it.
-	/*private int[] arrayOfVelocity(String input)
+
+	private int[] arrayOfVelocity(String input)
 	{
 		String[] strArray = input.split(",");
 		int[] intArray = new int[strArray.length];
@@ -1013,14 +1016,14 @@ public class ControllerScrumMaster
 		return (sum / numbers.length);
 	}
 
-	private void velocity()
+	private void velocityCalculator()
 	{
 		String input = getVelocity();
 		int[] numbers = arrayOfVelocity(input);
 		int averageVelocity = getAverageVelocity(numbers);
 
 		printVelocity(averageVelocity);
-	}*/
+	}
 
 	//------------------------------------Methods for Assigning object-------------------------------------------//
 

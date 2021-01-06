@@ -29,10 +29,11 @@ public class ScrumMasterView
 				"7. Deadlines.\n" +
 				"8. View Backlogs, Members or completed User Stories/Tasks Menu.\n" +
 				"9. Move a User Story or Task between Product and Sprint Backlogs.\n" +
-				"10. Show Implemented Story Points.\n" +
-				"11. Show average Velocity.\n" +
-				"12. Switch Project.\n" +
-				"13. Go back to Main Menu.\n");
+				"10. Show your Implemented Story Points.\n" +
+				"11. Show your average Velocity.\n" +
+				"12. Velocity calculator.\n" +
+				"13. Switch Project.\n" +
+				"14. Go back to Main Menu.\n");
 
 		return option;
 	}
