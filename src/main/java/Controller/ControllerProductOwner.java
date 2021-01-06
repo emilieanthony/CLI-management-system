@@ -42,12 +42,9 @@ public class ControllerProductOwner {
                         controllerAll.viewCompletedUStories();
                         break;
                     case 6:
-                        deleteExistingAndCreateNewBacklog(controllerAll);
-                        break;
-                    case 7:
                         getProjectName(controllerAll);
                         break;
-                    case 8:
+                    case 7:
                         running = false; //go back to main menu
                         break;
                     default:
@@ -108,20 +105,6 @@ public class ControllerProductOwner {
 
             nonExistentUStory();
 
-        }
-    }
-
-
-    public void deleteExistingAndCreateNewBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
-        try {
-            Project project = controllerAll.whichProject();
-            ProductBacklog ProBacklog = getBacklogInfo();
-            project.setProductBacklog(ProBacklog);
-            proBacklogCreationConf();
-            Scan.print(ProBacklog.toString());
-            controllerAll.saveData();
-        } catch (Exception e) {
-            backlogFail();
         }
     }
 

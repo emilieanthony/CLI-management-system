@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Project implements Serializable
+public class Project
 {
     private int id;
     private String name;
