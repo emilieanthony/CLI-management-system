@@ -463,11 +463,12 @@ public class ControllerScrumMaster
 
 		if (!ids.isEmpty()) {
 			id = ids.get(ids.size() - 1) + 1;
+
+			while (ids.contains(id)){
+				id++;
+			}
 		}
 
-		while (ids.contains(id)){
-			id++;
-		}
 
 		return id;
 	}
