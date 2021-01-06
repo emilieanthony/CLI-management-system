@@ -5,7 +5,17 @@
   "endDate" : "2020-3-5",
   "productBacklog" : {
     "name" : "Project product backlog",
-    "allUserStories" : [ ],
+    "allUserStories" : [ {
+      "name" : "us1",
+      "number" : 1004,
+      "storyPoints" : 0,
+      "status" : "Open",
+      "assignedDevelopers" : [ ],
+      "userStoryTasks" : [ ],
+      "binary" : [ ],
+      "deadline" : null,
+      "completedBy" : null
+    } ],
     "tasks" : [ {
       "id" : 1003,
       "estimatedHours" : 2,
@@ -67,7 +77,7 @@
       "name" : "User story",
       "number" : 1002,
       "storyPoints" : 0,
-      "status" : "In progress",
+      "status" : "Complete",
       "assignedDevelopers" : [ {
         "name" : "Lina",
         "id" : 3

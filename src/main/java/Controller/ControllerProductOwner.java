@@ -89,6 +89,7 @@ public class ControllerProductOwner {
     {
         Project project = controllerAll.whichProject();
 
+        viewProBacklog(controllerAll);
         int number = getUSNumber();
 
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);

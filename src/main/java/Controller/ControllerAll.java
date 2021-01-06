@@ -411,7 +411,7 @@ public class ControllerAll
         ArrayList<UserStory> completedStories = new ArrayList<>();
         for (UserStory userStory : allStories)
         {
-            if(userStory.getStatus() == "Complete")
+            if(userStory.getStatus().equals("Complete"))
             {
                 completedStories.add(userStory);
             }
