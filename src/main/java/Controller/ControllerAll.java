@@ -8,7 +8,9 @@ import Utility.DataManagement;
 import Utility.Scan;
 import View.ProductOwnerView;
 
+import static Controller.ControllerScrumMaster.sprintName;
 import static Utility.PrintUtility.defaultMessage;
+import static Utility.PrintUtility.projectNotFound;
 import static View.AllView.*;
 import static View.DevTeamView.*;
 import static View.ProductOwnerView.*;
@@ -57,7 +59,7 @@ public class ControllerAll
                 switch (option)
                 {
                     case 1:
-                        contScrum.scrumMasterMenu(contProOwner, controllerAll, contScrum);
+                        contScrum.scrumMasterMenu(controllerAll,contProOwner,contScrum);
                         break;
                     case 2:
                         contProOwner.productOwnerMenu(controllerAll, contScrum);
@@ -248,98 +250,245 @@ public class ControllerAll
         }
         return allStories;
     }
+    public void editUSStoryPointsSBL(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-    public void editUSAcceptanceC(UserStory userStory){
-        String newUSAcceptanceC = getNewUSAcceptanceC();
-        userStory.setAcceptanceCriteria(newUSAcceptanceC);
-        saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
-    }
-
-    public void editUSNumber(UserStory userStory) {
-
-        int newUSNumber = getNewUSNumber();
-
-        userStory.setNumber(newUSNumber);
-        saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
-
-    }
-
-    public void editUSName(UserStory userStory){
-
-        String newUSName = getNewUSName();
-
-        userStory.setName(newUSName);
-        saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
-    }
-    public void editUSPriority(UserStory userStory) {
-
-        int newUSPriority = getNewUSPriority();
-
-        userStory.setPriorityNumber(newUSPriority);
-        saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
-    }
-
-    public void editUSStoryPoints(UserStory userStory) {
-
-        int newUSSPoints = getNewUSStoryPoints();
-
-        userStory.setStoryPoints(newUSSPoints);
-        saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
-    }
-
-    public void editUSContent(UserStory userStory) {
-        String newUSContent = getNewUSContent();
-
-        userStory.setContent(newUSContent);
-        saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
-    }
-
-
-
-    public void changeUSStatus(UserStory userStory){
-
-        int newUSStatus = ProductOwnerView.getNewUSStatus();
-
-        if (newUSStatus == 1) {
-            userStory.setOpen();
-            saveData();
-            userStoryEditConf();
-
-        } else if (newUSStatus == 2) {
-            userStory.setAssigned();
-            saveData();
-            userStoryEditConf();
-
-        } else if (newUSStatus == 3) {
-            userStory.setInProgress();
-            saveData();
-            userStoryEditConf();
-
-
-        } else if (newUSStatus == 4) {
-            userStory.setCompletedBy(getNameCompleteTask());
-            userStory.setComplete();
-            saveData();
-            userStoryEditConf();
-
-
-        } else {
-            changeStatusMessage();
+        Project project = controllerAll.whichProject();
+        if (project == null)
+        {
+            projectNotFound();
         }
 
-        Scan.print(userStory.toString());
+        showAllSprintBacklogs(project);
+        sprintName = getSprintBacklogByName();
+
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+        if (userStory == null)
+        {
+            nullUserStoryPrint();
+        }
+
+        else
+        {
+
+            int newUSSPoints = getNewUSStoryPoints();
+            userStory.setStoryPoints(newUSSPoints);
+            saveData();
+            userStoryEditConf();
+            Scan.print(userStory.toString());
+
+        }
+
+    }
+
+    /*public void editUSAcceptanceCSBL(ControllerAll controllerAll,ControllerScrumMaster  contScrum){
+
+        Project project = controllerAll.whichProject();
+        if (project == null)
+        {
+            projectNotFound();
+        }
+
+        showAllSprintBacklogs(project);
+        sprintName = getSprintBacklogByName();
+
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+        if (userStory == null)
+        {
+            nullUserStoryPrint();
+        }
+
+        else
+        {
+
+            String newUSAcceptanceC = getNewUSAcceptanceC();
+            userStory.setAcceptanceCriteria(newUSAcceptanceC);
+            saveData();
+            userStoryEditConf();
+            Scan.print(userStory.toString());
+
+        }
+    }
+
+    public void editUSNumberSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
+
+        Project project = controllerAll.whichProject();
+        if (project == null)
+        {
+            projectNotFound();
+        }
+
+        showAllSprintBacklogs(project);
+        sprintName = getSprintBacklogByName();
+
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+        if (userStory == null)
+        {
+            nullUserStoryPrint();
+        }
+
+        else
+        {
+
+            int newUSNumber = getNewUSNumber();
+            userStory.setNumber(newUSNumber);
+            saveData();
+            userStoryEditConf();
+            Scan.print(userStory.toString());
+
+        }
+    }
+
+    public void editUSNameSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum){
+
+        Project project = controllerAll.whichProject();
+        if (project == null)
+        {
+            projectNotFound();
+        }
+
+        showAllSprintBacklogs(project);
+        sprintName = getSprintBacklogByName();
+
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+        if (userStory == null)
+        {
+            nullUserStoryPrint();
+        }
+
+        else
+        {
+
+            String newUSName = getNewUSName();
+            userStory.setName(newUSName);
+            saveData();
+            userStoryEditConf();
+            Scan.print(userStory.toString());
+
+        }
+    }
+    public void editUSContentSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
+
+        Project project = controllerAll.whichProject();
+        if (project == null)
+        {
+            projectNotFound();
+        }
+
+        showAllSprintBacklogs(project);
+        sprintName = getSprintBacklogByName();
+
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+        if (userStory == null)
+        {
+            nullUserStoryPrint();
+        }
+
+        else
+        {
+
+            String newUSContent = getNewUSContent();
+            userStory.setContent(newUSContent);
+            saveData();
+            userStoryEditConf();
+            Scan.print(userStory.toString());
+
+        }
+    }
+    */
+    public void editUSPrioritySBL(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
+
+        Project project = controllerAll.whichProject();
+        if (project == null)
+        {
+            projectNotFound();
+        }
+
+        showAllSprintBacklogs(project);
+        sprintName = getSprintBacklogByName();
+
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+        if (userStory == null)
+        {
+            nullUserStoryPrint();
+        }
+
+        else
+        {
+
+            int newUSPriority = getNewUSPriority();
+            userStory.setPriorityNumber(newUSPriority);
+            saveData();
+            userStoryEditConf();
+            Scan.print(userStory.toString());
+
+        }
+    }
+
+    public void changeUSStatusSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum){
+
+        Project project = controllerAll.whichProject();
+        if (project == null)
+        {
+            projectNotFound();
+        }
+
+        showAllSprintBacklogs(project);
+        sprintName = getSprintBacklogByName();
+
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+        if (userStory == null)
+        {
+            nullUserStoryPrint();
+        }
+
+        else
+        {
+
+            int newUSStatus = ProductOwnerView.getNewUSStatus();
+
+            if (newUSStatus == 1) {
+                userStory.setOpen();
+                saveData();
+                userStoryEditConf();
+
+            } else if (newUSStatus == 2) {
+                userStory.setInProgress();
+                saveData();
+                userStoryEditConf();
+
+            } else if (newUSStatus == 3) {
+                userStory.setCompletedBy(getNameCompleteTask());
+                userStory.setComplete();
+                saveData();
+                userStoryEditConf();
+
+            } else if (newUSStatus == 4) {
+                userStory.setAssigned();
+                saveData();
+                userStoryEditConf();
+
+            } else {
+                changeStatusMessage();
+            }
+
+            Scan.print(userStory.toString());
+
+        }
+
     }
 
     public void loadData()

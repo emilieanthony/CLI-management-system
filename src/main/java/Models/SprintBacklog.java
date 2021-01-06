@@ -48,7 +48,7 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 
 		for (UserStory userStory:userStories)
 		{
-			if (userStory.getStatus().equalsIgnoreCase("Done"))
+			if (userStory.getStatus().equalsIgnoreCase("Complete"))
 			{
 				totalStoryPoints = totalStoryPoints + userStory.getStoryPoints();
 			}

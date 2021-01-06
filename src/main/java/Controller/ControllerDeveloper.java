@@ -33,7 +33,7 @@ public class ControllerDeveloper {
                         break;
                     case 4:
                         proCont.viewProBacklog(controllerAll);
-                        proCont.changeUSStatusInPBL(getStoryNumber(),controllerAll);
+                        controllerAll.changeUSStatusSBL(controllerAll,scrumMaster);;
                         break;
                     case 5:
                         proCont.viewProBacklog(controllerAll);//View product backlog

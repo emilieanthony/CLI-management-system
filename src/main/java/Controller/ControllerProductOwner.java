@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
-import static View.DevTeamView.getNameCompleteTask;
 import static View.DevTeamView.invalidInputPrint;
 import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;
@@ -199,35 +198,25 @@ public class ControllerProductOwner {
         boolean running = true;
         viewProBacklog(controllerAll);
         int number = getStoryNumber();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
-
+        //UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
 
         do {
             int option = menuEditUserStory();
 
             switch (option) {
                 case 1:
-                    controllerAll.editUSNumber(userStory);
+                    editUSNumber(number,controllerAll);
                     break;
                 case 2:
-                    controllerAll.editUSName(userStory);
+                    editUSName(number,controllerAll);
                     break;
                 case 3:
-                    controllerAll.editUSPriority(userStory);
+                    editUSContent(number,controllerAll);
                     break;
                 case 4:
-                    controllerAll.editUSStoryPoints(userStory);
+                    editUSAcceptanceC(number,controllerAll);
                     break;
                 case 5:
-                    controllerAll.editUSContent(userStory);
-                    break;
-                case 6:
-                    controllerAll.editUSAcceptanceC(userStory);
-                    break;
-                case 7:
-                    controllerAll.changeUSStatus(userStory);
-                    break;
-                case 8:
                     running = false;
                     break;
                 default:
@@ -237,14 +226,50 @@ public class ControllerProductOwner {
     }
 
     //---------------------------------------Methods for 3rd Menu - editing User Stories--------------------------------
+    public void editUSNumber(int number, ControllerAll controllerAll) {
 
-
-    public void changeUSStatusInPBL(int number, ControllerAll controllerAll) {
-
+        int newUSNumber = getNewUSNumber();
         UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setNumber(newUSNumber);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
 
-        controllerAll.changeUSStatus(userStory);
     }
+
+    public void editUSName(int number, ControllerAll controllerAll) {
+
+        String newUSName = getNewUSName();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setName(newUSName);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+
+    }
+
+
+
+    public void editUSContent(int number, ControllerAll controllerAll) {
+        String newUSContent = getNewUSContent();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setContent(newUSContent);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+    }
+
+    public void editUSAcceptanceC(int number, ControllerAll controllerAll) {
+        String newUSAcceptanceC = getNewUSAcceptanceC();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setAcceptanceCriteria(newUSAcceptanceC);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+
+    }
+
+
 
     //*-----------------------------------Code to reuse--------------------------------------------*//
     public UserStory findUStoryByNumberPBL(int number, ControllerAll controllerAll) {
