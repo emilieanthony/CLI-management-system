@@ -93,21 +93,21 @@ public class ControllerDeveloper {
     }*/
 
     public void viewMyTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
-        Task task = findTaskByDeveloper(controllerAll,contScrum);
-        Scan.print(task.toString());
-    }
-
-    public Task findTaskByDeveloper(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
-        Task task = null;
+        ArrayList<Task> assignedTasks = new ArrayList<>();
         Developer developer = controllerAll.findDeveloperByID();
-        Iterator<Task> iterator = controllerAll.collectAllTasks().iterator();
-        while (task == null && iterator.hasNext()) {
-            Task foundTask = iterator.next();
-            if (foundTask.getAssignedDevelopers().contains(developer)) {
-                task = foundTask;
+
+        for (Task task : controllerAll.collectAllTasks())
+        {
+            for (Developer dev : task.getAssignedDevelopers())
+            {
+                if(dev.getId() == developer.getId())
+                {
+                    assignedTasks.add(task);
+                }
             }
         }
-        return task;
+
+        Scan.print(assignedTasks.toString());
     }
 
     public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
@@ -115,7 +115,7 @@ public class ControllerDeveloper {
         for (Task task:allTasks) {
             if (task == null) {
                 noAssignedTasks();
-            }else if(task.getStatus().equalsIgnoreCase("In progress")) {
+            }else if(task.getStatus().equalsIgnoreCase("Assigned")) {
                 Scan.print(task.toString());
             }
         }

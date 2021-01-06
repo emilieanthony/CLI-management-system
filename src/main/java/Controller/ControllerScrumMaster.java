@@ -394,6 +394,7 @@ public class ControllerScrumMaster
 				if (thereIsASprintBacklog){
 					Task newTask = getTaskInfo(id);
 					createdTaskReceipt(newTask);
+					viewSprints(project);
 					sprintName = getSprintBacklogName();
 					findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
 					controllerAll.saveData();
@@ -879,8 +880,8 @@ public class ControllerScrumMaster
 	public void viewSprintBacklog(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
-		viewSprints(project);
 
+		viewSprints(project);
 		sprintName = getSprintBacklogByName();
 
 		if (project == null)
@@ -1144,9 +1145,9 @@ public class ControllerScrumMaster
 		}
 
 		showAllTasks(controllerAll);
-
 		int idTask = assignTaskPrintIdTask();
-		showAllSprintBacklogs(project);
+
+		viewSprints(project);
 		sprintName = assignTaskPrintSprintName();
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
 

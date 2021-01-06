@@ -47,7 +47,7 @@ public class DevTeamView {
     }
 
     public static int getDeveloperId(){
-        int id = Scan.readInt("Please enter the developer's id you want to assign the task to.");
+        int id = Scan.readInt("Please enter developer ID: ");
         return id;
     }
 
