@@ -183,6 +183,11 @@ public class ScrumMasterView
 		Scan.print("This task does not exist, please try again.");
 
 	}
+	public static void nullUserStoryPrint()
+	{
+		Scan.print("This User Story does not exist, please try again.");
+
+	}
 
 	public static void invalidTaskPrint()
 	{
@@ -384,6 +389,10 @@ public class ScrumMasterView
 	public static void showAllTasks(ControllerAll controllerAll){
 		Scan.print("Below you find all your tasks. \n\n");
 		System.out.println(controllerAll.collectAllTasks().toString());
+	}
+	public static void showAllUserStories(ControllerAll controllerAll){
+		Scan.print("Below you find all user stories. \n\n");
+		System.out.println(controllerAll.collectAllStories().toString());
 	}
 
 	public static void showAllSprintBacklogs(Project project){

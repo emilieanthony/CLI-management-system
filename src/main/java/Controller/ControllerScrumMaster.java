@@ -1050,22 +1050,42 @@ public class ControllerScrumMaster
 
 	private void assignUserStory(ControllerAll controllerAll)
 	{
-		int number = assignUsPrintIdUs();
-		sprintName = assignUsPrintSprintName();
-		Developer developer = controllerAll.findDeveloperByID();
-
 		Project project = controllerAll.whichProject();
+
 		if (project == null)
 		{
 			projectNotFound();
 		}
 
-		UserStory userStory = findSprintBacklogByName(controllerAll).getUserStory(number);
-		userStory.getAssignedDevelopers().add(developer);
-		userStory.setInProgress();
-		controllerAll.saveData();
+		showAllUserStories(controllerAll);
 
-		assignmentCompleted();
+		int number = assignUsPrintIdUs();
+		showAllSprintBacklogs(project);
+		sprintName = assignUsPrintSprintName();
+		UserStory userStory = findSprintBacklogByName(controllerAll).getUserStory(number);
+
+		if (userStory == null)
+		{
+			nullUserStoryPrint();
+		}
+
+		else
+		{
+			showAllTeamMembers(project);
+			Developer developer = controllerAll.findDeveloperByID();
+			if (project.getAllTeamMembers().isEmpty()){
+				noDeveloperYet();
+				createDevelopmentMember(controllerAll);
+			}else if (!(project.getAllTeamMembers().contains(developer))){
+				invalidDeveloperId();
+			}else{
+				userStory.getAssignedDevelopers().add(developer);
+				userStory.setAssigned();
+				controllerAll.saveData();
+				assignmentCompleted();
+			}
+
+		}
 	}
 
 	//--------------------------------------Edit task in US menu ------------------------------//
