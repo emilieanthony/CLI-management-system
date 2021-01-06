@@ -162,8 +162,8 @@ public class ProductOwnerView {
         Scan.print("\nYou have successfully edited the product backlog.");
     }
 
-    public static void userStoryEditConf() {
-        Scan.print("\nYou have successfully edited the user story.");
+    public static void userStoryEditConf(UserStory userStory) {
+        Scan.print("\nYou have successfully edited the following user story: + \n" + userStory.toString());
     }
 
     public static void changeStatusMessage() {
