@@ -1,0 +1,67 @@
+[ {
+  "id" : 1,
+  "name" : "Project",
+  "startDate" : "2020-1-2",
+  "endDate" : "2020-3-5",
+  "productBacklog" : {
+    "name" : "Project product backlog",
+    "allUserStories" : [ ],
+    "tasks" : [ ]
+  },
+  "allTeamMembers" : [ {
+    "name" : "Karl",
+    "id" : 1
+  }, {
+    "name" : "Bassam",
+    "id" : 2
+  }, {
+    "name" : "Lina",
+    "id" : 3
+  }, {
+    "name" : "Emilie",
+    "id" : 4
+  }, {
+    "name" : "Sanna",
+    "id" : 5
+  } ],
+  "allProductOwners" : [ {
+    "name" : "Malte",
+    "id" : 1
+  } ],
+  "allSprintBacklogs" : [ {
+    "name" : "Sprint 1",
+    "startDate" : "2020-2-2",
+    "endDate" : "2020-11-11",
+    "allTasks" : [ {
+      "id" : 1001,
+      "estimatedHours" : 3,
+      "actualHours" : 0,
+      "status" : "Assigned",
+      "name" : "task",
+      "assignedDevelopers" : [ {
+        "name" : "Bassam",
+        "id" : 2
+      } ],
+      "deadline" : null,
+      "completedBy" : null
+    } ],
+    "userStories" : [ {
+      "name" : "User story",
+      "number" : 1002,
+      "storyPoints" : 0,
+      "status" : "In progress",
+      "assignedDevelopers" : [ {
+        "name" : "Lina",
+        "id" : 3
+      }, {
+        "name" : "Emilie",
+        "id" : 4
+      }],
+      "userStoryTasks" : [ ],
+      "binary" : [ ],
+      "deadline" : null,
+      "completedBy" : null
+    } ],
+    "totalStoryPoints" : 0
+  } ]
+} ]

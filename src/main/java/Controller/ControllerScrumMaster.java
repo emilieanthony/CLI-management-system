@@ -1017,33 +1017,35 @@ public class ControllerScrumMaster
 			projectNotFound();
 		}
 
-		showAllTasks(project);
+		showAllTasks(controllerAll);
+
 		int idTask = assignTaskPrintIdTask();
 		showAllSprintBacklogs(project);
 		sprintName = assignTaskPrintSprintName();
-		showAllTeamMembers(project);
-		Developer developer = controllerAll.findDeveloperByID();
-
-
-
-		if (developer == null){
-			noDeveloperYet();
-			createDevelopmentMember(controllerAll);
-		}
-
 		Task task = findSprintBacklogByName(controllerAll).getTask(idTask);
+
 		if (task == null)
 		{
 			nullTaskPrint();
 		}
-		else
-		{
-			task.getAssignedDevelopers().add(developer);
-			task.setAssigned();
-			controllerAll.saveData();
 
-			assignmentCompleted();
-		}
+		else
+			{
+				showAllTeamMembers(project);
+				Developer developer = controllerAll.findDeveloperByID();
+				if (project.getAllTeamMembers().isEmpty()){
+					noDeveloperYet();
+					createDevelopmentMember(controllerAll);
+				}else if (!(project.getAllTeamMembers().contains(developer))){
+					invalidDeveloperId();
+				}else{
+					task.getAssignedDevelopers().add(developer);
+					task.setAssigned();
+					controllerAll.saveData();
+					assignmentCompleted();
+				}
+
+			}
 	}
 
 	private void assignUserStory(ControllerAll controllerAll)

@@ -381,9 +381,9 @@ public class ScrumMasterView
 		return idTask;
 	}
 
-	public static void showAllTasks(Project project){
+	public static void showAllTasks(ControllerAll controllerAll){
 		Scan.print("Below you find all your tasks. \n\n");
-		System.out.println(project.getProductBacklog().getTasks());
+		System.out.println(controllerAll.collectAllTasks().toString());
 	}
 
 	public static void showAllSprintBacklogs(Project project){
@@ -411,8 +411,9 @@ public class ScrumMasterView
 
 	public static String moveObjectToBacklogPrint()
 	{
-		String input = Scan.readLine("Do you want to move a TASK from sprint backlog to product backlog, type: 1\n" +
-				"Do you want to move a USER STORY from sprint backlog to product backlog, type: " +
+		String input = Scan.readLine("Do you want to move a TASK from Product backlog to Sprint " +
+				"backlog, type: 1\n" +
+				"Do you want to move a USER STORY from Product backlog to Sprint backlog, type: " +
 				"2\n");
 		return input;
 	}
@@ -642,8 +643,11 @@ public class ScrumMasterView
 	}
 
 	public static void noDeveloperYet(){
-		Scan.print("There is not any development team members in the system." +
+		Scan.print("There is no any development team members in the system." +
 				" Please register a new development team member first below.\n\n");
+	}
+	public static void invalidDeveloperId(){
+		Scan.print("There is no Developer that matches your given input. \n\n");
 	}
 
 	public static void showAllTeamMembers(Project project){
