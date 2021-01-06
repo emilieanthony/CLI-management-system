@@ -4,7 +4,6 @@ import Exceptions.*;
 import Models.*;
 import Utility.Scan;
 import View.AllView;
-import View.ProductOwnerView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -248,10 +247,10 @@ public class ControllerScrumMaster
 				switch (option)
 				{
 					case 1:
-						moveTaskOrUSToSprintBacklog(contProOwner,controllerAll);
+						moveTaskOrUstoryToSBL(contProOwner,controllerAll);
 						break;
 					case 2:
-						moveTaskOrUSToProductBacklog(controllerAll);
+						moveTaskOrUstoryToPBL(controllerAll);
 						break;
 					case 3:
 						running = false;
@@ -331,7 +330,6 @@ public class ControllerScrumMaster
 
 	}
 
-
 	private void createTaskToProductBacklog(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
@@ -377,6 +375,7 @@ public class ControllerScrumMaster
 	private void createTaskToSprint(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
+		viewSprints(project);
 
 		if (project == null)
 		{
@@ -424,7 +423,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	public boolean checkForSprintBacklog(Project project){
+	private boolean checkForSprintBacklog(Project project){
 		if(project.getAllSprintBacklogs().isEmpty()){
 			return false;
 		} else {
@@ -464,7 +463,7 @@ public class ControllerScrumMaster
 		return id;
 	}
 
-	private void moveTaskOrUSToSprintBacklog(ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	private void moveTaskOrUstoryToSBL(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 		contProOwner.viewProBacklog(controllerAll);
 
@@ -517,7 +516,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private void moveTaskOrUSToProductBacklog(ControllerAll controllerAll)
+	private void moveTaskOrUstoryToPBL(ControllerAll controllerAll)
 	{
 		viewSprintBacklog(controllerAll);
 
@@ -682,6 +681,9 @@ public class ControllerScrumMaster
 
 	private void removeTaskSprintBacklog(ControllerAll controllerAll, ControllerScrumMaster contScrum)
 	{
+		Project project = controllerAll.whichProject();
+
+		showAllSprintBacklogs(project);
 		sprintName = getSprintBacklogByName();
 
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
@@ -699,7 +701,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	//------------------------------------------Methods product owner------------------------------------------------//
+	//------------------------------------------Methods to create product owner------------------------------------------------//
 
 	private void createProductOwner(ControllerAll controllerAll)
 	{
@@ -743,7 +745,7 @@ public class ControllerScrumMaster
 		return FIRST_ID;
 	}
 
-	//------------------------------------Methods create development member-----------------------------------------//
+	//------------------------------------Methods to create development member-----------------------------------------//
 
 	private void createDevelopmentMember(ControllerAll controllerAll)
 	{
@@ -816,8 +818,6 @@ public class ControllerScrumMaster
 			AllView.errorPrint();
 		}
 	}
-
-
 
 	//------------------------------------Methods etc for sprints-------------------------------------------//
 
@@ -912,8 +912,6 @@ public class ControllerScrumMaster
 	}
 
 	public void editUSInSprintBLMenu(ControllerAll controllerAll,ControllerScrumMaster contScrum){
-
-
 
 		boolean running = true;
 

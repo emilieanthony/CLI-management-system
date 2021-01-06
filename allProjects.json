@@ -6,7 +6,16 @@
   "productBacklog" : {
     "name" : "Project product backlog",
     "allUserStories" : [ ],
-    "tasks" : [ ]
+    "tasks" : [ {
+      "id" : 1003,
+      "estimatedHours" : 2,
+      "actualHours" : 0,
+      "status" : "Complete",
+      "name" : "Task1",
+      "assignedDevelopers" : [ ],
+      "deadline" : null,
+      "completedBy" : null
+    } ]
   },
   "allTeamMembers" : [ {
     "name" : "Karl",
@@ -44,6 +53,15 @@
       } ],
       "deadline" : null,
       "completedBy" : null
+    }, {
+      "id" : 1003,
+      "estimatedHours" : 2,
+      "actualHours" : 0,
+      "status" : "Open",
+      "name" : "task2",
+      "assignedDevelopers" : [ ],
+      "deadline" : null,
+      "completedBy" : null
     } ],
     "userStories" : [ {
       "name" : "User story",
@@ -56,12 +74,19 @@
       }, {
         "name" : "Emilie",
         "id" : 4
-      }],
+      } ],
       "userStoryTasks" : [ ],
       "binary" : [ ],
       "deadline" : null,
       "completedBy" : null
     } ],
+    "totalStoryPoints" : 0
+  }, {
+    "name" : "Sprint2",
+    "startDate" : "2021-2-2",
+    "endDate" : "2021-6-6",
+    "allTasks" : [ ],
+    "userStories" : [ ],
     "totalStoryPoints" : 0
   } ]
 } ]

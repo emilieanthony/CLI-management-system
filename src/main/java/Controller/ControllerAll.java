@@ -503,13 +503,11 @@ public class ControllerAll
 
     public void viewCompletedTasks()
     {
-
-
         ArrayList<Task> allTasks = collectAllTasks();
         ArrayList<Task> completedTasks = new ArrayList<>();
         for (Task task : allTasks)
         {
-            if(task.getStatus() == "Done")
+            if(task.getStatus().equals("Complete"))
             {
                 completedTasks.add(task);
             }
@@ -523,7 +521,7 @@ public class ControllerAll
         ArrayList<UserStory> completedStories = new ArrayList<>();
         for (UserStory userStory : allStories)
         {
-            if(userStory.getStatus() == "Done")
+            if(userStory.getStatus().equals("Complete"))
             {
                 completedStories.add(userStory);
             }
