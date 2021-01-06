@@ -72,6 +72,18 @@
       "assignedDevelopers" : [ ],
       "deadline" : null,
       "completedBy" : null
+    }, {
+      "id" : 1005,
+      "estimatedHours" : 2,
+      "actualHours" : 0,
+      "status" : "Assigned",
+      "name" : "Sprint 1",
+      "assignedDevelopers" : [ {
+        "name" : "Bassam",
+        "id" : 2
+      } ],
+      "deadline" : null,
+      "completedBy" : null
     } ],
     "userStories" : [ {
       "name" : "User story",
