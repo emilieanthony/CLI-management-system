@@ -480,6 +480,7 @@ public class ControllerScrumMaster
 			if (input.equals("1"))
 			{
 				int idTask = specifyTask();
+				viewSprints(project);
 				sprintName = specifySprint();
 
 				Task taskInBacklog = project.getProductBacklog().getTask(idTask);
@@ -501,6 +502,7 @@ public class ControllerScrumMaster
 			if (input.equals("2"))
 			{
 				int usName = numberUsToMove();
+				viewSprints(project);
 				sprintName = sprintNameToMovePrintUS();
 
 				UserStory userStoryToMove = project.getProductBacklog().getUserStory(usName);
@@ -658,6 +660,7 @@ public class ControllerScrumMaster
 		}
 		else
 		{
+			Scan.print(project.getProductBacklog().toString());
 			int idTaskRemove = IdTaskRemove();
 			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 
