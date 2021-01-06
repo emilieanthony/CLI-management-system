@@ -206,25 +206,25 @@ public class ControllerProductOwner {
 
             switch (option) {
                 case 1:
-                    controllerAll.editUSNumber(userStory);
+                    editUSNumber(number,controllerAll);
                     break;
                 case 2:
-                    controllerAll.editUSName(userStory);
+                    editUSName(number,controllerAll);
                     break;
                 case 3:
-                    controllerAll.editUSPriority(userStory);
+                    editUSPriority(number,controllerAll);
                     break;
                 case 4:
-                    controllerAll.editUSStoryPoints(userStory);
+                    editUSStoryPoints(number,controllerAll);
                     break;
                 case 5:
-                    controllerAll.editUSContent(userStory);
+                    editUSContent(number,controllerAll);
                     break;
                 case 6:
-                    controllerAll.editUSAcceptanceC(userStory);
+                    editUSAcceptanceC(number,controllerAll);
                     break;
                 case 7:
-                    controllerAll.changeUSStatus(userStory);
+                    editUSStatus(number,controllerAll);
                     break;
                 case 8:
                     running = false;
@@ -236,14 +236,99 @@ public class ControllerProductOwner {
     }
 
     //---------------------------------------Methods for 3rd Menu - editing User Stories--------------------------------
+    public void editUSNumber(int number, ControllerAll controllerAll) {
 
+        int newUSNumber = getNewUSNumber();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setNumber(newUSNumber);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
 
-    public void changeUSStatusInPBL(int number, ControllerAll controllerAll) {
+    }
+
+    public void editUSName(int number, ControllerAll controllerAll) {
+
+        String newUSName = getNewUSName();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setName(newUSName);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+
+    }
+
+    public void editUSPriority(int number, ControllerAll controllerAll) {
+        int newUSPriority = getNewUSPriority();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setPriorityNumber(newUSPriority);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+    }
+
+    public void editUSStoryPoints(int number, ControllerAll controllerAll) {
+        int newUSSPoints = getNewUSStoryPoints();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setStoryPoints(newUSSPoints);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+    }
+
+    public void editUSContent(int number, ControllerAll controllerAll) {
+        String newUSContent = getNewUSContent();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setContent(newUSContent);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+    }
+
+    public void editUSAcceptanceC(int number, ControllerAll controllerAll) {
+        String newUSAcceptanceC = getNewUSAcceptanceC();
+        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        userStory.setAcceptanceCriteria(newUSAcceptanceC);
+        controllerAll.saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+
+    }
+
+    public void editUSStatus(int number, ControllerAll controllerAll) {
+        int newUSStatus = getNewUSStatus();
 
         UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
 
-        controllerAll.changeUSStatus(userStory);
+        if (newUSStatus == 1) {
+            userStory.setOpen();
+            controllerAll.saveData();
+            userStoryEditConf();
+
+        } else if (newUSStatus == 2) {
+            userStory.setInProgress();
+            controllerAll.saveData();
+            userStoryEditConf();
+
+        } else if (newUSStatus == 3) {
+            Developer developer = controllerAll.findDeveloperByID();
+            userStory.setCompletedBy(developer.getName());
+            userStory.setComplete();
+            controllerAll.saveData();
+            userStoryEditConf();
+
+        } else if (newUSStatus == 4) {
+            userStory.setAssigned();
+            controllerAll.saveData();
+            userStoryEditConf();
+
+        } else {
+            changeStatusMessage();
+        }
+
+        Scan.print(userStory.toString());
     }
+
 
     //*-----------------------------------Code to reuse--------------------------------------------*//
     public UserStory findUStoryByNumberPBL(int number, ControllerAll controllerAll) {

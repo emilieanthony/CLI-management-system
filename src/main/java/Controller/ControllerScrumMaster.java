@@ -908,11 +908,7 @@ public class ControllerScrumMaster
 
 	public void editUSInSprintBLMenu(ControllerAll controllerAll){
 
-		sprintName = getSprintBacklogByName();
 
-		int USNumber = getUserStoryNumber();
-
-		UserStory userStory = findUStoryByNumberSBL(USNumber, controllerAll);
 
 		boolean running = true;
 
@@ -924,13 +920,13 @@ public class ControllerScrumMaster
 				switch (option)
 				{
 					case 1:
-						controllerAll.editUSStoryPoints(userStory);//Edit user story point
+						controllerAll.editUSStoryPointsSBL(userStory);//Edit user story point
 						break;
 					case 2:
-						controllerAll.editUSPriority(userStory);//edit priority number
+						controllerAll.editUSPrioritySBL(userStory);//edit priority number
 						break;
 					case 3:
-						controllerAll.changeUSStatus(userStory);//change user story status
+						controllerAll.changeUSStatusSBL(userStory);//change user story status
 						break;
 					case 4:
 						setUserStoryDeadline(controllerAll);//set user story deadline
@@ -1129,7 +1125,7 @@ public class ControllerScrumMaster
 
 	//---------------------------------------------------------------------------------------------//
 
-	private UserStory findUStoryByNumberSBL(int number, ControllerAll controllerAll)
+	public  UserStory findUStoryByNumberSBL(int number, ControllerAll controllerAll)
 	{
 		UserStory userStory = null;
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);

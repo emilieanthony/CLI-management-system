@@ -8,6 +8,7 @@ import Utility.DataManagement;
 import Utility.Scan;
 import View.ProductOwnerView;
 
+import static Controller.ControllerScrumMaster.sprintName;
 import static Utility.PrintUtility.defaultMessage;
 import static View.AllView.*;
 import static View.DevTeamView.*;
@@ -248,8 +249,28 @@ public class ControllerAll
         }
         return allStories;
     }
+    public void editUSStoryPointsSBL(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
 
-    public void editUSAcceptanceC(UserStory userStory){
+        Project project = controllerAll.whichProject();
+        showAllSprintBacklogs(project);
+        sprintName = getSprintBacklogByName();
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+        int newUSSPoints = getNewUSStoryPoints();
+
+        userStory.setStoryPoints(newUSSPoints);
+        saveData();
+        userStoryEditConf();
+        Scan.print(userStory.toString());
+    }
+
+    public void editUSAcceptanceCSBL(ControllerAll controllerAll){
+
+        sprintName = getSprintBacklogByName();
+        int USNumber = getUserStoryNumber();
+
+        UserStory userStory = findUStoryByNumberSBL(USNumber, controllerAll);
         String newUSAcceptanceC = getNewUSAcceptanceC();
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
         saveData();
@@ -257,7 +278,7 @@ public class ControllerAll
         Scan.print(userStory.toString());
     }
 
-    public void editUSNumber(UserStory userStory) {
+    public void editUSNumberSBL(UserStory userStory) {
 
         int newUSNumber = getNewUSNumber();
 
@@ -268,7 +289,7 @@ public class ControllerAll
 
     }
 
-    public void editUSName(UserStory userStory){
+    public void editUSNameSBL(UserStory userStory){
 
         String newUSName = getNewUSName();
 
@@ -277,7 +298,7 @@ public class ControllerAll
         userStoryEditConf();
         Scan.print(userStory.toString());
     }
-    public void editUSPriority(UserStory userStory) {
+    public void editUSPrioritySBL(UserStory userStory) {
 
         int newUSPriority = getNewUSPriority();
 
@@ -287,17 +308,9 @@ public class ControllerAll
         Scan.print(userStory.toString());
     }
 
-    public void editUSStoryPoints(UserStory userStory) {
 
-        int newUSSPoints = getNewUSStoryPoints();
 
-        userStory.setStoryPoints(newUSSPoints);
-        saveData();
-        userStoryEditConf();
-        Scan.print(userStory.toString());
-    }
-
-    public void editUSContent(UserStory userStory) {
+    public void editUSContentSBL(UserStory userStory) {
         String newUSContent = getNewUSContent();
 
         userStory.setContent(newUSContent);
@@ -308,7 +321,7 @@ public class ControllerAll
 
 
 
-    public void changeUSStatus(UserStory userStory){
+    public void changeUSStatusSBL(UserStory userStory){
 
         int newUSStatus = ProductOwnerView.getNewUSStatus();
 
