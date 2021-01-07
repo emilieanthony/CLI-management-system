@@ -101,7 +101,7 @@ public class ControllerProductOwner {
         viewProBacklog(controllerAll);
         int number = getUSid();
 
-        UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
+        UserStory userStory = findUStoryByIdPBL(number,controllerAll);
 
         ArrayList<UserStory> userStories = project.getProductBacklog().getAllUserStories();
 
@@ -225,7 +225,7 @@ public class ControllerProductOwner {
         boolean running = true;
         viewUStoriesPBL(controllerAll);
         int number = getStoryID();
-        UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
+        UserStory userStory = findUStoryByIdPBL(number, controllerAll);
 
         do {
             int option = menuEditUserStory();
@@ -344,7 +344,7 @@ public class ControllerProductOwner {
 
 
     //*-----------------------------------Code to reuse--------------------------------------------*//
-    public UserStory findUStoryByNumberPBL(int number, ControllerAll controllerAll) {
+    public UserStory findUStoryByIdPBL(int id, ControllerAll controllerAll) {
         UserStory userStory = null;
 
         Project project = controllerAll.whichProject();
@@ -352,7 +352,7 @@ public class ControllerProductOwner {
         while (userStory == null && iterator.hasNext()) {
             UserStory foundUserStory = iterator.next();
 
-            if (foundUserStory.getId() == number) {
+            if (foundUserStory.getId() == id) {
                 userStory = foundUserStory;
                 Scan.print(userStory.toString());
             }
