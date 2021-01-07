@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
 import static View.DevTeamView.*;
-import static View.DevTeamView.getUserStoryNumber;
+import static View.DevTeamView.getUserStoryID;
 import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;
 
@@ -974,9 +974,9 @@ public class ControllerScrumMaster
 
 		sprintName = getSprintBacklogByName();
 
-		int USNumber = getUserStoryNumber();
+		int USid = getUserStoryID();
 
-		UserStory userStory = findUStoryByNumberSBL(USNumber, controllerAll);
+		UserStory userStory = findUStoryByNumberSBL(USid, controllerAll);
 
 		return userStory;
 	}
@@ -1315,7 +1315,7 @@ public class ControllerScrumMaster
 			showAllSprintBacklogs(project, "user stories");
 			sprintName = getSprintBacklogByName();
 
-			int USNumber = getUserStoryNumber();
+			int USNumber = getUserStoryID();
 
 			//viewSprintBacklogT(controllerAll);
 			UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
@@ -1393,7 +1393,7 @@ public class ControllerScrumMaster
 		showAllSprintBacklogs(project, "user stories");
 		sprintName = getSprintBacklogByName();
 
-		int USNumber = getUserStoryNumber();
+		int USNumber = getUserStoryID();
 
 		UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
 		if (userStory == null)
@@ -1428,7 +1428,7 @@ public class ControllerScrumMaster
 		showAllSprintBacklogs(project, "user stories");
 		sprintName = getSprintBacklogByName();
 
-		int USNumber = getUserStoryNumber();
+		int USNumber = getUserStoryID();
 
 		UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
 		if (userStory == null)

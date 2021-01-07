@@ -170,7 +170,7 @@ public class ControllerAll
 
     public UserStory findUStoryByNumber(){
 
-        int number = getUserStoryNumber();
+        int number = getUserStoryID();
         UserStory userStory = null;
 
         Iterator<UserStory> iterator = collectAllStories().iterator();

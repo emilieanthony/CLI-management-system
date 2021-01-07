@@ -69,8 +69,8 @@ public class DevTeamView {
         Scan.print("Number cannot be negative.");
     }
 
-    public static int getUserStoryNumber(){
-        int id = Scan.readInt("Please enter the User Story's number");
+    public static int getUserStoryID(){
+        int id = Scan.readInt("Please enter the User Story's ID");
         return id;
     }
 
