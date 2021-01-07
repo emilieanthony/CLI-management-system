@@ -3,12 +3,10 @@ package Controller;
 import Models.*;
 import Utility.Scan;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.*;
-import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.emptyName;
-import static View.ScrumMasterView.getProjectName;
 
 
 public class ControllerDeveloper {
@@ -27,7 +25,7 @@ public class ControllerDeveloper {
                         viewMyTasks(controllerAll,scrumMaster);
                         break;
                     case 2:
-                        viewAllAssignedTasks(controllerAll,scrumMaster);
+                        viewAllAssignedTasks(controllerAll);
                         break;
                     case 3:
                         completeTask(controllerAll);
@@ -37,13 +35,13 @@ public class ControllerDeveloper {
                         scrumMaster.changeUSStatus(userStory, controllerAll);;
                         break;
                     case 5:
-                        proCont.viewProBacklog(controllerAll);//View product backlog
+                        proCont.viewProBacklog(controllerAll);
                         break;
                     case 6:
-                        scrumMaster.viewSprintBacklog(controllerAll);//View sprint backlog
+                        scrumMaster.viewSprintBacklog(controllerAll);
                         break;
                     case 7:
-                        controllerAll.viewAllTasks();//View all tasks
+                        controllerAll.viewAllTasks();
                         break;
                     case 8:
                         controllerAll.viewCompletedTasks();
@@ -72,26 +70,8 @@ public class ControllerDeveloper {
         } while (running);
     }
 
-    //---------------------------------Method----------------------------------------------//
+    //---------------------------------Methods----------------------------------------------//
 
-  /*  public void taskMenu(ControllerAll controllerAll) {
-        boolean running = true;
-
-        do {
-
-            int option = getTaskMenu();
-            switch (option) {
-                case 1:
-                    completeTask(controllerAll);
-                    break;
-                case 2:
-                    running = false;
-                    break;
-                default:
-                    defaultMessage();
-            }
-        } while (running);
-    }*/
 
     public void viewMyTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
         ArrayList<Task> assignedTasks = new ArrayList<>();
@@ -111,7 +91,7 @@ public class ControllerDeveloper {
         Scan.print(assignedTasks.toString());
     }
 
-    public void viewAllAssignedTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
+    public void viewAllAssignedTasks(ControllerAll controllerAll) {
         ArrayList<Task> allTasks = controllerAll.collectAllTasks();
         for (Task task:allTasks) {
             if (task == null) {
@@ -121,8 +101,6 @@ public class ControllerDeveloper {
             }
         }
     }
-
-
 
     public Task openTask(ControllerAll controllerAll) {
         Task task = controllerAll.findTaskById();

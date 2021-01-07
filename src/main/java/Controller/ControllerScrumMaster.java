@@ -6,7 +6,6 @@ import Utility.DataManagement;
 import Utility.Scan;
 import View.AllView;
 import View.ProductOwnerView;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -1066,8 +1065,6 @@ public class ControllerScrumMaster
 
 	public void changeUSStatus(UserStory userStory, ControllerAll controllerAll){
 
-
-
 		int newUSStatus = ProductOwnerView.getNewUSStatus();
 
 		if (newUSStatus == 1) {
@@ -1100,18 +1097,6 @@ public class ControllerScrumMaster
 	}
 
 
-
-
-	/*public UserStory findSBLUStory(ControllerAll controllerAll){
-		sprintName = getSprintBacklogByName();
-
-		int USNumber = getUserStoryNumber();
-
-		UserStory userStory = findUStoryByNumberSBL(USNumber, controllerAll);
-
-		return userStory;
-	}*/
-
 	public void removeUSFromSBL(UserStory userStory, ControllerAll controllerAll){
 
 
@@ -1125,35 +1110,7 @@ public class ControllerScrumMaster
 
 	}
 
-	/*public void removeUSFromSBL(UserStory userStory, ControllerAll controllerAll) {
 
-
-
-
-		Project project = controllerAll.whichProject();
-		if (project == null) {
-			projectNotFound();
-		}
-
-		showAllSprintBacklogs(project);
-		sprintName = getSprintBacklogByName();
-
-		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
-		if (sprintBacklog == null) {
-			invalidSprintBacklog();
-		} else {
-			int USNumber = getUserStoryNumber();
-			UserStory userStory = findUStoryByNumberSBL(USNumber, controllerAll);
-			if (userStory == null){
-				nullUserStoryPrint();
-			}else{
-				sprintBacklog.getUserStories().remove(userStory);
-				printDeleted();
-			}
-
-		}
-
-	}*/
 	//------------------------------------Methods for velocity-------------------------------------------//
 
 
