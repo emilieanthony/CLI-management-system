@@ -114,6 +114,20 @@ public class ControllerProductOwner {
         }
     }
 
+    public void deleteExistingAndCreateNewBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
+        try {
+            Project project = controllerAll.whichProject();
+            ProductBacklog ProBacklog = getBacklogInfo();
+            project.setProductBacklog(ProBacklog);
+            proBacklogCreationConf();
+            Scan.print(ProBacklog.toString());
+            controllerAll.saveData();
+        } catch (Exception e) {
+            backlogFail();
+        }
+    }
+
+
     //*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*//
     public void editProductBacklog(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster) {
         boolean running = true;
