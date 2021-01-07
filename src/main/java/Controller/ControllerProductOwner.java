@@ -1,9 +1,12 @@
 package Controller;
 
 import Models.*;
+import Utility.DataManagement;
 import Utility.Scan;
 import View.ScrumMasterView;
 
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
@@ -42,9 +45,12 @@ public class ControllerProductOwner {
                         controllerAll.viewCompletedUStories();
                         break;
                     case 6:
-                        getProjectName(controllerAll);
+                        deleteExistingAndCreateNewBacklog(controllerAll);
                         break;
                     case 7:
+                        controllerAll.switchProject(controllerAll);
+                        break;
+                    case 8:
                         running = false; //go back to main menu
                         break;
                     default:
@@ -147,10 +153,20 @@ public class ControllerProductOwner {
     public void editProductBacklogName(ControllerAll controllerAll) {
 
         String nameBacklog = getProBacklogName();
+
+        while (nameBacklog.isBlank()){
+            emptyName();
+            nameBacklog = getProBacklogName();
+        }
+
         Project project = controllerAll.whichProject();
+
         project.getProductBacklog().setName(nameBacklog);
+
         controllerAll.saveData();
+
         proBacklogEditConf();
+
         Scan.print(project.getProductBacklog().toString());
 
     }
@@ -159,6 +175,16 @@ public class ControllerProductOwner {
 
         Project project = controllerAll.whichProject();
         String startDate = ScrumMasterView.getStartDate();
+
+        LocalDate localStartDate = DataManagement.stringToLocalDate(startDate);
+        LocalDate localEndDate = DataManagement.stringToLocalDate(project.getProductBacklog().getEndDate());
+
+        while (localEndDate.isBefore(localStartDate)){
+            wrongDatePrint();
+            startDate = ScrumMasterView.getStartDate();
+            localStartDate = DataManagement.stringToLocalDate(startDate);
+        }
+
         project.getProductBacklog().setStartDate(startDate);
         controllerAll.saveData();
         proBacklogEditConf();
@@ -168,6 +194,16 @@ public class ControllerProductOwner {
     public void editBacklogEndDate(ControllerAll controllerAll) {
         Project project = controllerAll.whichProject();
         String endDate = getBacklogEDate();
+
+        LocalDate localEndDate = DataManagement.stringToLocalDate(endDate);
+        LocalDate localStartDate = DataManagement.stringToLocalDate(project.getProductBacklog().getStartDate());
+
+        while (localEndDate.isBefore(localStartDate)){
+            wrongDatePrint();
+            endDate = getBacklogEDate();
+            localEndDate = DataManagement.stringToLocalDate(endDate);
+        }
+
         project.getProductBacklog().setEndDate(endDate);
         controllerAll.saveData();
         proBacklogEditConf();
@@ -180,7 +216,7 @@ public class ControllerProductOwner {
     public void editUserStory(ControllerAll controllerAll) {
 
         boolean running = true;
-        viewProBacklog(controllerAll);
+        viewUStoriesPBL(controllerAll);
         int number = getStoryNumber();
         UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
 
@@ -189,16 +225,16 @@ public class ControllerProductOwner {
 
             switch (option) {
                 case 1:
-                    editUSNumber(userStory,controllerAll);
+                    editUSNumber(userStory, controllerAll);
                     break;
                 case 2:
-                    editUSName(userStory,controllerAll);
+                    editUSName(userStory, controllerAll);
                     break;
                 case 3:
-                    editUSContent(userStory,controllerAll);
+                    editUSContent(userStory, controllerAll);
                     break;
                 case 4:
-                    editUSAcceptanceC(userStory,controllerAll);
+                    editUSAcceptanceC(userStory, controllerAll);
                     break;
                 case 5:
                     running = false;
@@ -210,6 +246,16 @@ public class ControllerProductOwner {
     }
 
     //---------------------------------------Methods for 3rd Menu - editing User Stories--------------------------------
+
+    public void viewUStoriesPBL(ControllerAll controllerAll){
+        Project project = controllerAll.whichProject();
+        ArrayList<UserStory> userStories = project.getProductBacklog().getAllUserStories();
+
+        printPBLUStories(userStories);
+
+    }
+
+
     public void editUSNumber(UserStory userStory, ControllerAll controllerAll) {
 
         int newUSNumber = getNewUSNumber();
@@ -222,6 +268,12 @@ public class ControllerProductOwner {
     public void editUSName(UserStory userStory, ControllerAll controllerAll) {
 
         String newUSName = getNewUSName();
+
+        while (newUSName.isBlank()){
+            emptyName();
+            newUSName = getNewUSName();
+        }
+
         userStory.setName(newUSName);
         controllerAll.saveData();
         userStoryEditConf(userStory);
@@ -230,6 +282,12 @@ public class ControllerProductOwner {
 
     public void editUSContent(UserStory userStory, ControllerAll controllerAll) {
         String newUSContent = getNewUSContent();
+
+        while (newUSContent.isBlank()){
+            emptyContent();
+            newUSContent = getNewUSContent();
+        }
+
         userStory.setContent(newUSContent);
         controllerAll.saveData();
         userStoryEditConf(userStory);
@@ -237,6 +295,8 @@ public class ControllerProductOwner {
 
     public void editUSAcceptanceC(UserStory userStory, ControllerAll controllerAll) {
         String newUSAcceptanceC = getNewUSAcceptanceC();
+
+
         userStory.setAcceptanceCriteria(newUSAcceptanceC);
         controllerAll.saveData();
         userStoryEditConf(userStory);

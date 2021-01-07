@@ -54,6 +54,14 @@ public class ProductBacklog
         this.endDate = endDate;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
     public Task getTask(int id)
     {
         for(Task task : tasks)

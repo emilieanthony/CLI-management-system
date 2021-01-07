@@ -104,12 +104,13 @@ public class DevTeamView {
     }
 
     public static void printAllTasks(ArrayList<Task> tasks){
+        Scan.print("All tasks: ");
         for (Task task : tasks){
-            Scan.print(task.toString());
+            Scan.print("ID: " + task.getId() + " name: " + task.getName());
         }
     }
 
-    public static void viewSprints(Project project){
+    public static void printSprints(Project project){
         Scan.print("Sprints: \n" );
         for(SprintBacklog sprintBacklog : project.getAllSprintBacklogs()){
             Scan.print(sprintBacklog.getName());

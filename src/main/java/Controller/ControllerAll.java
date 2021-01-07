@@ -8,6 +8,8 @@ import Utility.DataManagement;
 import Utility.Scan;
 import View.ProductOwnerView;
 
+import javax.naming.ldap.Control;
+
 import static Controller.ControllerScrumMaster.sprintName;
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
@@ -98,6 +100,15 @@ public class ControllerAll
                 numberFormatMessage();
             }
         } while (running);
+    }
+
+    public void switchProject(ControllerAll controllerAll){
+        getProjectName(controllerAll);
+
+        while (!legalProject()){
+            wrongProjectNameInput();
+            getProjectName(controllerAll);
+        }
     }
 
     private void viewProjects()
@@ -234,6 +245,11 @@ public class ControllerAll
             }
         }
         return allTasks;
+    }
+
+    public void viewAllTasks(){
+        ArrayList<Task> allTasks = collectAllTasks();
+        printAllTasks(allTasks);
     }
 
     public ArrayList<UserStory> collectAllStories()

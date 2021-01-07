@@ -7,6 +7,7 @@ import java.util.Iterator;
 import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.*;
 import static View.ProductOwnerView.getStoryNumber;
+import static View.ScrumMasterView.emptyName;
 import static View.ScrumMasterView.getProjectName;
 
 
@@ -42,7 +43,7 @@ public class ControllerDeveloper {
                         scrumMaster.viewSprintBacklog(controllerAll);//View sprint backlog
                         break;
                     case 7:
-                        viewAllTasks(controllerAll, scrumMaster);//View all tasks
+                        controllerAll.viewAllTasks();//View all tasks
                         break;
                     case 8:
                         controllerAll.viewCompletedTasks();
@@ -57,7 +58,7 @@ public class ControllerDeveloper {
                         controllerAll.viewUStoryDeadlines();
                         break;
                     case 12:
-                        getProjectName(controllerAll);// Switch project.
+                        controllerAll.switchProject(controllerAll);// Switch project.
                         break;
                     case 13:
                         running = false;
@@ -121,10 +122,7 @@ public class ControllerDeveloper {
         }
     }
 
-    public void viewAllTasks(ControllerAll controllerAll, ControllerScrumMaster scrumMaster){
-        ArrayList<Task> allTasks = controllerAll.collectAllTasks();
-        printAllTasks(allTasks);
-    }
+
 
     public Task openTask(ControllerAll controllerAll) {
         Task task = controllerAll.findTaskById();
@@ -134,11 +132,22 @@ public class ControllerDeveloper {
 
     public void completeTask(ControllerAll controllerAll){
 
-        String name = getNameCompleteTask();
 
         Task task = openTask(controllerAll);
 
         int actualHrs = getActualHrs();
+
+        while (actualHrs<0){
+            negativeNumberPrint();
+            actualHrs = getActualHrs();
+        }
+
+        String name = getNameCompleteTask();
+
+        while (name.isBlank()){
+            emptyName();
+            name = getNameCompleteTask();
+        }
 
         task.setActualHours( actualHrs );
 
