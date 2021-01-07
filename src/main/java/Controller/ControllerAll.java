@@ -494,6 +494,7 @@ public class ControllerAll
 
         printUStoryDeadlines(storiesWDeadlines, storiesWODeadlines);
 
+
     }
 
     public boolean legalProject(){
