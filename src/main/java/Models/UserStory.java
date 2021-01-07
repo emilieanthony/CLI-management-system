@@ -182,13 +182,16 @@ public class UserStory implements Comparable<UserStory> {
     @Override
     public String toString() {
         String output;
-        
+
+
         String acceptanceCriteria = "";
+
         int listLine = 1;
         for (String criteria : this.acceptanceCriteria){
             acceptanceCriteria = acceptanceCriteria + "\n " + listLine + ". " + criteria;
             listLine++;
         }
+
 
         output =
                 "\nUser Story: " +
