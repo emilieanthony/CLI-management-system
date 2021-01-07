@@ -268,15 +268,6 @@ public class ControllerProductOwner {
     }
 
 
-   /* public void editUSNumber(UserStory userStory, ControllerAll controllerAll) {
-
-        int newUSNumber = getNewUSNumber();
-        userStory.setNumber(newUSNumber);
-        controllerAll.saveData();
-        userStoryEditConf(userStory);
-
-    }*/
-
     public void editUSName(UserStory userStory, ControllerAll controllerAll) {
 
         String newUSName = getNewUSName();
@@ -344,8 +335,6 @@ public class ControllerProductOwner {
         }
 
     }
-
-
 
 
     //*-----------------------------------Code to reuse--------------------------------------------*//
