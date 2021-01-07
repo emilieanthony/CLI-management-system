@@ -78,7 +78,7 @@ public class ProductBacklog
     {
         for(UserStory userStory : allUserStories)
         {
-            if(userStory.getNumber()==number)
+            if(userStory.getId()==number)
             {
                 return userStory;
             }

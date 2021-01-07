@@ -12,7 +12,7 @@ public class UserStory implements Comparable<UserStory> {
 
     // Attributes:-
     private String name;
-    private int number;
+    private int id;
     private int priorityNumber;
     private int storyPoints;
     private String content;
@@ -39,7 +39,7 @@ public class UserStory implements Comparable<UserStory> {
         {
             throw new NegativeId();
         } else {
-            this.number = number;
+            this.id = number;
         }
 
         if (priority < 0 || priority > 5) {
@@ -69,8 +69,8 @@ public class UserStory implements Comparable<UserStory> {
         return name;
     }
 
-    public int getNumber() {
-        return number;
+    public int getId() {
+        return id;
     }
 
 
@@ -107,8 +107,8 @@ public class UserStory implements Comparable<UserStory> {
         this.name = name;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setPriorityNumber(int priorityNumber) {
@@ -192,7 +192,7 @@ public class UserStory implements Comparable<UserStory> {
 
         output =
                 "\nUser Story: " +
-                        "\nUser story ID: " + number +
+                        "\nUser story ID: " + id +
                         "\nName: " + name +
                         "\nPriority: " + priorityNumber +
                         "\nStory Points: " + storyPoints +

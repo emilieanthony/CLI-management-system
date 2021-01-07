@@ -5,7 +5,6 @@ import Utility.DataManagement;
 import Utility.Scan;
 import View.ScrumMasterView;
 
-import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -99,7 +98,7 @@ public class ControllerProductOwner {
         Project project = controllerAll.whichProject();
 
         viewProBacklog(controllerAll);
-        int number = getUSNumber();
+        int number = getUSid();
 
         UserStory userStory = findUStoryByNumberPBL(number,controllerAll);
 
@@ -224,7 +223,7 @@ public class ControllerProductOwner {
 
         boolean running = true;
         viewUStoriesPBL(controllerAll);
-        int number = getStoryNumber();
+        int number = getStoryID();
         UserStory userStory = findUStoryByNumberPBL(number, controllerAll);
 
         do {
@@ -232,21 +231,18 @@ public class ControllerProductOwner {
 
             switch (option) {
                 case 1:
-                    editUSNumber(userStory, controllerAll);
-                    break;
-                case 2:
                     editUSName(userStory, controllerAll);
                     break;
-                case 3:
+                case 2:
                     editUSContent(userStory, controllerAll);
                     break;
-                case 4:
+                case 3:
                     editUSAcceptanceC(userStory, controllerAll);
                     break;
-                case 5:
+                case 4:
                     removeUSAcceptanceC(userStory, controllerAll);
                     break;
-                case 6:
+                case 5:
                     running = false;
                     break;
                 default:
@@ -266,14 +262,14 @@ public class ControllerProductOwner {
     }
 
 
-    public void editUSNumber(UserStory userStory, ControllerAll controllerAll) {
+   /* public void editUSNumber(UserStory userStory, ControllerAll controllerAll) {
 
         int newUSNumber = getNewUSNumber();
         userStory.setNumber(newUSNumber);
         controllerAll.saveData();
         userStoryEditConf(userStory);
 
-    }
+    }*/
 
     public void editUSName(UserStory userStory, ControllerAll controllerAll) {
 
@@ -355,7 +351,7 @@ public class ControllerProductOwner {
         while (userStory == null && iterator.hasNext()) {
             UserStory foundUserStory = iterator.next();
 
-            if (foundUserStory.getNumber() == number) {
+            if (foundUserStory.getId() == number) {
                 userStory = foundUserStory;
                 Scan.print(userStory.toString());
             }

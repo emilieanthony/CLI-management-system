@@ -3,12 +3,10 @@ package Controller;
 import Models.*;
 import Utility.Scan;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.*;
-import static View.ProductOwnerView.getStoryNumber;
 import static View.ScrumMasterView.emptyName;
-import static View.ScrumMasterView.getProjectName;
 
 
 public class ControllerDeveloper {

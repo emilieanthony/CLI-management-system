@@ -5,7 +5,6 @@ import Models.SprintBacklog;
 import Models.UserStory;
 import Utility.Scan;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static View.ScrumMasterView.proName;
@@ -32,7 +31,7 @@ public class ProductOwnerView {
     public static void printPBLUStories(ArrayList<UserStory> userStories){
         Scan.print("The following user stories exist in the product backlog:");
         for (UserStory userStory : userStories){
-            Scan.print(userStory.getNumber() + " " + userStory.getName());
+            Scan.print(userStory.getId() + " " + userStory.getName());
         }
     }
 
@@ -80,14 +79,14 @@ public class ProductOwnerView {
         return endDate;
     }
 
-    public static UserStory getUSInfo(int number) throws Exception {
+    public static UserStory getUSInfo(int id) throws Exception {
         Scan.print("Create new user story");
         String name = Scan.readLine("Name: ");
         //int number = Scan.readInt("User story number: ");
         int priority = Scan.readInt("Priority: ");
         String content = Scan.readLine("Content: ");
         String acceptanceCriteria = Scan.readLine("Acceptance criteria: ");
-        return new UserStory(name, number, priority, content, acceptanceCriteria);
+        return new UserStory(name, id, priority, content, acceptanceCriteria);
 
     }
 
@@ -101,10 +100,10 @@ public class ProductOwnerView {
         Scan.print("\nYou have now created the following user story to your product backlog: \n" + userStory.toString());
     }
 
-    public static int getUSNumber() {
+    public static int getUSid() {
         Scan.print("\nDelete a user story");
-        int number = Scan.readInt("\nEnter the number of the user story you want to delete from the product backlog:");
-        return number;
+        int id = Scan.readInt("\nEnter the ID of the user story you want to delete from the product backlog:");
+        return id;
     }
 
 
@@ -112,24 +111,23 @@ public class ProductOwnerView {
     public static int menuEditUserStory() {
         int option = Scan.readInt
                 ("\n\nPlease enter the number of which part of the user story you want to edit:\n\n" +
-                        "1. Edit user story number.\n" +
-                        "2. Edit user story name.\n" +
-                        "3. Edit user story content.\n" +
-                        "4. Edit user story acceptance criteria\n" +
-                        "5. Remove user story acceptance criteria\n" +
-                        "6. Back to your menu.\n");
+                        "1. Edit user story name.\n" +
+                        "2. Edit user story content.\n" +
+                        "3. Edit user story acceptance criteria\n" +
+                        "4. Remove user story acceptance criteria\n" +
+                        "5. Back to your menu.\n");
         return option;
     }
 
-    public static int getStoryNumber() {
-        int number = Scan.readInt("\nPlease enter the number of the user story you want to edit.");
-        return number;
+    public static int getStoryID() {
+        int id = Scan.readInt("\nPlease enter the ID of the user story you want to edit.");
+        return id;
 
     }
 
-    public static int getNewUSNumber() {
-        int newUSNumber = Scan.readInt("\nEnter a new number for the user story.");
-        return newUSNumber;
+    public static int getNewUSid() {
+        int newUSid = Scan.readInt("\nEnter a new ID for the user story.");
+        return newUSid;
     }
 
     public static String getNewUSName() {
@@ -188,7 +186,7 @@ public class ProductOwnerView {
         Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 5.");
     }
     public static void nonExistentUStory(){
-        Scan.print("The number you entered does not match with any user story in the product backlog.");
+        Scan.print("The ID you entered does not match with any user story in the product backlog.");
     }
 
     public static void printSprint(SprintBacklog sprintBacklog){

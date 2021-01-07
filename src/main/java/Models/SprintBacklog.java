@@ -3,7 +3,6 @@ package Models;
 import Exceptions.EmptyName;
 import Exceptions.WrongDate;
 import Utility.DataManagement;
-import View.ScrumMasterView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,7 +88,7 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 	{
 		for(UserStory userStory : userStories)
 		{
-			if(userStory.getNumber() == number)
+			if(userStory.getId() == number)
 			{
 				return userStory;
 			}

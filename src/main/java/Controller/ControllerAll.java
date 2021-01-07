@@ -6,16 +6,10 @@ import java.util.Iterator;
 import Models.*;
 import Utility.DataManagement;
 import Utility.Scan;
-import View.ProductOwnerView;
 
-import javax.naming.ldap.Control;
-
-import static Controller.ControllerScrumMaster.sprintName;
 import static Utility.PrintUtility.defaultMessage;
-import static Utility.PrintUtility.projectNotFound;
 import static View.AllView.*;
 import static View.DevTeamView.*;
-import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;
 
 public class ControllerAll
@@ -183,7 +177,7 @@ public class ControllerAll
         while (userStory == null && iterator.hasNext())
         {
             UserStory foundStory = iterator.next();
-            if (foundStory.getNumber() == number)
+            if (foundStory.getId() == number)
             {
                 userStory = foundStory;
             }

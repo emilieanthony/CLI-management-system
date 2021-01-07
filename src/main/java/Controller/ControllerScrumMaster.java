@@ -494,7 +494,7 @@ public class ControllerScrumMaster
 		{
 			for (UserStory userStory : stories) {
 
-				ids.add(userStory.getNumber());
+				ids.add(userStory.getId());
 
 			}
 		}
@@ -1316,7 +1316,7 @@ public class ControllerScrumMaster
 		while (userStory == null && iterator.hasNext())
 		{
 			UserStory foundUserStory = iterator.next();
-			if (foundUserStory.getNumber() == number)
+			if (foundUserStory.getId() == number)
 			{
 				userStory = foundUserStory;
 				Scan.print(userStory.toString());
@@ -1527,7 +1527,7 @@ public class ControllerScrumMaster
 		}
 
 		else {
-			Task task = findTaskInUserSSBL(userStory.getNumber(), controllerAll);
+			Task task = findTaskInUserSSBL(userStory.getId(), controllerAll);
 			if (task == null)
 			{
 				nullTaskPrint();

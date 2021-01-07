@@ -6,7 +6,6 @@ import Models.Task;
 import Utility.DataManagement;
 import Utility.Scan;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static Controller.ControllerScrumMaster.sprintName;
@@ -419,7 +418,7 @@ public class ScrumMasterView
 
 			if (objectTypePlural=="user stories"){
 			for (UserStory userStory : sprint.getUserStories()){
-				Scan.print("-    User story number: " + userStory.getNumber() + " " + userStory.getName());
+				Scan.print("-    User story number: " + userStory.getId() + " " + userStory.getName());
 			}
 			}else if (objectTypePlural=="tasks"){
 				for(Task task : sprint.getAllTasks())
@@ -631,13 +630,13 @@ public class ScrumMasterView
 
 	public static void printUStoryDeadlines(ArrayList<UserStory> wDeadlines, ArrayList<UserStory> wODeadlines){
 		for (UserStory userStory : wDeadlines){
-			Scan.print(userStory.getDeadline() + " Number: " + userStory.getNumber() + " Name: " + userStory.getName());
+			Scan.print(userStory.getDeadline() + " Number: " + userStory.getId() + " Name: " + userStory.getName());
 		}
 
 		if (!wODeadlines.isEmpty()){
 			Scan.print("\n\nThe following user stories do not have any deadlines");
 			for (UserStory userStory : wODeadlines){
-				Scan.print("Number: " + userStory.getNumber() + " Name: " + userStory.getName());
+				Scan.print("Number: " + userStory.getId() + " Name: " + userStory.getName());
 			}
 		}
 
@@ -650,7 +649,7 @@ public class ScrumMasterView
 
 	public static void setUStoryDeadlineReceipt(UserStory userStory){
 		Scan.print("The following deadline: " + userStory.getDeadline() + " for user story with the number: " +
-				userStory.getNumber() + " with the name: " + userStory.getName());
+				userStory.getId() + " with the name: " + userStory.getName());
 	}
 
 	public static int getUSPoints(){
