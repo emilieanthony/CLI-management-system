@@ -1313,6 +1313,7 @@ public class ControllerScrumMaster
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
 		Iterator<UserStory> iterator = sprintBacklog.getUserStories().iterator();
 
+
 		while (userStory == null && iterator.hasNext())
 		{
 			UserStory foundUserStory = iterator.next();
@@ -1321,7 +1322,9 @@ public class ControllerScrumMaster
 			{
 
 				userStory = foundUserStory;
-				Scan.print(userStory.toString());
+
+				printUStoryInfo(userStory);
+
 			}
 		}
 		return userStory;
