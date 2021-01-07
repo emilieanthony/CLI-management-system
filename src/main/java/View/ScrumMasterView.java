@@ -198,7 +198,7 @@ public class ScrumMasterView
 
 	public static void invalidSprintBacklog()
 	{
-		Scan.print("The name of the sprint was not found. Please try again");
+		Scan.print("\n\nThe name of the sprint was not found. Please try again\n\n");
 
 	}
 
@@ -648,29 +648,29 @@ public class ScrumMasterView
 	}
 
 	public static void emptyName(){
-		Scan.print("Error: Name cannot be empty, Please " +
-				"try again");
+		Scan.print("\n\nError: Name cannot be empty, Please " +
+				"try again\n\n");
 	}
 	public static void negativeId(){
-		Scan.print("Error: Id cannot be negative, Please " +
-				"try again");
+		Scan.print("\n\nError: Id cannot be negative, Please " +
+				"try again\n\n");
 	}
 
 	public static void noSprintBacklogYet(){
-		Scan.print("There isn't yet any sprint backlog for you to add any tasks to, please create one first.\n\n");
+		Scan.print("\n\nThere isn't yet any sprint backlog for you to add any tasks to, please create one first.\n\n");
 	}
 
 	public static void noDeveloperYet(){
-		Scan.print("There is no any development team members in the system." +
+		Scan.print("\n\nThere is no any development team members in the system." +
 				" Please register a new development team member first below.\n\n");
 	}
 	public static void invalidDeveloperId(){
-		Scan.print("There is no Developer that matches your given input. \n\n");
+		Scan.print("\n\nThere is no Developer that matches your given input. \n\n");
 	}
 
 	public static void showAllTeamMembers(Project project){
 		String name = project.getName();
-		Scan.print("Below you find all development team members working on project " + name);
+		Scan.print("\nBelow you find all development team members working on project " + name);
 		System.out.println("\n" + project.getAllTeamMembers());
 	}
 

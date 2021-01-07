@@ -20,6 +20,15 @@
       "id" : 1003,
       "estimatedHours" : 2,
       "actualHours" : 0,
+      "status" : "Open",
+      "name" : "task2",
+      "assignedDevelopers" : [ ],
+      "deadline" : null,
+      "completedBy" : null
+    }, {
+      "id" : 1003,
+      "estimatedHours" : 2,
+      "actualHours" : 0,
       "status" : "Complete",
       "name" : "Task1",
       "assignedDevelopers" : [ ],
@@ -61,15 +70,6 @@
         "name" : "Bassam",
         "id" : 2
       } ],
-      "deadline" : null,
-      "completedBy" : null
-    }, {
-      "id" : 1003,
-      "estimatedHours" : 2,
-      "actualHours" : 0,
-      "status" : "Open",
-      "name" : "task2",
-      "assignedDevelopers" : [ ],
       "deadline" : null,
       "completedBy" : null
     }, {

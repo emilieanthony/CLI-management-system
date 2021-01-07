@@ -534,10 +534,8 @@ public class ControllerScrumMaster
 
 	private void moveTaskOrUstoryToPBL(ControllerAll controllerAll)
 	{
-		viewSprintBacklog(controllerAll);
-
 		String input = moveObjectToBacklogPrint();
-
+		viewSprintBacklog(controllerAll);
 		Project project = controllerAll.whichProject();
 
 		if (project == null)
