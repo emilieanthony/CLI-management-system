@@ -236,6 +236,11 @@ public class ControllerAll
         return allTasks;
     }
 
+    public void viewAllTasks(){
+        ArrayList<Task> allTasks = collectAllTasks();
+        printAllTasks(allTasks);
+    }
+
     public ArrayList<UserStory> collectAllStories()
     {
         Project project = whichProject();

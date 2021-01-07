@@ -1,6 +1,7 @@
 package View;
 
 import Models.ProductBacklog;
+import Models.SprintBacklog;
 import Models.UserStory;
 import Utility.Scan;
 
@@ -177,6 +178,9 @@ public class ProductOwnerView {
         Scan.print("The number you entered does not match with any user story in the product backlog.");
     }
 
+    public static void printSprint(SprintBacklog sprintBacklog){
+        Scan.print(sprintBacklog.toString());
+    }
 
 }
 

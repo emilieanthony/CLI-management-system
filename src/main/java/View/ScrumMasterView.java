@@ -67,8 +67,8 @@ public class ScrumMasterView
 		int option = Scan.readInt
 				("\n\nDeadlines options Menu. \n" +
 
-						"1. Set User Story deadline\n" +
-						"2. Set Task deadline\n" +
+						"1. Set Task deadline\n" +
+						"2. Set User Story deadline\n" +
 						"3. View Sprint end dates\n" +
 						"4. View Task deadlines\n" +
 						"5. View User Story deadlines\n" +
@@ -108,12 +108,12 @@ public class ScrumMasterView
 		int option = Scan.readInt
 				("\n\nEdit Task Menu. \n " +
 						"Which part of the task do you want to edit, enter a number:\n\n" +
-						"1- Edit Task Priority Number.\n" +
-						"2- Edit Task Status.\n" +
-						"3- Set task deadline\n" +
-						"4- Remove Task from Sprint Backlog.\n" +
-						"5- Remove Task from Product Backlog.\n" +
-						"6- Back to your menu.\n");
+						"1. Edit Task Priority Number.\n" +
+						"2. Edit Task Status.\n" +
+						"3. Set task deadline\n" +
+						"4. Remove Task from Sprint Backlog.\n" +
+						"5. Remove Task from Product Backlog.\n" +
+						"6. Back to your menu.\n");
 		return option;
 	}
 
@@ -285,9 +285,17 @@ public class ScrumMasterView
 		return newPriorityNumberTask;
 	}
 
+	public static void wrongPrioNumber(){
+		Scan.print("Error. You entered an invalid priority number.");
+	}
+
 	public static void wrongDatePrint() {
 		Scan.print("Error. You entered a start date that is after the end date. Please try again\n");
 
+	}
+
+	public static void dateIsBeforeOrAfterProjectDate(){
+		Scan.print("Error. The date you entered is either before or after the duration of the project. Please try again.\n");
 	}
 
 	public static int newStatusTask()
@@ -404,9 +412,22 @@ public class ScrumMasterView
 		Scan.print(controllerAll.collectAllStories().toString());
 	}
 
-	public static void showAllSprintBacklogs(Project project){
-		Scan.print("Below you find all your sprint backlogs.");
-		Scan.print("\n\n"+project.getAllSprintBacklogs());
+	public static void showAllSprintBacklogs(Project project, String objectTypePlural){
+		Scan.print("Below you find all your sprint backlogs and its " + objectTypePlural);
+		for (SprintBacklog sprint : project.getAllSprintBacklogs()){
+			Scan.print("Name of sprint: " + sprint.getName());
+
+			if (objectTypePlural=="user stories"){
+			for (UserStory userStory : sprint.getUserStories()){
+				Scan.print("-    User story number: " + userStory.getNumber() + " " + userStory.getName());
+			}
+			}else if (objectTypePlural=="tasks"){
+				for(Task task : sprint.getAllTasks())
+				Scan.print("-    Task ID: " + task.getId() + " " + task.getName());
+			}
+
+		}
+
 	}
 
 	public static String assignTaskPrintSprintName()
@@ -624,7 +645,7 @@ public class ScrumMasterView
 
 	public static void setTaskDeadlineReceipt(Task task){
 		Scan.print("The following deadline: " + task.getDeadline() + " for task with the ID: " + task.getId() + " with " +
-				" the name: " + task.getName());
+				"the name: " + task.getName());
 	}
 
 	public static void setUStoryDeadlineReceipt(UserStory userStory){
