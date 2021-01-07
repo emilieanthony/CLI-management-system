@@ -1465,6 +1465,22 @@ public class ControllerScrumMaster
 				}
 				else if (option == 4)
 				{
+
+					int actualHrs = getActualHrs();
+
+					while (actualHrs<0){
+						negativeNumberPrint();
+						actualHrs = getActualHrs();
+					}
+
+					String name = getNameCompleteTask();
+
+					while (name.isBlank()){
+						emptyName();
+						name = getNameCompleteTask();
+					}
+
+					task.setActualHours( actualHrs );
 					task.setComplete();
 					checkUStoryStatus(userStory, controllerAll);
 					task.setActualHours(getActualHrs());
