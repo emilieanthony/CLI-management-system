@@ -5,6 +5,8 @@
   "endDate" : "2020-3-5",
   "productBacklog" : {
     "name" : "Project product backlog",
+    "startDate" : null,
+    "endDate" : null,
     "allUserStories" : [ {
       "name" : "us1",
       "number" : 1004,
@@ -81,6 +83,9 @@
       "assignedDevelopers" : [ {
         "name" : "Bassam",
         "id" : 2
+      }, {
+        "name" : "Karl",
+        "id" : 1
       } ],
       "deadline" : null,
       "completedBy" : null
