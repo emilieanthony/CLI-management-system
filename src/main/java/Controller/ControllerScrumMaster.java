@@ -976,7 +976,7 @@ public class ControllerScrumMaster
 
 		int USid = getUserStoryID();
 
-		UserStory userStory = findUStoryByNumberSBL(USid, controllerAll);
+		UserStory userStory = findUStoryByIdSBL(USid, controllerAll);
 
 		return userStory;
 	}
@@ -1268,7 +1268,7 @@ public class ControllerScrumMaster
 
 	//---------------------------------------------------------------------------------------------//
 
-	public UserStory findUStoryByNumberSBL(int number, ControllerAll controllerAll)
+	public UserStory findUStoryByIdSBL(int id, ControllerAll controllerAll)
 	{
 		UserStory userStory = null;
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
@@ -1278,7 +1278,7 @@ public class ControllerScrumMaster
 		while (userStory == null && iterator.hasNext())
 		{
 			UserStory foundUserStory = iterator.next();
-			if (foundUserStory.getId() == number)
+			if (foundUserStory.getId() == id)
 			{
 
 				userStory = foundUserStory;
@@ -1318,7 +1318,7 @@ public class ControllerScrumMaster
 			int USNumber = getUserStoryID();
 
 			//viewSprintBacklogT(controllerAll);
-			UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+			UserStory userStory = contScrum.findUStoryByIdSBL(USNumber, controllerAll);
 			if (userStory == null) {
 				nullUserStoryPrint();
 			} else {
@@ -1366,7 +1366,7 @@ public class ControllerScrumMaster
 	{
 		Task task = null;
 		int taskId = getTaskId();
-		UserStory userStory = findUStoryByNumberSBL(UsNumber, controllerAll);
+		UserStory userStory = findUStoryByIdSBL(UsNumber, controllerAll);
 		Iterator<Task> iterator = userStory.getUserStoryTasks().iterator();
 
 		while (task == null && iterator.hasNext())
@@ -1395,7 +1395,7 @@ public class ControllerScrumMaster
 
 		int USNumber = getUserStoryID();
 
-		UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+		UserStory userStory = contScrum.findUStoryByIdSBL(USNumber, controllerAll);
 		if (userStory == null)
 		{
 			nullUserStoryPrint();
@@ -1430,7 +1430,7 @@ public class ControllerScrumMaster
 
 		int USNumber = getUserStoryID();
 
-		UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+		UserStory userStory = contScrum.findUStoryByIdSBL(USNumber, controllerAll);
 		if (userStory == null)
 		{
 			nullUserStoryPrint();
