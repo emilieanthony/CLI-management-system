@@ -20,7 +20,7 @@ public class AllView {
                 "2. Product owner.\n" +
                 "3. Development team member.\n" +
                 "4. View all Projects.\n" +
-                "5. Change project.\n" +
+                "5. Switch project.\n" +
                 "6. Save and Exit system.\n");
 
         return option;

@@ -53,7 +53,6 @@ public class ControllerAll
         viewProjectMenu(controllerAll);
         Start();
 
-
         if (proName.isBlank() ) {
             contScrum.createProject(controllerAll);
         }else if (!legalProject()){
