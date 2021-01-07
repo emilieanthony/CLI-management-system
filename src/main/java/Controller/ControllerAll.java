@@ -1,5 +1,4 @@
 package Controller;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -49,12 +48,14 @@ public class ControllerAll
 
         if (proName.isBlank() ) {
             contScrum.createProject(controllerAll);
+
         }else if (!legalProject()){
+
             while (!legalProject()){
                 wrongProjectNameInput();
                 Start();
-            }
 
+            }
         }
 
         do
@@ -66,7 +67,7 @@ public class ControllerAll
                 switch (option)
                 {
                     case 1:
-                        contScrum.scrumMasterMenu(controllerAll,contProOwner,contScrum);
+                        contScrum.scrumMasterMenu(controllerAll, contProOwner, contScrum);
                         break;
                     case 2:
                         contProOwner.productOwnerMenu(controllerAll, contScrum);
@@ -274,133 +275,6 @@ public class ControllerAll
 
         return allStories;
     }
-
-
-    /*public void editUSAcceptanceCSBL(ControllerAll controllerAll,ControllerScrumMaster  contScrum){
-
-        Project project = controllerAll.whichProject();
-        if (project == null)
-        {
-            projectNotFound();
-        }
-
-        showAllSprintBacklogs(project);
-        sprintName = getSprintBacklogByName();
-
-        int USNumber = getUserStoryNumber();
-
-        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
-        if (userStory == null)
-        {
-            nullUserStoryPrint();
-        }
-
-        else
-        {
-
-            String newUSAcceptanceC = getNewUSAcceptanceC();
-            userStory.setAcceptanceCriteria(newUSAcceptanceC);
-            saveData();
-            userStoryEditConf();
-            Scan.print(userStory.toString());
-
-        }
-    }
-
-    public void editUSNumberSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
-
-        Project project = controllerAll.whichProject();
-        if (project == null)
-        {
-            projectNotFound();
-        }
-
-        showAllSprintBacklogs(project);
-        sprintName = getSprintBacklogByName();
-
-        int USNumber = getUserStoryNumber();
-
-        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
-        if (userStory == null)
-        {
-            nullUserStoryPrint();
-        }
-
-        else
-        {
-
-            int newUSNumber = getNewUSNumber();
-            userStory.setNumber(newUSNumber);
-            saveData();
-            userStoryEditConf();
-            Scan.print(userStory.toString());
-
-        }
-    }
-
-    public void editUSNameSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum){
-
-        Project project = controllerAll.whichProject();
-        if (project == null)
-        {
-            projectNotFound();
-        }
-
-        showAllSprintBacklogs(project);
-        sprintName = getSprintBacklogByName();
-
-        int USNumber = getUserStoryNumber();
-
-        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
-        if (userStory == null)
-        {
-            nullUserStoryPrint();
-        }
-
-        else
-        {
-
-            String newUSName = getNewUSName();
-            userStory.setName(newUSName);
-            saveData();
-            userStoryEditConf();
-            Scan.print(userStory.toString());
-
-        }
-    }
-    public void editUSContentSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum) {
-
-        Project project = controllerAll.whichProject();
-        if (project == null)
-        {
-            projectNotFound();
-        }
-
-        showAllSprintBacklogs(project);
-        sprintName = getSprintBacklogByName();
-
-        int USNumber = getUserStoryNumber();
-
-        UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
-        if (userStory == null)
-        {
-            nullUserStoryPrint();
-        }
-
-        else
-        {
-
-            String newUSContent = getNewUSContent();
-            userStory.setContent(newUSContent);
-            saveData();
-            userStoryEditConf();
-            Scan.print(userStory.toString());
-
-        }
-    }
-    */
-
-
 
 
     public void loadData()

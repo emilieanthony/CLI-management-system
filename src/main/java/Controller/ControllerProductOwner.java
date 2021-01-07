@@ -8,6 +8,7 @@ import View.ScrumMasterView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import static Utility.PrintUtility.defaultMessage;
 import static Utility.PrintUtility.projectNotFound;
 import static View.DevTeamView.invalidInputPrint;
@@ -72,8 +73,11 @@ public class ControllerProductOwner {
     }
 
     public void createUserStory(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster) {
+
         Project project = controllerAll.whichProject();
+
         int number = controllerScrumMaster.taskUSIdGenerator(controllerAll);
+
         try {
             UserStory newUserStory = getUSInfo(number);
             project.getProductBacklog().getAllUserStories().add(newUserStory);
@@ -88,6 +92,7 @@ public class ControllerProductOwner {
             createdUStoryReceipt(newUserStory);
 
             controllerAll.saveData();
+
         } catch (Exception e) {
             userStoryFail();
         }
