@@ -18,6 +18,11 @@ public class Task implements Comparable<Task> {
 	private String deadline;
 	private String completedBy;
 
+
+	//Empty constructor for data exporting and importing.
+	public Task() {}
+
+	//Constructor
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception {
 
 		if(id < 0)
@@ -57,10 +62,6 @@ public class Task implements Comparable<Task> {
 		this.assignedDevelopers = new ArrayList<>();
 	}
 
-
-	//Empty constructor for data exporting and importing.
-	public Task() {
-	}
 
  	//-----------------------------------Getters & Setters--------------------------------------------------------------
 
