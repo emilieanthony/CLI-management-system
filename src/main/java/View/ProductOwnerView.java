@@ -23,8 +23,8 @@ public class ProductOwnerView {
                 "3. Create user story to product backlog\n" +
                 "4. Delete user story from product backlog\n" +
                 "5  View all completed user stories\n" +
-                "7. Choose project\n" +
-                "8. Go back to main menu\n");
+                "6. Switch project\n" +
+                "7. Go back to main menu\n");
         return option;
 
     }

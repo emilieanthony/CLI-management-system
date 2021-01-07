@@ -239,6 +239,8 @@ public class ControllerScrumMaster
 			}
 		} while (running);
 	}
+
+
 	private void moveOptionsScrumMenu(ControllerAll controllerAll,
 									  ControllerProductOwner contProOwner)
 	{
@@ -252,7 +254,7 @@ public class ControllerScrumMaster
 				switch (option)
 				{
 					case 1:
-						moveTaskOrUstoryToSBL(contProOwner,controllerAll);
+						moveTaskOrUStoryToSBL(contProOwner,controllerAll);
 						break;
 					case 2:
 						moveTaskOrUStoryToPBL(controllerAll);
@@ -511,8 +513,9 @@ public class ControllerScrumMaster
 		return id;
 	}
 
-	private void moveTaskOrUstoryToSBL(ControllerProductOwner contProOwner, ControllerAll controllerAll)
+	public void moveTaskOrUStoryToSBL(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
+
 		contProOwner.viewProBacklog(controllerAll);
 
 		String input = moveObjectToBacklogPrint();
@@ -944,7 +947,6 @@ public class ControllerScrumMaster
 		SprintBacklog sprintBacklog = null;
 		Project project = controllerAll.whichProject();
 		Iterator<SprintBacklog> iterator = project.getAllSprintBacklogs().iterator();
-		//boolean foundIt = false;
 
 		while (sprintBacklog == null && iterator.hasNext())
 		{
@@ -952,7 +954,6 @@ public class ControllerScrumMaster
 			if (foundBacklog.getName().equalsIgnoreCase(sprintName))
 			{
 				sprintBacklog = foundBacklog;
-				//foundIt = true;
 			}
 		}
 
@@ -971,6 +972,7 @@ public class ControllerScrumMaster
 		}
 
 		showAllSprintBacklogs(project, "user stories");
+
 		sprintName = getSprintBacklogByName();
 
 		int USNumber = getUserStoryNumber();
@@ -985,7 +987,7 @@ public class ControllerScrumMaster
 		boolean running = true;
 
 		UserStory userStory = getUSFromSBL(controllerAll);
-
+		System.out.println("bu");
 		printUStoryInfo(userStory);
 
 		if (userStory == null) {
@@ -1021,6 +1023,8 @@ public class ControllerScrumMaster
 					}
 				} catch (Exception e)
 				{
+					e.printStackTrace();
+
 					invalidInputPrint();
 				}
 			} while (running);
@@ -1313,16 +1317,23 @@ public class ControllerScrumMaster
 		UserStory userStory = null;
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
 		Iterator<UserStory> iterator = sprintBacklog.getUserStories().iterator();
+		System.out.println("gröb");
 
 		while (userStory == null && iterator.hasNext())
 		{
 			UserStory foundUserStory = iterator.next();
+
 			if (foundUserStory.getNumber() == number)
 			{
+
 				userStory = foundUserStory;
-				Scan.print(userStory.toString());
+				System.out.println(userStory.getName());
+				System.out.println((userStory.toString()));
+
+				System.out.println("röd");
 			}
 		}
+		System.out.println(userStory);
 		return userStory;
 	}
 
