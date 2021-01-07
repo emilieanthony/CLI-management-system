@@ -1467,6 +1467,7 @@ public class ControllerScrumMaster
 				{
 					task.setComplete();
 					checkUStoryStatus(userStory, controllerAll);
+					task.setActualHours(getActualHrs());
 					Scan.print(task.toString());
 					objectEdited();
 					controllerAll.saveData();
