@@ -2,10 +2,8 @@ package Models;
 
 import Exceptions.EmptyName;
 
-import java.io.Serializable;
 
-
-public class Developer implements Serializable
+public class Developer
 {
     private String name;
     private int id;

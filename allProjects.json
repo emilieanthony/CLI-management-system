@@ -1,118 +1,68 @@
 [ {
   "id" : 1,
   "name" : "Project",
-  "startDate" : "2020-1-2",
-  "endDate" : "2020-3-5",
+  "startDate" : "2021-2-2",
+  "endDate" : "2021-7-7",
   "productBacklog" : {
     "name" : "Project product backlog",
-    "startDate" : null,
-    "endDate" : null,
+    "startDate" : "2021-2-2",
+    "endDate" : "2021-7-7",
     "allUserStories" : [ {
-      "name" : "us1",
-      "number" : 1004,
+      "name" : "User Story 1",
+      "id" : 1003,
       "storyPoints" : 0,
+      "acceptanceCriteria" : [ "none" ],
       "status" : "Open",
       "assignedDevelopers" : [ ],
       "userStoryTasks" : [ ],
       "binary" : [ ],
-      "deadline" : null,
-      "completedBy" : null
+      "deadline" : null
     } ],
     "tasks" : [ {
-      "id" : 1003,
+      "id" : 1001,
       "estimatedHours" : 2,
       "actualHours" : 0,
       "status" : "Open",
-      "name" : "task2",
+      "name" : "Task 1",
       "assignedDevelopers" : [ ],
-      "deadline" : null,
-      "completedBy" : null
-    }, {
-      "id" : 1003,
-      "estimatedHours" : 2,
-      "actualHours" : 0,
-      "status" : "Complete",
-      "name" : "Task1",
-      "assignedDevelopers" : [ ],
-      "deadline" : null,
-      "completedBy" : null
+      "deadline" : null
     } ]
   },
   "allTeamMembers" : [ {
-    "name" : "Karl",
+    "name" : "Lina",
     "id" : 1
   }, {
     "name" : "Bassam",
     "id" : 2
   }, {
-    "name" : "Lina",
+    "name" : "Emilie",
     "id" : 3
   }, {
-    "name" : "Emilie",
+    "name" : "Malte",
     "id" : 4
   }, {
-    "name" : "Sanna",
+    "name" : "Karl",
     "id" : 5
+  }, {
+    "name" : "Sanna",
+    "id" : 6
+  }, {
+    "name" : "Josanna",
+    "id" : 7
   } ],
-  "allProductOwners" : [ {
-    "name" : "Malte",
-    "id" : 1
-  } ],
+  "allProductOwners" : [ ],
   "allSprintBacklogs" : [ {
     "name" : "Sprint 1",
-    "startDate" : "2020-2-2",
-    "endDate" : "2020-11-11",
+    "endDate" : "2021-3-3",
     "allTasks" : [ {
-      "id" : 1001,
-      "estimatedHours" : 3,
-      "actualHours" : 0,
-      "status" : "Assigned",
-      "name" : "task",
-      "assignedDevelopers" : [ {
-        "name" : "Bassam",
-        "id" : 2
-      } ],
-      "deadline" : null,
-      "completedBy" : null
-    }, {
-      "id" : 1005,
+      "id" : 1002,
       "estimatedHours" : 2,
       "actualHours" : 0,
-      "status" : "Assigned",
-      "name" : "Sprint 1",
-      "assignedDevelopers" : [ {
-        "name" : "Bassam",
-        "id" : 2
-      }, {
-        "name" : "Karl",
-        "id" : 1
-      } ],
-      "deadline" : null,
-      "completedBy" : null
+      "status" : "Open",
+      "name" : "Task 2",
+      "assignedDevelopers" : [ ],
+      "deadline" : null
     } ],
-    "userStories" : [ {
-      "name" : "User story",
-      "number" : 1002,
-      "storyPoints" : 0,
-      "status" : "Complete",
-      "assignedDevelopers" : [ {
-        "name" : "Lina",
-        "id" : 3
-      }, {
-        "name" : "Emilie",
-        "id" : 4
-      } ],
-      "userStoryTasks" : [ ],
-      "binary" : [ ],
-      "deadline" : null,
-      "completedBy" : null
-    } ],
-    "totalStoryPoints" : 0
-  }, {
-    "name" : "Sprint2",
-    "startDate" : "2021-2-2",
-    "endDate" : "2021-6-6",
-    "allTasks" : [ ],
     "userStories" : [ ],
     "totalStoryPoints" : 0
   } ]

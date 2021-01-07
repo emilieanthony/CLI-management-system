@@ -3,10 +3,8 @@ package Models;
 import Exceptions.EmptyName;
 import Exceptions.NegativeId;
 
-import java.io.Serializable;
 
-
-public class ProductOwner implements Serializable
+public class ProductOwner
 {
     private String name;
     private int id;

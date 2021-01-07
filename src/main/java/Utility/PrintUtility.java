@@ -1,29 +1,10 @@
 package Utility;
 
-import static View.ScrumMasterView.proName;
 
 public class PrintUtility
 {
 
     /*-----------------------------------------Print code to reuse --------------------------------------------------*/
-
-    public int mainMenu()
-    {
-
-        int option = Scan.readInt("\n\nWelcome to Codelicode, your project management tool\n\n" +
-                "IMPORTANT:- Shift between your projects to be able to make any changes or view " +
-                "options,\nYou will find an option in your menu to choose between projects! \n" +
-                "\nPlease enter a option below:\n"+
-                "You're working on Project " + proName + "." + "\n\n"+
-                "1. Scrum master.\n" +
-                "2. Product owner.\n" +
-                "3. Development team member.\n" +
-                "4. View all Projects.\n" +
-                "5. Change project.\n" +
-                "6. Save and Exit system.\n");
-
-        return option;
-    }
 
     public static void defaultMessage()
     {

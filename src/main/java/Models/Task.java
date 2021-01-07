@@ -2,14 +2,7 @@ package Models;
 
 import Exceptions.*;
 import Utility.DataManagement;
-import Utility.Scan;
-import View.ScrumMasterView;
-
-import javax.xml.crypto.Data;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import static View.DevTeamView.*;
-import static View.ScrumMasterView.getEndDate;
 
 
 public class Task implements Comparable<Task> {
@@ -107,11 +100,6 @@ public class Task implements Comparable<Task> {
 		status = "Assigned";
 	}
 
-	public void setAssignedTeamMembers(ArrayList<Developer> assignedTeamMembers) {
-		this.assignedDevelopers = assignedTeamMembers;
-	}
-
-
 	public String getStatus() {
 		return status;
 	}
@@ -145,14 +133,6 @@ public class Task implements Comparable<Task> {
 		return assignedDevelopers;
 	}
 
-	public boolean isAssigned(Developer member) {
-		return assignedDevelopers.contains(member);
-	}
-
-	public String getCompletedBy() {
-		return completedBy;
-	}
-
 	public void setCompletedBy(String completedBy) {
 		this.completedBy = completedBy;
 	}
@@ -172,9 +152,6 @@ public class Task implements Comparable<Task> {
 	public int compareByDeadline(Task anotherTask){
 		return DataManagement.compareDeadlines(this.deadline, anotherTask.getDeadline());
 	}
-
-
-	//--------------------------------------ToString--------------------------------------------------------------------
 
 	public String toString() {
 		String output;

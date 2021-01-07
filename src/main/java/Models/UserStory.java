@@ -4,13 +4,11 @@ import Exceptions.EmptyName;
 import Exceptions.InvalidPriorityNumber;
 import Exceptions.NegativeId;
 import Utility.DataManagement;
-
 import java.util.ArrayList;
 
 
 public class UserStory implements Comparable<UserStory> {
 
-    // Attributes:-
     private String name;
     private int id;
     private int priorityNumber;
@@ -24,7 +22,11 @@ public class UserStory implements Comparable<UserStory> {
     private String deadline;
     private String completedBy;
 
-    // Constructors:-
+
+    //Empty constructor for data exporting and importing.
+    public UserStory() {}
+
+    // Constructor.
     public UserStory(String name, int number, int priority,
                      String content, String acceptanceCriteria) throws Exception {
 
@@ -58,11 +60,6 @@ public class UserStory implements Comparable<UserStory> {
         this.binary = new ArrayList<>();
     }
 
-    //Empty constructor for data exporting and importing.
-    public UserStory() {
-
-    }
-
     //------------------------------------Getters & Setters-------------------------------------------------------------
 
     public String getName() {
@@ -72,8 +69,6 @@ public class UserStory implements Comparable<UserStory> {
     public int getId() {
         return id;
     }
-
-
 
     public int getStoryPoints() {
         return storyPoints;
@@ -112,12 +107,8 @@ public class UserStory implements Comparable<UserStory> {
     }
 
     public void setPriorityNumber(int priorityNumber) {
-        /*do
-        {
-            Scan.print("priority must be between 1 to 5.");*/
+
         this.priorityNumber = priorityNumber;
-        /*}
-        while (priorityNumber <= 0 || priorityNumber >= 6);*/
     }
 
     public void setStoryPoints(int storyPoints) {
@@ -148,15 +139,19 @@ public class UserStory implements Comparable<UserStory> {
         status = "Assigned";
     }
 
-    public String getCompletedBy() {
-        return completedBy;
-    }
-
     public void setCompletedBy(String completedBy) {
         this.completedBy = completedBy;
     }
 
     //-----------------------------------------Methods------------------------------------------------------------------
+
+    public int compareByDeadline(UserStory anotherStory){
+        return DataManagement.compareDeadlines(this.deadline, anotherStory.getDeadline());
+    }
+
+    public boolean isAssigned(Developer member) {
+        return assignedDevelopers.contains(member);
+    }
 
     public int compareTo(UserStory userStory) {
         if (this.priorityNumber < userStory.priorityNumber) {
@@ -167,17 +162,6 @@ public class UserStory implements Comparable<UserStory> {
             return 0;
         }
     }
-
-    public int compareByDeadline(UserStory anotherStory){
-        return DataManagement.compareDeadlines(this.deadline, anotherStory.getDeadline());
-    }
-
-    public boolean isAssigned(Developer member) {
-        return assignedDevelopers.contains(member);
-    }
-
-
-    //-------------------------------------To String--------------------------------------------------------------------
 
     @Override
     public String toString() {

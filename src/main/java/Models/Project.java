@@ -1,13 +1,9 @@
 package Models;
 
-import Controller.ControllerAll;
 import Exceptions.EmptyName;
 import Exceptions.NegativeId;
 import Exceptions.WrongDate;
 import Utility.DataManagement;
-import View.ScrumMasterView;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -78,19 +74,9 @@ public class Project
         return startDate;
     }
 
-    public void setStartDate( String startDate)
-    {
-        this.startDate = startDate;
-    }
-
     public String getEndDate()
     {
         return endDate;
-    }
-
-    public void setEndDate(String endDate)
-    {
-        this.endDate = endDate;
     }
 
     public ArrayList<Developer> getAllTeamMembers() { return allTeamMembers; }
@@ -100,42 +86,13 @@ public class Project
         return allProductOwners;
     }
 
-    public void setProductBacklog(ProductBacklog productBacklog) {
-        this.productBacklog = productBacklog;
-    }
-
     public ArrayList<SprintBacklog> getAllSprintBacklogs() {
         return allSprintBacklogs;
-    }
-
-    public ArrayList<Task> AllTasksInSprintBacklog()
-    {
-        for(SprintBacklog sprintBacklog : allSprintBacklogs)
-        {
-            return sprintBacklog.getAllTasks();
-        }
-        return null;
     }
 
     public ProductBacklog getProductBacklog()
     {
         return productBacklog;
-    }
-
-    public void viewAllProductOwners()
-    {
-        for (ProductOwner productOwner : allProductOwners)
-        {
-            System.out.println(productOwner.toString());
-        }
-    }
-
-    public void viewAllDevelopmentMembers()
-    {
-        for (Developer developer : allTeamMembers)
-        {
-            System.out.println(developer.toString());
-        }
     }
 
     @Override

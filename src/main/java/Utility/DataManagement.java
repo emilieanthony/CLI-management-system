@@ -1,4 +1,5 @@
 package Utility;
+
 import Models.Project;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 
 public class DataManagement
 {
@@ -38,7 +40,6 @@ public class DataManagement
 
             projects = mapper.reader().forType(new TypeReference<ArrayList<Project>>() {})
                     .readValue(new File("allProjects.json"));
-
 
         } catch (IOException e)
         {
