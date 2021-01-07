@@ -172,7 +172,7 @@ public class ControllerScrumMaster
 				switch (option)
 				{
 					case 1:
-						setTaskDeadline(controllerAll);
+						viewAndSetTaskDeadline(controllerAll);
 						break;
 					case 2:
 						viewAndSetUSDeadline(controllerAll);
@@ -342,6 +342,8 @@ public class ControllerScrumMaster
 		task.setDeadline(deadline);
 
 		setTaskDeadlineReceipt(task);
+
+		controllerAll.saveData();
 
 	}
 
@@ -1539,12 +1541,19 @@ public class ControllerScrumMaster
 			if (task == null)
 			{
 				nullTaskPrint();
+
 			}else {
+
 				userStory.getUserStoryTasks().remove(task);
+
 				Scan.print(userStory.toString());
+
 				removedTaskInUserStory();
+
 				controllerAll.saveData();
-				Scan.print(userStory.toString());
+
+				printUStoryInfo(userStory);
+
 			}
 		}
 	}
@@ -1566,8 +1575,14 @@ public class ControllerScrumMaster
 	}
 
 	private void viewAndSetUSDeadline(ControllerAll controllerAll){
-		controllerAll.viewUStoryDeadlines();
-		UserStory userStory = controllerAll.findUStoryByNumber();
-		setUserStoryDeadline(userStory, controllerAll);
+
+		controllerAll.viewUStoryDeadlines(); //prints deadlines to user
+
+		UserStory userStory = controllerAll.findUStoryByNumber(); // retrieves user story
+
+		setUserStoryDeadline(userStory, controllerAll); //sets date
+
+		controllerAll.saveData();
+
 	}
 }
