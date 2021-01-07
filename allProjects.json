@@ -26,6 +26,14 @@
       "name" : "Task 1",
       "assignedDevelopers" : [ ],
       "deadline" : null
+    }, {
+      "id" : 1004,
+      "estimatedHours" : 3,
+      "actualHours" : 0,
+      "status" : "Open",
+      "name" : "Task 3",
+      "assignedDevelopers" : [ ],
+      "deadline" : null
     } ]
   },
   "allTeamMembers" : [ {
@@ -60,6 +68,14 @@
       "actualHours" : 0,
       "status" : "Open",
       "name" : "Task 2",
+      "assignedDevelopers" : [ ],
+      "deadline" : null
+    }, {
+      "id" : 1005,
+      "estimatedHours" : 1,
+      "actualHours" : 0,
+      "status" : "Open",
+      "name" : "Task 4",
       "assignedDevelopers" : [ ],
       "deadline" : null
     } ],

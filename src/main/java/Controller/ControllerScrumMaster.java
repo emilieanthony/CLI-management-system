@@ -416,7 +416,6 @@ public class ControllerScrumMaster
 	private void createTaskToSprint(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
-		printSprints(project);
 
 		if (project == null)
 		{
