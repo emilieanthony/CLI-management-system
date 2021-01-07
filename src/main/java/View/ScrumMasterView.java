@@ -695,6 +695,10 @@ public class ScrumMasterView
 		System.out.println("\n" + project.getAllTeamMembers());
 	}
 
+	public static void printUStoryInfo(UserStory userStory){
+		Scan.print(userStory.toString());
+	}
+
 }
 
 

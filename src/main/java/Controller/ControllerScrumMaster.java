@@ -48,19 +48,19 @@ public class ControllerScrumMaster
 						createDevelopmentMember(controllerAll);
 						break;
 					case 5:
-						USOptionsMenu(controllerAll, contScrum);
+						USOptionsMenu(controllerAll,contScrum);
 						break;
 					case 6:
-						TasksOptionsMenu(controllerAll, contScrum);
+						TasksOptionsMenu(controllerAll,contScrum);
 						break;
 					case 7:
 						deadlinesOptionsMenu(controllerAll);
 						break;
 					case 8:
-						viewProjectPartsMenu(controllerAll, contProOwner);
+						viewProjectPartsMenu(controllerAll,contProOwner);
 						break;
 					case 9:
-						moveOptionsScrumMenu(controllerAll, contProOwner);
+						moveOptionsScrumMenu(controllerAll,contProOwner);
 						break;
 					case 10:
 						showImplementedStoryPoints(controllerAll);
@@ -103,13 +103,13 @@ public class ControllerScrumMaster
 						assignUserStory(controllerAll);
 						break;
 					case 2:
-						editUSInSprintBLMenu(controllerAll, contScrum);
+						editUSInSprintBLMenu(controllerAll);
 						break;
 					case 3:
-						createTaskOfUsInSBL(controllerAll, contScrum);
+						createTaskOfUsInSBL(controllerAll,contScrum);
 						break;
 					case 4:
-						editTaskInUserStoryMenu(controllerAll, contScrum);
+						editTaskInUserStoryMenu(controllerAll,contScrum);
 						break;
 					case 5:
 						running = false;
@@ -145,7 +145,7 @@ public class ControllerScrumMaster
 						assignTask(controllerAll);
 						break;
 					case 4:
-						scrumMasterEditTaskMenu(controllerAll, contScrum);
+						scrumMasterEditTaskMenu(controllerAll,contScrum);
 						break;
 					case 5:
 						running = false;
@@ -252,7 +252,7 @@ public class ControllerScrumMaster
 				switch (option)
 				{
 					case 1:
-						moveTaskOrUstoryToSBL(contProOwner, controllerAll);
+						moveTaskOrUstoryToSBL(contProOwner,controllerAll);
 						break;
 					case 2:
 						moveTaskOrUStoryToPBL(controllerAll);
@@ -325,16 +325,15 @@ public class ControllerScrumMaster
 
 	//------------------------------------------Methods for tasks------------------------------------------------//
 
-	private void setTaskDeadline(ControllerAll controllerAll)
-	{
+	private void setTaskDeadline(ControllerAll controllerAll){
+
 
 
 		Task task = controllerAll.findTaskById();
 
 		String deadline = getEndDate();
 
-		while (!legalDate(deadline, controllerAll))
-		{
+		while (!legalDate(deadline, controllerAll)) {
 			dateIsBeforeOrAfterProjectDate();
 			deadline = getEndDate();
 		}
@@ -345,14 +344,12 @@ public class ControllerScrumMaster
 
 	}
 
-	private void viewAndSetTaskDeadline(ControllerAll controllerAll)
-	{
+	private void viewAndSetTaskDeadline(ControllerAll controllerAll){
 		controllerAll.viewTaskDeadlines();
 		setTaskDeadline(controllerAll);
 	}
 
-	private boolean legalDate(String deadline, ControllerAll controllerAll)
-	{
+	private boolean legalDate(String deadline, ControllerAll controllerAll){
 		Project project = controllerAll.whichProject();
 		String projectEndDate = project.getEndDate();
 		LocalDate proEndDate = DataManagement.stringToLocalDate(projectEndDate);
@@ -363,12 +360,9 @@ public class ControllerScrumMaster
 
 		boolean legal;
 
-		if (localDeadline.isAfter(proEndDate) || localDeadline.isBefore(proStartDate))
-		{
+		if(localDeadline.isAfter(proEndDate) || localDeadline.isBefore(proStartDate)){
 			legal = false;
-		}
-		else
-		{
+		} else{
 			legal = true;
 		}
 
@@ -396,28 +390,22 @@ public class ControllerScrumMaster
 				taskCreatedToPBacklog();
 
 
-			} catch (NegativeId n)
-			{
+			} catch (NegativeId n){
 				negativeIDPrint();
 
-			} catch (InvalidPriorityNumber i)
-			{
+			} catch (InvalidPriorityNumber i){
 				invalidNumberPrint();
 
-			} catch (EstimatedHours e)
-			{
+			} catch (EstimatedHours e) {
 				negativeNumberPrint();
 
-			} catch (EmptyName e)
-			{
+			} catch (EmptyName e){
 				emptyName();
 
-			} catch (EmptyDescription e)
-			{
+			} catch (EmptyDescription e){
 				AllView.errorEmptyDescription();
 
-			} catch (Exception e)
-			{
+			} catch (Exception e) {
 				registerTaskFail();
 			}
 		}
@@ -440,8 +428,7 @@ public class ControllerScrumMaster
 			{
 				boolean thereIsASprintBacklog = checkForSprintBacklog(project);
 
-				if (thereIsASprintBacklog)
-				{
+				if (thereIsASprintBacklog){
 					Task newTask = getTaskInfo(id);
 					createdTaskReceipt(newTask);
 					printSprints(project);
@@ -449,49 +436,37 @@ public class ControllerScrumMaster
 					findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
 					controllerAll.saveData();
 					taskCreatedToSBacklog();
-				}
-				else
-				{
+				} else {
 					noSprintBacklogYet();
 					createSprintBacklog(controllerAll);
 				}
 
 
-			} catch (NegativeId n)
-			{
+			} catch (NegativeId n){
 				negativeIDPrint();
 
-			} catch (InvalidPriorityNumber i)
-			{
+			} catch (InvalidPriorityNumber i){
 				invalidNumberPrint();
 
-			} catch (EstimatedHours e)
-			{
+			} catch (EstimatedHours e) {
 				negativeNumberPrint();
 
-			} catch (EmptyName e)
-			{
+			} catch (EmptyName e){
 				emptyName();
 
-			} catch (EmptyDescription e)
-			{
+			} catch (EmptyDescription e){
 				AllView.errorEmptyDescription();
 
-			} catch (Exception e)
-			{
+			} catch (Exception e) {
 				registerTaskFail();
 			}
 		}
 	}
 
-	private boolean checkForSprintBacklog(Project project)
-	{
-		if (project.getAllSprintBacklogs().isEmpty())
-		{
+	private boolean checkForSprintBacklog(Project project){
+		if(project.getAllSprintBacklogs().isEmpty()){
 			return false;
-		}
-		else
-		{
+		} else {
 			return true;
 		}
 	}
@@ -517,20 +492,17 @@ public class ControllerScrumMaster
 
 		if (!stories.isEmpty())
 		{
-			for (UserStory userStory : stories)
-			{
+			for (UserStory userStory : stories) {
 
 				ids.add(userStory.getNumber());
 
 			}
 		}
 
-		if (!ids.isEmpty())
-		{
+		if (!ids.isEmpty()) {
 			id = ids.get(ids.size() - 1) + 1;
 
-			while (ids.contains(id))
-			{
+			while (ids.contains(id)){
 				id++;
 			}
 		}
@@ -698,7 +670,7 @@ public class ControllerScrumMaster
 						task.setStatus("Open");
 						objectEdited();
 					}
-					else if (newStatusTask == 2)
+					else if(newStatusTask == 2)
 					{
 						task.setStatus("Assigned");
 						objectEdited();
@@ -792,13 +764,12 @@ public class ControllerScrumMaster
 			controllerAll.saveData();
 			createdProOwner();
 
-		} catch (EmptyName e)
-		{
+		}catch (EmptyName e){
 			emptyName();
-		} catch (NegativeId n)
-		{
+		}catch (NegativeId n){
 			negativeId();
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			AllView.errorPrint();
 		}
@@ -844,10 +815,12 @@ public class ControllerScrumMaster
 				controllerAll.saveData();
 				createdDeveloper();
 
-			} catch (EmptyName e)
-			{
+			}
+			catch (EmptyName e){
 				emptyName();
-			} catch (Exception e)
+			}
+
+			catch (Exception e)
 			{
 				registerDeveloperFail();
 			}
@@ -881,20 +854,16 @@ public class ControllerScrumMaster
 			controllerAll.saveData();
 			createProjectPrint(project);
 
-		} catch (EmptyName e)
-		{
+		} catch (EmptyName e) {
 			emptyName();
 
-		} catch (NegativeId n)
-		{
+		} catch (NegativeId n){
 			negativeId();
 
-		} catch (WrongDate w)
-		{
+		} catch (WrongDate w){
 			wrongDatePrint();
 
-		} catch (Exception e)
-		{
+		} catch (Exception e){
 			AllView.errorPrint();
 		}
 	}
@@ -912,16 +881,13 @@ public class ControllerScrumMaster
 
 			successfulSprintLog(sprintBacklog);
 
-		} catch (EmptyName e)
-		{
+		} catch (EmptyName e) {
 			emptyName();
 
-		} catch (WrongDate w)
-		{
+		} catch (WrongDate w){
 			wrongDatePrint();
 
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			AllView.errorPrint();
 		}
 	}
@@ -963,10 +929,13 @@ public class ControllerScrumMaster
 
 			if (sprint == null)
 			{
-
 				menuScrumMaster();
+
+			} else {
+
+				printSprint(sprint);
+
 			}
-			printSprint(sprint);
 		}
 	}
 
@@ -987,15 +956,14 @@ public class ControllerScrumMaster
 			}
 		}
 
-		if (sprintBacklog == null)//(!foundIt)
+		if(sprintBacklog == null)//(!foundIt)
 		{
 			invalidSprintBacklog();
 		}
 		return sprintBacklog;
 	}
 
-	public UserStory getUSFromSBL(ControllerAll controllerAll)
-	{
+	public UserStory getUSFromSBL(ControllerAll controllerAll){
 		Project project = controllerAll.whichProject();
 		if (project == null)
 		{
@@ -1012,19 +980,17 @@ public class ControllerScrumMaster
 		return userStory;
 	}
 
-	public void editUSInSprintBLMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum)
-	{
+	public void editUSInSprintBLMenu(ControllerAll controllerAll){
 
 		boolean running = true;
 
 		UserStory userStory = getUSFromSBL(controllerAll);
 
-		if (userStory == null)
-		{
+		printUStoryInfo(userStory);
+
+		if (userStory == null) {
 			nullUserStoryPrint();
-		}
-		else
-		{
+		} else {
 			do
 			{
 				try
@@ -1033,14 +999,14 @@ public class ControllerScrumMaster
 					switch (option)
 					{
 						case 1:
-							editUSStoryPoints(userStory, controllerAll);//Edit user story
+							editUSStoryPoints( userStory, controllerAll);//Edit user story
 							// point
 							break;
 						case 2:
 							editUSPriority(userStory, controllerAll);//edit priority number
 							break;
 						case 3:
-							changeUSStatus(userStory, controllerAll);//change user story status
+							changeUSStatus(userStory,controllerAll);//change user story status
 							break;
 						case 4:
 							setUserStoryDeadline(userStory, controllerAll);//set user story deadline
@@ -1063,13 +1029,11 @@ public class ControllerScrumMaster
 
 	}
 
-	public void editUSStoryPoints(UserStory userStory, ControllerAll controllerAll)
-	{
+	public void editUSStoryPoints(UserStory userStory, ControllerAll controllerAll) {
 
 		int newUSSPoints = getNewUSStoryPoints();
 
-		while (newUSSPoints < 0)
-		{
+		while (newUSSPoints < 0){
 			negativeNumberPrint();
 			newUSSPoints = getNewUSStoryPoints();
 		}
@@ -1080,13 +1044,11 @@ public class ControllerScrumMaster
 
 	}
 
-	public void editUSPriority(UserStory userStory, ControllerAll controllerAll)
-	{
+	public void editUSPriority(UserStory userStory, ControllerAll controllerAll) {
 
 		int newUSPriority = getNewUSPriority();
 
-		while (newUSPriority < 0 || newUSPriority > 5)
-		{
+		while (newUSPriority < 0 || newUSPriority > 5){
 			wrongPrioNumber();
 			newUSPriority = getNewUSPriority();
 		}
@@ -1097,43 +1059,34 @@ public class ControllerScrumMaster
 
 	}
 
-	public void changeUSStatus(UserStory userStory, ControllerAll controllerAll)
-	{
+	public void changeUSStatus(UserStory userStory, ControllerAll controllerAll){
+
 
 
 		int newUSStatus = ProductOwnerView.getNewUSStatus();
 
-		if (newUSStatus == 1)
-		{
+		if (newUSStatus == 1) {
 			userStory.setOpen();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
-		}
-		else if (newUSStatus == 2)
-		{
+		} else if (newUSStatus == 2) {
 			userStory.setInProgress();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
-		}
-		else if (newUSStatus == 3)
-		{
+		} else if (newUSStatus == 3) {
 			userStory.setCompletedBy(getNameCompleteTask());
 			userStory.setComplete();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
-		}
-		else if (newUSStatus == 4)
-		{
+		} else if (newUSStatus == 4) {
 			userStory.setAssigned();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
-		}
-		else
-		{
+		} else {
 			changeStatusMessage();
 		}
 
@@ -1154,15 +1107,14 @@ public class ControllerScrumMaster
 		return userStory;
 	}*/
 
-	public void removeUSFromSBL(UserStory userStory, ControllerAll controllerAll)
-	{
+	public void removeUSFromSBL(UserStory userStory, ControllerAll controllerAll){
+
 
 
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
 
 		boolean confirmRemoval = removingUSMsg(userStory);
-		if (confirmRemoval)
-		{
+		if (confirmRemoval){
 			sprintBacklog.getUserStories().remove(userStory);
 		}
 
@@ -1311,7 +1263,6 @@ public class ControllerScrumMaster
 				controllerAll.saveData();
 				assignmentCompleted();
 			}
-
 		}
 	}
 
@@ -1330,15 +1281,15 @@ public class ControllerScrumMaster
 				switch (option)
 				{
 					case 1:
-						editUStorySBLTaskPriority(controllerAll, contScrum);
+						editUStorySBLTaskPriority(controllerAll,contScrum);
 						controllerAll.saveData();
 						break;
 					case 2:
-						editUStorySBLTaskStatus(controllerAll, contScrum);
+						editUStorySBLTaskStatus(controllerAll,contScrum);
 						controllerAll.saveData();
 						break;
 					case 3:
-						removeUserStorySBLTask(controllerAll, contScrum);
+						removeUserStorySBLTask(controllerAll,contScrum);
 						controllerAll.saveData();
 						break;
 					case 4:
@@ -1392,8 +1343,7 @@ public class ControllerScrumMaster
 	{
 		{
 			Project project = controllerAll.whichProject();
-			if (project == null)
-			{
+			if (project == null) {
 				projectNotFound();
 			}
 
@@ -1404,23 +1354,18 @@ public class ControllerScrumMaster
 
 			//viewSprintBacklogT(controllerAll);
 			UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
-			if (userStory == null)
-			{
+			if (userStory == null) {
 				nullUserStoryPrint();
-			}
-			else
-			{
+			} else {
 				Scan.print(userStory.toString());
 
 				int id = taskUSIdGenerator(controllerAll);
 				Task task = null;
 
-				try
-				{
+				try {
 					taskCreation();
 					task = getTaskInfo(id);
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
@@ -1438,21 +1383,16 @@ public class ControllerScrumMaster
 	private void checkUStoryStatus(UserStory userStory, ControllerAll controllerAll)
 	{
 		userStory.getBinary().clear();
-		for (Task foundTasks : userStory.getUserStoryTasks())
-		{
+		for (Task foundTasks : userStory.getUserStoryTasks()) {
 
-			if (foundTasks.getStatus().equalsIgnoreCase("Done"))
-			{
+			if (foundTasks.getStatus().equalsIgnoreCase("Done")) {
 				userStory.getBinary().add(true);
 			}
-			else
-			{
+			else {
 				userStory.getBinary().add(false);
 			}
-			if (!(userStory.getBinary().contains(false)))
-			{
-				userStory.setComplete();
-			}
+			if (!(userStory.getBinary().contains(false))) {
+				userStory.setComplete(); }
 		}
 		controllerAll.saveData();
 	}
@@ -1496,15 +1436,11 @@ public class ControllerScrumMaster
 			nullUserStoryPrint();
 		}
 
-		else
-		{
+		else {
 			Task task = findTaskInUserSSBL(USNumber, controllerAll);
-			if (task == null)
-			{
+			if (task == null) {
 				nullTaskPrint();
-			}
-			else
-			{
+			} else {
 
 				int newPriorityNumber = newPriorityNumberTask();
 				task.setPriorityNumber(newPriorityNumber);
@@ -1538,12 +1474,9 @@ public class ControllerScrumMaster
 		else
 		{
 			Task task = findTaskInUserSSBL(USNumber, controllerAll);
-			if (task == null)
-			{
+			if (task == null){
 				nullTaskPrint();
-			}
-			else
-			{
+			}else{
 				int option = newStatusTask();
 
 				if (option == 1)
@@ -1593,15 +1526,12 @@ public class ControllerScrumMaster
 			nullUserStoryPrint();
 		}
 
-		else
-		{
+		else {
 			Task task = findTaskInUserSSBL(userStory.getNumber(), controllerAll);
 			if (task == null)
 			{
 				nullTaskPrint();
-			}
-			else
-			{
+			}else {
 				userStory.getUserStoryTasks().remove(task);
 				Scan.print(userStory.toString());
 				removedTaskInUserStory();
@@ -1611,14 +1541,12 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private void setUserStoryDeadline(UserStory userStory, ControllerAll controllerAll)
-	{
+	private void setUserStoryDeadline(UserStory userStory, ControllerAll controllerAll){
 
 
 		String deadline = getEndDate();
 
-		while (!legalDate(deadline, controllerAll))
-		{
+		while (!legalDate(deadline,controllerAll)){
 			dateIsBeforeOrAfterProjectDate();
 			deadline = getEndDate();
 		}
@@ -1629,8 +1557,7 @@ public class ControllerScrumMaster
 
 	}
 
-	private void viewAndSetUSDeadline(ControllerAll controllerAll)
-	{
+	private void viewAndSetUSDeadline(ControllerAll controllerAll){
 		controllerAll.viewUStoryDeadlines();
 		UserStory userStory = controllerAll.findUStoryByNumber();
 		setUserStoryDeadline(userStory, controllerAll);

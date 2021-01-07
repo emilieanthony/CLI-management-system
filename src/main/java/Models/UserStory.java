@@ -16,7 +16,7 @@ public class UserStory implements Comparable<UserStory> {
     private int priorityNumber;
     private int storyPoints;
     private String content;
-    private String acceptanceCriteria;
+    private ArrayList<String> acceptanceCriteria;
     private String status;
     private ArrayList<Developer> assignedDevelopers;
     private ArrayList<Task> userStoryTasks;
@@ -50,7 +50,8 @@ public class UserStory implements Comparable<UserStory> {
 
         this.storyPoints = 0;
         this.content = content;
-        this.acceptanceCriteria = acceptanceCriteria;
+        this.acceptanceCriteria = new ArrayList<>();
+        this.acceptanceCriteria.add(acceptanceCriteria);
         this.status = "Open";
         this.assignedDevelopers = new ArrayList<>();
         this.userStoryTasks = new ArrayList<>();
@@ -127,8 +128,8 @@ public class UserStory implements Comparable<UserStory> {
         this.content = content;
     }
 
-    public void setAcceptanceCriteria(String acceptanceCriteria) {
-        this.acceptanceCriteria = acceptanceCriteria;
+    public ArrayList<String> getAcceptanceCriteria() {
+        return acceptanceCriteria;
     }
 
     public void setOpen() {
@@ -181,6 +182,13 @@ public class UserStory implements Comparable<UserStory> {
     @Override
     public String toString() {
         String output;
+        
+        String acceptanceCriteria = "";
+        int listLine = 1;
+        for (String criteria : this.acceptanceCriteria){
+            acceptanceCriteria = acceptanceCriteria + "\n " + listLine + ". " + criteria;
+            listLine++;
+        }
 
         output =
                 "\nUser Story: " +
