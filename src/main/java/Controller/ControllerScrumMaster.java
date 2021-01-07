@@ -1351,7 +1351,7 @@ public class ControllerScrumMaster
 		userStory.getBinary().clear();
 		for (Task foundTasks : userStory.getUserStoryTasks()) {
 
-			if (foundTasks.getStatus().equalsIgnoreCase("Done")) {
+			if (foundTasks.getStatus().equalsIgnoreCase("Complete")) {
 				userStory.getBinary().add(true);
 			}
 			else {
