@@ -58,7 +58,7 @@ public class ControllerDeveloper {
                         controllerAll.viewUStoryDeadlines();
                         break;
                     case 12:
-                        getProjectName(controllerAll);// Switch project.
+                        controllerAll.switchProject(controllerAll);// Switch project.
                         break;
                     case 13:
                         running = false;

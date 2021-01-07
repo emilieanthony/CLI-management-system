@@ -6,6 +6,7 @@ import Models.UserStory;
 import Utility.Scan;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static View.ScrumMasterView.proName;
 
@@ -27,6 +28,13 @@ public class ProductOwnerView {
                 "8. Go back to main menu\n");
         return option;
 
+    }
+
+    public static void printPBLUStories(ArrayList<UserStory> userStories){
+        Scan.print("The following user stories exist in the product backlog:");
+        for (UserStory userStory : userStories){
+            Scan.print(userStory.getNumber() + " " + userStory.getName());
+        }
     }
 
     public static void userStoryFail() {
@@ -180,6 +188,10 @@ public class ProductOwnerView {
 
     public static void printSprint(SprintBacklog sprintBacklog){
         Scan.print(sprintBacklog.toString());
+    }
+
+    public static void emptyContent(){
+        Scan.print("Content can't be blank. Try again.");
     }
 
 }

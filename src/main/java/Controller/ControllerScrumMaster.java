@@ -72,7 +72,7 @@ public class ControllerScrumMaster
 						velocityCalculator();
 						break;
 					case 13:
-						getProjectName(controllerAll);
+						controllerAll.switchProject(controllerAll);
 						break;
 					case 14:
 						running = false;
@@ -86,6 +86,8 @@ public class ControllerScrumMaster
 			}
 		} while (running);
 	}
+
+
 
 	private void USOptionsMenu(ControllerAll controllerAll, ControllerScrumMaster contScrum)
 	{
@@ -253,7 +255,7 @@ public class ControllerScrumMaster
 						moveTaskOrUstoryToSBL(contProOwner,controllerAll);
 						break;
 					case 2:
-						moveTaskOrUstoryToPBL(controllerAll);
+						moveTaskOrUStoryToPBL(controllerAll);
 						break;
 					case 3:
 						running = false;
@@ -564,7 +566,7 @@ public class ControllerScrumMaster
 		}
 	}
 
-	private void moveTaskOrUstoryToPBL(ControllerAll controllerAll)
+	private void moveTaskOrUStoryToPBL(ControllerAll controllerAll)
 	{
 		viewSprintBacklog(controllerAll);
 

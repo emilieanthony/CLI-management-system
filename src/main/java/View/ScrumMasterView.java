@@ -166,7 +166,7 @@ public class ScrumMasterView
 		int startYear = Scan.readInt("Start date (YYYY): ");
 		int startMonth = Scan.readInt("Start date (MM): ");
 		int startDay = Scan.readInt("Start date (DD): ");
-		String startDate = String.valueOf(startYear + "-" + startMonth + "-" + startDay);
+		String startDate = (startYear + "-" + startMonth + "-" + startDay);
 		return startDate;
 	}
 
@@ -290,7 +290,7 @@ public class ScrumMasterView
 	}
 
 	public static void wrongDatePrint() {
-		Scan.print("Error. You entered a start date that is after the end date. Please try again\n");
+		Scan.print("Error. You entered a start or end date that is after the start or end date. Please try again\n");
 
 	}
 
