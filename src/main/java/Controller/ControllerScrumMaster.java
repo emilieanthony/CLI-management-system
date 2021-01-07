@@ -514,6 +514,7 @@ public class ControllerScrumMaster
 
 	public void moveTaskOrUStoryToSBL(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
+
 		contProOwner.viewProBacklog(controllerAll);
 
 		String input = moveObjectToBacklogPrint();
@@ -985,7 +986,7 @@ public class ControllerScrumMaster
 		boolean running = true;
 
 		UserStory userStory = getUSFromSBL(controllerAll);
-
+		System.out.println("bu");
 		printUStoryInfo(userStory);
 
 		if (userStory == null) {
@@ -1021,6 +1022,8 @@ public class ControllerScrumMaster
 					}
 				} catch (Exception e)
 				{
+					e.printStackTrace();
+
 					invalidInputPrint();
 				}
 			} while (running);
