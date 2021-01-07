@@ -1448,19 +1448,16 @@ public class ControllerScrumMaster
 				if (option == 1)
 				{
 					task.setOpen();
-					Scan.print(task.toString());
 					objectEdited();
 				}
 				else if (option == 2)
 				{
 					task.setAssigned();
-					Scan.print(task.toString());
 					objectEdited();
 				}
 				else if (option == 3)
 				{
 					task.setInProgress();
-					Scan.print(task.toString());
 					objectEdited();
 				}
 				else if (option == 4)
@@ -1483,14 +1480,14 @@ public class ControllerScrumMaster
 					task.setActualHours( actualHrs );
 					task.setComplete();
 					checkUStoryStatus(userStory, controllerAll);
-					Scan.print(task.toString());
 					objectEdited();
-					controllerAll.saveData();
+
 				}
 				else
 				{
 					invalidOption();
 				}
+				controllerAll.saveData();
 				Scan.print(task.toString());
 			}
 
