@@ -23,8 +23,8 @@ public class ProductOwnerView {
                 "3. Create user story to product backlog\n" +
                 "4. Delete user story from product backlog\n" +
                 "5  View all completed user stories\n" +
-                "6. Choose project\n" +
-                "7. Go back to main menu\n");
+                "7. Choose project\n" +
+                "8. Go back to main menu\n");
         return option;
 
     }
@@ -91,6 +91,12 @@ public class ProductOwnerView {
 
     }
 
+    public static String getAnotherACriteria(){
+        String criteria = Scan.readLine("Do you want to add another acceptance criteria? If YES enter the " +
+                "acceptance criteria, if NO just press enter.");
+        return criteria;
+    }
+
     public static void createdUStoryReceipt(UserStory userStory) {
         Scan.print("\nYou have now created the following user story to your product backlog: \n" + userStory.toString());
     }
@@ -110,7 +116,8 @@ public class ProductOwnerView {
                         "2. Edit user story name.\n" +
                         "3. Edit user story content.\n" +
                         "4. Edit user story acceptance criteria\n" +
-                        "5. Back to your menu.\n");
+                        "5. Remove user story acceptance criteria\n" +
+                        "6. Back to your menu.\n");
         return option;
     }
 
@@ -145,11 +152,11 @@ public class ProductOwnerView {
         return newUSContent;
     }
 
-    public static String getNewUSAcceptanceC() {
+  /*  public static String getNewUSAcceptanceC() {
         String newUSAcceptanceC = Scan.readLine("\nEnter new acceptance criteria for the user " +
                 "story.");
         return newUSAcceptanceC;
-    }
+    }*/
 
     public static int getNewUSStatus() {
         int newUSStatus = Scan.readInt("\nChoose the updated status of the user story:\n" +
@@ -170,7 +177,7 @@ public class ProductOwnerView {
     }
 
     public static void userStoryEditConf(UserStory userStory) {
-        Scan.print("\nYou have successfully edited the following user story: + \n" + userStory.toString());
+        Scan.print("\nYou have successfully edited the following user stories: + \n" + userStory.toString());
     }
 
     public static void changeStatusMessage() {
@@ -190,6 +197,28 @@ public class ProductOwnerView {
 
     public static void emptyContent(){
         Scan.print("Content can't be blank. Try again.");
+    }
+
+    public static void printUStoryACriteria(UserStory userStory){
+        if (!userStory.getAcceptanceCriteria().isEmpty()){
+        Scan.print("This user story now has the following acceptance criteria");
+        int listLine = 1;
+        for (String criteria : userStory.getAcceptanceCriteria()){
+            Scan.print(listLine + ". " + criteria);
+            listLine++;
+        }
+        }else {
+            Scan.print("This user story does not have any acceptance criteria yet. ");
+        }
+    }
+
+    public static int optionRemoveACriteria(){
+        int option = Scan.readInt("Enter the number of the acceptance criteria that you wish to remove: ");
+        return option;
+    }
+
+    public static void invalidIndexPrint(){
+        Scan.print("Error. The index you entered is invalid. Try again.");
     }
 
 }

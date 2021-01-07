@@ -104,7 +104,7 @@ public class ControllerScrumMaster
 						assignUserStory(controllerAll);
 						break;
 					case 2:
-						editUSInSprintBLMenu(controllerAll,contScrum);
+						editUSInSprintBLMenu(controllerAll);
 						break;
 					case 3:
 						createTaskOfUsInSBL(controllerAll,contScrum);
@@ -929,10 +929,13 @@ public class ControllerScrumMaster
 
 			if (sprint == null)
 			{
-
 				menuScrumMaster();
+
+			} else {
+
+				printSprint(sprint);
+
 			}
-			printSprint(sprint);
 		}
 	}
 
@@ -977,11 +980,13 @@ public class ControllerScrumMaster
 		return userStory;
 	}
 
-	public void editUSInSprintBLMenu(ControllerAll controllerAll,ControllerScrumMaster contScrum){
+	public void editUSInSprintBLMenu(ControllerAll controllerAll){
 
 		boolean running = true;
 
 		UserStory userStory = getUSFromSBL(controllerAll);
+
+		printUStoryInfo(userStory);
 
 		if (userStory == null) {
 			nullUserStoryPrint();

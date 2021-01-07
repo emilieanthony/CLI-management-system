@@ -45,12 +45,9 @@ public class ControllerProductOwner {
                         controllerAll.viewCompletedUStories();
                         break;
                     case 6:
-                        deleteExistingAndCreateNewBacklog(controllerAll);
-                        break;
-                    case 7:
                         controllerAll.switchProject(controllerAll);
                         break;
-                    case 8:
+                    case 7:
                         running = false; //go back to main menu
                         break;
                     default:
@@ -80,7 +77,16 @@ public class ControllerProductOwner {
         try {
             UserStory newUserStory = getUSInfo(number);
             project.getProductBacklog().getAllUserStories().add(newUserStory);
+
+            String criteria = getAnotherACriteria();
+
+            while (!criteria.isBlank()){
+                newUserStory.getAcceptanceCriteria().add(criteria);
+                criteria = getAnotherACriteria();
+            }
+
             createdUStoryReceipt(newUserStory);
+
             controllerAll.saveData();
         } catch (Exception e) {
             userStoryFail();
@@ -111,19 +117,6 @@ public class ControllerProductOwner {
 
             nonExistentUStory();
 
-        }
-    }
-
-    public void deleteExistingAndCreateNewBacklog(ControllerAll controllerAll) { //this method creates null pointer exceptions.
-        try {
-            Project project = controllerAll.whichProject();
-            ProductBacklog ProBacklog = getBacklogInfo();
-            project.setProductBacklog(ProBacklog);
-            proBacklogCreationConf();
-            Scan.print(ProBacklog.toString());
-            controllerAll.saveData();
-        } catch (Exception e) {
-            backlogFail();
         }
     }
 
@@ -251,6 +244,9 @@ public class ControllerProductOwner {
                     editUSAcceptanceC(userStory, controllerAll);
                     break;
                 case 5:
+                    removeUSAcceptanceC(userStory, controllerAll);
+                    break;
+                case 6:
                     running = false;
                     break;
                 default:
@@ -308,14 +304,45 @@ public class ControllerProductOwner {
     }
 
     public void editUSAcceptanceC(UserStory userStory, ControllerAll controllerAll) {
-        String newUSAcceptanceC = getNewUSAcceptanceC();
 
+        printUStoryACriteria(userStory);
 
-        userStory.setAcceptanceCriteria(newUSAcceptanceC);
+        String anotherCriteria = getAnotherACriteria();
+
+        while (!anotherCriteria.isBlank()){
+            userStory.getAcceptanceCriteria().add(anotherCriteria);
+            anotherCriteria = getAnotherACriteria();
+        }
+
         controllerAll.saveData();
+
         userStoryEditConf(userStory);
 
     }
+
+    public void removeUSAcceptanceC(UserStory userStory, ControllerAll controllerAll){
+        printUStoryACriteria(userStory);
+
+        if (!userStory.getAcceptanceCriteria().isEmpty()){
+
+            int index = optionRemoveACriteria() - 1;
+
+            if (!((userStory.getAcceptanceCriteria().get(index))==null)){
+
+                userStory.getAcceptanceCriteria().remove(index);
+                printUStoryACriteria(userStory);
+
+                controllerAll.saveData();
+
+            } else {
+
+                invalidInputPrint();
+
+            }
+        }
+
+    }
+
 
 
 
