@@ -79,7 +79,7 @@ public class ControllerAll
                         viewProjects();
                         break;
                     case 5:
-                        getProjectName(controllerAll);
+                        switchProject(controllerAll);
                         break;
                     case 6:
                         saveData();
