@@ -22,7 +22,7 @@ public class ControllerDeveloper {
 
                 switch (option) {
                     case 1:
-                        viewMyTasks(controllerAll,scrumMaster);
+                        viewMyTasks(controllerAll);
                         break;
                     case 2:
                         viewAllAssignedTasks(controllerAll);
@@ -73,7 +73,7 @@ public class ControllerDeveloper {
     //---------------------------------Methods----------------------------------------------//
 
 
-    public void viewMyTasks(ControllerAll controllerAll,ControllerScrumMaster contScrum) {
+    public void viewMyTasks(ControllerAll controllerAll) {
         ArrayList<Task> assignedTasks = new ArrayList<>();
         Developer developer = controllerAll.findDeveloperByID();
 
@@ -88,18 +88,13 @@ public class ControllerDeveloper {
             }
         }
 
-        Scan.print(assignedTasks.toString());
+        printMyAssignedTasks(assignedTasks);
+
     }
 
     public void viewAllAssignedTasks(ControllerAll controllerAll) {
         ArrayList<Task> allTasks = controllerAll.collectAllTasks();
-        for (Task task:allTasks) {
-            if (task == null) {
-                noAssignedTasks();
-            }else if(task.getStatus().equalsIgnoreCase("Assigned")) {
-                Scan.print(task.toString());
-            }
-        }
+        printAllAssignedTasks(allTasks);
     }
 
     public Task openTask(ControllerAll controllerAll) {

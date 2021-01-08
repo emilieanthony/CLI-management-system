@@ -329,7 +329,7 @@ public class ControllerProductOwner {
 
             } else {
 
-                invalidInputPrint();
+                invalidIndexPrint();
 
             }
         }

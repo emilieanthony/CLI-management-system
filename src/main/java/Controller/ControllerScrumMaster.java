@@ -327,8 +327,6 @@ public class ControllerScrumMaster
 
 	private void setTaskDeadline(ControllerAll controllerAll){
 
-
-
 		Task task = controllerAll.findTaskById();
 
 		String deadline = getEndDate();
@@ -1072,18 +1070,18 @@ public class ControllerScrumMaster
 			userStoryEditConf(userStory);
 
 		} else if (newUSStatus == 2) {
-			userStory.setInProgress();
+			userStory.setAssigned();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
 		} else if (newUSStatus == 3) {
-			userStory.setCompletedBy(getNameCompleteTask());
-			userStory.setComplete();
+			userStory.setInProgress();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
 		} else if (newUSStatus == 4) {
-			userStory.setAssigned();
+			userStory.setCompletedBy(getNameCompleteTask());
+			userStory.setComplete();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
@@ -1091,7 +1089,7 @@ public class ControllerScrumMaster
 			changeStatusMessage();
 		}
 
-		Scan.print(userStory.toString());
+		//Scan.print(userStory.toString());
 
 	}
 
@@ -1149,7 +1147,8 @@ public class ControllerScrumMaster
 
 	private void assignTask(ControllerAll controllerAll)
 	{
-		showAllTasks(controllerAll);
+		printAllTaskIDAndName(controllerAll.collectAllTasks());
+
 		Task task = controllerAll.findTaskById();
 
 		Project project = controllerAll.whichProject();

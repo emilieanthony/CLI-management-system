@@ -54,7 +54,6 @@ public class ControllerAll
             while (!legalProject()){
                 wrongProjectNameInput();
                 Start();
-
             }
         }
 
@@ -79,7 +78,7 @@ public class ControllerAll
                         viewProjects();
                         break;
                     case 5:
-                        getProjectName(controllerAll);
+                        switchProject(controllerAll);
                         break;
                     case 6:
                         saveData();
@@ -243,7 +242,7 @@ public class ControllerAll
 
     public void viewAllTasks(){
         ArrayList<Task> allTasks = collectAllTasks();
-        printAllTasks(allTasks);
+        showAllTasks(allTasks);
     }
 
     public ArrayList<UserStory> collectAllStories()
