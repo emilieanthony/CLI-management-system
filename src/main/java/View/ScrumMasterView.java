@@ -573,10 +573,10 @@ public class ScrumMasterView
 		int option = Scan.readInt
 				("\n\nEdit Task Menu. \n " +
 						"Which part of the task do you want to edit, enter a number:\n\n" +
-						"1- Edit Task Priority Number.\n" +
-						"2- Edit Task Status.\n" +
-						"3- Remove Task from a user story.\n" +
-						"4- Back to your menu.\n");
+						"1. Edit Task Priority Number.\n" +
+						"2. Edit Task Status.\n" +
+						"3. Remove Task from a user story.\n" +
+						"4. Back to your menu.\n");
 		return option;
 	}
 

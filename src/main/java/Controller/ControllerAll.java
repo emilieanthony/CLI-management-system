@@ -186,6 +186,27 @@ public class ControllerAll
 
     }
 
+    public void setTaskCompleted(Task task){
+        int actualHrs = getActualHrs();
+
+        while (actualHrs<0){
+            negativeNumberPrint();
+            actualHrs = getActualHrs();
+        }
+
+        String name = getNameCompleteTask();
+
+        while (name.isBlank()){
+            emptyName();
+            name = getNameCompleteTask();
+        }
+
+        task.setCompletedBy(name);
+        task.setActualHours( actualHrs );
+        task.setComplete();
+
+    }
+
     public void setUSInProgress(UserStory userStory){
         userStory.setInProgress();
         saveData();
@@ -381,11 +402,12 @@ public class ControllerAll
 
         printUStoryDeadlines(storiesWDeadlines, storiesWODeadlines);
 
-
     }
 
     public boolean legalProject(){
+
         boolean existingProject;
+
         if (findProjectByName()==null){
             existingProject = false;
         } else {

@@ -1,11 +1,8 @@
 package Controller;
 
 import Models.*;
-import Utility.DataManagement;
 import Utility.Scan;
-import View.ScrumMasterView;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -33,7 +30,7 @@ public class ControllerProductOwner {
                         viewProBacklog(controllerAll);
                         break;
                     case 2:
-                        editProductBacklog(controllerAll, controllerScrumMaster);
+                        editProductBacklog(controllerAll);
                         break;
                     case 3:
                         createUserStory(controllerAll, controllerScrumMaster);
@@ -127,7 +124,7 @@ public class ControllerProductOwner {
 
 
     //*-----------------------------------2nd Menu - menu for editing backlog------------------------------------------*//
-    public void editProductBacklog(ControllerAll controllerAll, ControllerScrumMaster controllerScrumMaster) {
+    public void editProductBacklog(ControllerAll controllerAll) {
         boolean running = true;
         do {
             int option;

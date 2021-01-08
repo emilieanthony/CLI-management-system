@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.*;
 import static View.ProductOwnerView.changeStatusErrorMessage;
-import static View.ScrumMasterView.emptyName;
-import static View.ScrumMasterView.invalidOption;
+
 
 
 public class ControllerDeveloper {
@@ -57,7 +56,7 @@ public class ControllerDeveloper {
                         controllerAll.viewUStoryDeadlines();
                         break;
                     case 12:
-                        controllerAll.switchProject(controllerAll);// Switch project.
+                        controllerAll.switchProject(controllerAll);
                         break;
                     case 13:
                         running = false;
@@ -123,30 +122,12 @@ public class ControllerDeveloper {
 
     public void completeTask(ControllerAll controllerAll){
 
-
         Task task = openTask(controllerAll);
 
-        int actualHrs = getActualHrs();
-
-        while (actualHrs<0){
-            negativeNumberPrint();
-            actualHrs = getActualHrs();
-        }
-
-        String name = getNameCompleteTask();
-
-        while (name.isBlank()){
-            emptyName();
-            name = getNameCompleteTask();
-        }
-
-        task.setActualHours( actualHrs );
-
-        task.setComplete();
-
-        task.setCompletedBy(name);
+        controllerAll.setTaskCompleted(task);
 
         taskCompletedReceipt(task);
+
     }
 }
 
