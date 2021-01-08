@@ -30,10 +30,6 @@ public class AllView {
         Scan.print("There was an error, please try again");
     }
 
-    public static void errorEstimatedHours(){
-        Scan.print("Error: Estimated hours cannot be negative, Please " +
-                "try again");
-    }
 
     public static void errorEmptyDescription(){
         Scan.print("Error: Description cannot be empty, Please " +

@@ -1,7 +1,6 @@
 package View;
 
 import Models.ProductBacklog;
-import Models.ProductOwner;
 import Models.SprintBacklog;
 import Models.UserStory;
 import Utility.Scan;
@@ -40,19 +39,6 @@ public class ProductOwnerView {
         Scan.print("There was a problem in creating the user story, please try again.");
     }
 
-    public static void proBacklogCreationConf() {
-        Scan.print("You have successfully created a new product backlog.");
-    }
-
-    public static ProductBacklog getBacklogInfo() throws Exception {
-        String backlogName = Scan.readLine("Please enter product backlog name:");
-
-        String startDate = ScrumMasterView.getStartDate();
-        String endDate = ScrumMasterView.getEndDate();
-
-        return new ProductBacklog(backlogName, startDate, endDate);
-    }
-
 
     /*----------------------------------------------2nd Menu---------------------------------------------------------*/
 
@@ -72,16 +58,10 @@ public class ProductOwnerView {
         return nameBacklog;
     }
 
-    public static String getBacklogEDate() {
-
-        String endDate = ScrumMasterView.getEndDate();
-        return endDate;
-    }
 
     public static UserStory getUSInfo(int id) throws Exception {
         Scan.print("Create new user story");
         String name = Scan.readLine("Name: ");
-        //int number = Scan.readInt("User story number: ");
         int priority = Scan.readInt("Priority: ");
         String content = Scan.readLine("Content: ");
         String acceptanceCriteria = Scan.readLine("Acceptance criteria: ");
@@ -124,11 +104,6 @@ public class ProductOwnerView {
 
     }
 
-    public static int getNewUSid() {
-        int newUSid = Scan.readInt("\nEnter a new ID for the user story.");
-        return newUSid;
-    }
-
     public static String getNewUSName() {
         String newUSName = Scan.readLine("\nEnter a new name for the user story.");
         return newUSName;
@@ -149,11 +124,6 @@ public class ProductOwnerView {
         return newUSContent;
     }
 
-  /*  public static String getNewUSAcceptanceC() {
-        String newUSAcceptanceC = Scan.readLine("\nEnter new acceptance criteria for the user " +
-                "story.");
-        return newUSAcceptanceC;
-    }*/
 
     public static int getNewUSStatus() {
         int newUSStatus = Scan.readInt("\nChoose the updated status of the user story:\n" +
@@ -181,9 +151,6 @@ public class ProductOwnerView {
         Scan.print("\nThe user story has not been edited, You have to enter 1 or 2.");
     }
 
-    public static void changePriorityMessage() {
-        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 5.");
-    }
     public static void nonExistentUStory(){
         Scan.print("The ID you entered does not match with any user story in the product backlog.");
     }
@@ -198,12 +165,14 @@ public class ProductOwnerView {
 
     public static void printUStoryACriteria(UserStory userStory){
         if (!userStory.getAcceptanceCriteria().isEmpty()){
-        Scan.print("This user story now has the following acceptance criteria");
-        int listLine = 1;
-        for (String criteria : userStory.getAcceptanceCriteria()){
-            Scan.print(listLine + ". " + criteria);
-            listLine++;
-        }
+            Scan.print("This user story now has the following acceptance criteria");
+            int listLine = 1;
+
+            for (String criteria : userStory.getAcceptanceCriteria()){
+                Scan.print(listLine + ". " + criteria);
+                listLine++;
+            }
+
         }else {
             Scan.print("This user story does not have any acceptance criteria yet. ");
         }

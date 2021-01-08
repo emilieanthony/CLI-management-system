@@ -124,12 +124,8 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 	@Override
 	public int compareTo(SprintBacklog anotherSprint) {
 
-
-
 		LocalDate endDate = DataManagement.stringToLocalDate(this.endDate);
 		LocalDate anotherEndDate = DataManagement.stringToLocalDate(anotherSprint.getEndDate());
-
-
 
 		if( endDate.isBefore(anotherEndDate) ) {
 			return -1;

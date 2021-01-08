@@ -242,11 +242,6 @@ public class ScrumMasterView
 
 	}
 
-	public static void noSprintPrint()
-	{
-		Scan.print("No sprint exists with that name, please try again.");
-	}
-
 	public static void createProjectPrint(Project project)
 	{
 		Scan.print("You have successfully created the following project:\n\n" + project.toString());
@@ -262,19 +257,10 @@ public class ScrumMasterView
 		Scan.print("There was a problem trying to register a new task, please try again.");
 	}
 
-	public static void registerProOwnerFail()
-	{
-		Scan.print("There was a problem trying to register a new product owner, please try again.");
-	}
 
 	public static void registerDeveloperFail()
 	{
 		Scan.print("There was a problem registering a new developer, please try again.");
-	}
-
-	public static void backlogFail()
-	{
-		Scan.print("There was a problem trying to register a backlog, please try again.");
 	}
 
 	public static int newPriorityNumberTask()
@@ -290,7 +276,6 @@ public class ScrumMasterView
 
 	public static void wrongDatePrint() {
 		Scan.print("Error. You entered a start or end date that is after the start or end date. Please try again\n");
-
 	}
 
 	public static void dateIsBeforeOrAfterProjectDate(){
@@ -299,14 +284,12 @@ public class ScrumMasterView
 
 	public static int newStatusTask()
 	{
-
 		int newStatusTask = Scan.readInt("\nEnter the number for the new status; \n" +
-				"1 = Open\n" +
-				"2 = Assigned\n" +
-				"3 = Work in progress\n" +
-				"4 = Complete.");
+				"1. Open\n" +
+				"2. Assigned\n" +
+				"3. Work in progress\n" +
+				"4. Complete.");
 		return newStatusTask;
-
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------
@@ -338,10 +321,8 @@ public class ScrumMasterView
 
 	}
 
-	public static void getProjectName(ControllerAll controllerAll)
-
+	public static void getProjectName()
 	{
-		viewProjectMenu(controllerAll);
 		proName = Scan.readLine("\nWhich project do you want to access: Please enter the project " +
 				"name:\n");
 	}
@@ -397,11 +378,6 @@ public class ScrumMasterView
 		Scan.print("\nAssignment completed!");
 	}
 
-	public static int assignTaskPrintIdTask()
-	{
-		int idTask = Scan.readInt("Write the ID of the task you want to assign: ");
-		return idTask;
-	}
 
 	public static void showAllTasks(ArrayList<Task> allTasks){
 		Scan.print("Below you find all tasks. \n\n");
@@ -439,24 +415,6 @@ public class ScrumMasterView
 
 		}
 
-	}
-
-	public static String assignTaskPrintSprintName()
-	{
-		String sprintName = Scan.readLine("Write the name of which sprint backlog the task belongs to: ");
-		return sprintName;
-	}
-
-	public static int assignUsPrintIdUs()
-	{
-		int number = Scan.readInt("Write the number of the User Story you want to assign: ");
-		return number;
-	}
-
-	public static String assignUsPrintSprintName()
-	{
-		String sprintName = Scan.readLine("Write the name of which sprint backlog the User Story belongs to: ");
-		return sprintName;
 	}
 
 	public static String moveObjectToBacklogPrint()
@@ -573,10 +531,10 @@ public class ScrumMasterView
 		int option = Scan.readInt
 				("\n\nEdit Task Menu. \n " +
 						"Which part of the task do you want to edit, enter a number:\n\n" +
-						"1- Edit Task Priority Number.\n" +
-						"2- Edit Task Status.\n" +
-						"3- Remove Task from a user story.\n" +
-						"4- Back to your menu.\n");
+						"1. Edit Task Priority Number.\n" +
+						"2. Edit Task Status.\n" +
+						"3. Remove Task from a user story.\n" +
+						"4. Back to your menu.\n");
 		return option;
 	}
 
@@ -673,10 +631,6 @@ public class ScrumMasterView
 				userStory.getId() + " with the name: " + userStory.getName());
 	}
 
-	public static int getUSPoints(){
-		int points = Scan.readInt("Enter the amount of user story points this user story shall have: ");
-		return points;
-	}
 
 	public static boolean removingUSMsg(UserStory userStory) {
 		boolean confirmation = false;

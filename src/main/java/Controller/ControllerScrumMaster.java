@@ -430,11 +430,14 @@ public class ControllerScrumMaster
 				if (thereIsASprintBacklog){
 					Task newTask = getTaskInfo(id);
 					createdTaskReceipt(newTask);
+
 					printSprints(project);
 					sprintName = getSprintBacklogName();
 					findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
+
 					controllerAll.saveData();
 					taskCreatedToSBacklog();
+
 				} else {
 					noSprintBacklogYet();
 					createSprintBacklog(controllerAll);
@@ -485,7 +488,6 @@ public class ControllerScrumMaster
 			for (Task task : tasks)
 			{
 				ids.add(task.getId());
-
 			}
 		}
 
@@ -880,6 +882,7 @@ public class ControllerScrumMaster
 		{
 			SprintBacklog sprintBacklog = createSprintInfo();
 			Project project = controllerAll.whichProject();
+
 			project.getAllSprintBacklogs().add(sprintBacklog);
 			controllerAll.saveData();
 
@@ -1001,8 +1004,7 @@ public class ControllerScrumMaster
 					switch (option)
 					{
 						case 1:
-							editUSStoryPoints( userStory, controllerAll);//Edit user story
-							// point
+							editUSStoryPoints( userStory, controllerAll);//Edit user story points
 							break;
 						case 2:
 							editUSPriority(userStory, controllerAll);//edit priority number
@@ -1101,8 +1103,6 @@ public class ControllerScrumMaster
 
 	public void removeUSFromSBL(UserStory userStory, ControllerAll controllerAll){
 
-
-
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
 
 		boolean confirmRemoval = removingUSMsg(userStory);
@@ -1111,7 +1111,6 @@ public class ControllerScrumMaster
 		}
 
 	}
-
 
 	//------------------------------------Methods for velocity-------------------------------------------//
 
@@ -1158,37 +1157,22 @@ public class ControllerScrumMaster
 
 		Project project = controllerAll.whichProject();
 
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else if (task == null)
-		{
+
+		} else if (task == null) {
 			nullTaskPrint();
-		}
-		else
-		{
-			showAllTeamMembers(project);
-			Developer developer = controllerAll.findDeveloperByID();
 
-			if (project.getAllTeamMembers().isEmpty())
-			{
-				noDeveloperYet();
-				createDevelopmentMember(controllerAll);
+		} else {
+			Developer developer = getDeveloper(project, controllerAll);
 
-			}
-			else if (!(project.getAllTeamMembers().contains(developer)))
-			{
-				invalidDeveloperId();
-			}
-			else
-			{
+			if (!(developer==null)) {
+
 				task.getAssignedDevelopers().add(developer);
 				task.setAssigned();
 				controllerAll.saveData();
 				assignmentCompleted();
 			}
-
 		}
 	}
 
@@ -1199,36 +1183,38 @@ public class ControllerScrumMaster
 
 		Project project = controllerAll.whichProject();
 
-		if (project == null)
-		{
+		if (project == null) {
 			projectNotFound();
-		}
-		else if (userStory == null)
-		{
-			nullUserStoryPrint();
-		}
-		else
-		{
-			showAllTeamMembers(project);
-			Developer developer = controllerAll.findDeveloperByID();
 
-			if (project.getAllTeamMembers().isEmpty())
-			{
-				noDeveloperYet();
-				createDevelopmentMember(controllerAll);
-			}
-			else if (!(project.getAllTeamMembers().contains(developer)))
-			{
-				invalidDeveloperId();
-			}
-			else
-			{
+		} else if (userStory == null) {
+			nullUserStoryPrint();
+
+		} else {
+			Developer developer = getDeveloper(project, controllerAll);
+
+			if (!(developer==null)) {
 				userStory.getAssignedDevelopers().add(developer);
 				userStory.setAssigned();
 				controllerAll.saveData();
 				assignmentCompleted();
 			}
 		}
+	}
+
+	public Developer getDeveloper(Project project, ControllerAll controllerAll){
+		showAllTeamMembers(project);
+		Developer developer = controllerAll.findDeveloperByID();
+
+		if (project.getAllTeamMembers().isEmpty())
+		{
+			noDeveloperYet();
+			createDevelopmentMember(controllerAll);
+		}
+		else if (!(project.getAllTeamMembers().contains(developer)))
+		{
+			invalidDeveloperId();
+		}
+		return developer;
 	}
 
 	//--------------------------------------Edit task in US menu ------------------------------//
@@ -1294,19 +1280,6 @@ public class ControllerScrumMaster
 		return userStory;
 	}
 
-	private void viewSprintBacklogT(ControllerAll controllerAll)
-	{
-		Project project = controllerAll.whichProject();
-		if (project == null)
-		{
-			projectNotFound();
-		}
-		else
-		{
-			SprintBacklog sprint = findSprintBacklogByName(controllerAll);
-			Scan.print(sprint.toString());
-		}
-	}
 
 	private void createTaskOfUsInSBL(ControllerAll controllerAll, ControllerScrumMaster contScrum)
 	{
@@ -1321,7 +1294,6 @@ public class ControllerScrumMaster
 
 			int USNumber = getUserStoryID();
 
-			//viewSprintBacklogT(controllerAll);
 			UserStory userStory = contScrum.findUStoryByIdSBL(USNumber, controllerAll);
 			if (userStory == null) {
 				nullUserStoryPrint();
@@ -1340,7 +1312,7 @@ public class ControllerScrumMaster
 
 				userStory.getUserStoryTasks().add(task);
 				createdTaskReceipt(task);
-				Scan.print(task.toString());
+				printTask(task);
 				checkUStoryStatus(userStory, controllerAll);
 				controllerAll.saveData();
 			}
@@ -1379,7 +1351,7 @@ public class ControllerScrumMaster
 			if (foundTask.getId() == taskId)
 			{
 				task = foundTask;
-				Scan.print(task.toString());
+				printTask(task);
 			}
 		}
 		return task;
@@ -1413,7 +1385,7 @@ public class ControllerScrumMaster
 
 				int newPriorityNumber = newPriorityNumberTask();
 				task.setPriorityNumber(newPriorityNumber);
-				Scan.print(task.toString());
+				printTask(task);
 				objectEdited();
 			}
 		}
@@ -1465,26 +1437,9 @@ public class ControllerScrumMaster
 				}
 				else if (option == 4)
 				{
-
-					int actualHrs = getActualHrs();
-
-					while (actualHrs<0){
-						negativeNumberPrint();
-						actualHrs = getActualHrs();
-					}
-
-					String name = getNameCompleteTask();
-
-					while (name.isBlank()){
-						emptyName();
-						name = getNameCompleteTask();
-					}
-
-					task.setActualHours( actualHrs );
-					task.setComplete();
+					controllerAll.setTaskCompleted(task);
 					checkUStoryStatus(userStory, controllerAll);
 					objectEdited();
-
 				}
 				else
 				{
