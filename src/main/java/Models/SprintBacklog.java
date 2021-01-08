@@ -106,6 +106,10 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 		return userStories;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
+
 	@Override
 	public String toString()
 	{

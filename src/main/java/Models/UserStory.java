@@ -143,6 +143,18 @@ public class UserStory implements Comparable<UserStory> {
         this.completedBy = completedBy;
     }
 
+    public int getPriorityNumber() {
+        return priorityNumber;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getCompletedBy() {
+        return completedBy;
+    }
+
     //-----------------------------------------Methods------------------------------------------------------------------
 
     public int compareByDeadline(UserStory anotherStory){
@@ -162,6 +174,8 @@ public class UserStory implements Comparable<UserStory> {
             return 0;
         }
     }
+
+
 
     @Override
     public String toString() {

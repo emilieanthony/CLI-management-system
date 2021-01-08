@@ -19,6 +19,8 @@ public class Task implements Comparable<Task> {
 	private String completedBy;
 
 
+
+
 	//Empty constructor for data exporting and importing.
 	public Task() {}
 
@@ -128,6 +130,18 @@ public class Task implements Comparable<Task> {
 	public void setDeadline(String deadline) {
 
 		this.deadline = deadline;
+	}
+
+	public int getPriorityNumber() {
+		return priorityNumber;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getCompletedBy() {
+		return completedBy;
 	}
 
 	public ArrayList<Developer> getAssignedDevelopers() {
