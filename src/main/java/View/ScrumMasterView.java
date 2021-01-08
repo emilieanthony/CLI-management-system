@@ -539,9 +539,11 @@ public class ScrumMasterView
 
 		for (SprintBacklog sprintBacklog : project.getAllSprintBacklogs())
 		{
-			averageVelocity = averageVelocity + sprintBacklog.getTotalStoryPoints() / numberOfSprints;
+			averageVelocity = averageVelocity + sprintBacklog.getTotalStoryPoints();
 
 		}
+		averageVelocity = averageVelocity /  numberOfSprints;
+
 		Scan.print("The average velocity for all sprints until now is: " + averageVelocity);
 	}
 

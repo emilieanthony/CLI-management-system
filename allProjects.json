@@ -15,13 +15,24 @@
       "content" : "As a scrum master I want to be able to take notes in the system that will be saved so that I will be able to access them at all times.\n A note should contain a name and date when it is created.\n",
       "acceptanceCriteria" : [ "23.1 In the Scrum master menu there must be an option where a scrum master can take notes.", "23.2 When a Scrum master enters to take notes, the Scrum master must type in a name and a date.", "23.3 While taking the notes, the scrum master must be able to type words and numbers.", "23.4 The scrum master must be able to save his notes. This must be an option in the system and the scrum master must get a confirmation text when the notes have been stored." ],
       "status" : "Assigned",
-      "assignedDevelopers" : [  ],
+      "assignedDevelopers" : [ ],
       "userStoryTasks" : [ ],
       "binary" : [ ],
       "deadline" : null,
       "completedBy" : null
     } ],
-    "tasks" : [ ]
+    "tasks" : [ {
+      "id" : 1005,
+      "priorityNumber" : 1,
+      "estimatedHours" : 2,
+      "actualHours" : 0,
+      "status" : "Open",
+      "name" : "Project Burn Down Chart",
+      "description" : "Build a burn down chart for the whole project.",
+      "assignedDevelopers" : [ ],
+      "deadline" : null,
+      "completedBy" : null
+    } ]
   },
   "allTeamMembers" : [ {
     "name" : "Bassam",
@@ -53,14 +64,45 @@
     "name" : "Sprint 0",
     "startDate" : "2020-11-5",
     "endDate" : "2020-11-16",
-    "allTasks" : [ ],
+    "allTasks" : [ {
+      "id" : 1006,
+      "priorityNumber" : 5,
+      "estimatedHours" : 4,
+      "actualHours" : 5,
+      "status" : "Complete",
+      "name" : "Team Contract",
+      "description" : "Write a team contract for the whole project, describes the rules for working on the project between the team.",
+      "assignedDevelopers" : [ {
+        "name" : "Bassam",
+        "id" : 1
+      }, {
+        "name" : "Lina",
+        "id" : 5
+      } ],
+      "deadline" : "2020-11-16",
+      "completedBy" : "Bassam and Lina"
+    } ],
     "userStories" : [ ],
     "totalStoryPoints" : 0
   }, {
     "name" : "Sprint 1",
     "startDate" : "2020-11-17",
     "endDate" : "2020-11-30",
-    "allTasks" : [ ],
+    "allTasks" : [ {
+      "id" : 1007,
+      "priorityNumber" : 5,
+      "estimatedHours" : 2,
+      "actualHours" : 3,
+      "status" : "Complete",
+      "name" : "Write retrospective report",
+      "description" : "Write a retrospective report for sprint 1",
+      "assignedDevelopers" : [ {
+        "name" : "Emilie",
+        "id" : 4
+      } ],
+      "deadline" : "2020-11-30",
+      "completedBy" : "Emilie"
+    } ],
     "userStories" : [ {
       "name" : "User Story 1: Create a Menu",
       "id" : 1001,
@@ -68,26 +110,65 @@
       "storyPoints" : 2,
       "content" : "As a user I want to be able to choose in a menu between scrum master, product owner or member of the development team,\n so that all different employee types have different views in the system, different access, different responsibilities etc. \n",
       "acceptanceCriteria" : [ "1.1 The user can clearly choose between scrum master, product owner or development team member and after entering a choice, the user then gets access to its corresponding responsibilities.", "1.2 After making a menu choice, the user only gets access to the information of that choice.", "1.3 If the user enters an invalid input, then the system shall not crash. The system will in this case ask the user to enter a valid input." ],
-      "status" : "Complete",
-      "assignedDevelopers" : [{
+      "status" : "Assigned",
+      "assignedDevelopers" : [ {
         "name" : "Malte",
         "id" : 7
-      },{
+      }, {
         "name" : "Karl",
         "id" : 2
-      }  ],
-      "userStoryTasks" : [ ],
-      "binary" : [ ],
-      "deadline" : null,
+      } ],
+      "userStoryTasks" : [ {
+        "id" : 1011,
+        "priorityNumber" : 5,
+        "estimatedHours" : 1,
+        "actualHours" : 0,
+        "status" : "Open",
+        "name" : "Scrum master menu",
+        "description" : "Create a Scrum master menu",
+        "assignedDevelopers" : [ ],
+        "deadline" : "2020-11-30",
+        "completedBy" : null
+      }, {
+        "id" : 1012,
+        "priorityNumber" : 5,
+        "estimatedHours" : 1,
+        "actualHours" : 0,
+        "status" : "Open",
+        "name" : "Product owner menu",
+        "description" : "Create a Product owner menu",
+        "assignedDevelopers" : [ ],
+        "deadline" : "2020-11-30",
+        "completedBy" : null
+      } ],
+      "binary" : [ false, false ],
+      "deadline" : "2020-11-30",
       "completedBy" : null
     } ],
-    "totalStoryPoints" : 2
+    "totalStoryPoints" : 0
   }, {
     "name" : "Sprint 2",
     "startDate" : "2020-12-01",
     "endDate" : "2020-12-14",
-    "allTasks" : [ ],
-    "userStories" : [{
+    "allTasks" : [ {
+      "id" : 1008,
+      "priorityNumber" : 5,
+      "estimatedHours" : 2,
+      "actualHours" : 3,
+      "status" : "Complete",
+      "name" : "Work breakdown structure (WBS)",
+      "description" : "Create a new Work breakdown structure (WBS) for the project",
+      "assignedDevelopers" : [ {
+        "name" : "Karl",
+        "id" : 2
+      }, {
+        "name" : "Malte",
+        "id" : 7
+      } ],
+      "deadline" : "2020-12-14",
+      "completedBy" : "Malte and Karl"
+    } ],
+    "userStories" : [ {
       "name" : "User Story 6: Task priority number",
       "id" : 1002,
       "priorityNumber" : 4,
@@ -95,25 +176,45 @@
       "content" : "As a scrum master I want to be able to create tasks with a priority number (1-5), and status (\"done\", \"in progress\" or \"open\") so that the product owner can create a list of all tasks and sort them by priority and status.\n",
       "acceptanceCriteria" : [ "6.1 The task that is created must be stored and the scrum master should be able to access all tasks at any time after the task has been created.", "6.2 To create a task, a name, a priority number shall be entered. The priority number must be between 1 – 5." ],
       "status" : "Complete",
-      "assignedDevelopers" : [{
+      "assignedDevelopers" : [ {
         "name" : "Emilie",
         "id" : 4
-      },{
+      }, {
         "name" : "Sanna",
         "id" : 3
       } ],
       "userStoryTasks" : [ ],
       "binary" : [ ],
-      "deadline" : null,
-      "completedBy" : null
+      "deadline" : "2020-12-14",
+      "completedBy" : "Emilie and Sanna"
     } ],
     "totalStoryPoints" : 2
   }, {
     "name" : "Sprint 3",
     "startDate" : "2020-12-14",
     "endDate" : "2020-12-23",
-    "allTasks" : [ ],
-    "userStories" : [{
+    "allTasks" : [ {
+      "id" : 1009,
+      "priorityNumber" : 5,
+      "estimatedHours" : 3,
+      "actualHours" : 2,
+      "status" : "Complete",
+      "name" : "Testing of code",
+      "description" : "Test the code functionality and inform the developers to fix bugs",
+      "assignedDevelopers" : [ {
+        "name" : "Emilie",
+        "id" : 4
+      }, {
+        "name" : "Josanna",
+        "id" : 6
+      }, {
+        "name" : "Sanna",
+        "id" : 3
+      } ],
+      "deadline" : "2020-12-23",
+      "completedBy" : "Emilie, Josanna and Sanna"
+    } ],
+    "userStories" : [ {
       "name" : "User Story 28: Unique ID",
       "id" : 1003,
       "priorityNumber" : 5,
@@ -121,40 +222,54 @@
       "content" : "As a user I want to be able to generate a unique ID to all user stories and tasks that are created in the system so that user stories and tasks with that same name always have a different ID. \n",
       "acceptanceCriteria" : [ "28.1 A unique ID will never be used twice in the system. This implies that a user story/task can never have the same ID.", "28.2 All tasks and user stories must be assigned a unique ID." ],
       "status" : "Complete",
-      "assignedDevelopers" : [{
+      "assignedDevelopers" : [ {
         "name" : "Lina",
         "id" : 5
-      },{
+      }, {
         "name" : "Josanna",
         "id" : 6
       } ],
       "userStoryTasks" : [ ],
       "binary" : [ ],
-      "deadline" : null,
-      "completedBy" : null
+      "deadline" : "2020-12-23",
+      "completedBy" : "Lina and Josanna"
     } ],
     "totalStoryPoints" : 3
   }, {
     "name" : "Sprint 4",
     "startDate" : "2021-01-4",
     "endDate" : "2020-01-10",
-    "allTasks" : [ ],
-    "userStories" : [{
+    "allTasks" : [ {
+      "id" : 1010,
+      "priorityNumber" : 5,
+      "estimatedHours" : 3,
+      "actualHours" : 4,
+      "status" : "Complete",
+      "name" : "Improve code readability",
+      "description" : "Go through all the code and make sure that it's readable and neat.",
+      "assignedDevelopers" : [ {
+        "name" : "Sanna",
+        "id" : 3
+      } ],
+      "deadline" : "2020-01-10",
+      "completedBy" : "Sanna"
+    } ],
+    "userStories" : [ {
       "name" : "User Story 32: Break down a User Story",
       "id" : 1004,
       "priorityNumber" : 5,
       "storyPoints" : 5,
       "content" : "As a scrum master i want to be able to break down user stories to tasks so that a user story is more manageable.\n",
-      "acceptanceCriteria" : [ "32.1 The scrum master must have an option in the scrum master menu where he/she can break down a user story into tasks.", "32.2 The scrum master is only able to break down a user story that exists in the sprint backlog.","32.3 The development team member should have an option in his/her menu where he/she can change a user story task status.","32.4 The scrum master should have an option in his/her menu where he is able to edit a user story task (priority and status) or remove a user story task.","32.5 When all user story tasks are completed the user story is automatically set to status “completed”." ],
+      "acceptanceCriteria" : [ "32.1 The scrum master must have an option in the scrum master menu where he/she can break down a user story into tasks.", "32.2 The scrum master is only able to break down a user story that exists in the sprint backlog.", "32.3 The development team member should have an option in his/her menu where he/she can change a user story task status.", "32.4 The scrum master should have an option in his/her menu where he is able to edit a user story task (priority and status) or remove a user story task.", "32.5 When all user story tasks are completed the user story is automatically set to status “completed”." ],
       "status" : "Complete",
-      "assignedDevelopers" : [{
+      "assignedDevelopers" : [ {
         "name" : "Bassam",
         "id" : 1
-      }],
+      } ],
       "userStoryTasks" : [ ],
       "binary" : [ ],
-      "deadline" : null,
-      "completedBy" : null
+      "deadline" : "2020-01-10",
+      "completedBy" : "Bassam"
     } ],
     "totalStoryPoints" : 5
   } ]
