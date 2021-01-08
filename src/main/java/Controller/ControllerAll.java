@@ -54,7 +54,6 @@ public class ControllerAll
             while (!legalProject()){
                 wrongProjectNameInput();
                 Start();
-
             }
         }
 
@@ -241,9 +240,8 @@ public class ControllerAll
         return allTasks;
     }
 
-    public void viewAllTasks(){
-        ArrayList<Task> allTasks = collectAllTasks();
-        printAllTasks(allTasks);
+    public void viewAllTasks(ControllerAll controllerAll){
+        showAllTasks(controllerAll);
     }
 
     public ArrayList<UserStory> collectAllStories()

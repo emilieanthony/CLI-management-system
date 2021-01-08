@@ -1072,18 +1072,18 @@ public class ControllerScrumMaster
 			userStoryEditConf(userStory);
 
 		} else if (newUSStatus == 2) {
-			userStory.setInProgress();
+			userStory.setAssigned();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
 		} else if (newUSStatus == 3) {
-			userStory.setCompletedBy(getNameCompleteTask());
-			userStory.setComplete();
+			userStory.setInProgress();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
 		} else if (newUSStatus == 4) {
-			userStory.setAssigned();
+			userStory.setCompletedBy(getNameCompleteTask());
+			userStory.setComplete();
 			controllerAll.saveData();
 			userStoryEditConf(userStory);
 
@@ -1091,7 +1091,7 @@ public class ControllerScrumMaster
 			changeStatusMessage();
 		}
 
-		Scan.print(userStory.toString());
+		//Scan.print(userStory.toString());
 
 	}
 

@@ -167,7 +167,7 @@ public class ProductOwnerView {
     }
 
     public static void printDeleted() {
-        Scan.print("\nThis user story has been deleted");
+        Scan.print("\n\n\nThis user story has been deleted\n");
     }
 
     public static void proBacklogEditConf() {
@@ -175,7 +175,7 @@ public class ProductOwnerView {
     }
 
     public static void userStoryEditConf(UserStory userStory) {
-        Scan.print("\nYou have successfully edited the following user stories: + \n" + userStory.toString());
+        Scan.print("\nYou have successfully edited the following user story:  \n" + userStory.toString());
     }
 
     public static void changeStatusMessage() {

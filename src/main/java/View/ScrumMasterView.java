@@ -382,13 +382,13 @@ public class ScrumMasterView
 
 	public static String getSprintBacklogName()
 	{
-		String nameSprintBacklog = Scan.readLine("\nPlease enter the name of the sprint backlog you want to add the task to:");
+		String nameSprintBacklog = Scan.readLine("\nPlease enter the name of the sprint backlog:");
 		return nameSprintBacklog;
 	}
 
 	public static String getSprintBacklogByName()
 	{
-		sprintName = Scan.readLine("Write the name of the sprint: ");
+		sprintName = Scan.readLine("Enter the name of the sprint: ");
 		return sprintName;
 	}
 
@@ -404,7 +404,7 @@ public class ScrumMasterView
 	}
 
 	public static void showAllTasks(ControllerAll controllerAll){
-		Scan.print("Below you find all your tasks. \n\n");
+		Scan.print("Below you find all tasks. \n\n");
 		Scan.print(controllerAll.collectAllTasks().toString());
 	}
 	public static void showAllUserStories(ControllerAll controllerAll){
@@ -418,12 +418,12 @@ public class ScrumMasterView
 			Scan.print("Name of sprint: " + sprint.getName());
 
 			if (objectTypePlural=="user stories"){
-			for (UserStory userStory : sprint.getUserStories()){
-				Scan.print("-    User story number: " + userStory.getId() + " " + userStory.getName());
-			}
+				for (UserStory userStory : sprint.getUserStories()){
+					Scan.print("-    User story number: " + userStory.getId() + " " + userStory.getName());
+				}
 			}else if (objectTypePlural=="tasks"){
 				for(Task task : sprint.getAllTasks())
-				Scan.print("-    Task ID: " + task.getId() + " " + task.getName());
+					Scan.print("-    Task ID: " + task.getId() + " " + task.getName());
 			}
 
 		}
@@ -616,8 +616,11 @@ public class ScrumMasterView
 	}
 
 	public static void printTaskDeadlines(ArrayList<Task> wDeadlines, ArrayList<Task> wODeadlines){
-		for (Task task : wDeadlines){
-			Scan.print(task.getDeadline() + " Task ID: " + task.getId() + " Name: " + task.getName());
+		if (!wDeadlines.isEmpty()) {
+			Scan.print("Tasks with deadlines: ");
+			for (Task task : wDeadlines){
+				Scan.print(task.getDeadline() + " Task ID: " + task.getId() + " Name: " + task.getName());
+			}
 		}
 
 		if (!wODeadlines.isEmpty()){
@@ -630,8 +633,12 @@ public class ScrumMasterView
 	}
 
 	public static void printUStoryDeadlines(ArrayList<UserStory> wDeadlines, ArrayList<UserStory> wODeadlines){
-		for (UserStory userStory : wDeadlines){
-			Scan.print(userStory.getDeadline() + " Number: " + userStory.getId() + " Name: " + userStory.getName());
+
+		if (!wDeadlines.isEmpty()){
+			Scan.print("User stories with deadlines: ");
+			for (UserStory userStory : wDeadlines){
+				Scan.print(userStory.getDeadline() + " Number: " + userStory.getId() + " Name: " + userStory.getName());
+			}
 		}
 
 		if (!wODeadlines.isEmpty()){

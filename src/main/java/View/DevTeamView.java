@@ -35,12 +35,6 @@ public class DevTeamView {
         return option;
     }
 
-    /*public static int getTaskMenu() {
-        int option = Scan.readInt("\n\nPlease enter an option below\n" +
-                "1. Set Task as complete and enter actual hrs\n" +
-                "2. Go back to previous menu\n");
-        return option;
-    }*/
 
     public static void invalidInputPrint(){
         Scan.print("There was a problem entering input data.");
@@ -56,7 +50,7 @@ public class DevTeamView {
     }
 
     public static int getTaskId(){
-        int id = Scan.readInt("Please enter the task's id");
+        int id = Scan.readInt("Please enter the ID of the task that you want to access:");
         return id;
     }
 
@@ -99,11 +93,41 @@ public class DevTeamView {
         return id;
     }
 
-    public void printTasks(String assignedTasks){
-        Scan.print(assignedTasks);
+    public static void printMyAssignedTasks(ArrayList<Task> assignedTasks){
+        if (assignedTasks.isEmpty()){
+            Scan.print("\n\nThere are no tasks that are assigned you yet");
+        } else {
+            Scan.print("\n\nTasks that are assigned to you: ");
+            for (Task task : assignedTasks){
+                Scan.print(task.toString());
+            }
+        }
     }
 
-    public static void printAllTasks(ArrayList<Task> tasks){
+    public static void printAllAssignedTasks(ArrayList<Task> allAssignedTasks){
+
+        if (allAssignedTasks.isEmpty()) {
+            noAssignedTasks();
+        } else {
+            Scan.print("Assigned tasks: ");
+            for (Task task : allAssignedTasks) {
+                if (task.getStatus().equalsIgnoreCase("Assigned")) {
+                    Scan.print(task.toString());
+                }
+            }
+        }
+    }
+
+    public static void printTask(Task task){
+        Scan.print(task.toString());
+    }
+
+    public static int anotherTaskOption(){
+        int id = Scan.readInt("Do you want to open another task? If YES enter task ID, if NO just press Enter: ");
+        return id;
+    }
+
+    public static void printAllTaskIDAndName(ArrayList<Task> tasks){
         Scan.print("All tasks: ");
         for (Task task : tasks){
             Scan.print("ID: " + task.getId() + " name: " + task.getName());
@@ -119,7 +143,8 @@ public class DevTeamView {
 
     public static void taskCompletedReceipt(Task task){
         Scan.print("Task " + task.getName() + " with the ID " + task.getId() + " is now set as completed"
-        + "\nEstimated hours: " + task.getEstimatedHours() + " Actual hours: " + task.getActualHours());
+        + "\nEstimated hours: " + task.getEstimatedHours() + " Actual hours: " + task.getActualHours()
+        + "\nSet as complete by: " + task.getCompletedBy());
     }
 
     public static String getNameCompleteTask(){
