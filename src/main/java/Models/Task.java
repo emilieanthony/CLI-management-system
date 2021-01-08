@@ -2,14 +2,7 @@ package Models;
 
 import Exceptions.*;
 import Utility.DataManagement;
-import Utility.Scan;
-import View.ScrumMasterView;
-
-import javax.xml.crypto.Data;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import static View.DevTeamView.*;
-import static View.ScrumMasterView.getEndDate;
 
 
 public class Task implements Comparable<Task> {
@@ -25,6 +18,13 @@ public class Task implements Comparable<Task> {
 	private String deadline;
 	private String completedBy;
 
+
+
+
+	//Empty constructor for data exporting and importing.
+	public Task() {}
+
+	//Constructor
 	public Task(int id, int priorityNumber, int estimatedTime, String name, String description) throws Exception {
 
 		if(id < 0)
@@ -65,10 +65,6 @@ public class Task implements Comparable<Task> {
 	}
 
 
-	//Empty constructor for data exporting and importing.
-	public Task() {
-	}
-
  	//-----------------------------------Getters & Setters--------------------------------------------------------------
 
 	public void setId(int id) {
@@ -107,11 +103,6 @@ public class Task implements Comparable<Task> {
 		status = "Assigned";
 	}
 
-	public void setAssignedTeamMembers(ArrayList<Developer> assignedTeamMembers) {
-		this.assignedDevelopers = assignedTeamMembers;
-	}
-
-
 	public String getStatus() {
 		return status;
 	}
@@ -141,16 +132,20 @@ public class Task implements Comparable<Task> {
 		this.deadline = deadline;
 	}
 
-	public ArrayList<Developer> getAssignedDevelopers() {
-		return assignedDevelopers;
+	public int getPriorityNumber() {
+		return priorityNumber;
 	}
 
-	public boolean isAssigned(Developer member) {
-		return assignedDevelopers.contains(member);
+	public String getDescription() {
+		return description;
 	}
 
 	public String getCompletedBy() {
 		return completedBy;
+	}
+
+	public ArrayList<Developer> getAssignedDevelopers() {
+		return assignedDevelopers;
 	}
 
 	public void setCompletedBy(String completedBy) {
@@ -172,9 +167,6 @@ public class Task implements Comparable<Task> {
 	public int compareByDeadline(Task anotherTask){
 		return DataManagement.compareDeadlines(this.deadline, anotherTask.getDeadline());
 	}
-
-
-	//--------------------------------------ToString--------------------------------------------------------------------
 
 	public String toString() {
 		String output;

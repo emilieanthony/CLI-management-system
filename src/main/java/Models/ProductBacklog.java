@@ -7,7 +7,6 @@ import java.util.Collections;
 
 public class ProductBacklog
 {
-    //Attributes:-
     private String name;
     private String startDate;
     private String endDate;
@@ -17,7 +16,7 @@ public class ProductBacklog
     //Empty constructor for data exporting and importing.
     public ProductBacklog(){}
 
-    // Constructor:-
+    // Constructor
     public ProductBacklog(String name, String startDate, String endDate)
     {
         this.name = name;
@@ -29,10 +28,9 @@ public class ProductBacklog
             this.endDate = endDate;
         }
         this.allUserStories = new ArrayList<>();
-        this.tasks = new ArrayList<>(); // No tasks in product backlog
+        this.tasks = new ArrayList<>();
     }
 
-    //Setters and Getters:-Make sure at the end of the project that not used methods are deleted.
 
     public String getName()
     {
@@ -94,11 +92,6 @@ public class ProductBacklog
     public ArrayList<Task> getTasks()
     {
         return tasks;
-    }
-
-    public void setTasks(ArrayList<Task> tasks)
-    {
-        this.tasks = tasks;
     }
 
     public String printAssignedUStories(Developer member)

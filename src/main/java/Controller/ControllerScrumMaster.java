@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 import static Utility.PrintUtility.*;
 import static View.DevTeamView.*;
-import static View.DevTeamView.getUserStoryNumber;
+import static View.DevTeamView.getUserStoryID;
 import static View.ProductOwnerView.*;
 import static View.ScrumMasterView.*;
 
@@ -416,7 +416,6 @@ public class ControllerScrumMaster
 	private void createTaskToSprint(ControllerAll controllerAll)
 	{
 		Project project = controllerAll.whichProject();
-		printSprints(project);
 
 		if (project == null)
 		{
@@ -975,9 +974,9 @@ public class ControllerScrumMaster
 
 		sprintName = getSprintBacklogByName();
 
-		int USNumber = getUserStoryNumber();
+		int USid = getUserStoryID();
 
-		UserStory userStory = findUStoryByNumberSBL(USNumber, controllerAll);
+		UserStory userStory = findUStoryByIdSBL(USid, controllerAll);
 
 		return userStory;
 	}
@@ -1269,7 +1268,7 @@ public class ControllerScrumMaster
 
 	//---------------------------------------------------------------------------------------------//
 
-	public UserStory findUStoryByNumberSBL(int number, ControllerAll controllerAll)
+	public UserStory findUStoryByIdSBL(int id, ControllerAll controllerAll)
 	{
 		UserStory userStory = null;
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
@@ -1279,7 +1278,7 @@ public class ControllerScrumMaster
 		while (userStory == null && iterator.hasNext())
 		{
 			UserStory foundUserStory = iterator.next();
-			if (foundUserStory.getId() == number)
+			if (foundUserStory.getId() == id)
 			{
 
 				userStory = foundUserStory;
@@ -1316,10 +1315,10 @@ public class ControllerScrumMaster
 			showAllSprintBacklogs(project, "user stories");
 			sprintName = getSprintBacklogByName();
 
-			int USNumber = getUserStoryNumber();
+			int USNumber = getUserStoryID();
 
 			//viewSprintBacklogT(controllerAll);
-			UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+			UserStory userStory = contScrum.findUStoryByIdSBL(USNumber, controllerAll);
 			if (userStory == null) {
 				nullUserStoryPrint();
 			} else {
@@ -1367,7 +1366,7 @@ public class ControllerScrumMaster
 	{
 		Task task = null;
 		int taskId = getTaskId();
-		UserStory userStory = findUStoryByNumberSBL(UsNumber, controllerAll);
+		UserStory userStory = findUStoryByIdSBL(UsNumber, controllerAll);
 		Iterator<Task> iterator = userStory.getUserStoryTasks().iterator();
 
 		while (task == null && iterator.hasNext())
@@ -1394,9 +1393,9 @@ public class ControllerScrumMaster
 		showAllSprintBacklogs(project, "user stories");
 		sprintName = getSprintBacklogByName();
 
-		int USNumber = getUserStoryNumber();
+		int USNumber = getUserStoryID();
 
-		UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+		UserStory userStory = contScrum.findUStoryByIdSBL(USNumber, controllerAll);
 		if (userStory == null)
 		{
 			nullUserStoryPrint();
@@ -1429,9 +1428,9 @@ public class ControllerScrumMaster
 		showAllSprintBacklogs(project, "user stories");
 		sprintName = getSprintBacklogByName();
 
-		int USNumber = getUserStoryNumber();
+		int USNumber = getUserStoryID();
 
-		UserStory userStory = contScrum.findUStoryByNumberSBL(USNumber, controllerAll);
+		UserStory userStory = contScrum.findUStoryByIdSBL(USNumber, controllerAll);
 		if (userStory == null)
 		{
 			nullUserStoryPrint();
@@ -1448,19 +1447,16 @@ public class ControllerScrumMaster
 				if (option == 1)
 				{
 					task.setOpen();
-					Scan.print(task.toString());
 					objectEdited();
 				}
 				else if (option == 2)
 				{
 					task.setAssigned();
-					Scan.print(task.toString());
 					objectEdited();
 				}
 				else if (option == 3)
 				{
 					task.setInProgress();
-					Scan.print(task.toString());
 					objectEdited();
 				}
 				else if (option == 4)
@@ -1483,15 +1479,14 @@ public class ControllerScrumMaster
 					task.setActualHours( actualHrs );
 					task.setComplete();
 					checkUStoryStatus(userStory, controllerAll);
-					task.setActualHours(getActualHrs());
-					Scan.print(task.toString());
 					objectEdited();
-					controllerAll.saveData();
+
 				}
 				else
 				{
 					invalidOption();
 				}
+				controllerAll.saveData();
 				Scan.print(task.toString());
 			}
 

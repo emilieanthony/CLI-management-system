@@ -6,12 +6,6 @@ public class Scan
 {
     public static Scanner scan = new Scanner(System.in);
 
-    // Methods for reading input without printing
-    public static String scan()
-    {
-        return scan.next().trim();
-    }
-
     // Methods for output and scanning input
     public static String readLine(String output)
     {
@@ -23,7 +17,7 @@ public class Scan
     public static int readInt(String output)
     {
         System.out.println(output);
-        int anInt = Integer.parseInt(scan.nextLine().trim()); // to avoid error with new line
+        int anInt = Integer.parseInt(scan.nextLine().trim());
         return anInt;
     }
 

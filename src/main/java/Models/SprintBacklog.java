@@ -3,13 +3,12 @@ package Models;
 import Exceptions.EmptyName;
 import Exceptions.WrongDate;
 import Utility.DataManagement;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+
 public class SprintBacklog implements Comparable<SprintBacklog>
 {
-	//attributes
 	private String name;
 	private String startDate;
 	private String endDate;
@@ -55,7 +54,6 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 		return totalStoryPoints;
 	}
 
-	//all getters & setters
 	public String getName()
 	{
 		return name;
@@ -70,8 +68,6 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 		return totalStoryPoints;
 	}
 
-	//--------------------------------
-
 	public Task getTask(int id)
 	{
 		for (Task task : allTasks)
@@ -84,20 +80,16 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 		return null;
 	}
 
-	public UserStory getUserStory(int number)
+	public UserStory getUserStory(int id)
 	{
 		for(UserStory userStory : userStories)
 		{
-			if(userStory.getId() == number)
+			if(userStory.getId() == id)
 			{
 				return userStory;
 			}
 		}
 		return null;
-	}
-
-	public String getStartDate() {
-		return startDate;
 	}
 
 	public String getEndDate() {
@@ -114,9 +106,9 @@ public class SprintBacklog implements Comparable<SprintBacklog>
 		return userStories;
 	}
 
-	//--------------------------------------------------
-
-	//toString
+	public String getStartDate() {
+		return startDate;
+	}
 
 	@Override
 	public String toString()
