@@ -159,9 +159,9 @@ public class ProductOwnerView {
     public static int getNewUSStatus() {
         int newUSStatus = Scan.readInt("\nChoose the updated status of the user story:\n" +
                 "1. Open\n" +
-                "2. Assigned\n" +
-                "3. In progress \n" +
-                "4. Complete\n");
+                "2. In progress\n" +
+                "3. Complete \n" +
+                "4. Assigned\n");
 
         return newUSStatus;
     }

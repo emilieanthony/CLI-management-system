@@ -43,7 +43,7 @@ public class DevTeamView {
     }*/
 
     public static void invalidInputPrint(){
-        Scan.print("There was a problem entering input data.");
+        Scan.print("\nThere was a problem entering input data.");
     }
 
     public static int getDeveloperId(){

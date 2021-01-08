@@ -515,8 +515,6 @@ public class ControllerScrumMaster
 	public void moveTaskOrUStoryToSBL(ControllerProductOwner contProOwner, ControllerAll controllerAll)
 	{
 
-		contProOwner.viewProBacklog(controllerAll);
-
 		String input = moveObjectToBacklogPrint();
 
 		Project project = controllerAll.whichProject();
@@ -529,6 +527,7 @@ public class ControllerScrumMaster
 		{
 			if (input.equals("1"))
 			{
+				contProOwner.viewProBacklog(controllerAll);
 				int idTask = specifyTask();
 				printSprints(project);
 				sprintName = specifySprint();
@@ -551,7 +550,8 @@ public class ControllerScrumMaster
 
 			if (input.equals("2"))
 			{
-				int usName = numberUsToMove();
+				contProOwner.viewProBacklog(controllerAll);
+				int usName = idUsToMove();
 				printSprints(project);
 				sprintName = sprintNameToMovePrintUS();
 
@@ -594,7 +594,7 @@ public class ControllerScrumMaster
 
 			if (input.equals("2"))
 			{
-				int usNumber = numberUsToMove();
+				int usNumber = idUsToMove();
 				sprintName = sprintNameToMove();
 
 				UserStory userStoryToMove = findSprintBacklogByName(controllerAll).getUserStory(usNumber);
@@ -622,6 +622,7 @@ public class ControllerScrumMaster
 		else
 		{
 			ArrayList<Task> tasks = controllerAll.collectAllTasks();
+			controllerAll.viewAllTasks();
 			int idTaskEdit = IdTaskEdit();
 
 			for (Task task : tasks)
@@ -658,7 +659,7 @@ public class ControllerScrumMaster
 		else
 		{
 			ArrayList<Task> tasks = controllerAll.collectAllTasks();
-
+			controllerAll.viewAllTasks();
 			int idTaskEdit = IdTaskEdit();
 
 			for (Task task : tasks)
@@ -986,7 +987,6 @@ public class ControllerScrumMaster
 		boolean running = true;
 
 		UserStory userStory = getUSFromSBL(controllerAll);
-		System.out.println("bu");
 		printUStoryInfo(userStory);
 
 		if (userStory == null) {

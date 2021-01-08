@@ -481,9 +481,9 @@ public class ScrumMasterView
 		return sprintName;
 	}
 
-	public static int numberUsToMove()
+	public static int idUsToMove()
 	{
-		int usNumber = Scan.readInt("Write the number of the user story you want to move: ");
+		int usNumber = Scan.readInt("Write the ID of the user story you want to move: ");
 		return usNumber;
 	}
 
