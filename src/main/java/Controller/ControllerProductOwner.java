@@ -140,15 +140,9 @@ public class ControllerProductOwner {
                         editProductBacklogName(controllerAll);
                         break;
                     case 2:
-                        editBacklogStartDate(controllerAll);
-                        break;
-                    case 3:
-                        editBacklogEndDate(controllerAll);
-                        break;
-                    case 4:
                         editUserStory(controllerAll);
                         break;
-                    case 5:
+                    case 3:
                         running = false;
                         break;
                     default:
@@ -177,51 +171,10 @@ public class ControllerProductOwner {
 
         controllerAll.saveData();
 
-        proBacklogEditConf();
+        proBacklogEditConf(project.getProductBacklog());
 
-        Scan.print(project.getProductBacklog().toString());
 
     }
-
-    public void editBacklogStartDate(ControllerAll controllerAll) {
-
-        Project project = controllerAll.whichProject();
-        String startDate = ScrumMasterView.getStartDate();
-
-        LocalDate localStartDate = DataManagement.stringToLocalDate(startDate);
-        LocalDate localEndDate = DataManagement.stringToLocalDate(project.getProductBacklog().getEndDate());
-
-        while (localEndDate.isBefore(localStartDate)){
-            wrongDatePrint();
-            startDate = ScrumMasterView.getStartDate();
-            localStartDate = DataManagement.stringToLocalDate(startDate);
-        }
-
-        project.getProductBacklog().setStartDate(startDate);
-        controllerAll.saveData();
-        proBacklogEditConf();
-        Scan.print(project.getProductBacklog().toString());
-    }
-
-    public void editBacklogEndDate(ControllerAll controllerAll) {
-        Project project = controllerAll.whichProject();
-        String endDate = getBacklogEDate();
-
-        LocalDate localEndDate = DataManagement.stringToLocalDate(endDate);
-        LocalDate localStartDate = DataManagement.stringToLocalDate(project.getProductBacklog().getStartDate());
-
-        while (localEndDate.isBefore(localStartDate)){
-            wrongDatePrint();
-            endDate = getBacklogEDate();
-            localEndDate = DataManagement.stringToLocalDate(endDate);
-        }
-
-        project.getProductBacklog().setEndDate(endDate);
-        controllerAll.saveData();
-        proBacklogEditConf();
-        Scan.print(project.getProductBacklog().toString());
-    }
-
 
 
     //--------------------------------3rd Menu - menu for editing user stories---------------------------------------
