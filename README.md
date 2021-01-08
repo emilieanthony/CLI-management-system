@@ -1,47 +1,37 @@
 # mini-project
 ### Product description
-The task for this software development project is to develop a software tool to manage a software
-project, i.e. a software project management tool. The management tool is preloaded with the project team's own data. 
+The product is a console based software intended to be a helpful tool for software development project management using agile, and in particular Scrum, methods. It will allow development teams to create and work on multiple projects, divide projects into tasks to development team members and organize tasks. It will allow the user to clearly see what tasks have been assigned to them and easily keep track of their own responsibility in the project. 
+
+The system allows the user to choose between three roles: scrum master, product owner or developer. Each role has different functionalities. 
+
+The management tool is preloaded with the project team's own data.
 
 ### Features
-A scrum master can:
-- Create new project
-- Create new sprint
-- Create a new task for product backlog
-- Create a new task for sprint backlog
-- Create a user story for product backlog
-- Create a new Development Team Member
-- Create a new Product owner
-- Assign a task to Development Team Member
-- View product backlog
-- View all development Team Members
-- Move task or user story to sprint backlog 
-- View sprint backlog
-  
-A product owner can:
-- Create a new product backlog
--  View product backlog
-- Edit product backlog
-   
-A development team member can:
-- View their own tasks
-- View all assigned tasks
-- View all tasks
-- View their own user stories
-- View all user stories
-  
+Scrum masters are able to create projects, sprint backlogs, new development team members and new product owners. The system shall also allow them to create tasks, assign tasks, edit tasks (i.e. date, name, etc.), move tasks between backlogs, keep track of velocities and story points with automatic calculations of averages and progressions. In addition, the system shall allow the scrum master to break down a user story into tasks and it will automatically set the user story as complete when all its tasks are completed. 
+
+Product owners are able to edit product backlog, remove and create a new product backlog, create user stories, edit user stories and remove user stories.
+
+Developers can view tasks that have been assigned to them, view all assigned tasks, set tasks status as in progress or completed and view backlogs.
+
+Any user can be displayed an overview of deadlines to keep track of the progression of a project, as well as be able to switch between projects from their respective main menu. 
+
+The project does not include features like other tools for product management, such as a planning poker feature for story point estimation, any messaging or note-taking features, and will not include any sophisticated graphical user interface for visual purposes.
+
+ 
 
 # Installation/ how to run
-Preconditions and required software (e.g. Java version). Command to run the code (e.g. press green button in IntelliJ or terminal)
+Run the main method in class Main.
+
+A precondition in order to run the program is to have Java 14 and Maven 3 installed.
+
 # Structure
-Structure of the project. Architecture. 
 
 ### Folder/ package structure
-- Main
-- Controllers
-- Models
-- View
-- Utility
+- Controller - for business logic
+- Model - for object data
+- View - presentation layer 
+- Utility - for code that is commonly used, e.g. input class
+- Exceptions - commonly used custom exceptions
 
 # How to contribute
 
