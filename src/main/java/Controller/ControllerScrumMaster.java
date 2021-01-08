@@ -622,13 +622,14 @@ public class ControllerScrumMaster
 			ArrayList<Task> tasks = controllerAll.collectAllTasks();
 			controllerAll.viewAllTasks();
 			int idTaskEdit = IdTaskEdit();
+			boolean foundTask = false;
 
 			for (Task task : tasks)
 			{
 				if (task.getId() == idTaskEdit)
 				{
 					int newPriorityNumberTask = newPriorityNumberTask();
-
+					foundTask = true;
 					if ((newPriorityNumberTask >= PRIORITY_LOWEST) && (newPriorityNumberTask <= PRIORITY_HIGHEST))
 					{
 						task.setPriorityNumber(newPriorityNumberTask);
@@ -640,7 +641,9 @@ public class ControllerScrumMaster
 					}
 					return;
 				}
-
+			}
+			if(!foundTask)
+			{
 				taskNotFound();
 			}
 		}
