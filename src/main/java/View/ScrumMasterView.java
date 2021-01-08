@@ -413,17 +413,28 @@ public class ScrumMasterView
 	}
 
 	public static void showAllSprintBacklogs(Project project, String objectTypePlural){
+
 		Scan.print("Below you find all your sprint backlogs and its " + objectTypePlural);
 		for (SprintBacklog sprint : project.getAllSprintBacklogs()){
 			Scan.print("Name of sprint: " + sprint.getName());
 
 			if (objectTypePlural=="user stories"){
+				if (sprint.getUserStories().isEmpty()){
+					Scan.print("This sprint backlog does not contain any user stories");
+				}
+
 				for (UserStory userStory : sprint.getUserStories()){
 					Scan.print("-    User story number: " + userStory.getId() + " " + userStory.getName());
 				}
+
 			}else if (objectTypePlural=="tasks"){
-				for(Task task : sprint.getAllTasks())
+				if (sprint.getAllTasks().isEmpty()){
+					Scan.print("This sprint backlog does not contain any tasks");
+				}
+
+				for(Task task : sprint.getAllTasks()){
 					Scan.print("-    Task ID: " + task.getId() + " " + task.getName());
+				}
 			}
 
 		}

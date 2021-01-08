@@ -958,7 +958,7 @@ public class ControllerScrumMaster
 			}
 		}
 
-		if(sprintBacklog == null)//(!foundIt)
+		if(sprintBacklog == null)
 		{
 			invalidSprintBacklog();
 		}

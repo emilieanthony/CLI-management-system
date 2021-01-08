@@ -1,6 +1,7 @@
 package View;
 
 import Models.ProductBacklog;
+import Models.ProductOwner;
 import Models.SprintBacklog;
 import Models.UserStory;
 import Utility.Scan;
@@ -61,10 +62,8 @@ public class ProductOwnerView {
                 Scan.readInt("\n\n You are working on project " + proName + "." +
                         "\n\nPlease enter the number of which part of the product backlog you want to edit:\n\n" +
                         "1. Edit product backlog name\n" +
-                        "2. Edit product backlog start date\n" +
-                        "3. Edit product backlog end date\n" +
-                        "4. Edit product backlog user stories\n" +
-                        "5. Back to your menu");
+                        "2. Edit product backlog user stories\n" +
+                        "3. Back to your menu");
         return option;
     }
 
@@ -170,8 +169,8 @@ public class ProductOwnerView {
         Scan.print("\n\n\nThis user story has been deleted\n");
     }
 
-    public static void proBacklogEditConf() {
-        Scan.print("\nYou have successfully edited the product backlog.");
+    public static void proBacklogEditConf(ProductBacklog productBacklog) {
+        Scan.print("\nYou have successfully edited the product backlog.\n" + productBacklog.toString());
     }
 
     public static void userStoryEditConf(UserStory userStory) {
