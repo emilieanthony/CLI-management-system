@@ -97,11 +97,13 @@ public class ControllerAll
     }
 
     public void switchProject(ControllerAll controllerAll){
-        getProjectName(controllerAll);
+        viewProjectMenu(controllerAll);
+        getProjectName();
 
         while (!legalProject()){
             wrongProjectNameInput();
-            getProjectName(controllerAll);
+            viewProjectMenu(controllerAll);
+            getProjectName();
         }
     }
 

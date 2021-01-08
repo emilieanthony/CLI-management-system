@@ -430,11 +430,14 @@ public class ControllerScrumMaster
 				if (thereIsASprintBacklog){
 					Task newTask = getTaskInfo(id);
 					createdTaskReceipt(newTask);
+
 					printSprints(project);
 					sprintName = getSprintBacklogName();
 					findSprintBacklogByName(controllerAll).getAllTasks().add(newTask);
+
 					controllerAll.saveData();
 					taskCreatedToSBacklog();
+
 				} else {
 					noSprintBacklogYet();
 					createSprintBacklog(controllerAll);
@@ -485,7 +488,6 @@ public class ControllerScrumMaster
 			for (Task task : tasks)
 			{
 				ids.add(task.getId());
-
 			}
 		}
 
@@ -877,6 +879,7 @@ public class ControllerScrumMaster
 		{
 			SprintBacklog sprintBacklog = createSprintInfo();
 			Project project = controllerAll.whichProject();
+
 			project.getAllSprintBacklogs().add(sprintBacklog);
 			controllerAll.saveData();
 
@@ -998,8 +1001,7 @@ public class ControllerScrumMaster
 					switch (option)
 					{
 						case 1:
-							editUSStoryPoints( userStory, controllerAll);//Edit user story
-							// point
+							editUSStoryPoints( userStory, controllerAll);//Edit user story points
 							break;
 						case 2:
 							editUSPriority(userStory, controllerAll);//edit priority number
@@ -1098,8 +1100,6 @@ public class ControllerScrumMaster
 
 	public void removeUSFromSBL(UserStory userStory, ControllerAll controllerAll){
 
-
-
 		SprintBacklog sprintBacklog = findSprintBacklogByName(controllerAll);
 
 		boolean confirmRemoval = removingUSMsg(userStory);
@@ -1108,7 +1108,6 @@ public class ControllerScrumMaster
 		}
 
 	}
-
 
 	//------------------------------------Methods for velocity-------------------------------------------//
 

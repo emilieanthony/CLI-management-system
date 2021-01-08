@@ -170,7 +170,6 @@ public class ControllerProductOwner {
 
         proBacklogEditConf(project.getProductBacklog());
 
-
     }
 
 
@@ -280,10 +279,8 @@ public class ControllerProductOwner {
             } else {
 
                 invalidIndexPrint();
-
             }
         }
-
     }
 
 

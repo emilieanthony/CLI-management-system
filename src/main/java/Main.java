@@ -2,7 +2,6 @@ import Controller.ControllerAll;
 import Controller.ControllerDeveloper;
 import Controller.ControllerProductOwner;
 import Controller.ControllerScrumMaster;
-import Models.*;
 
 
 public class Main {
