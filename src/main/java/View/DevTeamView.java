@@ -6,9 +6,6 @@ import Models.Task;
 import Utility.Scan;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import static View.ScrumMasterView.menuScrumMaster;
 import static View.ScrumMasterView.proName;
 
 public class DevTeamView {
