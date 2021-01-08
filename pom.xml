@@ -6,19 +6,25 @@
 
     <name>Codelicode</name>
     <description>Software tools helps to manage building projects.
-        The project will develop a software intended to be a helpful tool for software development project management. It will allow development teams to create and work on multiple projects, divide projects into tasks to development team members and organize tasks. It will allow the user to clearly see what tasks have been assigned to them and easily keep track of their own responsibility in the project.
 
-        The system shall allow the user to choose between three roles, scrum master, product owner or developer. Each role has different functionalities.
+        The project will develop a software intended to be a helpful tool for software development project management.
+        It will allow development teams to create and work on multiple projects, divide projects into tasks to development team members and organize tasks.
+        It will allow the user to clearly see what tasks have been assigned to them and easily keep track of their own responsibility in the project.
 
-        Scrum masters shall be able to create projects, sprint backlogs, create developer and product owner user accounts. It shall also allow them to create tasks, assign tasks, edit tasks (date, name, etc.), move tasks between backlogs, keep track of velocities and story points with automatic calculations of averages and progressions. In addition, the system shall allow the scrum master to break down a user story into tasks and it will automatically set the user story as complete when all it’s tasks are completed.
+        The system shall allow the user to choose between three roles, scrum master, product owner or developer.
+        Each role has different functionalities.
+        Scrum masters shall be able to create projects, sprint backlogs, create developer and product owner user accounts.
+        It shall also allow them to create tasks, assign tasks, edit tasks (date, name, etc.), move tasks between backlogs,
+        keep track of velocities and story points with automatic calculations of averages and progressions.
+        In addition, the system shall allow the scrum master to break down a user story into tasks and it will automatically set the user story as complete when all it’s tasks are completed.
 
         Product owners shall be able to edit product backlog, remove and create a new product backlog, create user stories, edit user stories and remove user stories.
-
         Developers shall be allowed to view tasks that have been assigned to them, view all assigned tasks, set tasks status as in progress or completed and view backlogs.
 
         Any user shall be displayed an overview of deadlines to keep track of the progression of a project, as well as be able to switch between projects from their respective main menu.
 
-        The project will not include other tools for product management, such as a planning poker feature for story point estimation, any messaging or note-taking features, and will not include any sophisticated graphical user interface for visual purposes.
+        The project will not include other tools for product management, such as a planning poker feature for story point estimation, any messaging or note-taking features,
+        and will not include any sophisticated graphical user interface for visual purposes.
 
     </description>
     <dependencies>
