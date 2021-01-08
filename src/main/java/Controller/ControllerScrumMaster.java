@@ -327,8 +327,6 @@ public class ControllerScrumMaster
 
 	private void setTaskDeadline(ControllerAll controllerAll){
 
-
-
 		Task task = controllerAll.findTaskById();
 
 		String deadline = getEndDate();
@@ -1149,7 +1147,8 @@ public class ControllerScrumMaster
 
 	private void assignTask(ControllerAll controllerAll)
 	{
-		showAllTasks(controllerAll);
+		printAllTaskIDAndName(controllerAll.collectAllTasks());
+
 		Task task = controllerAll.findTaskById();
 
 		Project project = controllerAll.whichProject();

@@ -41,7 +41,7 @@ public class ControllerDeveloper {
                         scrumMaster.viewSprintBacklog(controllerAll);
                         break;
                     case 7:
-                        controllerAll.viewAllTasks(controllerAll);
+                        controllerAll.viewAllTasks();
                         break;
                     case 8:
                         controllerAll.viewCompletedTasks();

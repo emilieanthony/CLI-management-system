@@ -403,9 +403,9 @@ public class ScrumMasterView
 		return idTask;
 	}
 
-	public static void showAllTasks(ControllerAll controllerAll){
+	public static void showAllTasks(ArrayList<Task> allTasks){
 		Scan.print("Below you find all tasks. \n\n");
-		Scan.print(controllerAll.collectAllTasks().toString());
+		Scan.print(allTasks.toString());
 	}
 	public static void showAllUserStories(ControllerAll controllerAll){
 		Scan.print("Below you find all user stories. \n\n");

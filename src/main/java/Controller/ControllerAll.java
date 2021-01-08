@@ -240,8 +240,9 @@ public class ControllerAll
         return allTasks;
     }
 
-    public void viewAllTasks(ControllerAll controllerAll){
-        showAllTasks(controllerAll);
+    public void viewAllTasks(){
+        ArrayList<Task> allTasks = collectAllTasks();
+        showAllTasks(allTasks);
     }
 
     public ArrayList<UserStory> collectAllStories()
