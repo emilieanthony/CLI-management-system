@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import static Utility.PrintUtility.defaultMessage;
 import static View.DevTeamView.*;
+import static View.ProductOwnerView.changeStatusErrorMessage;
 import static View.ScrumMasterView.emptyName;
+import static View.ScrumMasterView.invalidOption;
 
 
 public class ControllerDeveloper {
@@ -31,8 +33,7 @@ public class ControllerDeveloper {
                         completeTask(controllerAll);
                         break;
                     case 4:
-                        UserStory userStory = controllerAll.findUStoryByNumber();
-                        scrumMaster.changeUSStatus(userStory, controllerAll);;
+                        changeUSStatus(controllerAll);
                         break;
                     case 5:
                         proCont.viewProBacklog(controllerAll);
@@ -72,6 +73,23 @@ public class ControllerDeveloper {
 
     //---------------------------------Methods----------------------------------------------//
 
+    public void changeUSStatus(ControllerAll controllerAll){
+        UserStory userStory = controllerAll.findUStoryByNumber();
+        int option =  changeUSStatusOption();
+
+        while (option < 0 || option > 2){
+            changeStatusErrorMessage();
+            option =  changeUSStatusOption();
+        }
+        if (option == 1) {
+            controllerAll.setUSInProgress(userStory);
+
+        } else if (option == 2) {
+            controllerAll.setUSCompleted(userStory);
+
+        }
+
+    }
 
     public void viewMyTasks(ControllerAll controllerAll) {
         ArrayList<Task> assignedTasks = new ArrayList<>();

@@ -9,6 +9,7 @@ import Utility.Scan;
 import static Utility.PrintUtility.defaultMessage;
 import static View.AllView.*;
 import static View.DevTeamView.*;
+import static View.ProductOwnerView.userStoryEditConf;
 import static View.ScrumMasterView.*;
 
 public class ControllerAll
@@ -183,6 +184,19 @@ public class ControllerAll
         }
         return userStory;
 
+    }
+
+    public void setUSInProgress(UserStory userStory){
+        userStory.setInProgress();
+        saveData();
+        userStoryEditConf(userStory);
+    }
+
+    public void setUSCompleted(UserStory userStory){
+        userStory.setCompletedBy(getNameCompleteTask());
+        userStory.setComplete();
+        saveData();
+        userStoryEditConf(userStory);
     }
 
     public Developer findDeveloperByID()

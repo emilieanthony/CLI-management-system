@@ -32,6 +32,12 @@ public class DevTeamView {
         return option;
     }
 
+    public static int changeUSStatusOption(){
+        int option = Scan.readInt("Enter: \n" +
+                "1. to set as 'In Progress'\n2. to set as 'Done'");
+        return option;
+    }
+
 
     public static void invalidInputPrint(){
         Scan.print("\nThere was a problem entering input data.");
