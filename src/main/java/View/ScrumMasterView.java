@@ -549,7 +549,7 @@ public class ScrumMasterView
 
 	public static void invalidOption()
 	{
-		Scan.print("\nYou have entered an invalid option, choose between 1-5.");
+		Scan.print("\nYou have entered an invalid option, choose between 1-4.");
 	}
 
 	public static void removedTaskInUserStory()

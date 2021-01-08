@@ -1068,32 +1068,34 @@ public class ControllerScrumMaster
 		int newUSStatus = ProductOwnerView.getNewUSStatus();
 
 		if (newUSStatus == 1) {
-			userStory.setOpen();
-			controllerAll.saveData();
-			userStoryEditConf(userStory);
+			setUSOpen(userStory, controllerAll);
 
 		} else if (newUSStatus == 2) {
-			userStory.setAssigned();
-			controllerAll.saveData();
-			userStoryEditConf(userStory);
+			setUSAssigned(userStory, controllerAll);
 
 		} else if (newUSStatus == 3) {
-			userStory.setInProgress();
-			controllerAll.saveData();
-			userStoryEditConf(userStory);
+			controllerAll.setUSInProgress(userStory);
 
 		} else if (newUSStatus == 4) {
-			userStory.setCompletedBy(getNameCompleteTask());
-			userStory.setComplete();
-			controllerAll.saveData();
-			userStoryEditConf(userStory);
+			controllerAll.setUSCompleted(userStory);
 
 		} else {
-			changeStatusMessage();
+			invalidOption();
 		}
 
-		//Scan.print(userStory.toString());
 
+	}
+
+	public void setUSOpen(UserStory userStory, ControllerAll controllerAll){
+		userStory.setOpen();
+		controllerAll.saveData();
+		userStoryEditConf(userStory);
+	}
+
+	public void setUSAssigned(UserStory userStory, ControllerAll controllerAll){
+		userStory.setAssigned();
+		controllerAll.saveData();
+		userStoryEditConf(userStory);
 	}
 
 

@@ -178,8 +178,8 @@ public class ProductOwnerView {
         Scan.print("\nYou have successfully edited the following user story:  \n" + userStory.toString());
     }
 
-    public static void changeStatusMessage() {
-        Scan.print("\nThe user story has not been edited, You have to enter a number between 1 - 3.");
+    public static void changeStatusErrorMessage() {
+        Scan.print("\nThe user story has not been edited, You have to enter 1 or 2.");
     }
 
     public static void changePriorityMessage() {
