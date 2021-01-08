@@ -93,12 +93,15 @@ public class ControllerDeveloper {
 
     public void viewAllAssignedTasks(ControllerAll controllerAll) {
         ArrayList<Task> allTasks = controllerAll.collectAllTasks();
-        for (Task task:allTasks) {
-            if (task == null) {
-                noAssignedTasks();
-            }else if(task.getStatus().equalsIgnoreCase("Assigned")) {
+        Task task = null;
+        for (Task foundTask:allTasks) {
+            if ((foundTask.getStatus().equalsIgnoreCase("Assigned"))) {
+                task = foundTask;
                 Scan.print(task.toString());
             }
+        }
+        if (task == null) {
+            noAssignedTasks();
         }
     }
 
